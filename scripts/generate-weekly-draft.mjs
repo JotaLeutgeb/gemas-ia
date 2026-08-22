@@ -5,7 +5,7 @@ import { ROOT, log } from "./lib/util.js";
 
 const DATASET = path.join(ROOT, "public", "data", "dataset.json");
 const OUT_DIR = path.join(ROOT, "content", "linkedin");
-const SITE_URL = "https://joaqu.github.io/gemas-ia";
+const SITE_URL = "https://jotaleutgeb.github.io/gemas-ia";
 const MAX_GEMS = 3;
 
 function fmtPct(value) {

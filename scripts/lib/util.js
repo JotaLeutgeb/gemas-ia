@@ -32,7 +32,7 @@ export async function fetchJson(url, { retries = 3, timeoutMs = 30000 } = {}) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const response = await fetch(url, {
-        headers: { "User-Agent": "gemas-ia/0.1 (+https://github.com/joaqu/gemas-ia)" },
+        headers: { "User-Agent": "gemas-ia/0.1 (+https://github.com/JotaLeutgeb/gemas-ia)" },
         signal: AbortSignal.timeout(timeoutMs),
       });
       if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);

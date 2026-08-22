@@ -12,7 +12,7 @@
 | Tagline | El radar de las joyas ocultas de la IA |
 | Tipo | Sitio 100% estático + pipeline de datos automatizado |
 | Idioma del contenido | Español (términos técnicos en inglés) |
-| Autor / marca personal | joaqu (dueño del proyecto; todo contenido termina atribuyéndole) |
+| Autor / marca personal | JotaLeutgeb (dueño del proyecto; todo contenido termina atribuyéndole) |
 
 **Propósito en una frase:** detectar modelos LLM poco conocidos que ofrecen la mejor relación calidad/precio ("joyas ocultas"), proyectar su evolución con datos históricos propios, y convertir esos hallazgos en contenido analítico para LinkedIn.
 
@@ -218,18 +218,15 @@ Orden correcto tras recolectar: `collect` → `build:dataset` → `test` → (`d
 4. Publicar en LinkedIn, borrar/marcar el borrador como publicado en el frontmatter (`published: true`).
 
 ### Publicar por primera vez en GitHub Pages
-El nombre de usuario real de GitHub está placeholder como `joaqu` en EXACTAMENTE estos 4 lugares (buscar/reemplazar todos):
-1. `astro.config.mjs` → campo `site` (`https://joaqu.github.io`)
-2. `src/config/site.js` → `repoUrl` y `author`
-3. `scripts/generate-weekly-draft.mjs` → constante `SITE_URL`
-4. `public/robots.txt` → línea `Sitemap:`
+> **HECHO 2026-08-22:** usuario real `JotaLeutgeb`, remote configurado, placeholders reemplazados.
+> Lección: la rutina original listaba 4 lugares y había 9 (faltaban BaseLayout canonical fallback, metodologia.astro, util.js User-Agent, AGENTS.md identidad). Cuando agregues URLs hardcodeadas, sumalas acá.
 
 Pasos:
-1. Crear repo público llamado exactamente `gemas-ia` bajo la cuenta del dueño.
-2. Hacer el reemplazo de usuario en los 4 lugares y commitear (`docs:`).
-3. `git remote add origin git@github.com:<usuario>/gemas-ia.git && git push -u origin main`.
+1. ~~Crear repo público llamado exactamente `gemas-ia` bajo la cuenta del dueño.~~ ✓
+2. ~~Hacer el reemplazo de usuario en los 4 lugares y commitear (`docs:`).~~ ✓ (fueron 9)
+3. `git remote add origin https://github.com/JotaLeutgeb/gemas-ia.git && git push -u origin main`.
 4. En GitHub: Settings → Pages → Build and deployment → Source: **GitHub Actions**.
-5. Verificar que corra deploy.yml (verde) y que `https://<usuario>.github.io/gemas-ia/` responda.
+5. Verificar que corra deploy.yml (verde) y que `https://jotaleutgeb.github.io/gemas-ia/` responda.
 6. Confirmar que snapshot.yml quedó habilitado (pestaña Actions → scheduled workflow).
 
 ### Checklist de release de features grandes

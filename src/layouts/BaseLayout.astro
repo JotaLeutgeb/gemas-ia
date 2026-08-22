@@ -9,7 +9,7 @@ const isActive = (href) => {
   if (target === "/") return currentPath === "/" ? "page" : undefined;
   return currentPath === target || currentPath.startsWith(`${target}/`) ? "page" : undefined;
 };
-const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://joaqu.github.io");
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://jotaleutgeb.github.io");
 ---
 
 <!doctype html>

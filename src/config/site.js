@@ -3,8 +3,8 @@ export const SITE = {
   tagline: "El radar de las joyas ocultas de la IA",
   description:
     "Observatorio estático de LLMs: detectamos modelos poco conocidos con la mejor relación calidad/precio y proyectamos su evolución con datos propios.",
-  author: "joaqu",
-  repoUrl: "https://github.com/joaqu/gemas-ia",
+  author: "JotaLeutgeb",
+  repoUrl: "https://github.com/JotaLeutgeb/gemas-ia",
   sources: [
     { label: "OpenRouter", url: "https://openrouter.ai" },
     { label: "HuggingFace", url: "https://huggingface.co" },
