@@ -3,12 +3,12 @@ import * as Plot from "@observablehq/plot";
 const HEIGHT = 340;
 const DAY_MS = 86400000;
 const THEME = {
-  ink: "#1c1a16",
-  inkSoft: "#5d5748",
-  grid: "rgba(28, 26, 22, 0.09)",
-  green: "#0e7255",
-  gold: "#96700f",
-  rust: "#ab4032",
+  ink: "#ece7db",
+  inkSoft: "#a89f8d",
+  grid: "rgba(236, 231, 219, 0.10)",
+  green: "#46b881",
+  gold: "#d9a441",
+  rust: "#e08268",
 };
 
 export async function loadDataset() {
