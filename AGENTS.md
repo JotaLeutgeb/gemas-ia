@@ -194,6 +194,10 @@ Orden correcto tras recolectar: `collect` → `build:dataset` → `test` → (`d
 - **Sin secretos:** las fuentes de fase 1 no requieren keys. Cuando Artificial Analysis entre (fase 2), usar `AA_API_KEY` como secret de Actions; nunca commitear keys.
 - **Commits:** prefijos `data:` (snapshots/dataset), `content:` (blog/linkedin), `site:` (UI), `pipeline:` (scripts), `docs:` (este archivo y README).
 - **Código sin comentarios explicativos:** los nombres deben bastar; la documentación conceptual vive acá y en `/metodologia`.
+- **Sistema visual (2026-08-22):** tema "boletín técnico impreso" — papel cálido `#f7f4ec`, tinta `#1c1a16`, filetes de 1-2px, esquinas casi rectas, cero sombras/gradientes. Tipografía auto-hospedada: Fraunces Variable (display serif), IBM Plex Sans (cuerpo), IBM Plex Mono (todo dato numérico, tabular). Los gráficos usan tokens `THEME` de `src/scripts/charts.js` — jamás hex crueles en marks. Nada de Google Fonts CDN (privacidad/GDPR) ni dark-mode genérico: ese fue un error v0 deliberadamente corregido. Cambiar la identidad visual = actualizar este párrafo + `global.css` + `THEME` + favicon.
+- **Seguridad:** CSP por meta tag (GH Pages no setea headers): `script-src 'self'`, sin inline scripts; estilos con `'unsafe-inline'` necesario para atributos SVG de Plot. Dependencias vigiladas por Dependabot (npm + github-actions, semanal). Sin secrets en fase 1; cuando entre Artificial Analysis usar secret `AA_API_KEY`. XSS revisado: nombres de modelos solo fluyen vía expresiones Astro (escapadas) y `textContent` de Plot — nunca `innerHTML` manual.
+- **Liability:** aviso legal en `/metodologia#aviso-legal` (sin garantías, proyecciones ≠ consejos, marcas de sus dueños, sin tracking). Código MIT (`LICENSE`), datos CC BY 4.0 (`LICENSE-DATA.md`) citando Gemas IA + fuentes upstream.
+- **Observabilidad:** el dataset expone `sources.<fuente>.{ok, errors, fetchedAt}` agregado desde `_meta` de snapshots; el dashboard lo muestra como health-strip con estados ok/stale/unknown. Los errores de colecta NUNCA se ocultan: quedan en el snapshot y se reflejan en la web. Badge de CI en README. Decisión consciente: sin SaaS de monitoring (solo owner); los emails de falla de Actions alcanzan para v1.
 - **Actualización de este documento:** toda PR que cambie arquitectura, scoring, fuentes o procesos debe incluir los cambios correspondientes en AGENTS.md. Un agente que detecte desalineación doc↔código debe corregirla en la misma PR.
 
 ---
@@ -266,6 +270,15 @@ Lecciones operativas: `node --test <dir>` no funciona igual en Windows (usar rut
 9. Tests 16→21: clamp por recorte, fallback tasa28-sola, corte de ventana 7d, guard de famosos sin score, skip grácil si falta dataset.json.
 
 Veredicto auditor previo a fixes: "REVISAR — base sólida y publicable"; los 4 hallazgos IMPORTANTE quedaron resueltos y verificados (`npm test` 21/21, build 631 páginas).
+
+### 2026-08-22 — publicación + rediseño editorial + seguridad/observabilidad
+1. **Publicado** en https://jotaleutgeb.github.io/gemas-ia/ — lección: la rutina de placeholders listaba 4 lugares, había 9 (ver §9).
+2. **Rediseño anti-AI-slop**: dark-mode genérico → tema "boletín técnico impreso" (tokens y tipografía documentados en §8 Sistema visual).
+3. **Observabilidad de pipeline**: health-strip en dashboard alimentado por `sources.*.{ok,errors,fetchedAt}`; los fallos de colecta son visibles en el sitio, no solo en logs.
+4. **Assets LinkedIn**: `npm run charts` genera SVG+PNG (resvg) de top joyas + tarjeta semanal 1200×630 en `public/charts/`; el borrador semanal las lista para adjuntar. Motivación: LinkedIn no acepta SVG ni markdown — sin PNGs el workflow no era usable de verdad.
+5. **Borrador v2**: hooks alternativos, comparación precio-vs-gigantes, contador de caracteres contra límite 3000.
+6. **Seguridad**: CSP meta (`script-src 'self'`), referrer-policy, Dependabot npm+actions, `npm audit` limpio. Pendiente deliberado: pin actions por SHA (Dependabot cubre updates; revisar si el proyecto crece).
+7. **Liability**: aviso legal en metodología + `LICENSE-DATA.md` (CC BY 4.0).
 
 ---
 

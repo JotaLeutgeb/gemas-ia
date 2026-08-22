@@ -100,7 +100,13 @@ export async function build() {
       if (record.promptUsdPerM != null) (or.promptUsdPerMSeries ||= []).push({ date, value: record.promptUsdPerM });
       if (record.completionUsdPerM != null) (or.completionUsdPerMSeries ||= []).push({ date, value: record.completionUsdPerM });
     }
-    sourcesSummary.openrouter = { lastSnapshot: date, modelsInSnapshot: snapshot._meta?.count ?? null };
+    sourcesSummary.openrouter = {
+      lastSnapshot: date,
+      modelsInSnapshot: snapshot._meta?.count ?? null,
+      ok: (snapshot._meta?.errors ?? []).length === 0,
+      errors: snapshot._meta?.errors ?? [],
+      fetchedAt: snapshot._meta?.fetchedAt ?? null,
+    };
   }
 
   const hfFiles = await listSnapshots("huggingface");
@@ -125,7 +131,13 @@ export async function build() {
       if (record.likes != null) (hf.likesSeries ||= []).push({ date, value: record.likes });
       if (record.trendingScore != null) hf.trendingScore = record.trendingScore;
     }
-    sourcesSummary.huggingface = { lastSnapshot: date, modelsInSnapshot: snapshot._meta?.count ?? null };
+    sourcesSummary.huggingface = {
+      lastSnapshot: date,
+      modelsInSnapshot: snapshot._meta?.count ?? null,
+      ok: (snapshot._meta?.errors ?? []).length === 0,
+      errors: snapshot._meta?.errors ?? [],
+      fetchedAt: snapshot._meta?.fetchedAt ?? null,
+    };
   }
 
   const usedUrlSlugs = new Map();

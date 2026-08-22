@@ -1,5 +1,11 @@
 ---
 import { SITE, NAV, withBase } from "../config/site.js";
+import "@fontsource-variable/fraunces";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
 import "../styles/global.css";
 
 const { title = `${SITE.name} — ${SITE.tagline}`, description = SITE.description } = Astro.props;
@@ -17,6 +23,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://jotaleutgeb
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; base-uri 'self'; form-action 'none'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
@@ -34,7 +42,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://jotaleutgeb
   <body>
     <header class="site-header">
       <div class="container">
-        <a href={withBase("/")} class="brand"><span class="gem">◆</span> {SITE.name}</a>
+        <a href={withBase("/")} class="brand"><span class="gem">◆</span> Gemas IA</a>
         <nav class="main-nav">
           {NAV.map((item) => <a href={withBase(item.href)} aria-current={isActive(item.href)}>{item.label}</a>)}
         </nav>
@@ -48,7 +56,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://jotaleutgeb
     <footer class="site-footer">
       <div class="container">
         <p>
-          Hecho con curiosidad por {SITE.author}. Datos de
+          Compilado con curiosidad por {SITE.author}. Datos de
           {SITE.sources.map((s, i) => (
             <>
               {i > 0 && " y "}<a href={s.url} rel="noopener">{s.label}</a>
@@ -57,7 +65,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://jotaleutgeb
         </p>
         <p class="small">
           Proyecto abierto: <a href={SITE.repoUrl} rel="noopener">código y datos en GitHub</a> ·
-          snapshots diarios versionados · <a href={withBase("/metodologia/")}>cómo se calcula todo</a>
+          snapshots diarios versionados · <a href={withBase("/metodologia/")}>cómo se calcula todo</a> ·
+          <a href={withBase("/metodologia/#aviso-legal")}>aviso legal</a>
+        </p>
+        <p class="colophon">
+          ◆ Gemas IA · tipografía Fraunces &amp; IBM Plex · código bajo MIT, datos bajo CC BY 4.0
         </p>
       </div>
     </footer>

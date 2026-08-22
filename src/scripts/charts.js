@@ -2,6 +2,14 @@ import * as Plot from "@observablehq/plot";
 
 const HEIGHT = 340;
 const DAY_MS = 86400000;
+const THEME = {
+  ink: "#1c1a16",
+  inkSoft: "#5d5748",
+  grid: "rgba(28, 26, 22, 0.09)",
+  green: "#0e7255",
+  gold: "#96700f",
+  rust: "#ab4032",
+};
 
 export async function loadDataset() {
   const response = await fetch(`${import.meta.env.BASE_URL}data/dataset.json`);
@@ -17,7 +25,8 @@ function plotBase(el) {
   return {
     width: Math.max(el.clientWidth || 720, 320),
     height: HEIGHT,
-    style: { background: "transparent", color: "#e6edf5", font: "inherit" },
+    style: { background: "transparent", color: THEME.ink, font: "inherit" },
+    marks: [],
   };
 }
 
@@ -62,7 +71,7 @@ export function renderMomentumScatter(el, models) {
           title: (d) => `${d.name}\n${d.y.toFixed(1)}% / semana`,
         }),
       ],
-      color: { domain: [false, true], range: ["#34d399", "#f87171"], legend: true },
+      color: { domain: [false, true], range: [THEME.green, THEME.rust], legend: true },
     })
   );
   return true;
@@ -75,9 +84,9 @@ export function renderDownloadsSeries(el, model) {
   const f90 = model.metrics.forecastDownloads90d;
   const f180 = model.metrics.forecastDownloads180d;
   const marks = [
-    Plot.areaY(series, { x: "date", y: "value", fill: "#34d399", fillOpacity: 0.12 }),
-    Plot.line(series, { x: "date", y: "value", stroke: "#34d399", strokeWidth: 2 }),
-    Plot.dot(series, { x: "date", y: "value", fill: "#34d399", r: 3, title: (d) => `${d.date.toISOString().slice(0, 10)}: ${d.value.toLocaleString("es")}` }),
+    Plot.areaY(series, { x: "date", y: "value", fill: THEME.green, fillOpacity: 0.14 }),
+    Plot.line(series, { x: "date", y: "value", stroke: THEME.green, strokeWidth: 2 }),
+    Plot.dot(series, { x: "date", y: "value", fill: THEME.green, r: 3, title: (d) => `${d.date.toISOString().slice(0, 10)}: ${d.value.toLocaleString("es")}` }),
   ];
   if (f180 && series.length >= 4) {
     const lastPoint = series[series.length - 1];
@@ -86,7 +95,7 @@ export function renderDownloadsSeries(el, model) {
     if (f90) projectionPoints.push({ date: new Date(lastDate.getTime() + 90 * DAY_MS), value: f90.center });
     projectionPoints.push({ date: new Date(lastDate.getTime() + 180 * DAY_MS), value: f180.center });
     marks.push(
-      Plot.line(projectionPoints, { x: "date", y: "value", stroke: "#fbbf24", strokeWidth: 1.5, strokeDasharray: "4,4" })
+      Plot.line(projectionPoints, { x: "date", y: "value", stroke: THEME.gold, strokeWidth: 1.5, strokeDasharray: "4,4" })
     );
     marks.push(
       Plot.areaY(
@@ -94,7 +103,7 @@ export function renderDownloadsSeries(el, model) {
           { date: lastDate, low: lastPoint.value, high: lastPoint.value },
           { date: new Date(lastDate.getTime() + 180 * DAY_MS), low: f180.low, high: f180.high },
         ],
-        { x: "date", y1: "low", y2: "high", fill: "#fbbf24", fillOpacity: 0.15 }
+        { x: "date", y1: "low", y2: "high", fill: THEME.gold, fillOpacity: 0.18 }
       )
     );
   }

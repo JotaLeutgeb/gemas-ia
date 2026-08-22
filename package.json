@@ -14,14 +14,19 @@
     "collect": "node scripts/collect-all.mjs",
     "build:dataset": "node scripts/build-dataset.mjs",
     "draft": "node scripts/generate-weekly-draft.mjs",
+    "charts": "node scripts/generate-chart-assets.mjs",
     "test": "node --test tests/scoring.test.mjs tests/dataset.test.mjs",
-    "pipeline": "npm run collect && npm run build:dataset"
+    "pipeline": "npm run collect && npm run build:dataset && npm run charts"
   },
   "dependencies": {
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
     "@observablehq/plot": "^0.6.17",
     "astro": "^7.2.4"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.7.3"
+    "@astrojs/sitemap": "^3.7.3",
+    "@resvg/resvg-js": "^2.6.2"
   }
 }

@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Metodología — Gemas IA" description="Cómo recolectamos los datos y calculamos los scores de gemas-ia. Sin cajas negras.">
+  <p class="kicker"><span class="gem">◆</span> Documento vivo · actualizado con cada cambio de scoring</p>
   <section class="hero">
     <h1>Metodología</h1>
     <p class="lede">Todo lo que mostramos se puede auditar: cada número del sitio nace de un snapshot versionado en el repositorio.</p>
@@ -10,6 +11,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <div class="prose">
     <section class="card">
+      <p class="kicker">§ 01 · Datos</p>
       <h2>De dónde vienen los datos</h2>
       <p>
         Un cron diario (GitHub Actions) consulta las APIs públicas de
@@ -25,6 +27,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <section class="card">
+      <p class="kicker">§ 02 · Identidad</p>
       <h2>Cómo se identifica a cada modelo</h2>
       <p>
         Un mismo modelo aparece con IDs distintos por fuente (<code>Llama-3.3-70B</code> vs <code>llama-3-3-70b</code>).
@@ -34,6 +37,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <section class="card">
+      <p class="kicker">§ 03 · Momentum</p>
       <h2>Momentum</h2>
       <p>El momentum mide qué tan rápido crece la serie de descargas diarias, ajustando una recta sobre el logaritmo de los valores:</p>
       <div class="formula">
@@ -48,6 +52,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <section class="card">
+      <p class="kicker">§ 04 · Score</p>
       <h2>Score de joya</h2>
       <p>Versión actual (v1): crecimiento normalizado × factor de escasez:</p>
       <div class="formula">
@@ -62,6 +67,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <section class="card">
+      <p class="kicker">§ 05 · Proyecciones</p>
       <h2>Proyecciones</h2>
       <p>
         Extrapolamos la misma regresión log-lineal 90 y 180 días hacia adelante. La banda de confianza
@@ -71,6 +77,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <section class="card">
+      <p class="kicker">§ 06 · Limitaciones</p>
       <h2>Limitaciones honestas</h2>
       <ul>
         <li>Descargas ≠ uso real: es la mejor señal abierta disponible hoy, pero sesga hacia modelos open-weights.</li>
@@ -80,14 +87,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </ul>
     </section>
 
-    <section class="card">
-      <h2>Atribución</h2>
+    <section class="card" id="aviso-legal">
+      <p class="kicker">§ 07 · Atribución y aviso legal</p>
+      <h2>Atribución y aviso legal</h2>
       <p>
         Datos: <a href="https://openrouter.ai" rel="noopener">OpenRouter</a> y
         <a href="https://huggingface.co/docs/hub/api" rel="noopener">HuggingFace Hub API</a>.
-        Proyecto abierto de JotaLeutgeb — código, snapshots y este cálculo completo son públicos
-        en <a href="https://github.com/JotaLeutgeb/gemas-ia" rel="noopener">GitHub</a>.
+        El código es open source bajo MIT; los datos publicados (snapshots y dataset)
+        se comparten bajo <strong>CC BY 4.0</strong>: usalos libremente citando a Gemas IA
+        y las fuentes originales.
       </p>
+      <ul>
+        <li><strong>Sin garantías:</strong> la información se publica "tal cual", con fines informativos. Puede contener errores; verificá precios y benchmarks en las fuentes oficiales antes de tomar decisiones.</li>
+        <li><strong>Las proyecciones son estimaciones estadísticas</strong>, no consejos de inversión, compra o adopción empresarial. Publicamos bandas de confianza porque el futuro es incierto.</li>
+        <li><strong>Marcas:</strong> GPT, Claude, Gemini, Llama y demás nombres son propiedad de sus respectivos dueños; se mencionan con fines descriptivos e identificativos.</li>
+        <li><strong>Privacidad:</strong> este sitio no usa cookies ni rastreo y no recolecta datos personales. El hosting de GitHub Pages está sujeto a las políticas de GitHub.</li>
+      </ul>
     </section>
   </div>
 </BaseLayout>

@@ -28,8 +28,9 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
 ---
 
 <BaseLayout title={`${SITE.name} — ${SITE.tagline}`}>
+  <p class="kicker"><span class="gem">◆</span> Observatorio independiente de LLMs · edición diaria</p>
   <section class="hero">
-    <h1>El radar de las <span class="gem">joyas ocultas</span> de la IA</h1>
+    <h1>El radar de las <em class="gem">joyas ocultas</em> de la IA</h1>
     <p class="lede">
       Todos los días tomamos una fotografía del mercado de LLMs. Con esas fotos acumuladas detectamos
       modelos poco conocidos con la mejor relación calidad/precio y proyectamos hacia dónde van.
@@ -87,6 +88,22 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
         Mientras tanto, mirá <a href={withBase("/modelos/")}>el catálogo completo</a> o leé <a href={withBase("/metodologia/")}>la metodología</a>.
       </p>
     )}
+  </section>
+
+  <section class="health-strip" aria-label="Estado de recolección de datos">
+    {Object.entries(dataset?.sources ?? {}).map(([name, info]) => {
+      const ageDays = info.lastSnapshot
+        ? Math.round((Date.parse(dataset.generatedAt) - Date.parse(info.lastSnapshot)) / 86400000)
+        : null;
+      const state = info.ok === false ? "stale" : ageDays !== null && ageDays <= 1 ? "ok" : "unknown";
+      const errorCount = (info.errors ?? []).length;
+      return (
+        <span class={state}>
+          {name}: {info.lastSnapshot ?? "sin snapshots"} · {info.modelsInSnapshot ?? "—"} modelos{errorCount > 0 ? ` · ${errorCount} errores` : ""}
+        </span>
+      );
+    })}
+    <span class="unknown">próxima corrida automática: 06:17 UTC</span>
   </section>
 </BaseLayout>
 
