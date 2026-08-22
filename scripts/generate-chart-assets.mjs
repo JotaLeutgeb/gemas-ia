@@ -9,14 +9,14 @@ const OUT_DIR = path.join(ROOT, "public", "charts");
 const TOP_N = 10;
 
 const T = {
-  paper: "#16140f",
-  ink: "#eae4d5",
-  inkSoft: "#b3ab97",
-  inkFaint: "#837b66",
-  rule: "#332e22",
-  green: "#4fbf94",
-  gold: "#d4a72c",
-  rust: "#e0725f",
+  paper: "#f7f4ec",
+  ink: "#1c1a16",
+  inkSoft: "#5d5748",
+  inkFaint: "#8a8271",
+  rule: "#d9d2bf",
+  green: "#0e7255",
+  gold: "#96700f",
+  rust: "#ab4032",
 };
 
 async function savePng(svgString, outFile, width) {
