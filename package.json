@@ -12,23 +12,26 @@
     "build": "astro build",
     "preview": "astro preview",
     "collect": "node scripts/collect-all.mjs",
+    "collect:usage": "node scripts/collect-openrouter-usage.mjs",
+    "benchmarks": "node scripts/collect-benchmarks.mjs",
+    "backfill": "node scripts/backfill.mjs",
     "build:dataset": "node scripts/build-dataset.mjs",
     "draft": "node scripts/generate-weekly-draft.mjs",
     "charts": "node scripts/generate-chart-assets.mjs",
     "test": "node --test tests/scoring.test.mjs tests/movements.test.mjs tests/dataset.test.mjs",
-    "pipeline": "npm run collect && npm run build:dataset && npm run charts"
+    "pipeline": "npm run collect && npm run collect:usage && npm run build:dataset && npm run charts"
   },
   "dependencies": {
-    "@duckdb/node-api": "^1.5.5-r.4",
-    "@fontsource-variable/fraunces": "^5.3.0",
-    "@fontsource/ibm-plex-mono": "^5.3.0",
-    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@astrojs/sitemap": "^3.6.0",
+    "@duckdb/node-api": "^1.4.1-r.2",
+    "@fontsource-variable/fraunces": "^5.2.7",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/ibm-plex-sans": "^5.2.7",
     "@observablehq/plot": "^0.6.17",
     "astro": "^7.2.4",
-    "fflate": "^0.8.3"
+    "fflate": "^0.8.2"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.7.3",
     "@resvg/resvg-js": "^2.6.2"
   }
 }

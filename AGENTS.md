@@ -64,9 +64,10 @@ Sesión de refinamiento tipo "grill-me" con el dueño. Estas decisiones están *
 ```
 
 Principios inviolables:
-- Los snapshots son **append-only**: nunca se edita ni borra un archivo de `data/snapshots/` pasado. Si una corrida falla, ese día simplemente no existe.
+- Los snapshots son **append-only**: nunca se edita ni borra un archivo de `data/snapshots/` pasado. Si una corrida falla, ese día simplemente no existe. **Única excepción:** `data/snapshots/benchmarks/` conserva solo los últimos 8 archivos (es dato de referencia, no historia de mercado).
 - `public/data/dataset.json` es un artefacto derivado. Nunca editarlo a mano.
 - Todo dato mostrado en el sitio debe provenir de `dataset.json`, que a su vez proviene de snapshots commiteados. Trazabilidad total.
+- Los backfills (`scripts/backfill.mjs`) escriben SOLO fechas que no existen en disco; los snapshots propios jamás se pisan. Los archivos de backfill llevan `_meta.backfill = true` y su `source` indica el origen real (ej. `huggingface-backfill`).
 
 ---
 
@@ -120,10 +121,14 @@ gemas-ia/
 |---|---|---|---|---|
 | OpenRouter | `https://openrouter.ai/api/v1/models` | catálogo de modelos, precios prompt/completion (USD/token), contexto, modalidades | diaria | ninguna |
 | HuggingFace Hub | `https://huggingface.co/api/models?sort=downloads&direction=-1&limit=1000&full=true` | downloads, likes, createdAt, pipeline_tag | diaria | ninguna |
+| OpenRouter Data API | `https://openrouter.ai/api/v1/datasets/rankings-daily` | tokens reales procesados por día, top-50 (uso real) | diaria | secret `OPENROUTER_API_KEY` |
+| Epoch AI | `https://epoch.ai/data/benchmark_data.zip` | ~66 benchmarks curados + externos (GPQA, MATH L5, SWE-bench, MMLU...), CSVs | semanal (workflow benchmarks.yml) | ninguna |
 
 Notas duras ganadas a fuerza de golpes:
-- Ninguna de las dos devuelve series históricas. La historia ES este repositorio.
-- OpenRouter expone rankings de uso en su web pero no garantiza endpoint público estable; el colector intenta endpoints extra y si fallan, guarda igualmente lo obtenido. No depender de scraping HTML en fase 1.
+- Ninguna de las dos primeras devuelve series históricas. La historia ES este repositorio; lo histórico se rellenó con backfills (ver abajo) y sigue creciendo un punto por día.
+- El dataset de uso de OpenRouter arranca en 2025-01-01, permite ventanas ≤366 días por request y **exige citación exacta**: "Source: OpenRouter (openrouter.ai/rankings), as of {as_of}" (CC BY 4.0). Rate limits: 30 req/min, 500 req/día.
+- Los benchmarks de Epoch AI son snapshots de referencia con retención de 8 archivos; el matching a nuestros slugs es heurístico (`scripts/lib/benchmark-match.js`, substring bidireccional con mínimo de largo) — los no matcheados se descartan sin inventar nada.
+- HF downloads históricos vienen del dataset público `mmpr/open_model_evolution_data` (grano semanal desde feb-2025). Un intento anterior con `DS2UVA/hf-hub-daily-downloads-full` fracasó porque el dataset se volvió privado (HTTP 401): verificar acceso ANTES de diseñar sobre datasets de terceros.
 - HuggingFace limita a ~1000 resultados por request sin paginar más profundo; suficiente para v1.
 
 ### Fase 2 — diseñada, no implementada
@@ -178,17 +183,20 @@ Implementación en `scripts/lib/movements.js` (funciones puras, testeada). `data
 
 ```bash
 npm install                # setup inicial
-npm run collect            # un snapshot HOY de todas las fuentes (tolerante a fallo parcial)
+npm run collect            # snapshot HOY de catálogo OpenRouter + HuggingFace
+npm run collect:usage      # snapshot de uso real (últimos 3 días faltantes; requiere key)
+npm run benchmarks         # refresco de benchmarks Epoch AI (snapshot de referencia)
 npm run build:dataset      # regenera public/data/dataset.json desde todos los snapshots
 npm run draft              # genera borrador semanal en content/linkedin/
-npm run test               # node:test: unit de scoring + smoke del dataset
-npm run pipeline           # collect + build:dataset (flujo diario completo)
+npm run test               # node:test: scoring + movements + smoke de dataset
+npm run pipeline           # collect + collect:usage + build:dataset + charts (flujo diario completo)
+npm run backfill           # runner one-off: subcomandos openrouter-usage | hf-downloads
 npm run dev                # sitio en localhost:4321
 npm run build              # build de producción a dist/
 npm run preview            # sirve el build
 ```
 
-Orden correcto tras recolectar: `collect` → `build:dataset` → `test` → (`draft` opcional) → commit.
+Orden correcto tras recolectar: `collect` → `collect:usage` → `build:dataset` → `test` → (`draft` opcional) → commit.
 
 ---
 
@@ -198,7 +206,7 @@ Orden correcto tras recolectar: `collect` → `build:dataset` → `test` → (`d
 - **Links internos:** SIEMPRE vía `withBase()` de `src/config/site.js`. Jamás escribir `/seccion/` crudo: GitHub Pages sirve bajo subpath `/gemas-ia/` y rompería la navegación. En markdown usar rutas relativas (`../../metodologia/`).
 - **Fechas:** siempre ISO `YYYY-MM-DD` UTC. Snapshots usan la fecha UTC del momento.
 - **Slugs:** normalización definida en §5. El slug canónico es la identidad del modelo en TODO el sistema.
-- **Sin secretos:** las fuentes de fase 1 no requieren keys. Cuando Artificial Analysis entre (fase 2), usar `AA_API_KEY` como secret de Actions; nunca commitear keys.
+- **Sin secretos:** las fuentes de fase 1 no requieren keys en código; `OPENROUTER_API_KEY` vive como secret de GitHub (CI) y en `.env` local (gitignored, parser tolera `KEY = valor` y `KEY=valor`). Nunca commitear keys ni loggearlas. Si una key aparece en chat/issues, rotarla.
 - **Commits:** prefijos `data:` (snapshots/dataset), `content:` (blog/linkedin), `site:` (UI), `pipeline:` (scripts), `docs:` (este archivo y README).
 - **Código sin comentarios explicativos:** los nombres deben bastar; la documentación conceptual vive acá y en `/metodologia`.
 - **Sistema visual (2026-08-22):** tema "boletín técnico impreso" — papel cálido `#f7f4ec`, tinta `#1c1a16`, filetes de 1-2px, esquinas casi rectas, cero sombras/gradientes. Tipografía auto-hospedada: Fraunces Variable (display serif), IBM Plex Sans (cuerpo), IBM Plex Mono (todo dato numérico, tabular). Los gráficos usan tokens `THEME` de `src/scripts/charts.js` — jamás hex crueles en marks. Nada de Google Fonts CDN (privacidad/GDPR) ni dark-mode genérico: ese fue un error v0 deliberadamente corregido. Cambiar la identidad visual = actualizar este párrafo + `global.css` + `THEME` + favicon.

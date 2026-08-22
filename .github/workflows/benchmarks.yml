@@ -1,8 +1,8 @@
-name: snapshot
+name: benchmarks
 
 on:
   schedule:
-    - cron: "17 6 * * *"
+    - cron: "43 5 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -13,34 +13,26 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  collect:
+  refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run collect
-      - name: Collect OpenRouter usage
-        env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: npm run collect:usage
+      - run: npm run benchmarks
       - run: npm run build:dataset
-      - run: npm run charts
-      - run: npm test
-      - name: Commit snapshots
+      - name: Commit benchmark snapshot
         run: |
           git config user.name "gemas-ia-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/snapshots public/data/dataset.json public/charts
+          git add data/snapshots/benchmarks public/data/dataset.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "data: snapshot $(date -u +%F)"
+            git commit -m "data: benchmarks $(date -u +%F)"
             git push
           fi
