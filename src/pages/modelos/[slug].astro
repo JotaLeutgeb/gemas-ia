@@ -33,7 +33,7 @@ const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
   </section>
 
   <section class="kpis">
-    <div class="kpi"><div class="value">{fmtNum(model.downloads)}</div><div class="label">descargas diarias</div></div>
+    <div class="kpi"><div class="value">{fmtNum(model.downloads)}</div><div class="label">descargas acumuladas</div></div>
     <div class="kpi"><div class="value">{fmtNum(model.likes)}</div><div class="label">likes</div></div>
     <div class="kpi"><div class="value">{model.promptUsdPerM == null ? "n/d" : `$${model.promptUsdPerM.toFixed(2)}`}</div><div class="label">$ / 1M entrada</div></div>
     <div class="kpi"><div class="value">{model.completionUsdPerM == null ? "n/d" : `$${model.completionUsdPerM.toFixed(2)}`}</div><div class="label">$ / 1M salida</div></div>
@@ -47,7 +47,7 @@ const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
       Línea verde: descargas diarias observadas. Línea amarilla punteada: extrapolación log-lineal
       a 180 días con su banda de confianza. Cuantos más puntos tengamos, más honesta es la banda.
     </p>
-    <div id="chart-downloads" class="chart-container" data-model={JSON.stringify(model)}></div>
+    <div id="chart-downloads" class="chart-container" role="img" aria-label="Serie histórica de descargas acumuladas con proyección a 180 días" data-model={JSON.stringify(model)}></div>
   </section>
 
   <section class="card">

@@ -1,6 +1,7 @@
 import * as Plot from "@observablehq/plot";
 
 const HEIGHT = 340;
+const DAY_MS = 86400000;
 
 export async function loadDataset() {
   const response = await fetch(`${import.meta.env.BASE_URL}data/dataset.json`);
@@ -71,32 +72,33 @@ export function renderDownloadsSeries(el, model) {
   const series = (model.series.downloads ?? []).map((p) => ({ date: new Date(p.date), value: p.value }));
   if (series.length < 2) return false;
   clear(el);
-  const forecast = model.metrics.forecastDownloads180d;
+  const f90 = model.metrics.forecastDownloads90d;
+  const f180 = model.metrics.forecastDownloads180d;
   const marks = [
     Plot.areaY(series, { x: "date", y: "value", fill: "#34d399", fillOpacity: 0.12 }),
     Plot.line(series, { x: "date", y: "value", stroke: "#34d399", strokeWidth: 2 }),
     Plot.dot(series, { x: "date", y: "value", fill: "#34d399", r: 3, title: (d) => `${d.date.toISOString().slice(0, 10)}: ${d.value.toLocaleString("es")}` }),
   ];
-  if (forecast && series.length >= 4) {
+  if (f180 && series.length >= 4) {
     const lastPoint = series[series.length - 1];
     const lastDate = lastPoint.date;
+    const projectionPoints = [lastPoint];
+    if (f90) projectionPoints.push({ date: new Date(lastDate.getTime() + 90 * DAY_MS), value: f90.center });
+    projectionPoints.push({ date: new Date(lastDate.getTime() + 180 * DAY_MS), value: f180.center });
     marks.push(
-      Plot.line(
-        [lastPoint, { date: new Date(lastDate.getTime() + 90 * 86400000), value: forecast.center }, { date: new Date(lastDate.getTime() + 180 * 86400000), value: forecast.center }],
-        { x: "date", y: "value", stroke: "#fbbf24", strokeWidth: 1.5, strokeDasharray: "4,4" }
-      )
+      Plot.line(projectionPoints, { x: "date", y: "value", stroke: "#fbbf24", strokeWidth: 1.5, strokeDasharray: "4,4" })
     );
     marks.push(
       Plot.areaY(
         [
           { date: lastDate, low: lastPoint.value, high: lastPoint.value },
-          { date: new Date(lastDate.getTime() + 180 * 86400000), low: forecast.low, high: forecast.high },
+          { date: new Date(lastDate.getTime() + 180 * DAY_MS), low: f180.low, high: f180.high },
         ],
         { x: "date", y1: "low", y2: "high", fill: "#fbbf24", fillOpacity: 0.15 }
       )
     );
   }
-  el.append(Plot.plot({ ...plotBase(el), y: { label: "descargas diarias (HuggingFace)", grid: true }, marks }));
+  el.append(Plot.plot({ ...plotBase(el), y: { label: "descargas acumuladas (HuggingFace)", grid: true }, marks }));
   return true;
 }
 

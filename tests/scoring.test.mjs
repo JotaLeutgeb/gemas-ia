@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  clampOutliers,
   linearFit,
   growthRate,
   momentum,
@@ -89,4 +90,34 @@ test("normalizeScores mapea min->0 max->1 y preserva nulls", () => {
   assert.ok(Math.abs(norm(20) - 0.5) < 1e-9);
   assert.equal(norm(null), null);
   assert.equal(normalizeScores([])(5), null);
+});
+
+test("clampOutliers recorta al cap sin perder puntos", () => {
+  const s = series([10, 10, 11, 10, 10_000]);
+  const clamped = clampOutliers(s);
+  assert.equal(clamped.length, s.length);
+  const med = 10;
+  assert.ok(clamped.every((p) => p.value <= Math.max(med * 3, 1)));
+});
+
+test("momentum usa solo tasa 28d cuando la ventana 7d queda vacía", () => {
+  const start = Date.parse("2026-07-01T00:00:00Z");
+  let v = 100;
+  const s = Array.from({ length: 9 }, (_, i) => ({
+    date: new Date(start + i * 3 * DAY).toISOString().slice(0, 10),
+    value: (v *= 1.05),
+  }));
+  const r28 = growthRate(s, 28).accumulated;
+  assert.equal(growthRate(s, 7), null);
+  assert.ok(Math.abs(momentum(s) - r28) < 1e-9);
+});
+
+test("growthRate solo considera los últimos N días", () => {
+  const flatOld = Array.from({ length: 12 }, () => 1000);
+  let v = 1000;
+  const recentGrowth = Array.from({ length: 7 }, () => (v *= 1.1));
+  const s = series([...flatOld, ...recentGrowth], "2026-06-15");
+  const rate = growthRate(s, 7);
+  assert.ok(rate !== null);
+  assert.ok(Math.abs(rate.accumulated - Math.log(1.1) * 7) < 0.05 * Math.abs(rate.accumulated));
 });

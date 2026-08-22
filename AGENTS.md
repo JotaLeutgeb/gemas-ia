@@ -151,17 +151,19 @@ Implementación única y autoritativa: `scripts/lib/scoring.js`. La página `/me
 
 ### Momentum (v1)
 - Serie: puntos diarios disponibles por modelo por métrica (downloads HF, likes HF).
-- Tasa de crecimiento: regresión lineal simple sobre `ln(valor)` de los últimos **28 días** (mínimo 4 puntos; si no alcanza, momentum = null y el modelo queda fuera de rankings).
-- `momentum = 0.6 * tasa7d + 0.4 * tasa28d` donde `tasaNd = pendiente * Nd` (aprox. de crecimiento acumulado log-lineal).
-- Amortiguación anti-outliers: si algún punto es 3× la mediana local, se recorta antes de ajustar.
+- Tasa de crecimiento: regresión lineal sobre `ln(valor)` dentro de una ventana de N días. Una ventana es válida si tiene ≥4 puntos Y cubre ≥25% de los días de la ventana.
+- Combinación: `momentum = 0.6 * tasa7d + 0.4 * tasa28d` donde `tasaNd = pendiente * Nd` (aprox. de crecimiento acumulado log-lineal).
+- Fallbacks oficiales: ventana 28d inválida → usa tasa7d sola; ventana 7d inválida → tasa28d sola; ninguna válida (<4 puntos totales) → momentum = null y el modelo queda fuera de rankings.
+- Amortiguación anti-outliers: valores >3× la mediana local se RECORTAN al cap (no se eliminan) antes de ajustar. Aplica también a las proyecciones.
 
 ### Filtro de fama
-Los modelos en `config/famous-models.json` no pueden aparecer en `/joyas` ni en borradores de LinkedIn como "joyas" (sí pueden aparecer en dashboard y fichas). Mantener esa lista actualizada es tarea manual del dueño; revisarla cada ~mes.
+Los modelos en `config/famous-models.json` no compiten como joyas: su `gemScore` es null y en fichas muestran badge "modelo famoso". Mantener esa lista actualizada es tarea manual del dueño; revisarla cada ~mes. Los fragments se matchean contra el slug normalizado completo — evitar fragments cortos ambiciosos (ej. `"o3"` matcheaba IDs ajenos; usar `"openaio3"`).
 
 ### gemScore (evolución por fases)
-- **v1.x (actual):** `gemScore = momentum_normalizado × factor_escasez`, donde `factor_escasez = 1` para modelos fuera de la lista famosa con < 500k downloads acumulados; 0.5 entre 500k y 5M; 0 arriba (no compiten).
+- **v1.x (actual):** `gemScore = momentum_normalizado × factor_escasez`, redondeado a 6 decimales para minimizar empates. `factor_escasez = 1` si downloads < 500k; 0.5 entre 500k y 5M; 0 arriba.
+- Elegibilidad en rankings (única definición compartida por dashboard, `/joyas` y borrador semanal): `!famous && gemScore !== null && downloads <= 5M`.
 - **v2 (cuando exista quality):** `gemScore = quality_score / precio_promedio_por_1M_tokens`, normalizado por categoría de tamaño (<8B, 8–34B, 34–70B, >70B). El momentum pasa a ser desempate.
-- Proyección: extrapolación log-lineal a 90 y 180 días, con banda de confianza ± desviación estándar del residuo. Siempre mostrar la banda; jamás publicar proyección sin ella.
+- Proyección: extrapolación log-lineal a 90 y 180 días, banda ±1 desviación estándar del residuo (n−2 grados de libertad), sobre serie recortada igual que momentum. Siempre mostrar la banda; jamás publicar proyección sin ella.
 
 ---
 
@@ -216,7 +218,7 @@ Orden correcto tras recolectar: `collect` → `build:dataset` → `test` → (`d
 4. Publicar en LinkedIn, borrar/marcar el borrador como publicado en el frontmatter (`published: true`).
 
 ### Checklist de release de features grandes
-- [ ] `npm test` pasa (16 tests: scoring + smoke de dataset)
+- [ ] `npm test` pasa (21 tests: scoring + smoke de dataset)
 - [ ] Build pasa (`npm run build`)
 - [ ] `dataset.json` regenerado sin errores
 - [ ] AGENTS.md actualizado
@@ -239,6 +241,19 @@ Hallazgos corregidos, dejados como guards donde aplica:
 8. Tabla de proyecciones de ficha tenía celda huérfana → reestructurada.
 
 Lecciones operativas: `node --test <dir>` no funciona igual en Windows (usar rutas explícitas); versiones actuales: astro ^7.2.4, @observablehq/plot ^0.6.17.
+
+### 2026-08-22 — auditoría externa (agente auditor) + hardening
+1. **Línea de forecast con quiebre falso**: punto a 90 días usaba `center` de 180d → ahora usa `forecastDownloads90d` cuando existe.
+2. **Re-run pisaba snapshot del día** (violaba espíritu append-only; una API caída reemplazaba datos buenos por vacío) → guard de existencia en colectores; `--force` para override consciente.
+3. **Doc↔código §6 desalineado** (fallbacks de momentum no documentados, outliers "recortados" pero filtrados en código, famosos sin efecto en score) → código alineado a spec: clamp recorta (cap), famosos con `gemScore=null`, fallbacks oficiales escritos.
+4. **gemScore round2 generaba empates masivos** con ~600 modelos → precisión 6 decimales; elegibilidad unificada (incluye cap de downloads) compartida por dashboard/joyas/borrador.
+5. σ residual con n−2 grados de libertad; proyecciones usan mismo clamp que momentum.
+6. Labels corregidos: HF downloads es ACUMULADO, no diario ("descargas diarias" engañaba).
+7. Fragments de famosos peligrosos por substring (`"o3"`, `"kimi"`) → `"openaio3"`, `"kimik2"`.
+8. CI: `timeout-minutes` en jobs, grupo de concurrencia unificado `data-pipeline` (snapshot y draft ya se pisan entre sí), `.nojekyll` agregado, aria-labels en contenedores de gráficos.
+9. Tests 16→21: clamp por recorte, fallback tasa28-sola, corte de ventana 7d, guard de famosos sin score, skip grácil si falta dataset.json.
+
+Veredicto auditor previo a fixes: "REVISAR — base sólida y publicable"; los 4 hallazgos IMPORTANTE quedaron resueltos y verificados (`npm test` 21/21, build 631 páginas).
 
 ---
 

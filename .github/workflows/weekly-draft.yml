@@ -9,12 +9,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: weekly-draft
+  group: data-pipeline
   cancel-in-progress: false
 
 jobs:
   draft:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

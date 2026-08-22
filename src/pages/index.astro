@@ -17,7 +17,8 @@ const lastUpdate = dataset?.generatedAt ? dataset.generatedAt.slice(0, 10) : nul
 const snapshotCount = new Set(
   models.flatMap((m) => (m.series.downloads ?? []).map((p) => p.date))
 ).size;
-const gems = models.filter((m) => !m.famous && m.gemScore !== null);
+const isGemEligible = (m) => !m.famous && m.gemScore !== null && (m.downloads ?? 0) <= 5_000_000;
+const gems = models.filter(isGemEligible);
 const eligibleGems = gems.length;
 const topGems = gems.slice(0, 8);
 
@@ -52,7 +53,7 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
       momentum semanal (eje vertical). Los rojos son modelos famosos; los verdes, candidatos a joya.
       Necesitamos al menos 4 snapshots para calcular momentum.
     </p>
-    <div id="scatter-momentum" class="chart-container"></div>
+    <div id="scatter-momentum" class="chart-container" role="img" aria-label="Gráfico de dispersión: precio por millón de tokens contra momentum semanal por modelo"></div>
   </section>
 
   <section class="card">

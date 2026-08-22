@@ -1,3 +1,4 @@
+import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ROOT, fetchJson, log, todayISO, writeJson } from "./lib/util.js";
@@ -30,7 +31,15 @@ function slimModel(model) {
   };
 }
 
-export async function run() {
+export async function run({ force = false } = {}) {
+  const outPath = path.join(ROOT, "data", "snapshots", SOURCE, `${todayISO()}.json`);
+  if (!force) {
+    try {
+      await fs.access(outPath);
+      log(SOURCE, `snapshot ${todayISO()} ya existe, se conserva (append-only; usá --force para reemplazar)`);
+      return { source: SOURCE, ok: true, skipped: true, count: null, errors: [] };
+    } catch {}
+  }
   const errors = [];
   let models = [];
   try {
@@ -46,7 +55,7 @@ export async function run() {
     _meta: { source: SOURCE, endpoint: ENDPOINT, fetchedAt: new Date().toISOString(), date: todayISO(), errors, count: models.length },
     models,
   };
-  await writeJson(path.join(ROOT, "data", "snapshots", SOURCE, `${todayISO()}.json`), snapshot);
+  await writeJson(outPath, snapshot);
   return { source: SOURCE, ok: errors.length === 0, count: models.length, errors };
 }
 

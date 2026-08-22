@@ -41,8 +41,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         momentum = 0.6 × tasa(7d) + 0.4 × tasa(28d)
       </div>
       <ul>
-        <li>Mínimo 4 puntos en la ventana; con menos historia, no hay score (y así se muestra).</li>
-        <li>Los valores extremos (>3× la mediana local) se recortan antes de ajustar para no dejar que un pico invente una tendencia.</li>
+        <li>Con menos de 4 puntos no hay momentum. Con historia parcial usamos la ventana disponible (7 días sola, o 28 sola); con ambas, se combinan 60/40.</li>
+        <li>Los valores extremos (>3× la mediana local) se recortan antes de ajustar para que un pico no invente una tendencia.</li>
         <li>En la UI mostramos el equivalente aproximado en % semanal: e<sup>momentum</sup> − 1.</li>
       </ul>
     </section>
@@ -51,14 +51,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2>Score de joya</h2>
       <p>Versión actual (v1): crecimiento normalizado × factor de escasez:</p>
       <div class="formula">
-        factor_escasez = 0 si downloads > 5M · 0.5 si > 500k · 1 resto<br />
+        factor_escasez = 1 si downloads &lt; 500k · 0.5 entre 500k y 5M · 0 arriba<br />
         score_joya = momentum_normalizado(0..1) × factor_escasez
       </div>
       <p>
-        Los modelos famosos (lista pública y editable) están excluidos del ranking de joyas:
-        acá buscamos lo que casi nadie mira. Cuando incorporemos datos de calidad (fase 2),
-        el score pasará a ser <strong>calidad ÷ precio por categoría de tamaño</strong>, y el
-        momentum quedará como desempate.
+        Los modelos famosos no compiten: su score es null y en sus fichas figuran como "modelo famoso".
+        Cuando incorporemos datos de calidad (fase 2), el score pasará a ser
+        <strong>calidad ÷ precio por categoría de tamaño</strong>, y el momentum quedará como desempate.
       </p>
     </section>
 

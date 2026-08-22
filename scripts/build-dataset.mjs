@@ -184,7 +184,7 @@ export async function build() {
     const factor = scarcityFactor(model.downloads);
     const norm = momentumNorm(model.metrics.momentum);
     model.metrics.scarcityFactor = factor;
-    model.gemScore = norm !== null ? round2(norm * factor) : null;
+    model.gemScore = !model.famous && norm !== null ? round6(norm * factor) : null;
   }
 
   models.sort((a, b) => (b.gemScore ?? -1) - (a.gemScore ?? -1) || (b.downloads ?? 0) - (a.downloads ?? 0));
@@ -207,8 +207,8 @@ function minIso(a, b) {
   return a < b ? a : b;
 }
 
-function round2(n) {
-  return Math.round(n * 100) / 100;
+function round6(n) {
+  return Math.round(n * 1e6) / 1e6;
 }
 
 function buildLinks(entry) {

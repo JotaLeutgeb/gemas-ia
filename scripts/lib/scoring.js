@@ -18,10 +18,10 @@ export function linearFit(points) {
   return { slope, intercept };
 }
 
-function clampOutliers(series) {
+export function clampOutliers(series) {
   if (series.length < 5) return series;
-  const med = median(series.map((p) => p.value));
-  return series.filter((p) => p.value <= Math.max(med * 3, 1));
+  const cap = Math.max(median(series.map((p) => p.value)) * 3, 1);
+  return series.map((p) => (p.value > cap ? { ...p, value: cap } : p));
 }
 
 export function logPoints(series) {
@@ -57,15 +57,16 @@ export function momentum(downloadsSeries) {
 const MIN_POINTS_FOR_FORECAST = 4;
 
 export function project(series, horizonDays) {
-  const positive = logPoints(series);
+  const positive = logPoints(clampOutliers(series));
   if (positive.length < MIN_POINTS_FOR_FORECAST) return null;
   const dayZero = Date.parse(positive[0].date);
   const points = positive.map((p) => ({ x: (Date.parse(p.date) - dayZero) / 86400000, y: Math.log(p.value) }));
   const fit = linearFit(points);
   if (!fit) return null;
   const lastX = points[points.length - 1].x;
+  const dof = Math.max(points.length - 2, 1);
   const residualStd = Math.sqrt(
-    points.reduce((acc, p) => acc + (p.y - (fit.intercept + fit.slope * p.x)) ** 2, 0) / points.length
+    points.reduce((acc, p) => acc + (p.y - (fit.intercept + fit.slope * p.x)) ** 2, 0) / dof
   );
   const targetX = lastX + horizonDays;
   const center = Math.exp(fit.intercept + fit.slope * targetX);
