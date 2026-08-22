@@ -18,3 +18,10 @@ export const NAV = [
   { href: "/metodologia/", label: "Metodología" },
   { href: "/blog/", label: "Blog" },
 ];
+
+export const BASE = import.meta.env.BASE_URL;
+
+export function withBase(path) {
+  if (/^https?:\/\//.test(path)) return path;
+  return `${BASE.replace(/\/$/, "")}/${String(path).replace(/^\//, "")}`;
+}

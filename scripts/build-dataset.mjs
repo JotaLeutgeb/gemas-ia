@@ -34,7 +34,12 @@ function kebabSlug(value) {
 
 async function loadModelMap() {
   try {
-    return await readJson(path.join(ROOT, "scripts", "model-map.json"));
+    const raw = await readJson(path.join(ROOT, "scripts", "model-map.json"));
+    const map = {};
+    for (const [key, value] of Object.entries(raw ?? {})) {
+      if (!key.startsWith("_") && typeof value === "string") map[key] = value;
+    }
+    return map;
   } catch {
     return {};
   }

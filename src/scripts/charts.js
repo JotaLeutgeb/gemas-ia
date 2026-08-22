@@ -1,9 +1,6 @@
 import * as Plot from "@observablehq/plot";
 
-const PLOT_OPTIONS = {
-  style: { background: "transparent", color: "#e6edf5", width: "100%", height: 340 },
-  margin: 0,
-};
+const HEIGHT = 340;
 
 export async function loadDataset() {
   const response = await fetch(`${import.meta.env.BASE_URL}data/dataset.json`);
@@ -13,6 +10,20 @@ export async function loadDataset() {
 
 function clear(el) {
   el.replaceChildren();
+}
+
+function plotBase(el) {
+  return {
+    width: Math.max(el.clientWidth || 720, 320),
+    height: HEIGHT,
+    style: { background: "transparent", color: "#e6edf5", font: "inherit" },
+  };
+}
+
+function fmtPriceTick(dayExponent) {
+  const value = 10 ** dayExponent;
+  const label = value >= 100 ? String(Math.round(value)) : value >= 1 ? value.toFixed(0) : value.toFixed(2);
+  return `$${label}`;
 }
 
 export function renderEmpty(el, message = "Todavía no hay datos suficientes. Volvé en unos días.") {
@@ -32,14 +43,13 @@ export function renderMomentumScatter(el, models) {
       x: Math.log10(Math.max(m.promptUsdPerM, 0.001)),
       y: m.metrics.momentum * 100,
       famous: m.famous,
-      urlSlug: m.urlSlug,
     }));
   if (points.length < 3) return false;
   clear(el);
   el.append(
     Plot.plot({
-      ...PLOT_OPTIONS,
-      x: { label: "precio entrada US$/1M (escala log)", tickFormat: (d) => `$${10 ** d >= 1 ? 10 ** d : 10 ** d.toFixed(1)}` },
+      ...plotBase(el),
+      x: { label: "precio entrada US$/1M (escala log)", domain: [-4, 2.2], tickFormat: fmtPriceTick },
       y: { label: "momentum (% crec. semanal aprox.)", grid: true },
       marks: [
         Plot.ruleY([0]),
@@ -51,7 +61,7 @@ export function renderMomentumScatter(el, models) {
           title: (d) => `${d.name}\n${d.y.toFixed(1)}% / semana`,
         }),
       ],
-      color: { domain: [false, true], range: ["#34d399", "#f87171"] },
+      color: { domain: [false, true], range: ["#34d399", "#f87171"], legend: true },
     })
   );
   return true;
@@ -67,30 +77,26 @@ export function renderDownloadsSeries(el, model) {
     Plot.line(series, { x: "date", y: "value", stroke: "#34d399", strokeWidth: 2 }),
     Plot.dot(series, { x: "date", y: "value", fill: "#34d399", r: 3, title: (d) => `${d.date.toISOString().slice(0, 10)}: ${d.value.toLocaleString("es")}` }),
   ];
-  if (forecast) {
-    const lastDate = series[series.length - 1].date;
+  if (forecast && series.length >= 4) {
+    const lastPoint = series[series.length - 1];
+    const lastDate = lastPoint.date;
     marks.push(
       Plot.line(
-        [
-          { ...series[series.length - 1], date: lastDate },
-          { date: new Date(lastDate.getTime() + 90 * 86400000), value: forecast.center },
-          { date: new Date(lastDate.getTime() + 180 * 86400000), value: forecast.center },
-        ],
+        [lastPoint, { date: new Date(lastDate.getTime() + 90 * 86400000), value: forecast.center }, { date: new Date(lastDate.getTime() + 180 * 86400000), value: forecast.center }],
         { x: "date", y: "value", stroke: "#fbbf24", strokeWidth: 1.5, strokeDasharray: "4,4" }
       )
     );
     marks.push(
       Plot.areaY(
         [
-          series[series.length - 1],
-          { date: new Date(lastDate.getTime() + 180 * 86400000), value: forecast.high },
-          { date: new Date(lastDate.getTime() + 180 * 86400000), value: forecast.low },
+          { date: lastDate, low: lastPoint.value, high: lastPoint.value },
+          { date: new Date(lastDate.getTime() + 180 * 86400000), low: forecast.low, high: forecast.high },
         ],
-        { x: "date", y: "value", y1: "low", y2: "high", fill: "#fbbf24", fillOpacity: 0.15 }
+        { x: "date", y1: "low", y2: "high", fill: "#fbbf24", fillOpacity: 0.15 }
       )
     );
   }
-  el.append(Plot.plot({ ...PLOT_OPTIONS, y: { label: "descargas diarias (HuggingFace)", grid: true }, marks }));
+  el.append(Plot.plot({ ...plotBase(el), y: { label: "descargas diarias (HuggingFace)", grid: true }, marks }));
   return true;
 }
 

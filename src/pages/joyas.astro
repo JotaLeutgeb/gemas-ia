@@ -2,6 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../config/site.js";
 
 let dataset = null;
 try {
@@ -46,7 +47,7 @@ const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
           {gems.map((m, i) => (
             <tr>
               <td>{i + 1}</td>
-              <td><a href={`/modelos/${m.urlSlug}/`}>{m.name}</a></td>
+              <td><a href={withBase(`/modelos/${m.urlSlug}/`)}>{m.name}</a></td>
               <td class="num">{m.gemScore.toFixed(2)}</td>
               <td class="num">{fmtPct(m.metrics.momentum)}</td>
               <td class="num">{m.promptUsdPerM == null ? "n/d" : m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}`}</td>
@@ -59,13 +60,13 @@ const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
     ) : (
       <p class="chart-empty">
         El ranking necesita al menos una semana de snapshots acumulados para calcular momentum de forma confiable.
-        Volvé pronto o leé <a href="/metodologia/">cómo funciona el score</a>.
+        Volvé pronto o leé <a href={withBase("/metodologia/")}>cómo funciona el score</a>.
       </p>
     )}
   </section>
 
   <p class="small muted">
     ¿Por qué no aparece tu modelo favorito? Puede ser que esté en la lista de famosos, que supere
-    los 5M de descargas, o que aún no tengamos suficientes puntos históricos. Todo está explicado en la <a href="/metodologia/">metodología</a>.
+    los 5M de descargas, o que aún no tengamos suficientes puntos históricos. Todo está explicado en la <a href={withBase("/metodologia/")}>metodología</a>.
   </p>
 </BaseLayout>

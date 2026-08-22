@@ -30,7 +30,7 @@ Sesión de refinamiento tipo "grill-me" con el dueño. Estas decisiones están *
 4. **Recolección:** GitHub Actions cron diario toma snapshots de las APIs y los commitea al repo. Las series temporales son PROPIAS: casi ninguna fuente devuelve historia vía API.
 5. **Forecasting v1:** extrapolación de tendencias (regresión lineal/log sobre últimas semanas), horizonte 3–6 meses. Nada de Prophet/ARIMA/redes por ahora.
 6. **Definición de "joya oculta":** eficiencia costo/calidad. Score calidad-por-dólar cuando lleguen datos de calidad (fase 2); mientras tanto momentum + escasez. Segmentación por tarea (corta/media/larga, código agéntico) es extensión futura. La tesis "N subagentes baratos vs 1 LLM caro" es ángulo editorial/futuro, NO métrica v1.
-7. **Stack:** Astro 5 + Observable Plot. Sin Tailwind, sin React.
+7. **Stack:** Astro 7 + Observable Plot 0.6. Sin Tailwind, sin React.
 8. **Deploy:** GitHub Pages, repo público, rama `main`.
 9. **Secciones v1:** dashboard, fichas por modelo, ranking de joyas, metodología, blog.
 10. **LinkedIn:** borrador semanal automático en markdown → `content/linkedin/`. Analítico, no noticioso, con cifras citables y atribución final al proyecto.
@@ -92,9 +92,13 @@ gemas-ia/
 │   ├── collect-all.mjs        ← orquestador diario (tolerante a fallos parciales)
 │   ├── build-dataset.mjs      ← snapshots → dataset.json (series + scores + forecast)
 │   ├── generate-weekly-draft.mjs
+│   ├── model-map.json         ← overrides de matching cross-fuente (claves `_` son docs, se ignoran)
 │   └── lib/
 │       ├── scoring.js         ← momentum, gemScore, regresión lineal, proyección
 │       └── util.js            ← slugs, fechas, fetch con retry
+├── tests/
+│   ├── scoring.test.mjs       ← unit tests de scoring (node:test)
+│   └── dataset.test.mjs       ← smoke del dataset.json + guards de regresión
 ├── src/
 │   ├── config/site.js         ← constantes de marca y URLs
 │   ├── layouts/BaseLayout.astro
@@ -168,18 +172,21 @@ npm install                # setup inicial
 npm run collect            # un snapshot HOY de todas las fuentes (tolerante a fallo parcial)
 npm run build:dataset      # regenera public/data/dataset.json desde todos los snapshots
 npm run draft              # genera borrador semanal en content/linkedin/
+npm run test               # node:test: unit de scoring + smoke del dataset
+npm run pipeline           # collect + build:dataset (flujo diario completo)
 npm run dev                # sitio en localhost:4321
 npm run build              # build de producción a dist/
 npm run preview            # sirve el build
 ```
 
-Orden correcto tras recolectar: `collect` → `build:dataset` → (`draft` opcional) → commit.
+Orden correcto tras recolectar: `collect` → `build:dataset` → `test` → (`draft` opcional) → commit.
 
 ---
 
 ## 8. Convenciones obligatorias
 
 - **Idioma:** UI y contenido en español rioplatense neutro. Código, IDs y commits en inglés.
+- **Links internos:** SIEMPRE vía `withBase()` de `src/config/site.js`. Jamás escribir `/seccion/` crudo: GitHub Pages sirve bajo subpath `/gemas-ia/` y rompería la navegación. En markdown usar rutas relativas (`../../metodologia/`).
 - **Fechas:** siempre ISO `YYYY-MM-DD` UTC. Snapshots usan la fecha UTC del momento.
 - **Slugs:** normalización definida en §5. El slug canónico es la identidad del modelo en TODO el sistema.
 - **Sin secretos:** las fuentes de fase 1 no requieren keys. Cuando Artificial Analysis entre (fase 2), usar `AA_API_KEY` como secret de Actions; nunca commitear keys.
@@ -209,6 +216,7 @@ Orden correcto tras recolectar: `collect` → `build:dataset` → (`draft` opcio
 4. Publicar en LinkedIn, borrar/marcar el borrador como publicado en el frontmatter (`published: true`).
 
 ### Checklist de release de features grandes
+- [ ] `npm test` pasa (16 tests: scoring + smoke de dataset)
 - [ ] Build pasa (`npm run build`)
 - [ ] `dataset.json` regenerado sin errores
 - [ ] AGENTS.md actualizado
@@ -217,30 +225,51 @@ Orden correcto tras recolectar: `collect` → `build:dataset` → (`draft` opcio
 
 ---
 
-## 10. Roadmap
+## 10. Registro de auditorías
 
-- [x] v0.1 — scaffold, docs, pipeline fase 1, sitio base
+### 2026-08-22 — auditoría v0.1 (post-scaffold)
+Hallazgos corregidos, dejados como guards donde aplica:
+1. **Modelo fantasma** desde la clave `_usage` de `model-map.json` → `loadModelMap` filtra claves `_`; guard de regresión en `tests/dataset.test.mjs`.
+2. **Links internos absolutos** rotos bajo el subpath `/gemas-ia/` → convención `withBase()` en todo el sitio.
+3. **Nav nunca activo** porque no descontaba la base del pathname → corregido en BaseLayout.
+4. **`margin: 0` en Observable Plot** recortaba ejes → `plotBase(el)` con ancho del contenedor; banda de forecast reescrita con claves `y1/y2` (`low/high`).
+5. **Ruido float en precios** (0.4499999…) → redondeo a 6 decimales en colector OpenRouter.
+6. **Guard de ejecución directa** de scripts no matcheaba rutas Windows → `fileURLToPath` + `path.resolve`.
+7. KPI "joyas en la mira" contaba lista recortada a 8 → ahora cuenta elegibles totales.
+8. Tabla de proyecciones de ficha tenía celda huérfana → reestructurada.
+
+Lecciones operativas: `node --test <dir>` no funciona igual en Windows (usar rutas explícitas); versiones actuales: astro ^7.2.4, @observablehq/plot ^0.6.17.
+
+---
+
+## 11. Roadmap
+
+- [x] v0.1 — scaffold, docs, pipeline fase 1, sitio base, tests, sitemap, OG tags, favicon
 - [ ] v0.2 — primera semana real de snapshots; validar momentum con ≥4 puntos
-- [ ] v0.3 — gráficos de series en fichas de modelos + proyecciones con bandas
+- [ ] v0.3 — validar visualmente gráficos de series y bandas de proyección en fichas
+- [ ] v0.4 — optimizar payload de fichas (hoy embeben la serie completa como data-attribute)
 - [ ] v1.0 — ranking de joyas estable + primer borrador semanal publicado
 - [ ] v1.1 — fuente LMArena/Elo (fase 2 empieza)
 - [ ] v1.2 — quality-per-dollar real (Artificial Analysis o Epoch)
+- [ ] v1.x — og:image para previews ricos al compartir en LinkedIn
 - [ ] v2.0 — segmentación por tipo de tarea (corta/media/larga, código agéntico)
 - [ ] v2.x — análisis editorial "swarm economics" (N subagentes baratos vs 1 LLM caro)
 
 ---
 
-## 11. Riesgos y limitaciones conocidas
+## 12. Riesgos y limitaciones conocidas
 
-- **Series jóvenes:** los primeros ~28 días no hay forecasting posible (mínimo 4 puntos). El sitio debe verse bien igual.
-- **Matching imperfecto cross-fuente:** hasta tener overrides manuales, algunos modelos aparecerán duplicados entre fuentes. Es aceptable en v1; documentar en metodología.
-- **Endpoints no contractuales:** OpenRouter/HF pueden cambiar formatos. Los colectores deben validar campos esperados y registrar errores en el JSON de salida (campo `_meta.errors`) en vez de romper toda la corrida.
-- **Rate limits:** HF permite requests anónimos generosos pero no infinitos; un solo request grande por día está lejos del límite.
-- **GitHub Actions gratuito:** repo público = minutos ilimitados para estos workflows. Si el repo se vuelve privado, revisar costos ANTES de mantener los crons.
+- **Series jóvenes:** los primeros días no hay forecasting posible. El sitio debe verse bien igual (empty states implementados).
+- **Momentum con historia parcial:** con <7 días de datos usa solo tasa 7d; la ventana de 28d exige ≥7 puntos. Es más permisivo que "mínimo 4 puntos totales" y así funciona a propósito.
+- **Matching imperfecto cross-fuente:** hasta tener overrides manuales, algunos modelos aparecerán duplicados entre fuentes. Aceptable en v1; documentado en metodología.
+- **Payload creciente:** cada ficha embebe su serie completa en `data-model`; con ~1 año de snapshots diarios pesará cientos de KB por página → optimizar en v0.4.
+- **Endpoints no contractuales:** OpenRouter/HF pueden cambiar formatos. Los colectores validan campos esperados y registran errores en `_meta.errors` sin romper la corrida.
+- **Rate limits:** HF permite requests anónimos generosos pero no infinitos; un request diario grande está lejos del límite.
+- **GitHub Actions gratuito:** repo público = minutos ilimitados. Si el repo se vuelve privado, revisar costos ANTES de mantener los crons.
 
 ---
 
-## 12. Reglas de contenido LinkedIn (para borradores generados)
+## 13. Reglas de contenido LinkedIn (para borradores generados)
 
 1. Gancho con cifra concreta o contradicción ("un modelo de 7B le gana en $/calidad a uno de 70B").
 2. Máximo 3 joyas por edición, con: nombre, tamaño/contexto, precio por 1M tokens, crecimiento 28d, link a su ficha.

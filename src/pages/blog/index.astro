@@ -2,6 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../config/site.js";
 
 const postFiles = Object.entries(
   import.meta.glob("../../content/posts/*.md", { eager: true })
@@ -27,7 +28,7 @@ const posts = postFiles.sort((a, b) => (a.date < b.date ? 1 : -1));
 
   {posts.map((post) => (
     <article class="card">
-      <h2><a href={`/blog/${post.slug}/`}>{post.title}</a></h2>
+      <h2><a href={withBase(`/blog/${post.slug}/`)}>{post.title}</a></h2>
       <p class="small muted">{post.date}{post.description ? ` · ${post.description}` : ""}</p>
     </article>
   ))}

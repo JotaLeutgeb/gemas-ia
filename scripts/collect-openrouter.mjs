@@ -11,6 +11,10 @@ function toNumber(value) {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+function round6(value) {
+  return Math.round(value * 1e6) / 1e6;
+}
+
 function slimModel(model) {
   const outputModalities = model?.architecture?.output_modalities;
   if (Array.isArray(outputModalities) && !outputModalities.includes("text")) return null;
@@ -20,8 +24,8 @@ function slimModel(model) {
     name: model.name ?? model.id,
     createdAt: typeof model.created === "number" ? new Date(model.created * 1000).toISOString() : null,
     contextLength: typeof model.context_length === "number" ? model.context_length : null,
-    promptUsdPerM: toNumber(pricing.prompt) !== null ? toNumber(pricing.prompt) * USD_PER_TOKEN : null,
-    completionUsdPerM: toNumber(pricing.completion) !== null ? toNumber(pricing.completion) * USD_PER_TOKEN : null,
+    promptUsdPerM: toNumber(pricing.prompt) !== null ? round6(toNumber(pricing.prompt) * USD_PER_TOKEN) : null,
+    completionUsdPerM: toNumber(pricing.completion) !== null ? round6(toNumber(pricing.completion) * USD_PER_TOKEN) : null,
     modality: model?.architecture?.modality ?? null,
   };
 }

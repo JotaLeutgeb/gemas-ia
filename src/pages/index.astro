@@ -2,7 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE } from "../config/site.js";
+import { SITE, withBase } from "../config/site.js";
 
 let dataset = null;
 try {
@@ -17,7 +17,9 @@ const lastUpdate = dataset?.generatedAt ? dataset.generatedAt.slice(0, 10) : nul
 const snapshotCount = new Set(
   models.flatMap((m) => (m.series.downloads ?? []).map((p) => p.date))
 ).size;
-const gems = models.filter((m) => !m.famous && m.gemScore !== null).slice(0, 8);
+const gems = models.filter((m) => !m.famous && m.gemScore !== null);
+const eligibleGems = gems.length;
+const topGems = gems.slice(0, 8);
 
 const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
 const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
@@ -39,7 +41,7 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
   <section class="kpis">
     <div class="kpi"><div class="value">{tracked}</div><div class="label">modelos en el radar</div></div>
     <div class="kpi"><div class="value">{snapshotCount || "—"}</div><div class="label">snapshots acumulados</div></div>
-    <div class="kpi"><div class="value">{gems.length}</div><div class="label">joyas en la mira</div></div>
+    <div class="kpi"><div class="value">{eligibleGems}</div><div class="label">joyas en la mira</div></div>
     <div class="kpi"><div class="value">100%</div><div class="label">datos abiertos y trazables</div></div>
   </section>
 
@@ -67,9 +69,9 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
           </tr>
         </thead>
         <tbody>
-          {gems.map((m) => (
+          {topGems.map((m) => (
             <tr>
-              <td><a href={`/modelos/${m.urlSlug}/`}>{m.name}</a></td>
+              <td><a href={withBase(`/modelos/${m.urlSlug}/`)}>{m.name}</a></td>
               <td>{m.gemScore.toFixed(2)}</td>
               <td class="num">{fmtPct(m.metrics.momentum)}</td>
               <td class="num">{fmtPrice(m.promptUsdPerM)}</td>
@@ -81,7 +83,7 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
     ) : (
       <p class="chart-empty">
         El radar recién arranca: necesitamos unas semanas de snapshots para calcular momentum.
-        Mientras tanto, mirá <a href="/modelos/">el catálogo completo</a> o leé <a href="/metodologia/">la metodología</a>.
+        Mientras tanto, mirá <a href={withBase("/modelos/")}>el catálogo completo</a> o leé <a href={withBase("/metodologia/")}>la metodología</a>.
       </p>
     )}
   </section>

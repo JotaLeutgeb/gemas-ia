@@ -1,13 +1,15 @@
 ---
-import { SITE, NAV } from "../config/site.js";
+import { SITE, NAV, withBase } from "../config/site.js";
 import "../styles/global.css";
 
-const { title = SITE.name, description = SITE.description } = Astro.props;
+const { title = `${SITE.name} — ${SITE.tagline}`, description = SITE.description } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isActive = (href) => {
-  const target = href.replace(/\/$/, "") || "/";
-  return currentPath === target ? "page" : undefined;
+  const target = withBase(href).replace(/\/$/, "") || "/";
+  if (target === "/") return currentPath === "/" ? "page" : undefined;
+  return currentPath === target || currentPath.startsWith(`${target}/`) ? "page" : undefined;
 };
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://joaqu.github.io");
 ---
 
 <!doctype html>
@@ -17,14 +19,24 @@ const isActive = (href) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={withBase("favicon.svg")} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <title>{title}</title>
   </head>
   <body>
     <header class="site-header">
       <div class="container">
-        <a href="/" class="brand"><span class="gem">◆</span> {SITE.name}</a>
+        <a href={withBase("/")} class="brand"><span class="gem">◆</span> {SITE.name}</a>
         <nav class="main-nav">
-          {NAV.map((item) => <a href={item.href} aria-current={isActive(item.href)}>{item.label}</a>)}
+          {NAV.map((item) => <a href={withBase(item.href)} aria-current={isActive(item.href)}>{item.label}</a>)}
         </nav>
       </div>
     </header>
@@ -45,7 +57,7 @@ const isActive = (href) => {
         </p>
         <p class="small">
           Proyecto abierto: <a href={SITE.repoUrl} rel="noopener">código y datos en GitHub</a> ·
-          snapshots diarios versionados · <a href="/metodologia/">cómo se calcula todo</a>
+          snapshots diarios versionados · <a href={withBase("/metodologia/")}>cómo se calcula todo</a>
         </p>
       </div>
     </footer>

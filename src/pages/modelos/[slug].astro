@@ -2,6 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../config/site.js";
 
 export async function getStaticPaths() {
   let dataset = null;
@@ -51,36 +52,43 @@ const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
 
   <section class="card">
     <h2>Proyecciones</h2>
-    <table class="data">
-      <thead>
-        <tr><th>Métrica</th><th class="num">90 días</th><th class="num">180 días</th><th class="num">Momentum 28d</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Descargas diarias</td>
-          <td class="num">{model.metrics.forecastDownloads90d ? fmtNum(Math.round(model.metrics.forecastDownloads90d.center)) : "n/d"}</td>
-          <td class="num">{model.metrics.forecastDownloads180d ? fmtNum(Math.round(model.metrics.forecastDownloads180d.center)) : "n/d"}</td>
-          <td class="num" rowspan="1"></td>
-        </tr>
-        <tr>
-          <td>Banda inferior / superior (180d)</td>
-          <td class="num">—</td>
-          <td class="num">
-            {model.metrics.forecastDownloads180d
-              ? `${fmtNum(Math.round(model.metrics.forecastDownloads180d.low))} – ${fmtNum(Math.round(model.metrics.forecastDownloads180d.high))}`
-              : "n/d"}
-          </td>
-          <td class="num">{fmtPct(model.metrics.momentum)}</td>
-        </tr>
-      </tbody>
-    </table>
-    {(model.metrics.forecastDownloads90d === null) && (
+    {model.metrics.forecastDownloads90d || model.metrics.forecastDownloads180d || Number.isFinite(model.metrics.momentum) ? (
+      <table class="data">
+        <thead>
+          <tr><th>Métrica</th><th class="num">90 días</th><th class="num">180 días</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Descargas proyectadas</td>
+            <td class="num">{model.metrics.forecastDownloads90d ? fmtNum(Math.round(model.metrics.forecastDownloads90d.center)) : "n/d"}</td>
+            <td class="num">{model.metrics.forecastDownloads180d ? fmtNum(Math.round(model.metrics.forecastDownloads180d.center)) : "n/d"}</td>
+          </tr>
+          <tr>
+            <td>Banda de confianza (±1σ)</td>
+            <td class="num">
+              {model.metrics.forecastDownloads90d
+                ? `${fmtNum(Math.round(model.metrics.forecastDownloads90d.low))} – ${fmtNum(Math.round(model.metrics.forecastDownloads90d.high))}`
+                : "n/d"}
+            </td>
+            <td class="num">
+              {model.metrics.forecastDownloads180d
+                ? `${fmtNum(Math.round(model.metrics.forecastDownloads180d.low))} – ${fmtNum(Math.round(model.metrics.forecastDownloads180d.high))}`
+                : "n/d"}
+            </td>
+          </tr>
+          <tr>
+            <td>Momentum 28d (crecimiento relativo)</td>
+            <td class="num" colspan="2">{fmtPct(model.metrics.momentum)}</td>
+          </tr>
+        </tbody>
+      </table>
+    ) : (
       <p class="small muted">Sin proyección todavía: se necesitan al menos 4 puntos en la serie.</p>
     )}
   </section>
 
   <p class="small muted">
-    ¿Cómo se calculan estos números? Todo está abierto en la <a href="/metodologia/">metodología</a>.
+    ¿Cómo se calculan estos números? Todo está abierto en la <a href={withBase("/metodologia/")}>metodología</a>.
   </p>
 </BaseLayout>
 

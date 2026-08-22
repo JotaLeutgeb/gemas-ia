@@ -25,4 +25,4 @@ Los grandes son fáciles de seguir. Las joyas ocultas requieren otra cosa: **med
 
 Estamos en la fase de acumulación: el radar recién arranca. Cuando tengamos algunas semanas de datos, vas a ver acá los primeros análisis de joyas ocultas con proyecciones reales.
 
-Si querés entender exactamente cómo calculamos todo, la [metodología](/metodologia/) está abierta. Sin cajas negras.
+Si querés entender exactamente cómo calculamos todo, la [metodología](../../metodologia/) está abierta. Sin cajas negras.

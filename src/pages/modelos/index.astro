@@ -2,6 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../config/site.js";
 
 let dataset = null;
 try {
@@ -38,7 +39,7 @@ const providers = [...byProvider.entries()].sort((a, b) => b[1].length - a[1].le
       <h2>{provider}</h2>
       <div class="model-grid">
         {list.map((m) => (
-          <a href={`/modelos/${m.urlSlug}/`} class="model-card">
+          <a href={withBase(`/modelos/${m.urlSlug}/`)} class="model-card">
             <div class="name">{m.name}</div>
             <div class="meta">
               {m.downloads != null && <>📥 {fmtNum(m.downloads)} · </>}
