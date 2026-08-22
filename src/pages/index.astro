@@ -90,6 +90,43 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
     )}
   </section>
 
+  <section class="card">
+    <h2>En movimiento</h2>
+    {(() => {
+      const mov = dataset?.movements;
+      if (!mov) return <p class="chart-empty">Movimientos disponibles desde la próxima corrida.</p>;
+      const altas = (mov.altas ?? []).slice(0, 3);
+      const drops = (mov.priceDrops ?? []).slice(0, 3);
+      if (altas.length === 0 && drops.length === 0)
+        return <p class="chart-empty">Sin altas ni cambios de precio en la ventana actual. Ver <a href={withBase("/movimientos/")}>movimientos</a>.</p>;
+      return (
+        <table class="data">
+          <thead>
+            <tr><th>Tipo</th><th>Modelo</th><th>Detalle</th><th>Fecha</th></tr>
+          </thead>
+          <tbody>
+            {altas.map((a) => (
+              <tr>
+                <td><span class="badge gem">alta</span></td>
+                <td><a href={withBase(`/modelos/${a.urlSlug}/`)}>{a.name}</a></td>
+                <td class="muted">primera vez en {a.source}</td>
+                <td>{a.firstSeen}</td>
+              </tr>
+            ))}
+            {drops.map((p) => (
+              <tr>
+                <td><span class="badge famous">precio</span></td>
+                <td><a href={withBase(`/modelos/${p.urlSlug}/`)}>{p.name}</a></td>
+                <td class="muted">{fmtPrice(p.oldPrice)} → {fmtPrice(p.newPrice)} {p.field}</td>
+                <td>{p.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    })()}
+  </section>
+
   <section class="health-strip" aria-label="Estado de recolección de datos">
     {Object.entries(dataset?.sources ?? {}).map(([name, info]) => {
       const ageDays = info.lastSnapshot

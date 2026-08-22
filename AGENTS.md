@@ -159,6 +159,13 @@ Implementación única y autoritativa: `scripts/lib/scoring.js`. La página `/me
 ### Filtro de fama
 Los modelos en `config/famous-models.json` no compiten como joyas: su `gemScore` es null y en fichas muestran badge "modelo famoso". Mantener esa lista actualizada es tarea manual del dueño; revisarla cada ~mes. Los fragments se matchean contra el slug normalizado completo — evitar fragments cortos ambiciosos (ej. `"o3"` matcheaba IDs ajenos; usar `"openaio3"`).
 
+### Movimientos del mercado (A4/A5/A6, 2026-08-22)
+Implementación en `scripts/lib/movements.js` (funciones puras, testeada). `dataset.movements` con schema v2:
+- **Altas**: primera aparición de un matchKey en snapshots por fuente, ventana ≤7 días desde el último snapshot. Se trackea OpenRouter y HuggingFace.
+- **Bajas**: presente en snapshot previo y ausente hoy, SOLO catálogo OpenRouter (salir del top-N de HF es churn de ranking, no baja real). Ventana ≤7 días. Las bajas que también son altas se descartan (re-apariciones).
+- **Price drops**: caída ≥20% entre puntos consecutivos de serie de precios (prompt o completion), incluido paso a gratis; transiciones null→valor NO cuentan (nueva info ≠ cambio). Ventana entre puntos ≤30 días.
+- Umbrales como constantes en build-dataset.mjs; si cambian, actualizar `/movimientos` (los menciona en texto).
+
 ### gemScore (evolución por fases)
 - **v1.x (actual):** `gemScore = momentum_normalizado × factor_escasez`, redondeado a 6 decimales para minimizar empates. `factor_escasez = 1` si downloads < 500k; 0.5 entre 500k y 5M; 0 arriba.
 - Elegibilidad en rankings (única definición compartida por dashboard, `/joyas` y borrador semanal): `!famous && gemScore !== null && downloads <= 5M`.

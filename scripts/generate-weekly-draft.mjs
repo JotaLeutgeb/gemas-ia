@@ -84,6 +84,8 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
     .join(" · ");
   const famousRef = cheapestFamousPrice(dataset);
   const images = await availableChartImages();
+  const altasSemana = (dataset.movements?.altas ?? []).slice(0, 5);
+  const dropsSemana = (dataset.movements?.priceDrops ?? []).slice(0, 3);
 
   const gemSections = gems.map((gem, i) => {
     const ratio =
@@ -99,6 +101,24 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
 - Ficha completa: ${SITE_URL}/modelos/${gem.urlSlug}/${imageNote}`;
   }).join("\n\n");
 
+  const movementsSection = [];
+  if (altasSemana.length > 0) {
+    movementsSection.push(
+      "## Movimientos del mercado",
+      "",
+      `Altas de la ventana: ${altasSemana.map((a) => `**${a.name}** (${a.source}, ${a.firstSeen})`).join(" · ")}.`,
+    );
+    if (dropsSemana.length > 0) {
+      movementsSection.push(
+        "",
+        "Y los precios siguen en guerra:",
+        ...dropsSemana.map((p) => `- ${p.name}: ${fmtPrice(p.oldPrice)} → ${fmtPrice(p.newPrice)} (${p.field})`),
+        "",
+        "[TU OPINIÓN AQUÍ — ¿qué significa esta guerra de precios para quién construye productos?]",
+      );
+    }
+  }
+
   const postBody = [
     mover
       ? `El mercado se mueve rápido: **${mover.model.name}** creció **${fmtPct(mover.growth)}** en descargas en las últimas semanas y casi nadie lo está mirando.`
@@ -108,6 +128,8 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
     "",
     gemSections,
     "",
+    ...movementsSection,
+    ...(movementsSection.length > 0 ? [""] : []),
     "## Lo que esto significa",
     "",
     "[TU OPINIÓN AQUÍ — conectá los hallazgos con una tesis: eficiencia costo/calidad, swarm economics, hacia dónde va el mercado]",

@@ -1,0 +1,103 @@
+---
+import fs from "node:fs/promises";
+import path from "node:path";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../config/site.js";
+
+let dataset = null;
+try {
+  dataset = JSON.parse(await fs.readFile(path.resolve("public/data/dataset.json"), "utf8"));
+} catch {
+  dataset = null;
+}
+const movements = dataset?.movements ?? { altas: [], bajas: [], priceDrops: [] };
+
+const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(2)}`);
+const fmtPct = (v) => (Number.isFinite(v) ? `${(v * 100).toFixed(0)}%` : "n/d");
+---
+
+<BaseLayout title="Movimientos del mercado — Gemas IA" description="Altas de la semana, bajas del catálogo y cambios de precio en el mercado de LLMs.">
+  <p class="kicker"><span class="gem">◆</span> Diffs diarios entre snapshots · ventana de 7 días</p>
+  <section class="hero">
+    <h1>Movimientos del <em class="gem">mercado</em></h1>
+    <p class="lede">
+      Qué modelos entraron, cuáles desaparecieron y dónde están cayendo los precios.
+      Calculado comparando cada snapshot contra el anterior — sin rumorología, solo diffs.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Altas recientes</h2>
+    <p class="section-note">Primera aparición de un modelo en nuestros snapshots.</p>
+    {movements.altas.length > 0 ? (
+      <table class="data">
+        <thead>
+          <tr><th>Modelo</th><th>Fuente</th><th>Primera vez visto</th><th class="num">$ / 1M in</th></tr>
+        </thead>
+        <tbody>
+          {movements.altas.map((a) => (
+            <tr>
+              <td><a href={withBase(`/modelos/${a.urlSlug}/`)}>{a.name}</a></td>
+              <td>{a.source}</td>
+              <td>{a.firstSeen}</td>
+              <td class="num">{fmtPrice(a.promptUsdPerM)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p class="chart-empty">Sin altas en la ventana actual.</p>
+    )}
+  </section>
+
+  <section class="card">
+    <h2>Bajas del catálogo OpenRouter</h2>
+    <p class="section-note">
+      Estaban ayer, no están hoy. Solo trackeamos bajas de OpenRouter: salir del top-N
+      de HuggingFace es churn de ranking, no una baja real.
+    </p>
+    {movements.bajas.length > 0 ? (
+      <table class="data">
+        <thead>
+          <tr><th>Modelo</th><th>Visto por última vez</th></tr>
+        </thead>
+        <tbody>
+          {movements.bajas.map((b) => (
+            <tr>
+              <td>{b.name}</td>
+              <td>{b.lastSeen}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p class="chart-empty">Sin bajas en la ventana actual.</p>
+    )}
+  </section>
+
+  <section class="card">
+    <h2>Cambios de precio</h2>
+    <p class="section-note">Caídas de 20% o más entre puntos consecutivos de la serie, incluido el paso a gratis.</p>
+    {movements.priceDrops.length > 0 ? (
+      <table class="data">
+        <thead>
+          <tr><th>Modelo</th><th>Tipo</th><th class="num">Antes</th><th class="num">Ahora</th><th class="num">Cambio</th><th>Fecha</th></tr>
+        </thead>
+        <tbody>
+          {movements.priceDrops.map((p) => (
+            <tr>
+              <td><a href={withBase(`/modelos/${p.urlSlug}/`)}>{p.name}</a></td>
+              <td>{p.field}</td>
+              <td class="num">{fmtPrice(p.oldPrice)}</td>
+              <td class="num">{fmtPrice(p.newPrice)}</td>
+              <td class="num">{p.wentFree ? "→ gratis" : fmtPct(p.pctChange)}</td>
+              <td>{p.date}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p class="chart-empty">Sin movimientos de precio registrados todavía.</p>
+    )}
+  </section>
+</BaseLayout>

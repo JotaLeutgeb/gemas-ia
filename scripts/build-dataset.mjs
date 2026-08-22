@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ROOT, log, readJson, slugify, writeJson } from "./lib/util.js";
 import { momentum, normalizeScores, project, scarcityFactor } from "./lib/scoring.js";
+import { detectAltas, detectBajas, detectPriceDrops } from "./lib/movements.js";
 
 const SNAPSHOT_DIR = path.join(ROOT, "data", "snapshots");
 const OUTPUT = path.join(ROOT, "public", "data", "dataset.json");
@@ -76,6 +77,13 @@ export async function build() {
   }
 
   const sourcesSummary = {};
+  const presenceOR = new Map();
+  const presenceHF = new Map();
+
+  function markPresence(presence, date, key) {
+    if (!presence.has(date)) presence.set(date, new Set());
+    presence.get(date).add(key);
+  }
 
   const orFiles = await listSnapshots("openrouter");
   for (const file of orFiles) {
@@ -91,6 +99,7 @@ export async function build() {
       const key = modelMap[slugify(record.id)] ?? slugify(record.id);
       const model = ensureModel(key);
       model.aliases.push(slugify(record.id));
+      markPresence(presenceOR, date, key);
       const or = model.openrouter;
       or.id ??= record.id;
       or.name ??= record.name;
@@ -123,6 +132,7 @@ export async function build() {
       const key = modelMap[slugify(record.id)] ?? slugify(record.id);
       const model = ensureModel(key);
       model.aliases.push(slugify(record.id));
+      markPresence(presenceHF, date, key);
       const hf = model.huggingface;
       hf.id ??= record.id;
       hf.provider ??= typeof record.id === "string" ? record.id.split("/")[0] : null;
@@ -201,11 +211,50 @@ export async function build() {
 
   models.sort((a, b) => (b.gemScore ?? -1) - (a.gemScore ?? -1) || (b.downloads ?? 0) - (a.downloads ?? 0));
 
+  const byMatchKey = new Map(models.map((m) => [m.matchKey, m]));
+  const toMovement = (source, dateField) => (ev) => ({
+    urlSlug: byMatchKey.get(ev.matchKey)?.urlSlug ?? ev.matchKey,
+    name: byMatchKey.get(ev.matchKey)?.name ?? ev.matchKey,
+    source,
+    [dateField]: ev[dateField],
+    gemScore: byMatchKey.get(ev.matchKey)?.gemScore ?? null,
+    promptUsdPerM: byMatchKey.get(ev.matchKey)?.promptUsdPerM ?? null,
+  });
+
+  const altas = [
+    ...detectAltas(presenceOR).map(toMovement("openrouter", "firstSeen")),
+    ...detectAltas(presenceHF).map(toMovement("huggingface", "firstSeen")),
+  ]
+    .sort((a, b) => (a.firstSeen < b.firstSeen ? 1 : -1))
+    .slice(0, 50);
+
+  const bajas = detectBajas(presenceOR)
+    .map(toMovement("openrouter", "lastSeen"))
+    .sort((a, b) => (a.lastSeen < b.lastSeen ? 1 : -1))
+    .slice(0, 50);
+
+  const priceDrops = [];
+  for (const model of models) {
+    for (const field of ["promptUsdPerMSeries", "completionUsdPerMSeries"]) {
+      for (const event of detectPriceDrops(lastPerDate(model.series[field] ?? []))) {
+        priceDrops.push({
+          urlSlug: model.urlSlug,
+          name: model.name,
+          field: field === "promptUsdPerMSeries" ? "entrada" : "salida",
+          ...event,
+        });
+      }
+    }
+  }
+  priceDrops.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.pctChange - b.pctChange));
+  const movements = { altas, bajas: bajas.filter((b) => !altas.some((a) => a.urlSlug === b.urlSlug)), priceDrops: priceDrops.slice(0, 50) };
+
   const dataset = {
     generatedAt: new Date().toISOString(),
-    schemaVersion: 1,
+    schemaVersion: 2,
     sources: sourcesSummary,
     totals: { models: models.length },
+    movements,
     models,
   };
   await writeJson(OUTPUT, dataset);
