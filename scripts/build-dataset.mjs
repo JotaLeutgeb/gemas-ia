@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { ROOT, log, readJson, slugify, writeJson } from "./lib/util.js";
 import { momentum, normalizeScores, project, scarcityFactor } from "./lib/scoring.js";
 import { detectAltas, detectBajas, detectPriceDrops } from "./lib/movements.js";
+import { buildBenchmarkIndex, matchBenchmarks } from "./lib/benchmark-match.js";
 
 const SNAPSHOT_DIR = path.join(ROOT, "data", "snapshots");
 const OUTPUT = path.join(ROOT, "public", "data", "dataset.json");
@@ -79,6 +80,7 @@ export async function build() {
   const sourcesSummary = {};
   const presenceOR = new Map();
   const presenceHF = new Map();
+  const presenceORU = new Map();
 
   function markPresence(presence, date, key) {
     if (!presence.has(date)) presence.set(date, new Set());
@@ -150,6 +152,39 @@ export async function build() {
     };
   }
 
+  const usageFiles = await listSnapshots("openrouter-usage");
+  const usageByDateModel = new Map();
+  for (const file of usageFiles) {
+    const date = file.replace(".json", "");
+    let snapshot;
+    try {
+      snapshot = await readJson(path.join(SNAPSHOT_DIR, "openrouter-usage", file));
+    } catch (error) {
+      log("build-dataset", `skipping corrupt usage snapshot ${file}: ${error.message}`);
+      continue;
+    }
+    for (const record of snapshot.models ?? []) {
+      const key = modelMap[slugify(record.id)] ?? slugify(record.id);
+      const model = ensureModel(key);
+      model.aliases.push(slugify(record.id));
+      markPresence(presenceORU, date, key);
+      const cellKey = `${date}|${key}`;
+      usageByDateModel.set(cellKey, (usageByDateModel.get(cellKey) ?? 0) + (record.totalTokens ?? 0));
+    }
+    sourcesSummary.openrouterUsage = {
+      lastSnapshot: date,
+      modelsInSnapshot: snapshot._meta?.count ?? null,
+      ok: (snapshot._meta?.errors ?? []).length === 0,
+      errors: snapshot._meta?.errors ?? [],
+      fetchedAt: snapshot._meta?.fetchedAt ?? null,
+    };
+  }
+  for (const [cellKey, total] of usageByDateModel) {
+    const [date, key] = cellKey.split("|");
+    const model = ensureModel(key);
+    (model.openrouter.usageTokensSeries ||= []).push({ date, value: total });
+  }
+
   const usedUrlSlugs = new Map();
   const models = [];
   for (const entry of modelsByKey.values()) {
@@ -163,11 +198,13 @@ export async function build() {
     const provider = entry.openrouter.provider ?? entry.huggingface.provider ?? null;
     const downloadsSeries = lastPerDate(entry.huggingface.downloadsSeries ?? []);
     const likesSeries = lastPerDate(entry.huggingface.likesSeries ?? []);
+    const usageSeries = lastPerDate(entry.openrouter.usageTokensSeries ?? []);
     const promptSeries = lastPerDate(entry.openrouter.promptUsdPerMSeries ?? []);
     const completionSeries = lastPerDate(entry.openrouter.completionUsdPerMSeries ?? []);
     const latestDownloads = downloadsSeries.at(-1)?.value ?? null;
     const totalLikes = likesSeries.at(-1)?.value ?? null;
     const mom = momentum(downloadsSeries);
+    const momUsage = momentum(usageSeries);
 
     let urlSlug = kebabSlug(primaryId || displayName) || entry.matchKey;
     if (usedUrlSlugs.has(urlSlug)) urlSlug = `${urlSlug}-${entry.matchKey.slice(-6)}`;
@@ -190,28 +227,67 @@ export async function build() {
       series: {
         downloads: downloadsSeries,
         likes: likesSeries,
+        usageTokens: usageSeries,
         promptUsdPerM: promptSeries,
         completionUsdPerM: completionSeries,
       },
       metrics: {
         momentum: mom,
+        momentumUsage: momUsage,
         forecastDownloads90d: project(downloadsSeries, 90),
         forecastDownloads180d: project(downloadsSeries, 180),
       },
     });
   }
 
-  const momentumNorm = normalizeScores(models.map((m) => m.metrics.momentum));
+  const momentumNormD = normalizeScores(models.map((m) => m.metrics.momentum));
+  const momentumNormU = normalizeScores(models.map((m) => m.metrics.momentumUsage));
+  const MIN_USAGE_POINTS = 14;
+  const MIN_USAGE_LATEST_TOKENS = 10_000;
   for (const model of models) {
     const factor = scarcityFactor(model.downloads);
-    const norm = momentumNorm(model.metrics.momentum);
+    const normD = momentumNormD(model.metrics.momentum);
+    const usageStable =
+      (model.series.usageTokens?.length ?? 0) >= MIN_USAGE_POINTS &&
+      (model.series.usageTokens?.at(-1)?.value ?? 0) >= MIN_USAGE_LATEST_TOKENS;
+    const normU = usageStable ? momentumNormU(model.metrics.momentumUsage) : null;
+    const bestNorm = normD === null ? normU : normU === null ? normD : Math.max(normD, normU);
     model.metrics.scarcityFactor = factor;
-    model.gemScore = !model.famous && norm !== null ? round6(norm * factor) : null;
+    model.gemScore = !model.famous && bestNorm !== null ? round6(bestNorm * factor) : null;
   }
 
   models.sort((a, b) => (b.gemScore ?? -1) - (a.gemScore ?? -1) || (b.downloads ?? 0) - (a.downloads ?? 0));
 
   const byMatchKey = new Map(models.map((m) => [m.matchKey, m]));
+  const aliasesByKey = new Map([...modelsByKey.values()].map((e) => [e.matchKey, [...new Set(e.aliases)]]));
+
+  let benchmarkIndex = [];
+  let latestBenchFile = null;
+  try {
+    const benchDir = path.join(SNAPSHOT_DIR, "benchmarks");
+    const benchFiles = (await fs.readdir(benchDir)).filter((f) => f.endsWith(".json")).sort();
+    latestBenchFile = benchFiles[benchFiles.length - 1] ?? null;
+    if (latestBenchFile) {
+      const benchSnapshot = await readJson(path.join(benchDir, latestBenchFile));
+      benchmarkIndex = buildBenchmarkIndex(benchSnapshot.tables);
+    }
+  } catch (error) {
+    log("build-dataset", `benchmarks no disponibles: ${error.message}`);
+  }
+  let matchedModels = 0;
+  let matchedScores = 0;
+  if (benchmarkIndex.length > 0) {
+    for (const model of models) {
+      const matches = matchBenchmarks({ aliases: aliasesByKey.get(model.matchKey) ?? [model.matchKey], index: benchmarkIndex });
+      if (matches.length > 0) {
+        model.benchmarks = matches.sort((a, b) => a.benchmark.localeCompare(b.benchmark));
+        matchedModels++;
+        matchedScores += matches.length;
+      }
+    }
+    log("build-dataset", `benchmarks: ${matchedScores} scores para ${matchedModels} modelos (${latestBenchFile})`);
+  }
+
   const toMovement = (source, dateField) => (ev) => ({
     urlSlug: byMatchKey.get(ev.matchKey)?.urlSlug ?? ev.matchKey,
     name: byMatchKey.get(ev.matchKey)?.name ?? ev.matchKey,
@@ -224,6 +300,7 @@ export async function build() {
   const altas = [
     ...detectAltas(presenceOR).map(toMovement("openrouter", "firstSeen")),
     ...detectAltas(presenceHF).map(toMovement("huggingface", "firstSeen")),
+    ...detectAltas(presenceORU).map(toMovement("openrouter-usage", "firstSeen")),
   ]
     .sort((a, b) => (a.firstSeen < b.firstSeen ? 1 : -1))
     .slice(0, 50);
