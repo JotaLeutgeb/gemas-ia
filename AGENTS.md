@@ -86,7 +86,8 @@ gemas-ia/
 │       ├── openrouter/        ← YYYY-MM-DD.json (append-only)
 │       └── huggingface/       ← YYYY-MM-DD.json (append-only)
 ├── content/
-│   └── linkedin/              ← borradores semanales generados + editados
+│   ├── linkedin/              ← borradores semanales privados (hooks, cifras para copiar)
+│   └── posts → src/content    (los ensayos del blog viven en src/content/posts)
 ├── scripts/
 │   ├── collect-openrouter.mjs
 │   ├── collect-huggingface.mjs
@@ -102,13 +103,19 @@ gemas-ia/
 │   └── dataset.test.mjs       ← smoke del dataset.json + guards de regresión
 ├── src/
 │   ├── config/site.js         ← constantes de marca y URLs
+│   ├── lib/ediciones.js       ← frontmatter parser + carga/rendeo de ediciones (compartido)
 │   ├── layouts/BaseLayout.astro
 │   ├── components/
-│   ├── pages/                 ← index, joyas, metodologia, modelos/, blog/
+│   ├── content/
+│   │   ├── posts/             ← ensayos del blog
+│   │   └── ediciones/         ← ediciones semanales PÚBLICAS (published: true/false)
+│   ├── pages/                 ← index, joyas, movimientos, modelos/, metodologia, ediciones/, blog/, rss.xml
 │   ├── scripts/charts.js      ← gráficos Observable Plot del lado cliente
 │   └── styles/global.css
-├── public/data/dataset.json   ← generado, nunca manual
-└── .github/workflows/         ← snapshot.yml, weekly-draft.yml, deploy.yml
+├── public/
+│   ├── data/dataset.json      ← generado, nunca manual
+│   └── charts/ediciones/<fecha>/ ← gráficos congelados por edición
+└── .github/workflows/         ← snapshot.yml, benchmarks.yml, weekly-draft.yml, deploy.yml
 ```
 
 ---
@@ -230,11 +237,19 @@ Orden correcto tras recolectar: `collect` → `collect:usage` → `build:dataset
 2. Inspeccionar el snapshot crudo del día en `data/snapshots/`.
 3. Corregir SOLO hacia adelante: si fue bug de colector, arreglar colector; el histórico queda como está (append-only).
 
-### Generar y publicar contenido semanal
-1. `npm run draft` (o esperar el workflow del domingo).
-2. Editar el markdown: agregar opinión propia donde dice `[TU OPINIÓN AQUÍ]`. NUNCA publicar sin ese paso.
-3. Verificar que cada cifra tenga su número citable y que el cierre referencie el proyecto.
-4. Publicar en LinkedIn, borrar/marcar el borrador como publicado en el frontmatter (`published: true`).
+### Generar y publicar contenido semanal (rutina del dueño)
+El motor de contenido produce DOS artefactos cada semana con `npm run draft` (o cron del domingo):
+1. **Borrador privado** `content/linkedin/<fecha>.md` — hooks alternativos, cifras citables, contador de caracteres para copy-paste en LinkedIn.
+2. **Edición pública** `src/content/ediciones/<fecha>.md` con `published: false` — el artículo web con gráficos congelados en `public/charts/ediciones/<fecha>/`.
+
+Flujo de publicación:
+1. Editar la EDICIÓN pública: completar los marcadores `[SU HISTORIA AQUÍ]` y `[TU ANÁLISIS AQUÍ]` con criterio propio. Ajustar el título si hace falta.
+2. Cambiar `published: false` → `true` y commitear (`content:`). El sitio publica `/ediciones/<fecha>/` con protagonistas linkeando a sus fichas.
+3. Copiar al post de LinkedIn el texto del borrador privado + adjuntar `public/charts/ediciones/<fecha>/semana.png`.
+4. En el post, linkear la URL pública de la edición (cada página tiene botón de compartir a LinkedIn).
+5. El blog (`/blog/`) muestra mezcladas ediciones y ensayos ordenados por fecha; el dashboard tiene tarjeta de última edición; hay feed RSS en `/rss.xml`.
+
+REGLA: nunca publicar una edición con placeholders sin reemplazar. Los archivos de ediciones ya existentes NUNCA se sobreescriben por el generador salvo `--force`.
 
 ### Publicar por primera vez en GitHub Pages
 > **HECHO 2026-08-22:** usuario real `JotaLeutgeb`, remote configurado, placeholders reemplazados.

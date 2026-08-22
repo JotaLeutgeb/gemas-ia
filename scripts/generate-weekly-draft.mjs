@@ -5,10 +5,11 @@ import { ROOT, log } from "./lib/util.js";
 
 const DATASET = path.join(ROOT, "public", "data", "dataset.json");
 const OUT_DIR = path.join(ROOT, "content", "linkedin");
+const EDITIONS_DIR = path.join(ROOT, "src", "content", "ediciones");
+const CHARTS_DIR = path.join(ROOT, "public", "charts");
 const SITE_URL = "https://jotaleutgeb.github.io/gemas-ia";
 const MAX_GEMS = 3;
 const LINKEDIN_CHAR_LIMIT = 3000;
-const CHARTS_DIR = path.join(ROOT, "public", "charts");
 
 function fmtPct(value) {
   if (!Number.isFinite(value)) return "n/d";
@@ -53,6 +54,110 @@ async function availableChartImages() {
   } catch {
     return [];
   }
+}
+
+async function freezeEditionCharts(isoDate) {
+  const outDir = path.join(CHARTS_DIR, "ediciones", isoDate);
+  let copied = 0;
+  try {
+    for (const file of await fs.readdir(CHARTS_DIR)) {
+      if (!file.endsWith(".png")) continue;
+      const target = path.join(outDir, file);
+      try {
+        await fs.access(target);
+        continue;
+      } catch {}
+      await fs.copyFile(path.join(CHARTS_DIR, file), target);
+      copied++;
+    }
+  } catch {}
+  return copied;
+}
+
+async function writeEdition({ dataset, gems, mover, altasSemana, dropsSemana, isoDate, force }) {
+  const editionPath = path.join(EDITIONS_DIR, `${isoDate}.md`);
+  if (!force) {
+    try {
+      await fs.access(editionPath);
+      log("draft", `la edición ${isoDate}.md ya existe en src/content/ediciones, no se pisa`);
+      return null;
+    } catch {}
+  }
+
+  await freezeEditionCharts(isoDate);
+  const chartBase = `/charts/ediciones/${isoDate}`;
+  const hasCard = await fs
+    .access(path.join(ROOT, "public", chartBase, "semana.png"))
+    .then(() => true)
+    .catch(() => false);
+
+  const gemParagraphs = gems.map(
+    (gem) => `### ${gem.name}
+
+${fmtContext(gem)} · ${fmtPrice(gem)} · score de joya **${gem.gemScore ?? "n/d"}**. Descargas acumuladas: ${gem.downloads?.toLocaleString("es") ?? "n/d"}.
+
+[SU HISTORIA AQUÍ — por qué este modelo es una joya esta semana]`
+  );
+
+  const movementsBlock = [];
+  if (altasSemana.length > 0 || dropsSemana.length > 0) {
+    movementsBlock.push("## Movimientos del mercado", "");
+    if (altasSemana.length > 0) {
+      movementsBlock.push(`**Entraron al radar:** ${altasSemana.map((a) => a.name).join(", ")}.`, "");
+    }
+    if (dropsSemana.length > 0) {
+      movementsBlock.push("**La guerra de precios:**", "");
+      for (const drop of dropsSemana) {
+        movementsBlock.push(`- ${drop.name}: ${fmtPrice(drop.oldPrice)} → ${fmtPrice(drop.newPrice)} (${drop.field})`);
+      }
+      movementsBlock.push("");
+    }
+    movementsBlock.push("[LECTURA DEL MOVIMIENTO AQUÍ]");
+  }
+
+  const body = [
+    `<img src="${chartBase}/semana.png" alt="Las joyas ocultas de la semana" width="600" />`,
+    "",
+    mover
+      ? `El mercado se mueve rápido: **${mover.model.name}** creció **${fmtPct(mover.growth)}** en descargas en las últimas semanas y casi nadie lo está mirando. Esta es la edición semanal de Gemas IA: tres modelos fuera del mainstream que merecen tu atención.`
+      : "Edición semanal de Gemas IA: lo que dicen los datos propios del observatorio sobre los modelos que nadie mira.",
+    "",
+    "## Las joyas de la semana",
+    "",
+    ...gemParagraphs,
+    "",
+    ...movementsBlock,
+    "",
+    "## Lo que esto significa",
+    "",
+    "[TU ANÁLISIS AQUÍ — la tesis de la semana: eficiencia costo/calidad, hacia dónde va el mercado, qué implica para quien construye]",
+    "",
+    "---",
+    "",
+    "*Los datos de esta edición salen de snapshots diarios propios (OpenRouter y HuggingFace) con metodología abierta y trazable.*",
+  ].join("\n");
+
+  const frontmatter = [
+    "---",
+    `title: "Joyas ocultas #${editionNumber(isoDate)} — ${gems[0]?.name ?? "arranque"}"`,
+    `date: "${isoDate}"`,
+    "published: false",
+    `gems: [${gems.map((g) => `"${g.urlSlug}"`).join(", ")}]`,
+    `cover: "${hasCard ? `${chartBase}/semana.png` : ""}"`,
+    "---",
+    "",
+  ].join("\n");
+
+  await fs.mkdir(EDITIONS_DIR, { recursive: true });
+  await fs.writeFile(editionPath, `${frontmatter}${body}\n`, "utf8");
+  log("draft", `edición pública generada -> src/content/ediciones/${isoDate}.md (published: false; editá y pasala a true)`);
+  return editionPath;
+}
+
+function editionNumber(isoDate) {
+  const jan1 = new Date(`${isoDate.slice(0, 4)}-01-01T00:00:00Z`);
+  const week = Math.ceil((Date.parse(isoDate) - jan1.getTime()) / (7 * 86400000));
+  return week;
 }
 
 export async function generateDraft({ date = new Date(), force = false } = {}) {
@@ -181,6 +286,9 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
   await fs.mkdir(OUT_DIR, { recursive: true });
   await fs.writeFile(outPath, `${meta}${postBody}\n`, "utf8");
   log("draft", `borrador generado -> content/linkedin/${path.basename(outPath)} (${postBody.length} caracteres)`);
+
+  await writeEdition({ dataset, gems, mover, altasSemana, dropsSemana, isoDate, force });
+
   return outPath;
 }
 

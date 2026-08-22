@@ -269,6 +269,9 @@ table.data td.num { font-family: var(--mono); font-variant-numeric: tabular-nums
 }
 
 .prose { max-width: 44rem; }
+.prose img { max-width: 100%; height: auto; border: 1px solid var(--rule); }
+.edition-teaser h2 { margin: 0.3rem 0; }
+.edition-body h3 { font-family: var(--serif); font-size: 1.2rem; margin-top: 1.8rem; }
 .prose h2 {
   font-family: var(--serif);
   font-variation-settings: "opsz" 40;

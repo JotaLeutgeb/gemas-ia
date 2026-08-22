@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE, withBase } from "../config/site.js";
+import { loadPublishedEditions } from "../lib/ediciones.js";
 
 let dataset = null;
 try {
@@ -21,6 +22,7 @@ const isGemEligible = (m) => !m.famous && m.gemScore !== null && (m.downloads ??
 const gems = models.filter(isGemEligible);
 const eligibleGems = gems.length;
 const topGems = gems.slice(0, 8);
+const latestEdition = (await loadPublishedEditions())[0] ?? null;
 
 const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
 const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
@@ -46,6 +48,15 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
     <div class="kpi"><div class="value">{eligibleGems}</div><div class="label">joyas en la mira</div></div>
     <div class="kpi"><div class="value">100%</div><div class="label">datos abiertos y trazables</div></div>
   </section>
+
+  {latestEdition && (
+    <section class="card edition-teaser">
+      <p class="kicker">Edición semanal · {latestEdition.date}</p>
+      <h2><a href={withBase(`/ediciones/${latestEdition.slug}/`)}>{latestEdition.title}</a></h2>
+      {latestEdition.excerpt && <p class="small muted">{latestEdition.excerpt}…</p>}
+      <a class="small" href={withBase("/ediciones/")}>archivo de ediciones →</a>
+    </section>
+  )}
 
   <section class="card">
     <h2>El mercado en un gráfico</h2>

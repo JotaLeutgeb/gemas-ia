@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../config/site.js";
+import { loadPublishedEditions } from "../../lib/ediciones.js";
+
+const editions = await loadPublishedEditions();
+---
+
+<BaseLayout title="Ediciones — Gemas IA" description="Archivo de ediciones semanales: joyas ocultas, movimientos del mercado y análisis con datos propios.">
+  <p class="kicker"><span class="gem">◆</span> Una edición por semana · archivo completo</p>
+  <section class="hero">
+    <h1>Ediciones <em class="gem">semanales</em></h1>
+    <p class="lede">
+      Cada semana el observatorio publica qué modelos están rompiendo la relación
+      crecimiento/escasez, qué cambió de precio y hacia dónde va el mercado. Con datos propios,
+      metodología abierta y gráficos generados del pipeline.
+    </p>
+  </section>
+
+  {editions.length === 0 && (
+    <section class="card">
+      <p class="chart-empty">
+        Todavía no hay ediciones publicadas. La primera se genera con `npm run draft`:
+        editá el archivo en src/content/ediciones/, pasá published a true y commiteá.
+      </p>
+    </section>
+  )}
+
+  {editions.map((edition) => (
+    <article class="card edition-item">
+      <h2><a href={withBase(`/ediciones/${edition.slug}/`)}>{edition.title}</a></h2>
+      <p class="small muted">{edition.date}</p>
+      {edition.excerpt && <p>{edition.excerpt}…</p>}
+      <a href={withBase(`/ediciones/${edition.slug}/`)} class="small">Leer edición →</a>
+    </article>
+  ))}
+</BaseLayout>
