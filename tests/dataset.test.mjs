@@ -15,10 +15,21 @@ test("dataset existe (corré npm run build:dataset)", () => {
 });
 
 if (hasDataset) {
-  test("dataset tiene schema v1 y modelos", () => {
-    assert.equal(dataset.schemaVersion, 1);
+  test("dataset tiene schema v2 y modelos", () => {
+    assert.equal(dataset.schemaVersion, 2);
     assert.ok(Array.isArray(dataset.models));
     assert.ok(dataset.models.length > 0);
+  });
+
+  test("movimientos presentes con forma valida", () => {
+    const mov = dataset.movements ?? {};
+    for (const key of ["altas", "bajas", "priceDrops"]) {
+      assert.ok(Array.isArray(mov[key]), `${key} debe ser array`);
+    }
+    for (const alta of mov.altas) {
+      assert.ok(alta.matchKey || alta.urlSlug);
+      assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(alta.firstSeen));
+    }
   });
 
   test("cada modelo tiene identidad mínima válida", () => {
