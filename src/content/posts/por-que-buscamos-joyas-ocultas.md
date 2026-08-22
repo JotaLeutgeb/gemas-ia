@@ -4,6 +4,8 @@ description: "La tesis detrás de Gemas IA: el valor está en los modelos que na
 date: "2026-08-21"
 ---
 
+> **Nota (2026-08-22):** este ensayo describe la tesis original del proyecto. Ese día hicimos un pivote: ahora comparamos SOLO a los modelos líderes de los grandes labs con KPIs de eficiencia calidad-precio. Leé [Del ruido a los líderes](../del-ruido-a-los-lideres/) para el contexto.
+
 Todos los días se anuncia un modelo nuevo. La mayoría de las crónicas te cuentan lo mismo: parámetros, benchmarks, comparaciones con GPT. Ese no es este proyecto.
 
 **Gemas IA nace de una obsesión distinta:** encontrar los modelos que casi nadie mira y que, igual, ofrecen una relación calidad/precio absurda.

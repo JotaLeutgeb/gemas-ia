@@ -17,16 +17,24 @@ export async function getStaticPaths() {
 const { model } = Astro.props;
 const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
 const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
+const fmtPrice = (p) => {
+  if (p == null) return "n/d";
+  if (p === 0) return "gratis";
+  return p >= 1 ? `$${p.toFixed(2)}` : `$${p.toFixed(3)}`;
+};
 
-const KEY_BENCHMARKS = ["epoch_capabilities_index", "gpqa_diamond", "swe_bench_verified", "math_level_5", "hle", "mmlu_external", "terminalbench"];
+const KEY_BENCHMARKS = ["swe_bench_verified", "terminalbench", "cursorbench", "scicode", "frontiercode", "epoch_capabilities_index", "gpqa_diamond", "math_level_5", "hle", "mmlu"];
 const BENCH_LABELS = {
-  epoch_capabilities_index: "Epoch Capabilities Index",
-  gpqa_diamond: "GPQA Diamond (ciencia nivel PhD)",
   swe_bench_verified: "SWE-bench Verified (issues reales)",
+  terminalbench: "Terminal-Bench (agente terminal)",
+  cursorbench: "Cursor Bench (tareas de editor)",
+  scicode: "SciCode (código científico)",
+  frontiercode: "FrontierCode",
+  epoch_capabilities_index: "Epoch Capabilities Index (general)",
+  gpqa_diamond: "GPQA Diamond (ciencia nivel PhD)",
   math_level_5: "MATH Level 5 (competición)",
   hle: "Humanity's Last Exam",
-  mmlu_external: "MMLU (conocimiento general)",
-  terminalbench: "Terminal-Bench (agente terminal)",
+  mmlu: "MMLU (conocimiento general)",
 };
 const benchmarks = (model.benchmarks ?? [])
   .slice()
@@ -37,55 +45,75 @@ const benchmarks = (model.benchmarks ?? [])
   });
 const hasBenchmarks = benchmarks.length > 0;
 const hasUsage = (model.series.usageTokens ?? []).length >= 2;
+const hasPrices = (model.series.promptUsdPerM ?? []).length >= 2 || (model.series.completionUsdPerM ?? []).length >= 2;
+
+const chartModel = JSON.stringify({
+  series: {
+    usageTokens: model.series.usageTokens ?? [],
+    promptUsdPerM: model.series.promptUsdPerM ?? [],
+    completionUsdPerM: model.series.completionUsdPerM ?? [],
+  },
+});
+const hasForecast = model.metrics.forecastUsage90d || model.metrics.forecastUsage180d;
 ---
 
-<BaseLayout title={`${model.name} — Gemas IA`} description={`Evolución histórica, precios y proyección de ${model.name}.`}>
+<BaseLayout title={`${model.name} — Gemas IA`} description={`Calidad, precios y uso real de ${model.name} (${model.labLabel}) frente a los demás líderes.`}>
   <section class="hero">
     <h1>{model.name}</h1>
     <p class="lede muted">
-      de {model.provider ?? "proveedor desconocido"} ·
-      {model.famous ? <span class="badge famous">modelo famoso</span> : <span class="badge gem">candidato a joya</span>}
+      {model.labLabel}
+      {model.createdAt && <> · en el catálogo desde {model.createdAt.slice(0, 10)}</>}
+      {model.onEfficiencyFrontier && <> · <span class="badge gem">frontera eficiente</span></>}
     </p>
     <p class="small">
-      {model.links?.huggingface && <a href={model.links.huggingface} rel="noopener">HuggingFace ↗</a>}
-      {model.links?.openrouter && <> · <a href={model.links.openrouter} rel="noopener">OpenRouter ↗</a></>}
+      {model.links?.openrouter && <a href={model.links.openrouter} rel="noopener">OpenRouter ↗</a>}
+       · <a href={withBase("/joyas/")}>ranking de mejor valor</a>
     </p>
   </section>
 
   <section class="kpis">
-    <div class="kpi"><div class="value">{fmtNum(model.downloads)}</div><div class="label">descargas acumuladas</div></div>
-    <div class="kpi"><div class="value">{fmtNum(model.likes)}</div><div class="label">likes</div></div>
-    <div class="kpi"><div class="value">{model.promptUsdPerM == null ? "n/d" : `$${model.promptUsdPerM.toFixed(2)}`}</div><div class="label">$ / 1M entrada</div></div>
-    <div class="kpi"><div class="value">{model.completionUsdPerM == null ? "n/d" : `$${model.completionUsdPerM.toFixed(2)}`}</div><div class="label">$ / 1M salida</div></div>
+    <div class="kpi"><div class="value">{model.quality != null ? model.quality.index.toFixed(1) : "—"}</div><div class="label">índice de código</div></div>
+    <div class="kpi"><div class="value">{model.performanceRank != null ? `#${model.performanceRank}` : "—"}</div><div class="label">rank de código</div></div>
+    <div class="kpi"><div class="value">{fmtPrice(model.blendedUsdPerM)}</div><div class="label">$ / 1M mezclado</div></div>
+    <div class="kpi"><div class="value">{model.valueRank != null ? `#${model.valueRank}` : "—"}</div><div class="label">rank de valor</div></div>
+    <div class="kpi"><div class="value">{model.quality?.general?.index != null ? model.quality.general.index.toFixed(0) : "—"}</div><div class="label">índice general (ref.)</div></div>
     <div class="kpi"><div class="value">{model.contextLength ? `${Math.round(model.contextLength / 1000)}k` : "n/d"}</div><div class="label">ventana de contexto</div></div>
-    <div class="kpi"><div class="value">{model.gemScore != null ? model.gemScore.toFixed(2) : "—"}</div><div class="label">score joya</div></div>
+    <div class="kpi"><div class="value">{hasUsage ? fmtNum(Math.round(model.series.usageTokens.at(-1)?.value ?? 0)) : "n/d"}</div><div class="label">tokens/día (último dato)</div></div>
   </section>
 
-  <section class="card">
-    <h2>Evolución y proyección</h2>
-    <p class="small muted">
-      Línea verde: descargas acumuladas observadas. Línea amarilla punteada: extrapolación log-lineal
-      a 180 días con su banda de confianza. Cuantos más puntos tengamos, más honesta es la banda.
-    </p>
-    <div id="chart-downloads" class="chart-container" role="img" aria-label="Serie histórica de descargas acumuladas con proyección a 180 días" data-model={JSON.stringify(model)}></div>
-    {hasUsage && (
-      <>
-        <h2 style="margin-top:2rem">Uso real (tokens por día en OpenRouter)</h2>
-        <p class="small muted">
-          Descargas mide curiosidad; tokens miden uso genuino. Esta serie viene del Data API
-          público de OpenRouter (top diario por volumen).
-        </p>
-        <div id="chart-usage" class="chart-container" role="img" aria-label="Serie histórica de tokens procesados por día" data-model={JSON.stringify(model)}></div>
-      </>
-    )}
-  </section>
+  {(hasPrices || hasUsage) && (
+    <section class="card">
+      {hasPrices && (
+        <>
+          <h2>Historial de precios</h2>
+          <p class="small muted">
+            Precio por millón de tokens observado cada día en OpenRouter. Verde: entrada; amarillo: salida.
+            Las caídas bruscas quedan registradas en <a href={withBase("/movimientos/")}>movimientos</a>.
+          </p>
+          <div id="chart-prices" class="chart-container" role="img" aria-label="Serie histórica de precios por millón de tokens" data-model={chartModel}></div>
+        </>
+      )}
+      {hasUsage && (
+        <>
+          <h2 style={hasPrices ? "margin-top:2rem" : ""}>Uso real (tokens por día en OpenRouter)</h2>
+          <p class="small muted">
+            Tokens procesados por día a través de OpenRouter: tracción genuina entre desarrolladores,
+            no descargas de curiosos.
+          </p>
+          <div id="chart-usage" class="chart-container" role="img" aria-label="Serie histórica de tokens procesados por día" data-model={chartModel}></div>
+        </>
+      )}
+    </section>
+  )}
 
   {hasBenchmarks && (
     <section class="card">
       <h2>Desempeño</h2>
       <p class="section-note">
         Scores compilados por Epoch AI (evaluaciones propias y fuentes externas agregadas),
-        matcheados heurísticamente al modelo. Verificá siempre la fuente antes de citar un número.
+        matcheados heurísticamente al modelo, normalizados a escala 0–100. Los primeros cinco
+        benchmarks alimentan el índice de código del sitio; el resto es referencia. Verificá siempre
+        la fuente antes de citar un número.
       </p>
       <table class="data">
         <thead>
@@ -94,8 +122,8 @@ const hasUsage = (model.series.usageTokens ?? []).length >= 2;
         <tbody>
           {benchmarks.slice(0, 14).map((b) => {
             const isIndex = b.benchmark === "epoch_capabilities_index";
-            const display = isIndex ? b.score.toFixed(1) : (Math.min(b.score, 1) * 100).toFixed(1);
-            const pct = Math.max(0, Math.min(isIndex ? b.score / 2 : b.score, 1)) * 100;
+            const display = isIndex ? b.score.toFixed(1) : Math.min(b.score, 100).toFixed(1);
+            const pct = Math.max(0, Math.min(isIndex ? b.score / 2 : b.score, 100));
             return (
               <tr>
                 <td>{BENCH_LABELS[b.benchmark] ?? b.benchmark}</td>
@@ -110,44 +138,46 @@ const hasUsage = (model.series.usageTokens ?? []).length >= 2;
       {benchmarks.length > 14 && (
         <p class="small muted">+{benchmarks.length - 14} benchmarks más en el dataset crudo.</p>
       )}
-      <p class="small muted">ECI es un índice compuesto (no un porcentaje); el resto se muestra en escala 0–100.</p>
+      <p class="small muted">
+        Los benchmarks se muestran normalizados a escala 0–100; ECI es un índice compuesto propio de Epoch (escala distinta).
+      </p>
     </section>
   )}
 
   <section class="card">
-    <h2>Proyecciones</h2>
-    {model.metrics.forecastDownloads90d || model.metrics.forecastDownloads180d || Number.isFinite(model.metrics.momentum) ? (
+    <h2>Tendencia de uso</h2>
+    {hasForecast || Number.isFinite(model.metrics.momentumUsage) ? (
       <table class="data">
         <thead>
           <tr><th>Métrica</th><th class="num">90 días</th><th class="num">180 días</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td>Descargas proyectadas</td>
-            <td class="num">{model.metrics.forecastDownloads90d ? fmtNum(Math.round(model.metrics.forecastDownloads90d.center)) : "n/d"}</td>
-            <td class="num">{model.metrics.forecastDownloads180d ? fmtNum(Math.round(model.metrics.forecastDownloads180d.center)) : "n/d"}</td>
+            <td>Tokens/día proyectados</td>
+            <td class="num">{model.metrics.forecastUsage90d ? fmtNum(Math.round(model.metrics.forecastUsage90d.center)) : "n/d"}</td>
+            <td class="num">{model.metrics.forecastUsage180d ? fmtNum(Math.round(model.metrics.forecastUsage180d.center)) : "n/d"}</td>
           </tr>
           <tr>
             <td>Banda de confianza (±1σ)</td>
             <td class="num">
-              {model.metrics.forecastDownloads90d
-                ? `${fmtNum(Math.round(model.metrics.forecastDownloads90d.low))} – ${fmtNum(Math.round(model.metrics.forecastDownloads90d.high))}`
+              {model.metrics.forecastUsage90d
+                ? `${fmtNum(Math.round(model.metrics.forecastUsage90d.low))} – ${fmtNum(Math.round(model.metrics.forecastUsage90d.high))}`
                 : "n/d"}
             </td>
             <td class="num">
-              {model.metrics.forecastDownloads180d
-                ? `${fmtNum(Math.round(model.metrics.forecastDownloads180d.low))} – ${fmtNum(Math.round(model.metrics.forecastDownloads180d.high))}`
+              {model.metrics.forecastUsage180d
+                ? `${fmtNum(Math.round(model.metrics.forecastUsage180d.low))} – ${fmtNum(Math.round(model.metrics.forecastUsage180d.high))}`
                 : "n/d"}
             </td>
           </tr>
           <tr>
-            <td>Momentum 28d (crecimiento relativo)</td>
-            <td class="num" colspan="2">{fmtPct(model.metrics.momentum)}</td>
+            <td>Momentum de uso 28d (crecimiento relativo)</td>
+            <td class="num" colspan="2">{fmtPct(model.metrics.momentumUsage)}</td>
           </tr>
         </tbody>
       </table>
     ) : (
-      <p class="small muted">Sin proyección todavía: se necesitan al menos 4 puntos en la serie.</p>
+      <p class="small muted">Sin proyección todavía: se necesitan al menos 4 puntos en la serie de uso.</p>
     )}
   </section>
 

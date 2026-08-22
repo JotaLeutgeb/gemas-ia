@@ -40,7 +40,7 @@ const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeUR
           <a href={withBase(`/modelos/${m.urlSlug}/`)} class="model-card">
             <div class="name">{m.name}</div>
             <div class="meta">
-              score {m.gemScore ?? "—"} · {m.promptUsdPerM != null ? (m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}/1M`) : "precio n/d"}
+              calidad {m.quality?.index?.toFixed(1) ?? "—"} · {m.promptUsdPerM != null ? (m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}/1M`) : "precio n/d"}
             </div>
           </a>
         ))}

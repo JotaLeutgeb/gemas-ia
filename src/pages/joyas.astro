@@ -11,62 +11,69 @@ try {
   dataset = null;
 }
 
-const gems = (dataset?.models ?? [])
-  .filter((m) => !m.famous && m.gemScore !== null && (m.downloads ?? 0) <= 5_000_000)
-  .slice(0, 25);
+const ranked = [...(dataset?.models ?? [])]
+  .filter((m) => m.valueScore !== null)
+  .sort((a, b) => a.valueRank - b.valueRank)
+  .slice(0, 30);
+const withoutQuality = (dataset?.models ?? []).length - (dataset?.totals?.withQuality ?? 0);
 
-const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
-const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
+const fmtPrice = (p) => {
+  if (p == null) return "n/d";
+  if (p === 0) return "gratis";
+  return p >= 1 ? `$${p.toFixed(2)}` : `$${p.toFixed(3)}`;
+};
 ---
 
-<BaseLayout title="Ranking de joyas ocultas — Gemas IA" description="Los LLMs fuera del mainstream con mejor score de eficiencia y momentum, actualizados con datos propios.">
+<BaseLayout title="Mejor valor: calidad por dólar — Gemas IA" description="Qué modelo líder da la máxima calidad por dólar: índice Epoch AI dividido precio mezclado, actualizado a diario con datos propios.">
   <section class="hero">
-    <h1>Ranking de <span class="gem">joyas ocultas</span></h1>
+    <h1>Ranking de <span class="gem">mejor valor</span></h1>
     <p class="lede">
-      Modelos fuera del mainstream ordenados por su score: crecimiento sostenido × escasez.
-      Los modelos famosos (GPT, Claude, Gemini, DeepSeek...) están excluidos a propósito:
-      acá buscamos lo que casi nadie mira.
+      Solo modelos de labs líderes, ordenados por eficiencia para programar:
+      <strong>índice de código ÷ precio mezclado</strong> por millón de tokens (75% entrada / 25% salida).
+      Acá las joyas no son oscuras: son los líderes que más capacidad de código te dan por cada dólar.
     </p>
   </section>
 
   <section class="card">
-    {gems.length > 0 ? (
+    {ranked.length > 0 ? (
       <table class="data">
         <thead>
           <tr>
             <th>#</th>
             <th>Modelo</th>
-            <th class="num">Score joya</th>
-            <th class="num">Momentum 28d</th>
-            <th class="num">$ / 1M in</th>
+            <th>Lab</th>
+            <th class="num">Código</th>
+            <th class="num">$ / 1M mezclado</th>
+            <th class="num">pts × $</th>
             <th class="num">Contexto</th>
-            <th class="num">Downloads</th>
           </tr>
         </thead>
         <tbody>
-          {gems.map((m, i) => (
+          {ranked.map((m) => (
             <tr>
-              <td>{i + 1}</td>
-              <td><a href={withBase(`/modelos/${m.urlSlug}/`)}>{m.name}</a></td>
-              <td class="num">{m.gemScore.toFixed(2)}</td>
-              <td class="num">{fmtPct(m.metrics.momentum)}</td>
-              <td class="num">{m.promptUsdPerM == null ? "n/d" : m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}`}</td>
+              <td>{m.valueRank}</td>
+              <td><a href={withBase(`/modelos/${m.urlSlug}/`)}>{m.name}</a>{m.onEfficiencyFrontier && <> <span class="badge gem">frontera</span></>}</td>
+              <td class="muted">{m.labLabel}</td>
+              <td class="num">{m.quality.index.toFixed(1)}</td>
+              <td class="num">{fmtPrice(m.blendedUsdPerM)}</td>
+              <td class="num">{m.valueScore.toLocaleString("es", { maximumFractionDigits: 0 })}</td>
               <td class="num">{m.contextLength ? `${Math.round(m.contextLength / 1000)}k` : "n/d"}</td>
-              <td class="num">{fmtNum(m.downloads)}</td>
             </tr>
           ))}
         </tbody>
       </table>
     ) : (
       <p class="chart-empty">
-        El ranking necesita al menos una semana de snapshots acumulados para calcular momentum de forma confiable.
-        Volvé pronto o leé <a href={withBase("/metodologia/")}>cómo funciona el score</a>.
+        Todavía no hay scores de calidad matcheados contra precios. Volvé pronto o leé
+        <a href={withBase("/metodologia/")}> cómo se calcula el score</a>.
       </p>
     )}
   </section>
 
   <p class="small muted">
-    ¿Por qué no aparece tu modelo favorito? Puede ser que esté en la lista de famosos, que supere
-    los 5M de descargas, o que aún no tengamos suficientes puntos históricos. Todo está explicado en la <a href={withBase("/metodologia/")}>metodología</a>.
+    ¿Por qué no aparece tu modelo favorito? O no pertenece a un lab del universo comparado,
+    o todavía no tiene benchmarks en Epoch AI, o no está publicado en OpenRouter con precio.
+    {withoutQuality > 0 && <> Hoy hay {withoutQuality} modelos en el radar esperando score.</>}
+    Todo está explicado en la <a href={withBase("/metodologia/")}>metodología</a>.
   </p>
 </BaseLayout>
