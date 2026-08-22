@@ -217,6 +217,21 @@ Orden correcto tras recolectar: `collect` → `build:dataset` → `test` → (`d
 3. Verificar que cada cifra tenga su número citable y que el cierre referencie el proyecto.
 4. Publicar en LinkedIn, borrar/marcar el borrador como publicado en el frontmatter (`published: true`).
 
+### Publicar por primera vez en GitHub Pages
+El nombre de usuario real de GitHub está placeholder como `joaqu` en EXACTAMENTE estos 4 lugares (buscar/reemplazar todos):
+1. `astro.config.mjs` → campo `site` (`https://joaqu.github.io`)
+2. `src/config/site.js` → `repoUrl` y `author`
+3. `scripts/generate-weekly-draft.mjs` → constante `SITE_URL`
+4. `public/robots.txt` → línea `Sitemap:`
+
+Pasos:
+1. Crear repo público llamado exactamente `gemas-ia` bajo la cuenta del dueño.
+2. Hacer el reemplazo de usuario en los 4 lugares y commitear (`docs:`).
+3. `git remote add origin git@github.com:<usuario>/gemas-ia.git && git push -u origin main`.
+4. En GitHub: Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+5. Verificar que corra deploy.yml (verde) y que `https://<usuario>.github.io/gemas-ia/` responda.
+6. Confirmar que snapshot.yml quedó habilitado (pestaña Actions → scheduled workflow).
+
 ### Checklist de release de features grandes
 - [ ] `npm test` pasa (21 tests: scoring + smoke de dataset)
 - [ ] Build pasa (`npm run build`)
