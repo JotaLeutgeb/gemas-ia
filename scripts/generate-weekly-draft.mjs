@@ -17,10 +17,11 @@ function fmtPct(value) {
   return `${sign}${(value * 100).toFixed(1)}%`;
 }
 
-function fmtPrice(model) {
-  if (model.promptUsdPerM == null) return "precio n/d";
-  if (model.promptUsdPerM === 0) return "gratis";
-  return `US$${model.promptUsdPerM.toFixed(2)}/1M tokens de entrada`;
+function fmtBlended(model) {
+  const p = model.blendedUsdPerM;
+  if (p == null) return "precio n/d";
+  if (p === 0) return "gratis";
+  return `US$${p >= 1 ? p.toFixed(2) : p.toFixed(3)}/1M mezclados`;
 }
 
 function fmtContext(model) {
@@ -28,24 +29,26 @@ function fmtContext(model) {
   return `${Math.round(model.contextLength / 1000)}k de contexto`;
 }
 
-function growth28d(model) {
-  const series = model.series.downloads ?? [];
-  if (series.length < 2) return null;
-  const last = series[series.length - 1];
-  const past = series.find((p) => Date.parse(last.date) - Date.parse(p.date) >= 21 * 86400000);
-  if (!past || !past.value) return null;
-  return last.value / past.value - 1;
+function ratioVsLeader(model, leader) {
+  if (!leader?.quality || !model.quality) return null;
+  if (!model.blendedUsdPerM || !leader.blendedUsdPerM) return null;
+  return {
+    qualityPct: (100 * model.quality.index) / leader.quality.index,
+    pricePct: (100 * model.blendedUsdPerM) / leader.blendedUsdPerM,
+  };
 }
 
-function isGemEligible(model) {
-  return !model.famous && model.gemScore !== null && (model.downloads ?? 0) <= 5_000_000;
+function fmtRatioPct(value) {
+  if (!Number.isFinite(value)) return "n/d";
+  if (value <= 0) return "0%";
+  if (value < 1) return "<1%";
+  return `${value.toFixed(0)}%`;
 }
 
-function cheapestFamousPrice(dataset) {
+function bestValueModels(dataset) {
   return dataset.models
-    .filter((m) => m.famous && m.promptUsdPerM != null && m.promptUsdPerM > 0)
-    .map((m) => m.promptUsdPerM)
-    .sort((a, b) => a - b)[0] ?? null;
+    .filter((m) => m.valueScore !== null && m.valueRank !== null)
+    .sort((a, b) => a.valueRank - b.valueRank);
 }
 
 async function availableChartImages() {
@@ -74,7 +77,7 @@ async function freezeEditionCharts(isoDate) {
   return copied;
 }
 
-async function writeEdition({ dataset, gems, mover, altasSemana, dropsSemana, isoDate, force }) {
+async function writeEdition({ dataset, gems, leader, altasSemana, dropsSemana, isoDate, force }) {
   const editionPath = path.join(EDITIONS_DIR, `${isoDate}.md`);
   if (!force) {
     try {
@@ -91,24 +94,28 @@ async function writeEdition({ dataset, gems, mover, altasSemana, dropsSemana, is
     .then(() => true)
     .catch(() => false);
 
-  const gemParagraphs = gems.map(
-    (gem) => `### ${gem.name}
+  const gemParagraphs = gems.map((gem) => {
+    const ratio = ratioVsLeader(gem, leader);
+    const ratioText = ratio
+      ? ` Te da el **${fmtRatioPct(ratio.qualityPct)} de la calidad** del líder absoluto por el **${fmtRatioPct(ratio.pricePct)} de su precio**.`
+      : "";
+    return `### ${gem.name} (${gem.labLabel})
 
-${fmtContext(gem)} · ${fmtPrice(gem)} · score de joya **${gem.gemScore ?? "n/d"}**. Descargas acumuladas: ${gem.downloads?.toLocaleString("es") ?? "n/d"}.
+${fmtContext(gem)} · ${fmtBlended(gem)} · calidad **${gem.quality?.index?.toFixed(1) ?? "n/d"}** (#${gem.valueRank} en mejor valor).${ratioText}
 
-[SU HISTORIA AQUÍ — por qué este modelo es una joya esta semana]`
-  );
+[SU HISTORIA AQUÍ — por qué este líder es la compra de la semana]`;
+  });
 
   const movementsBlock = [];
   if (altasSemana.length > 0 || dropsSemana.length > 0) {
-    movementsBlock.push("## Movimientos del mercado", "");
+    movementsBlock.push("## Movimientos entre los grandes", "");
     if (altasSemana.length > 0) {
-      movementsBlock.push(`**Entraron al radar:** ${altasSemana.map((a) => a.name).join(", ")}.`, "");
+      movementsBlock.push(`**Lanzaron modelos nuevos:** ${altasSemana.map((a) => a.name).join(", ")}.`, "");
     }
     if (dropsSemana.length > 0) {
       movementsBlock.push("**La guerra de precios:**", "");
       for (const drop of dropsSemana) {
-        movementsBlock.push(`- ${drop.name}: ${fmtPrice(drop.oldPrice)} → ${fmtPrice(drop.newPrice)} (${drop.field})`);
+        movementsBlock.push(`- ${drop.name}: ${fmtBlended({ blendedUsdPerM: drop.oldPrice })} → ${fmtBlended({ blendedUsdPerM: drop.newPrice })} (${drop.field})`);
       }
       movementsBlock.push("");
     }
@@ -116,13 +123,13 @@ ${fmtContext(gem)} · ${fmtPrice(gem)} · score de joya **${gem.gemScore ?? "n/d
   }
 
   const body = [
-    `<img src="${chartBase}/semana.png" alt="Las joyas ocultas de la semana" width="600" />`,
+    `<img src="${chartBase}/semana.png" alt="La frontera calidad-precio de la semana" width="600" />`,
     "",
-    mover
-      ? `El mercado se mueve rápido: **${mover.model.name}** creció **${fmtPct(mover.growth)}** en descargas en las últimas semanas y casi nadie lo está mirando. Esta es la edición semanal de Gemas IA: tres modelos fuera del mainstream que merecen tu atención.`
-      : "Edición semanal de Gemas IA: lo que dicen los datos propios del observatorio sobre los modelos que nadie mira.",
+    leader
+      ? `Esta es la edición semanal de Gemas IA, el comparador de eficiencia entre los modelos líderes. El rey de la calidad sigue siendo **${leader.name}**, pero el ranking de mejor valor cuenta otra historia.`
+      : "Edición semanal de Gemas IA: lo que dicen los datos propios del observatorio sobre la relación calidad-precio entre los líderes.",
     "",
-    "## Las joyas de la semana",
+    "## Los líderes con mejor relación calidad-precio",
     "",
     ...gemParagraphs,
     "",
@@ -130,16 +137,16 @@ ${fmtContext(gem)} · ${fmtPrice(gem)} · score de joya **${gem.gemScore ?? "n/d
     "",
     "## Lo que esto significa",
     "",
-    "[TU ANÁLISIS AQUÍ — la tesis de la semana: eficiencia costo/calidad, hacia dónde va el mercado, qué implica para quien construye]",
+    "[TU ANÁLISIS AQUÍ — la tesis de la semana: eficiencia costo/calidad entre flagships, hacia dónde se mueve la frontera, qué implica para quien construye]",
     "",
     "---",
     "",
-    "*Los datos de esta edición salen de snapshots diarios propios (OpenRouter y HuggingFace) con metodología abierta y trazable.*",
+    "*Los datos de esta edición salen de snapshots diarios propios (OpenRouter y Epoch AI) con metodología abierta y trazable.*",
   ].join("\n");
 
   const frontmatter = [
     "---",
-    `title: "Joyas ocultas #${editionNumber(isoDate)} — ${gems[0]?.name ?? "arranque"}"`,
+    `title: "Mejor valor #${editionNumber(isoDate)} — ${gems[0]?.name ?? "arranque"}"`,
     `date: "${isoDate}"`,
     "published: false",
     `gems: [${gems.map((g) => `"${g.urlSlug}"`).join(", ")}]`,
@@ -162,15 +169,15 @@ function editionNumber(isoDate) {
 
 export async function generateDraft({ date = new Date(), force = false } = {}) {
   const dataset = JSON.parse(await fs.readFile(DATASET, "utf8"));
-  const gems = dataset.models.filter(isGemEligible).slice(0, MAX_GEMS);
+  const gems = bestValueModels(dataset).slice(0, MAX_GEMS);
+  const leader = dataset.models.find((m) => m.performanceRank === 1) ?? null;
+  const frontierCount = dataset.models.filter((m) => m.onEfficiencyFrontier).length;
   const mover = dataset.models
-    .filter((m) => !m.famous && m.metrics.momentum !== null)
-    .map((m) => ({ model: m, growth: growth28d(m) }))
-    .filter((x) => x.growth !== null)
-    .sort((a, b) => b.growth - a.growth)[0] ?? null;
+    .filter((m) => Number.isFinite(m.metrics.momentumUsage) && m.links?.openrouter)
+    .sort((a, b) => b.metrics.momentumUsage - a.metrics.momentumUsage)[0] ?? null;
 
   if (gems.length === 0) {
-    log("draft", "no hay modelos elegibles todavía (se necesitan al menos 4 snapshots para momentum)");
+    log("draft", "no hay modelos con score de calidad contra precio todavía (faltan benchmarks o precios)");
     if (!force) return null;
   }
 
@@ -187,37 +194,34 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
   const snapshotInfo = Object.entries(dataset.sources)
     .map(([source, info]) => `${source}: ${info.lastSnapshot}`)
     .join(" · ");
-  const famousRef = cheapestFamousPrice(dataset);
   const images = await availableChartImages();
   const altasSemana = (dataset.movements?.altas ?? []).slice(0, 5);
   const dropsSemana = (dataset.movements?.priceDrops ?? []).slice(0, 3);
 
   const gemSections = gems.map((gem, i) => {
-    const ratio =
-      famousRef && gem.promptUsdPerM > 0
-        ? ` · cuesta el ${(100 * (gem.promptUsdPerM / famousRef)).toFixed(0)}% del modelo top más barato`
-        : "";
+    const ratio = ratioVsLeader(gem, leader);
     const imageNote = images.includes(`${gem.urlSlug}.png`)
       ? `\n- Imagen lista para adjuntar: \`public/charts/${gem.urlSlug}.png\``
       : "";
-    return `**${i + 1}. ${gem.name}**
-- ${fmtContext(gem)} · ${fmtPrice(gem)}${ratio}
-- Downloads acumulados: ${gem.downloads?.toLocaleString("es") ?? "n/d"} · Score de joya: ${gem.gemScore ?? "n/d"}
+    return `**${i + 1}. ${gem.name}** (${gem.labLabel})
+- ${fmtContext(gem)} · ${fmtBlended(gem)}
+- Calidad: ${gem.quality?.index?.toFixed(1) ?? "n/d"} · Rank #${gem.valueRank} en mejor valor · ${Math.round(gem.valueScore).toLocaleString("es")} pts de calidad por dólar${ratio ? ` · el ${fmtRatioPct(ratio.qualityPct)} de la calidad del líder por el ${fmtRatioPct(ratio.pricePct)} de su precio` : ""}
 - Ficha completa: ${SITE_URL}/modelos/${gem.urlSlug}/${imageNote}`;
   }).join("\n\n");
 
   const movementsSection = [];
-  if (altasSemana.length > 0) {
-    movementsSection.push(
-      "## Movimientos del mercado",
-      "",
-      `Altas de la ventana: ${altasSemana.map((a) => `**${a.name}** (${a.source}, ${a.firstSeen})`).join(" · ")}.`,
-    );
+  if (altasSemana.length > 0 || dropsSemana.length > 0) {
+    movementsSection.push("## Movimientos entre los grandes", "");
+    if (altasSemana.length > 0) {
+      movementsSection.push(
+        `Lanzamientos detectados: ${altasSemana.map((a) => `**${a.name}** (${a.labLabel ?? a.source}, ${a.firstSeen})`).join(" · ")}.`,
+      );
+    }
     if (dropsSemana.length > 0) {
       movementsSection.push(
         "",
-        "Y los precios siguen en guerra:",
-        ...dropsSemana.map((p) => `- ${p.name}: ${fmtPrice(p.oldPrice)} → ${fmtPrice(p.newPrice)} (${p.field})`),
+        "Y la guerra de precios sigue:",
+        ...dropsSemana.map((p) => `- ${p.name}: $${p.oldPrice} → $${p.newPrice} (${p.field})`),
         "",
         "[TU OPINIÓN AQUÍ — ¿qué significa esta guerra de precios para quién construye productos?]",
       );
@@ -226,10 +230,10 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
 
   const postBody = [
     mover
-      ? `El mercado se mueve rápido: **${mover.model.name}** creció **${fmtPct(mover.growth)}** en descargas en las últimas semanas y casi nadie lo está mirando.`
-      : "Todavía no hay suficiente historia para hablar de crecimiento. Pero ya hay señales en los datos.",
+      ? `El líder en tracción real está clarísimo: **${mover.name}** crece **${fmtPct(mover.metrics.momentumUsage)}** semanal en tokens procesados. Pero tracción no es eficiencia.`
+      : "Los precios de los líderes se mueven todos los días. Los benchmarks, más lento. La eficiencia cambia cuando ambos lo hacen.",
     "",
-    "## Las joyas",
+    "## Los líderes con mejor valor",
     "",
     gemSections,
     "",
@@ -237,25 +241,30 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
     ...(movementsSection.length > 0 ? [""] : []),
     "## Lo que esto significa",
     "",
-    "[TU OPINIÓN AQUÍ — conectá los hallazgos con una tesis: eficiencia costo/calidad, swarm economics, hacia dónde va el mercado]",
+    `[TU OPINIÓN AQUÍ — conectá los hallazgos con una tesis: la frontera eficiente son ${frontierCount} modelos hoy, swarm economics, hacia dónde va el mercado]`,
     "",
     "Mi lectura: [TU OPINIÓN AQUÍ]",
     "",
     "---",
     "",
-    "Esto es parte de **Gemas IA**, mi proyecto abierto para encontrar las joyas ocultas de la IA y proyectar su evolución con datos propios.",
+    "Esto es parte de **Gemas IA**, mi proyecto abierto que compara a los modelos líderes en calidad y precio, con datos propios día a día.",
     "",
     `🔎 Metodología completa y ranking actualizado: ${SITE_URL}/joyas/`,
     "",
-    "#IA #LLM #MachineLearning #OpenSource",
+    "#IA #LLM #MachineLearning",
   ].join("\n");
 
+  const topGemRatio = gems[0] ? ratioVsLeader(gems[0], leader) : null;
   const hookOptions = [
-    `Un modelo que casi nadie conoce está creciendo ${mover ? fmtPct(mover.growth).replace("+", "") : "a ritmo récord"} semanal.`,
-    "Todos hablan de GPT y Claude. Yo miro otros 3 modelos.",
-    gems[0]?.promptUsdPerM != null && famousRef
-      ? `Hay un LLM que hace este trabajo por el ${(100 * (gems[0].promptUsdPerM / famousRef)).toFixed(0)}% del precio del más barato de los gigantes.`
-      : "Encontré 3 modelos que rompen la relación calidad/precio.",
+    leader
+      ? `El mejor modelo del mundo cuesta US$${leader.blendedUsdPerM?.toFixed(2)}/1M. Pero casi nadie necesita pagar eso.`
+      : "Comparé a los modelos líderes en calidad por dólar. El podio no es el que esperás.",
+    topGemRatio
+      ? `Hay un modelo de ${gems[0].labLabel} que te da el ${fmtRatioPct(topGemRatio.qualityPct)} de la calidad del mejor del mundo por el ${fmtRatioPct(topGemRatio.pricePct)} de su precio.`
+      : "Solo 9 labs compiten en la frontera. Comparé a todos sus modelos en calidad y precio.",
+    mover
+      ? `${mover.name} crece ${fmtPct(mover.metrics.momentumUsage).replace("+", "")} semanal en uso real. ¿Es la compra inteligente del momento? Miré los números.`
+      : "Todos publican benchmarks. Casi nadie publica calidad dividido precio.",
   ];
 
   const meta = [
@@ -267,9 +276,9 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
     `imagen_portada: public/charts/semana.png`,
     "---",
     "",
-    `# Borrador LinkedIn — Joyas ocultas (${isoDate})`,
+    `# Borrador LinkedIn — Mejor valor entre líderes (${isoDate})`,
     "",
-    "> Datos hasta: " + snapshotInfo + " · Modelos analizados: " + dataset.totals.models,
+    "> Datos hasta: " + snapshotInfo + " · Modelos comparados: " + dataset.totals.models,
     "> Post actual: " + postBody.length + "/3000 caracteres.",
     images.length > 0
       ? "> Imágenes disponibles para arrastrar al post: " + images.map((f) => `public/charts/${f}`).join(", ")
@@ -287,7 +296,7 @@ export async function generateDraft({ date = new Date(), force = false } = {}) {
   await fs.writeFile(outPath, `${meta}${postBody}\n`, "utf8");
   log("draft", `borrador generado -> content/linkedin/${path.basename(outPath)} (${postBody.length} caracteres)`);
 
-  await writeEdition({ dataset, gems, mover, altasSemana, dropsSemana, isoDate, force });
+  await writeEdition({ dataset, gems, leader, altasSemana, dropsSemana, isoDate, force });
 
   return outPath;
 }

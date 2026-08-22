@@ -7,7 +7,6 @@ import {
   momentum,
   project,
   normalizeScores,
-  scarcityFactor,
 } from "../scripts/lib/scoring.js";
 
 const DAY = 86400000;
@@ -74,13 +73,6 @@ test("project sobre serie log-lineal perfecta no tiene banda", () => {
 
 test("project exige mínimo 4 puntos", () => {
   assert.equal(project(series([100, 110, 120]), 90), null);
-});
-
-test("scarcityFactor respeta los umbrales documentados", () => {
-  assert.equal(scarcityFactor(null), 1);
-  assert.equal(scarcityFactor(499_999), 1);
-  assert.equal(scarcityFactor(600_000), 0.5);
-  assert.equal(scarcityFactor(5_000_001), 0);
 });
 
 test("normalizeScores mapea min->0 max->1 y preserva nulls", () => {

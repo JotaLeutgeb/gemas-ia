@@ -18,13 +18,12 @@
     "build:dataset": "node scripts/build-dataset.mjs",
     "draft": "node scripts/generate-weekly-draft.mjs",
     "charts": "node scripts/generate-chart-assets.mjs",
-    "test": "node --test tests/scoring.test.mjs tests/movements.test.mjs tests/dataset.test.mjs",
+    "test": "node --test tests/scoring.test.mjs tests/movements.test.mjs tests/labs.test.mjs tests/quality.test.mjs tests/benchmark-match.test.mjs tests/dataset.test.mjs",
     "pipeline": "npm run collect && npm run collect:usage && npm run build:dataset && npm run charts"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.6.0",
-    "@duckdb/node-api": "^1.4.1-r.2",
     "@fontsource-variable/fraunces": "^5.2.7",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/ibm-plex-sans": "^5.2.7",
