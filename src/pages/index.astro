@@ -1,0 +1,93 @@
+---
+import fs from "node:fs/promises";
+import path from "node:path";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../config/site.js";
+
+let dataset = null;
+try {
+  dataset = JSON.parse(await fs.readFile(path.resolve("public/data/dataset.json"), "utf8"));
+} catch {
+  dataset = null;
+}
+
+const models = dataset?.models ?? [];
+const tracked = models.length;
+const lastUpdate = dataset?.generatedAt ? dataset.generatedAt.slice(0, 10) : null;
+const snapshotCount = new Set(
+  models.flatMap((m) => (m.series.downloads ?? []).map((p) => p.date))
+).size;
+const gems = models.filter((m) => !m.famous && m.gemScore !== null).slice(0, 8);
+
+const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
+const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
+const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(2)}`);
+---
+
+<BaseLayout title={`${SITE.name} — ${SITE.tagline}`}>
+  <section class="hero">
+    <h1>El radar de las <span class="gem">joyas ocultas</span> de la IA</h1>
+    <p class="lede">
+      Todos los días tomamos una fotografía del mercado de LLMs. Con esas fotos acumuladas detectamos
+      modelos poco conocidos con la mejor relación calidad/precio y proyectamos hacia dónde van.
+    </p>
+    {lastUpdate && (
+      <p class="small muted">Última actualización: {lastUpdate}</p>
+    )}
+  </section>
+
+  <section class="kpis">
+    <div class="kpi"><div class="value">{tracked}</div><div class="label">modelos en el radar</div></div>
+    <div class="kpi"><div class="value">{snapshotCount || "—"}</div><div class="label">snapshots acumulados</div></div>
+    <div class="kpi"><div class="value">{gems.length}</div><div class="label">joyas en la mira</div></div>
+    <div class="kpi"><div class="value">100%</div><div class="label">datos abiertos y trazables</div></div>
+  </section>
+
+  <section class="card">
+    <h2>El mercado en un gráfico</h2>
+    <p class="small muted">
+      Cada punto es un modelo: precio por millón de tokens (eje horizontal, escala log) contra su
+      momentum semanal (eje vertical). Los rojos son modelos famosos; los verdes, candidatos a joya.
+      Necesitamos al menos 4 snapshots para calcular momentum.
+    </p>
+    <div id="scatter-momentum" class="chart-container"></div>
+  </section>
+
+  <section class="card">
+    <h2>Top momentum fuera del mainstream</h2>
+    {gems.length > 0 ? (
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Modelo</th>
+            <th>Score joya</th>
+            <th class="num">Momentum 28d</th>
+            <th class="num">$ / 1M in</th>
+            <th class="num">Downloads</th>
+          </tr>
+        </thead>
+        <tbody>
+          {gems.map((m) => (
+            <tr>
+              <td><a href={`/modelos/${m.urlSlug}/`}>{m.name}</a></td>
+              <td>{m.gemScore.toFixed(2)}</td>
+              <td class="num">{fmtPct(m.metrics.momentum)}</td>
+              <td class="num">{fmtPrice(m.promptUsdPerM)}</td>
+              <td class="num">{fmtNum(m.downloads)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p class="chart-empty">
+        El radar recién arranca: necesitamos unas semanas de snapshots para calcular momentum.
+        Mientras tanto, mirá <a href="/modelos/">el catálogo completo</a> o leé <a href="/metodologia/">la metodología</a>.
+      </p>
+    )}
+  </section>
+</BaseLayout>
+
+<script>
+  import { mountDashboard } from "../scripts/charts.js";
+  document.addEventListener("DOMContentLoaded", () => mountDashboard());
+</script>

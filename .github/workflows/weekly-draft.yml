@@ -1,0 +1,37 @@
+name: weekly-draft
+
+on:
+  schedule:
+    - cron: "0 9 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-draft
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generate weekly LinkedIn draft
+        run: node scripts/generate-weekly-draft.mjs
+      - name: Commit draft
+        run: |
+          git config user.name "gemas-ia-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add content/linkedin
+          if git diff --cached --quiet; then
+            echo "No draft to commit"
+          else
+            git commit -m "content: weekly draft $(date -u +%F)"
+            git push
+          fi

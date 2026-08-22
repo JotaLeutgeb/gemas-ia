@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  const posts = import.meta.glob("../../content/posts/*.md", { eager: true });
+  return Object.entries(posts).map(([file, mod]) => ({
+    params: { slug: file.split("/").pop().replace(/\.md$/, "") },
+    props: { mod },
+  }));
+}
+
+const { mod } = Astro.props;
+const { Content, frontmatter } = mod;
+---
+
+<BaseLayout title={`${frontmatter.title} — Blog Gemas IA`} description={frontmatter.description ?? frontmatter.title}>
+  <article class="prose">
+    <p class="small muted">{frontmatter.date}</p>
+    <Content />
+  </article>
+</BaseLayout>

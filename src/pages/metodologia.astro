@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Metodología — Gemas IA" description="Cómo recolectamos los datos y calculamos los scores de gemas-ia. Sin cajas negras.">
+  <section class="hero">
+    <h1>Metodología</h1>
+    <p class="lede">Todo lo que mostramos se puede auditar: cada número del sitio nace de un snapshot versionado en el repositorio.</p>
+  </section>
+
+  <div class="prose">
+    <section class="card">
+      <h2>De dónde vienen los datos</h2>
+      <p>
+        Un cron diario (GitHub Actions) consulta las APIs públicas de
+        <a href="https://openrouter.ai" rel="noopener">OpenRouter</a> (catálogo, precios, contexto) y
+        <a href="https://huggingface.co" rel="noopener">HuggingFace</a> (descargas, likes).
+        Cada respuesta se guarda como un archivo <code>YYYY-MM-DD.json</code> que se commitea al repo.
+      </p>
+      <blockquote>Ninguna de esas fuentes devuelve historia: las series temporales de este sitio son propias y crecen un punto por día. La historia ES este repositorio.</blockquote>
+      <p class="small muted">
+        Fase 2 planeada: Elo histórico (LMArena), índices de calidad (Artificial Analysis / Epoch AI)
+        para convertir el score en calidad-por-dólar real.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Cómo se identifica a cada modelo</h2>
+      <p>
+        Un mismo modelo aparece con IDs distintos por fuente (<code>Llama-3.3-70B</code> vs <code>llama-3-3-70b</code>).
+        Normalizamos cada ID quitando separadores y mayúsculas; si dos IDs caen en la misma forma normal, son el mismo modelo.
+        Los casos ambiguos se casan a mano en un archivo de overrides público.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Momentum</h2>
+      <p>El momentum mide qué tan rápido crece la serie de descargas diarias, ajustando una recta sobre el logaritmo de los valores:</p>
+      <div class="formula">
+        tasa(Nd) = pendiente_regresión(ln descargas ~ días) × N<br />
+        momentum = 0.6 × tasa(7d) + 0.4 × tasa(28d)
+      </div>
+      <ul>
+        <li>Mínimo 4 puntos en la ventana; con menos historia, no hay score (y así se muestra).</li>
+        <li>Los valores extremos (>3× la mediana local) se recortan antes de ajustar para no dejar que un pico invente una tendencia.</li>
+        <li>En la UI mostramos el equivalente aproximado en % semanal: e<sup>momentum</sup> − 1.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Score de joya</h2>
+      <p>Versión actual (v1): crecimiento normalizado × factor de escasez:</p>
+      <div class="formula">
+        factor_escasez = 0 si downloads > 5M · 0.5 si > 500k · 1 resto<br />
+        score_joya = momentum_normalizado(0..1) × factor_escasez
+      </div>
+      <p>
+        Los modelos famosos (lista pública y editable) están excluidos del ranking de joyas:
+        acá buscamos lo que casi nadie mira. Cuando incorporemos datos de calidad (fase 2),
+        el score pasará a ser <strong>calidad ÷ precio por categoría de tamaño</strong>, y el
+        momentum quedará como desempate.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Proyecciones</h2>
+      <p>
+        Extrapolamos la misma regresión log-lineal 90 y 180 días hacia adelante. La banda de confianza
+        es ±1 desviación estándar de los residuos del ajuste: cuanta más historia, más angosta la banda.
+        <strong>Jamás publicamos proyección sin su banda</strong>; el futuro es incierto y decirlo es parte del método.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Limitaciones honestas</h2>
+      <ul>
+        <li>Descargas ≠ uso real: es la mejor señal abierta disponible hoy, pero sesga hacia modelos open-weights.</li>
+        <li>Precios de OpenRouter cambian sin aviso; guardamos el valor observado cada día, no promedios.</li>
+        <li>El matching entre fuentes puede duplicar modelos hasta tener overrides manuales.</li>
+        <li>Con pocas semanas de historia, las bandas son anchas. Es esperable y lo decimos.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Atribución</h2>
+      <p>
+        Datos: <a href="https://openrouter.ai" rel="noopener">OpenRouter</a> y
+        <a href="https://huggingface.co/docs/hub/api" rel="noopener">HuggingFace Hub API</a>.
+        Proyecto abierto de joaqu — código, snapshots y este cálculo completo son públicos
+        en <a href="https://github.com/joaqu/gemas-ia" rel="noopener">GitHub</a>.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,22 @@
+{
+  "name": "gemas-ia",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "El radar de las joyas ocultas de la IA",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "collect": "node scripts/collect-all.mjs",
+    "build:dataset": "node scripts/build-dataset.mjs",
+    "draft": "node scripts/generate-weekly-draft.mjs"
+  },
+  "dependencies": {
+    "@observablehq/plot": "^0.6.17",
+    "astro": "^7.2.4"
+  }
+}

@@ -1,0 +1,58 @@
+---
+import fs from "node:fs/promises";
+import path from "node:path";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+let dataset = null;
+try {
+  dataset = JSON.parse(await fs.readFile(path.resolve("public/data/dataset.json"), "utf8"));
+} catch {
+  dataset = null;
+}
+const models = dataset?.models ?? [];
+const withDownloads = models.filter((m) => (m.downloads ?? 0) > 0);
+const shown = [...(withDownloads.length ? withDownloads : models)].slice(0, 200);
+
+const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
+const byProvider = new Map();
+for (const m of shown) {
+  const key = m.provider ?? "otros";
+  if (!byProvider.has(key)) byProvider.set(key, []);
+  byProvider.get(key).push(m);
+}
+const providers = [...byProvider.entries()].sort((a, b) => b[1].length - a[1].length);
+---
+
+<BaseLayout title="Catálogo de modelos — Gemas IA" description="Todos los LLMs en el radar de Gemas IA, con su evolución histórica y proyecciones.">
+  <section class="hero">
+    <h1>Catálogo de modelos</h1>
+    <p class="lede">
+      {models.length} modelos en el radar. Cada ficha incluye la serie histórica de descargas,
+      precios y una proyección con banda de confianza cuando hay datos suficientes.
+    </p>
+    {dataset?.generatedAt && <p class="small muted">Última actualización: {dataset.generatedAt.slice(0, 10)}</p>}
+  </section>
+
+  {providers.map(([provider, list]) => (
+    <section class="card">
+      <h2>{provider}</h2>
+      <div class="model-grid">
+        {list.map((m) => (
+          <a href={`/modelos/${m.urlSlug}/`} class="model-card">
+            <div class="name">{m.name}</div>
+            <div class="meta">
+              {m.downloads != null && <>📥 {fmtNum(m.downloads)} · </>}
+              {m.promptUsdPerM != null && <>💵 {m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}/1M`}</>}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  {models.length === 0 && (
+    <section class="card">
+      <p class="chart-empty">Todavía no se recolectaron datos. El pipeline corre automáticamente cada día.</p>
+    </section>
+  )}
+</BaseLayout>

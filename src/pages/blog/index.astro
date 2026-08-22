@@ -1,0 +1,34 @@
+---
+import fs from "node:fs/promises";
+import path from "node:path";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const postFiles = Object.entries(
+  import.meta.glob("../../content/posts/*.md", { eager: true })
+).map(([file, mod]) => ({
+  slug: file.split("/").pop().replace(/\.md$/, ""),
+  ...(mod.frontmatter ?? {}),
+}));
+
+const posts = postFiles.sort((a, b) => (a.date < b.date ? 1 : -1));
+---
+
+<BaseLayout title="Blog — Gemas IA" description="Análisis sobre el mercado de LLMs, joyas ocultas y forecasting con datos propios.">
+  <section class="hero">
+    <h1>Blog</h1>
+    <p class="lede">Análisis con tesis sobre el mercado de LLMs. Nada de crónicas de lanzamiento.</p>
+  </section>
+
+  {posts.length === 0 && (
+    <section class="card">
+      <p class="chart-empty">Todavía no hay posts publicados.</p>
+    </section>
+  )}
+
+  {posts.map((post) => (
+    <article class="card">
+      <h2><a href={`/blog/${post.slug}/`}>{post.title}</a></h2>
+      <p class="small muted">{post.date}{post.description ? ` · ${post.description}` : ""}</p>
+    </article>
+  ))}
+</BaseLayout>

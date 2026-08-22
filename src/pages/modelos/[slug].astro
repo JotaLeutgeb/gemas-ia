@@ -1,0 +1,90 @@
+---
+import fs from "node:fs/promises";
+import path from "node:path";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  let dataset = null;
+  try {
+    dataset = JSON.parse(await fs.readFile(path.resolve("public/data/dataset.json"), "utf8"));
+  } catch {
+    return [];
+  }
+  return (dataset.models ?? []).map((model) => ({ params: { slug: model.urlSlug }, props: { model } }));
+}
+
+const { model } = Astro.props;
+const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
+const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
+---
+
+<BaseLayout title={`${model.name} — Gemas IA`} description={`Evolución histórica, precios y proyección de ${model.name}.`}>
+  <section class="hero">
+    <h1>{model.name}</h1>
+    <p class="lede muted">
+      de {model.provider ?? "proveedor desconocido"} ·
+      {model.famous ? <span class="badge famous">modelo famoso</span> : <span class="badge gem">candidato a joya</span>}
+    </p>
+    <p class="small">
+      {model.links?.huggingface && <a href={model.links.huggingface} rel="noopener">HuggingFace ↗</a>}
+      {model.links?.openrouter && <> · <a href={model.links.openrouter} rel="noopener">OpenRouter ↗</a></>}
+    </p>
+  </section>
+
+  <section class="kpis">
+    <div class="kpi"><div class="value">{fmtNum(model.downloads)}</div><div class="label">descargas diarias</div></div>
+    <div class="kpi"><div class="value">{fmtNum(model.likes)}</div><div class="label">likes</div></div>
+    <div class="kpi"><div class="value">{model.promptUsdPerM == null ? "n/d" : `$${model.promptUsdPerM.toFixed(2)}`}</div><div class="label">$ / 1M entrada</div></div>
+    <div class="kpi"><div class="value">{model.completionUsdPerM == null ? "n/d" : `$${model.completionUsdPerM.toFixed(2)}`}</div><div class="label">$ / 1M salida</div></div>
+    <div class="kpi"><div class="value">{model.contextLength ? `${Math.round(model.contextLength / 1000)}k` : "n/d"}</div><div class="label">ventana de contexto</div></div>
+    <div class="kpi"><div class="value">{model.gemScore != null ? model.gemScore.toFixed(2) : "—"}</div><div class="label">score joya</div></div>
+  </section>
+
+  <section class="card">
+    <h2>Evolución y proyección</h2>
+    <p class="small muted">
+      Línea verde: descargas diarias observadas. Línea amarilla punteada: extrapolación log-lineal
+      a 180 días con su banda de confianza. Cuantos más puntos tengamos, más honesta es la banda.
+    </p>
+    <div id="chart-downloads" class="chart-container" data-model={JSON.stringify(model)}></div>
+  </section>
+
+  <section class="card">
+    <h2>Proyecciones</h2>
+    <table class="data">
+      <thead>
+        <tr><th>Métrica</th><th class="num">90 días</th><th class="num">180 días</th><th class="num">Momentum 28d</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Descargas diarias</td>
+          <td class="num">{model.metrics.forecastDownloads90d ? fmtNum(Math.round(model.metrics.forecastDownloads90d.center)) : "n/d"}</td>
+          <td class="num">{model.metrics.forecastDownloads180d ? fmtNum(Math.round(model.metrics.forecastDownloads180d.center)) : "n/d"}</td>
+          <td class="num" rowspan="1"></td>
+        </tr>
+        <tr>
+          <td>Banda inferior / superior (180d)</td>
+          <td class="num">—</td>
+          <td class="num">
+            {model.metrics.forecastDownloads180d
+              ? `${fmtNum(Math.round(model.metrics.forecastDownloads180d.low))} – ${fmtNum(Math.round(model.metrics.forecastDownloads180d.high))}`
+              : "n/d"}
+          </td>
+          <td class="num">{fmtPct(model.metrics.momentum)}</td>
+        </tr>
+      </tbody>
+    </table>
+    {(model.metrics.forecastDownloads90d === null) && (
+      <p class="small muted">Sin proyección todavía: se necesitan al menos 4 puntos en la serie.</p>
+    )}
+  </section>
+
+  <p class="small muted">
+    ¿Cómo se calculan estos números? Todo está abierto en la <a href="/metodologia/">metodología</a>.
+  </p>
+</BaseLayout>
+
+<script>
+  import { mountModelPage } from "../../scripts/charts.js";
+  document.addEventListener("DOMContentLoaded", () => mountModelPage());
+</script>

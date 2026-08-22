@@ -1,0 +1,71 @@
+---
+import fs from "node:fs/promises";
+import path from "node:path";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+let dataset = null;
+try {
+  dataset = JSON.parse(await fs.readFile(path.resolve("public/data/dataset.json"), "utf8"));
+} catch {
+  dataset = null;
+}
+
+const gems = (dataset?.models ?? [])
+  .filter((m) => !m.famous && m.gemScore !== null && (m.downloads ?? 0) <= 5_000_000)
+  .slice(0, 25);
+
+const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
+const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
+---
+
+<BaseLayout title="Ranking de joyas ocultas — Gemas IA" description="Los LLMs fuera del mainstream con mejor score de eficiencia y momentum, actualizados con datos propios.">
+  <section class="hero">
+    <h1>Ranking de <span class="gem">joyas ocultas</span></h1>
+    <p class="lede">
+      Modelos fuera del mainstream ordenados por su score: crecimiento sostenido × escasez.
+      Los modelos famosos (GPT, Claude, Gemini, DeepSeek...) están excluidos a propósito:
+      acá buscamos lo que casi nadie mira.
+    </p>
+  </section>
+
+  <section class="card">
+    {gems.length > 0 ? (
+      <table class="data">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Modelo</th>
+            <th class="num">Score joya</th>
+            <th class="num">Momentum 28d</th>
+            <th class="num">$ / 1M in</th>
+            <th class="num">Contexto</th>
+            <th class="num">Downloads</th>
+          </tr>
+        </thead>
+        <tbody>
+          {gems.map((m, i) => (
+            <tr>
+              <td>{i + 1}</td>
+              <td><a href={`/modelos/${m.urlSlug}/`}>{m.name}</a></td>
+              <td class="num">{m.gemScore.toFixed(2)}</td>
+              <td class="num">{fmtPct(m.metrics.momentum)}</td>
+              <td class="num">{m.promptUsdPerM == null ? "n/d" : m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}`}</td>
+              <td class="num">{m.contextLength ? `${Math.round(m.contextLength / 1000)}k` : "n/d"}</td>
+              <td class="num">{fmtNum(m.downloads)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p class="chart-empty">
+        El ranking necesita al menos una semana de snapshots acumulados para calcular momentum de forma confiable.
+        Volvé pronto o leé <a href="/metodologia/">cómo funciona el score</a>.
+      </p>
+    )}
+  </section>
+
+  <p class="small muted">
+    ¿Por qué no aparece tu modelo favorito? Puede ser que esté en la lista de famosos, que supere
+    los 5M de descargas, o que aún no tengamos suficientes puntos históricos. Todo está explicado en la <a href="/metodologia/">metodología</a>.
+  </p>
+</BaseLayout>
