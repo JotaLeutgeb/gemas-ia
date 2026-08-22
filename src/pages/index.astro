@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE, withBase } from "../config/site.js";
+import { loadPublishedEditions } from "../lib/ediciones.js";
 
 let dataset = null;
 try {
@@ -13,27 +14,38 @@ try {
 
 const models = dataset?.models ?? [];
 const tracked = models.length;
+const labCount = (dataset?.labs ?? []).length;
+const withQuality = models.filter((m) => m.quality !== null);
 const lastUpdate = dataset?.generatedAt ? dataset.generatedAt.slice(0, 10) : null;
 const snapshotCount = new Set(
-  models.flatMap((m) => (m.series.downloads ?? []).map((p) => p.date))
+  models.flatMap((m) => [
+    ...(m.series.usageTokens ?? []).map((p) => p.date),
+    ...(m.series.promptUsdPerM ?? []).map((p) => p.date),
+  ])
 ).size;
-const isGemEligible = (m) => !m.famous && m.gemScore !== null && (m.downloads ?? 0) <= 5_000_000;
-const gems = models.filter(isGemEligible);
-const eligibleGems = gems.length;
-const topGems = gems.slice(0, 8);
+const leaderboard = withQuality.slice(0, 12);
+const bestValue = [...models]
+  .filter((m) => m.valueScore !== null)
+  .sort((a, b) => a.valueRank - b.valueRank)
+  .slice(0, 5);
+const latestEdition = (await loadPublishedEditions())[0] ?? null;
 
-const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
 const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
-const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(2)}`);
+const fmtPrice = (p) => {
+  if (p == null) return "n/d";
+  if (p === 0) return "gratis";
+  return p >= 1 ? `$${p.toFixed(2)}` : `$${p.toFixed(3)}`;
+};
 ---
 
 <BaseLayout title={`${SITE.name} — ${SITE.tagline}`}>
-  <p class="kicker"><span class="gem">◆</span> Observatorio independiente de LLMs · edición diaria</p>
+  <p class="kicker"><span class="gem">◆</span> Observatorio independiente de LLMs frontera · edición diaria</p>
   <section class="hero">
-    <h1>El radar de las <em class="gem">joyas ocultas</em> de la IA</h1>
+    <h1>Calidad y precio entre los <em class="gem">modelos líderes</em></h1>
     <p class="lede">
-      Todos los días tomamos una fotografía del mercado de LLMs. Con esas fotos acumuladas detectamos
-      modelos poco conocidos con la mejor relación calidad/precio y proyectamos hacia dónde van.
+      Todos los días fotografiamos el catálogo de los labs que mandan — Anthropic, OpenAI, Google
+      DeepMind, DeepSeek, Qwen, Kimi, Z.ai, MiniMax, xAI — y lo cruzamos con los benchmarks de Epoch AI.
+      El resultado: quién rinde más, quién cuesta menos y qué líder te da la mejor calidad por dólar.
     </p>
     {lastUpdate && (
       <p class="small muted">Última actualización: {lastUpdate}</p>
@@ -41,53 +53,133 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
   </section>
 
   <section class="kpis">
-    <div class="kpi"><div class="value">{tracked}</div><div class="label">modelos en el radar</div></div>
+    <div class="kpi"><div class="value">{tracked}</div><div class="label">modelos de líderes comparados</div></div>
+    <div class="kpi"><div class="value">{labCount || "—"}</div><div class="label">labs trackeados</div></div>
+    <div class="kpi"><div class="value">{withQuality.length}</div><div class="label">con score de código</div></div>
     <div class="kpi"><div class="value">{snapshotCount || "—"}</div><div class="label">snapshots acumulados</div></div>
-    <div class="kpi"><div class="value">{eligibleGems}</div><div class="label">joyas en la mira</div></div>
-    <div class="kpi"><div class="value">100%</div><div class="label">datos abiertos y trazables</div></div>
   </section>
 
+  {latestEdition && (
+    <section class="card edition-teaser">
+      <p class="kicker">Edición semanal · {latestEdition.date}</p>
+      <h2><a href={withBase(`/ediciones/${latestEdition.slug}/`)}>{latestEdition.title}</a></h2>
+      {latestEdition.excerpt && <p class="small muted">{latestEdition.excerpt}…</p>}
+      <a class="small" href={withBase("/ediciones/")}>archivo de ediciones →</a>
+    </section>
+  )}
+
   <section class="card">
-    <h2>El mercado en un gráfico</h2>
+    <h2>La frontera eficiencia-precio para programar</h2>
     <p class="small muted">
-      Cada punto es un modelo: precio por millón de tokens (eje horizontal, escala log) contra su
-      momentum semanal (eje vertical). Los rojos son modelos famosos; los verdes, candidatos a joya.
-      Necesitamos al menos 4 snapshots para calcular momentum.
+      Cada punto es un modelo de un lab líder: precio mezclado por millón de tokens (75% entrada /
+      25% salida, escala log) contra su <strong>índice de código</strong> — SWE-bench Verified,
+      Terminal-Bench, Cursor Bench, SciCode y FrontierCode, normalizados a 0–100. La línea punteada
+      marca la <strong>frontera eficiente</strong>: nadie programa mejor por ese precio o menos.
     </p>
-    <div id="scatter-momentum" class="chart-container" role="img" aria-label="Gráfico de dispersión: precio por millón de tokens contra momentum semanal por modelo"></div>
+    <div id="scatter-quality" class="chart-container" role="img" aria-label="Gráfico de dispersión: precio mezclado contra índice de código, coloreado por laboratorio"></div>
   </section>
 
   <section class="card">
-    <h2>Top momentum fuera del mainstream</h2>
-    {gems.length > 0 ? (
+    <h2>Leaderboard de código</h2>
+    <p class="small muted">
+      Ranking por capacidad de código: media ponderada de SWE-bench Verified (40%), Terminal-Bench (25%),
+      Cursor Bench (15%), SciCode (15%) y FrontierCode (5%). Sin importar el costo. El índice general
+      de cada modelo vive en su ficha.
+    </p>
+    {leaderboard.length > 0 ? (
       <table class="data">
         <thead>
           <tr>
+            <th>#</th>
             <th>Modelo</th>
-            <th>Score joya</th>
-            <th class="num">Momentum 28d</th>
-            <th class="num">$ / 1M in</th>
-            <th class="num">Downloads</th>
+            <th>Lab</th>
+            <th class="num">Código</th>
+            <th class="num">$ / 1M mezclado</th>
+            <th class="num"># valor</th>
+            <th class="num">Contexto</th>
           </tr>
         </thead>
         <tbody>
-          {topGems.map((m) => (
+          {leaderboard.map((m) => (
             <tr>
-              <td><a href={withBase(`/modelos/${m.urlSlug}/`)}>{m.name}</a></td>
-              <td>{m.gemScore.toFixed(2)}</td>
-              <td class="num">{fmtPct(m.metrics.momentum)}</td>
-              <td class="num">{fmtPrice(m.promptUsdPerM)}</td>
-              <td class="num">{fmtNum(m.downloads)}</td>
+              <td>{m.performanceRank}</td>
+              <td><a href={withBase(`/modelos/${m.urlSlug}/`)}>{m.name}</a>{m.onEfficiencyFrontier && <> <span class="badge gem">frontera</span></>}</td>
+              <td class="muted">{m.labLabel}</td>
+              <td class="num">{m.quality.index.toFixed(1)}</td>
+              <td class="num">{fmtPrice(m.blendedUsdPerM)}</td>
+              <td class="num">{m.valueRank ?? "—"}</td>
+              <td class="num">{m.contextLength ? `${Math.round(m.contextLength / 1000)}k` : "n/d"}</td>
             </tr>
           ))}
         </tbody>
       </table>
     ) : (
       <p class="chart-empty">
-        El radar recién arranca: necesitamos unas semanas de snapshots para calcular momentum.
-        Mientras tanto, mirá <a href={withBase("/modelos/")}>el catálogo completo</a> o leé <a href={withBase("/metodologia/")}>la metodología</a>.
+        Todavía no hay scores de calidad matcheados. Mirá <a href={withBase("/modelos/")}>el catálogo</a> o leé <a href={withBase("/metodologia/")}>la metodología</a>.
       </p>
     )}
+    <p class="small"><a href={withBase("/joyas/")}>Ver el ranking completo de mejor valor →</a></p>
+  </section>
+
+  {bestValue.length > 0 && (
+    <section class="card">
+      <h2>Máxima calidad por dólar para programar</h2>
+      <p class="small muted">Entre todos los líderes con score de código, estos dan más capacidad de código por cada dólar de tokens.</p>
+      <table class="data">
+        <thead>
+          <tr><th>#</th><th>Modelo</th><th>Lab</th><th class="num">Código</th><th class="num">$ / 1M mezclado</th><th class="num">pts × $</th></tr>
+        </thead>
+        <tbody>
+          {bestValue.map((m) => (
+            <tr>
+              <td>{m.valueRank}</td>
+              <td><a href={withBase(`/modelos/${m.urlSlug}/`)}>{m.name}</a></td>
+              <td class="muted">{m.labLabel}</td>
+              <td class="num">{m.quality?.index?.toFixed(1) ?? "—"}</td>
+              <td class="num">{fmtPrice(m.blendedUsdPerM)}</td>
+              <td class="num">{m.valueScore.toLocaleString("es", { maximumFractionDigits: 0 })}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )}
+
+  <section class="card">
+    <h2>En movimiento</h2>
+    {(() => {
+      const mov = dataset?.movements;
+      if (!mov) return <p class="chart-empty">Movimientos disponibles desde la próxima corrida.</p>;
+      const altas = (mov.altas ?? []).slice(0, 4);
+      const drops = (mov.priceDrops ?? []).slice(0, 4);
+      if (altas.length === 0 && drops.length === 0)
+        return <p class="chart-empty">Sin lanzamientos ni cambios de precio en la ventana actual. Ver <a href={withBase("/movimientos/")}>movimientos</a>.</p>;
+      return (
+        <table class="data">
+          <thead>
+            <tr><th>Tipo</th><th>Modelo</th><th>Detalle</th><th>Fecha</th></tr>
+          </thead>
+          <tbody>
+            {altas.map((a) => (
+              <tr>
+                <td><span class="badge gem">alta</span></td>
+                <td><a href={withBase(`/modelos/${a.urlSlug}/`)}>{a.name}</a></td>
+                <td class="muted">lanzamiento detectado en {a.source}</td>
+                <td>{a.firstSeen}</td>
+              </tr>
+            ))}
+            {drops.map((p) => (
+              <tr>
+                <td><span class="badge famous">precio</span></td>
+                <td><a href={withBase(`/modelos/${p.urlSlug}/`)}>{p.name}</a></td>
+                <td class="muted">{fmtPrice(p.oldPrice)} → {fmtPrice(p.newPrice)} {p.field}</td>
+                <td>{p.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    })()}
   </section>
 
   <section class="health-strip" aria-label="Estado de recolección de datos">
@@ -95,11 +187,11 @@ const fmtPrice = (p) => (p == null ? "n/d" : p === 0 ? "gratis" : `$${p.toFixed(
       const ageDays = info.lastSnapshot
         ? Math.round((Date.parse(dataset.generatedAt) - Date.parse(info.lastSnapshot)) / 86400000)
         : null;
-      const state = info.ok === false ? "stale" : ageDays !== null && ageDays <= 1 ? "ok" : "unknown";
+      const state = info.ok === false ? "stale" : ageDays !== null && ageDays <= 7 ? "ok" : "unknown";
       const errorCount = (info.errors ?? []).length;
       return (
         <span class={state}>
-          {name}: {info.lastSnapshot ?? "sin snapshots"} · {info.modelsInSnapshot ?? "—"} modelos{errorCount > 0 ? ` · ${errorCount} errores` : ""}
+          {name}: {info.lastSnapshot ?? "sin snapshots"}{errorCount > 0 ? ` · ${errorCount} errores` : ""}
         </span>
       );
     })}

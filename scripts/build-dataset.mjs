@@ -2,7 +2,16 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ROOT, log, readJson, slugify, writeJson } from "./lib/util.js";
-import { momentum, normalizeScores, project, scarcityFactor } from "./lib/scoring.js";
+import { momentum, project } from "./lib/scoring.js";
+import { detectAltas, detectBajas, detectPriceDrops } from "./lib/movements.js";
+import { buildBenchmarkIndex, matchBenchmarks } from "./lib/benchmark-match.js";
+import { classifyLab, isExcludedSlug, loadLabs } from "./lib/labs.js";
+import {
+  blendedPrice,
+  computeCodeQuality,
+  efficiencyFrontier,
+  valueScore as computeValueScore,
+} from "./lib/quality.js";
 
 const SNAPSHOT_DIR = path.join(ROOT, "data", "snapshots");
 const OUTPUT = path.join(ROOT, "public", "data", "dataset.json");
@@ -45,39 +54,60 @@ async function loadModelMap() {
   }
 }
 
-async function loadFamousFragments() {
-  try {
-    const config = await readJson(path.join(ROOT, "config", "famous-models.json"));
-    return Array.isArray(config) ? config.map((f) => slugify(f)) : [];
-  } catch {
-    return [];
-  }
+function isCatalogVariant(id) {
+  return typeof id === "string" && id.includes(":");
 }
 
-function isFamous(aliases, famousFragments) {
-  return aliases.some((alias) => famousFragments.some((fragment) => alias.includes(fragment)));
+function hasTextOutput(record) {
+  if (typeof record.modality !== "string" || !record.modality.includes("->")) return true;
+  const output = record.modality.split("->")[1] ?? "";
+  return !/image|audio|video/i.test(output);
+}
+
+function canonicalUsageId(id) {
+  if (typeof id !== "string") return id;
+  return id
+    .replace(/:[a-z-]+$/, "")
+    .replace(/-((?:19|20)\d{6})$/, "")
+    .replace(/-((?:19|20)\d{2}-\d{2}-\d{2})$/, "");
 }
 
 export async function build() {
   const modelMap = await loadModelMap();
-  const famousFragments = await loadFamousFragments();
+  const { labs, excludeFragments } = await loadLabs();
+  if (labs.length === 0) log("build-dataset", "ADVERTENCIA: config/labs.json vacío o ilegible");
+
   const modelsByKey = new Map();
 
-  const ensureModel = (matchKey) => {
+  const ensureModel = (matchKey, labId) => {
     if (!modelsByKey.has(matchKey)) {
-      modelsByKey.set(matchKey, { matchKey, aliases: [], openrouter: {}, huggingface: {} });
+      modelsByKey.set(matchKey, {
+        matchKey,
+        aliases: [],
+        openrouter: {},
+        lab: labs.find((l) => l.id === labId) ?? null,
+        excluded: false,
+      });
     }
     return modelsByKey.get(matchKey);
   };
 
   for (const alias of Object.keys(modelMap)) {
     const canonical = modelMap[alias];
-    if (canonical && canonical !== alias) ensureModel(canonical).aliases.push(alias);
+    if (canonical && canonical !== alias) ensureModel(canonical, null);
   }
 
   const sourcesSummary = {};
+  const presenceOR = new Map();
+  const presenceORU = new Map();
+
+  function markPresence(presence, date, key) {
+    if (!presence.has(date)) presence.set(date, new Set());
+    presence.get(date).add(key);
+  }
 
   const orFiles = await listSnapshots("openrouter");
+  let skippedCatalog = 0;
   for (const file of orFiles) {
     const date = file.replace(".json", "");
     let snapshot;
@@ -88,9 +118,25 @@ export async function build() {
       continue;
     }
     for (const record of snapshot.models ?? []) {
-      const key = modelMap[slugify(record.id)] ?? slugify(record.id);
-      const model = ensureModel(key);
-      model.aliases.push(slugify(record.id));
+      if (isCatalogVariant(record.id) || !hasTextOutput(record)) {
+        skippedCatalog++;
+        continue;
+      }
+      const lab = classifyLab(labs, { id: canonicalUsageId(record.id) });
+      if (!lab) {
+        skippedCatalog++;
+        continue;
+      }
+      const canonicalId = canonicalUsageId(record.id);
+      const key = modelMap[slugify(canonicalId)] ?? slugify(canonicalId);
+      const model = ensureModel(key, lab.id);
+      model.aliases.push(slugify(record.id), slugify(canonicalId));
+      if (!model.excluded && isExcludedSlug(excludeFragments, [...new Set(model.aliases)])) {
+        model.excluded = true;
+        skippedCatalog++;
+      }
+      if (model.excluded) continue;
+      markPresence(presenceOR, date, key);
       const or = model.openrouter;
       or.id ??= record.id;
       or.name ??= record.name;
@@ -109,29 +155,33 @@ export async function build() {
     };
   }
 
-  const hfFiles = await listSnapshots("huggingface");
-  for (const file of hfFiles) {
+  const usageFiles = await listSnapshots("openrouter-usage");
+  const usageByDateModel = new Map();
+  for (const file of usageFiles) {
     const date = file.replace(".json", "");
     let snapshot;
     try {
-      snapshot = await readJson(path.join(SNAPSHOT_DIR, "huggingface", file));
+      snapshot = await readJson(path.join(SNAPSHOT_DIR, "openrouter-usage", file));
     } catch (error) {
-      log("build-dataset", `skipping corrupt snapshot ${file}: ${error.message}`);
+      log("build-dataset", `skipping corrupt usage snapshot ${file}: ${error.message}`);
       continue;
     }
     for (const record of snapshot.models ?? []) {
-      const key = modelMap[slugify(record.id)] ?? slugify(record.id);
-      const model = ensureModel(key);
-      model.aliases.push(slugify(record.id));
-      const hf = model.huggingface;
-      hf.id ??= record.id;
-      hf.provider ??= typeof record.id === "string" ? record.id.split("/")[0] : null;
-      hf.createdAt = minIso(hf.createdAt, record.createdAt);
-      if (record.downloads != null) (hf.downloadsSeries ||= []).push({ date, value: record.downloads });
-      if (record.likes != null) (hf.likesSeries ||= []).push({ date, value: record.likes });
-      if (record.trendingScore != null) hf.trendingScore = record.trendingScore;
+      const canonicalId = canonicalUsageId(record.id);
+      const lab = classifyLab(labs, { id: canonicalId });
+      if (!lab) continue;
+      const key = modelMap[slugify(canonicalId)] ?? slugify(canonicalId);
+      const model = ensureModel(key, lab.id);
+      model.aliases.push(slugify(canonicalId));
+      if (!model.excluded && isExcludedSlug(excludeFragments, [...new Set(model.aliases)])) {
+        model.excluded = true;
+      }
+      if (model.excluded) continue;
+      markPresence(presenceORU, date, key);
+      const cellKey = `${date}|${key}`;
+      usageByDateModel.set(cellKey, (usageByDateModel.get(cellKey) ?? 0) + (record.totalTokens ?? 0));
     }
-    sourcesSummary.huggingface = {
+    sourcesSummary.openrouterUsage = {
       lastSnapshot: date,
       modelsInSnapshot: snapshot._meta?.count ?? null,
       ok: (snapshot._meta?.errors ?? []).length === 0,
@@ -139,25 +189,23 @@ export async function build() {
       fetchedAt: snapshot._meta?.fetchedAt ?? null,
     };
   }
+  for (const [cellKey, total] of usageByDateModel) {
+    const [date, key] = cellKey.split("|");
+    const model = ensureModel(key);
+    (model.openrouter.usageTokensSeries ||= []).push({ date, value: total });
+  }
 
   const usedUrlSlugs = new Map();
   const models = [];
   for (const entry of modelsByKey.values()) {
-    const aliases = [...new Set(entry.aliases)];
-    const primaryId = entry.openrouter.id ?? entry.huggingface.id;
-    const displayName =
-      entry.openrouter.name ??
-      entry.huggingface.id ??
-      primaryId ??
-      entry.matchKey;
-    const provider = entry.openrouter.provider ?? entry.huggingface.provider ?? null;
-    const downloadsSeries = lastPerDate(entry.huggingface.downloadsSeries ?? []);
-    const likesSeries = lastPerDate(entry.huggingface.likesSeries ?? []);
+    if (entry.lab === null || entry.excluded) continue;
+    const primaryId = entry.openrouter.id ?? null;
+    const displayName = entry.openrouter.name ?? primaryId ?? entry.matchKey;
+    const usageSeries = lastPerDate(entry.openrouter.usageTokensSeries ?? []);
     const promptSeries = lastPerDate(entry.openrouter.promptUsdPerMSeries ?? []);
     const completionSeries = lastPerDate(entry.openrouter.completionUsdPerMSeries ?? []);
-    const latestDownloads = downloadsSeries.at(-1)?.value ?? null;
-    const totalLikes = likesSeries.at(-1)?.value ?? null;
-    const mom = momentum(downloadsSeries);
+    const promptUsdPerM = promptSeries.at(-1)?.value ?? null;
+    const completionUsdPerM = completionSeries.at(-1)?.value ?? null;
 
     let urlSlug = kebabSlug(primaryId || displayName) || entry.matchKey;
     if (usedUrlSlugs.has(urlSlug)) urlSlug = `${urlSlug}-${entry.matchKey.slice(-6)}`;
@@ -167,50 +215,171 @@ export async function build() {
       matchKey: entry.matchKey,
       urlSlug,
       name: displayName,
-      provider,
-      createdAt: minIso(entry.openrouter.createdAt, entry.huggingface.createdAt),
+      labId: entry.lab.id,
+      labLabel: entry.lab.label,
+      provider: entry.openrouter.provider ?? null,
+      createdAt: minIso(entry.openrouter.createdAt, null),
       contextLength: entry.openrouter.contextLength ?? null,
-      promptUsdPerM: promptSeries.at(-1)?.value ?? null,
-      completionUsdPerM: completionSeries.at(-1)?.value ?? null,
-      downloads: latestDownloads,
-      likes: totalLikes,
-      trendingScore: entry.huggingface.trendingScore ?? null,
-      famous: isFamous(aliases, famousFragments),
+      promptUsdPerM,
+      completionUsdPerM,
+      blendedUsdPerM: blendedPrice(promptUsdPerM, completionUsdPerM),
       links: buildLinks(entry),
       series: {
-        downloads: downloadsSeries,
-        likes: likesSeries,
+        usageTokens: usageSeries,
         promptUsdPerM: promptSeries,
         completionUsdPerM: completionSeries,
       },
       metrics: {
-        momentum: mom,
-        forecastDownloads90d: project(downloadsSeries, 90),
-        forecastDownloads180d: project(downloadsSeries, 180),
+        momentumUsage: momentum(usageSeries),
+        forecastUsage90d: project(usageSeries, 90),
+        forecastUsage180d: project(usageSeries, 180),
       },
+      quality: null,
+      benchmarks: [],
+      onEfficiencyFrontier: false,
+      performanceRank: null,
+      valueRank: null,
     });
   }
 
-  const momentumNorm = normalizeScores(models.map((m) => m.metrics.momentum));
-  for (const model of models) {
-    const factor = scarcityFactor(model.downloads);
-    const norm = momentumNorm(model.metrics.momentum);
-    model.metrics.scarcityFactor = factor;
-    model.gemScore = !model.famous && norm !== null ? round6(norm * factor) : null;
+  let benchmarkIndex = [];
+  let latestBenchFile = null;
+  try {
+    const benchDir = path.join(SNAPSHOT_DIR, "benchmarks");
+    const benchFiles = (await fs.readdir(benchDir)).filter((f) => f.endsWith(".json") && f !== ".gitkeep").sort();
+    latestBenchFile = benchFiles[benchFiles.length - 1] ?? null;
+    if (latestBenchFile) {
+      const benchSnapshot = await readJson(path.join(benchDir, latestBenchFile));
+      benchmarkIndex = buildBenchmarkIndex(benchSnapshot.tables);
+      sourcesSummary.benchmarks = {
+        lastSnapshot: latestBenchFile.replace(".json", ""),
+        ok: true,
+        errors: [],
+        fetchedAt: benchSnapshot._meta?.fetchedAt ?? null,
+      };
+    }
+  } catch (error) {
+    log("build-dataset", `benchmarks no disponibles: ${error.message}`);
+    sourcesSummary.benchmarks = { lastSnapshot: null, ok: false, errors: [error.message], fetchedAt: null };
   }
 
-  models.sort((a, b) => (b.gemScore ?? -1) - (a.gemScore ?? -1) || (b.downloads ?? 0) - (a.downloads ?? 0));
+  const byMatchKey = new Map(models.map((m) => [m.matchKey, m]));
+  const aliasesByKey = new Map([...modelsByKey.values()].map((e) => [e.matchKey, [...new Set(e.aliases)]]));
+
+  let matchedModels = 0;
+  let matchedScores = 0;
+  if (benchmarkIndex.length > 0) {
+    for (const model of models) {
+      const matches = matchBenchmarks({
+        aliases: aliasesByKey.get(model.matchKey) ?? [model.matchKey],
+        index: benchmarkIndex,
+      });
+      if (matches.length > 0) {
+        model.benchmarks = matches.sort((a, b) => a.benchmark.localeCompare(b.benchmark));
+        matchedModels++;
+        matchedScores += matches.length;
+      }
+      model.quality = computeCodeQuality(model.benchmarks);
+    }
+    log("build-dataset", `benchmarks: ${matchedScores} scores para ${matchedModels} modelos (${latestBenchFile})`);
+  }
+
+  for (const model of models) {
+    model.valueScore =
+      model.quality !== null ? computeValueScore(model.quality.index, model.blendedUsdPerM) : null;
+  }
+
+  const frontier = efficiencyFrontier(
+    models.map((m) => ({
+      matchKey: m.matchKey,
+      blendedUsdPerM: m.blendedUsdPerM,
+      qualityIndex: m.quality?.index ?? Number.NaN,
+    }))
+  );
+  for (const model of models) model.onEfficiencyFrontier = frontier.has(model.matchKey);
+
+  assignRanks(models, "performanceRank", (m) => m.quality?.index ?? null);
+  assignRanks(models, "valueRank", (m) => m.valueScore);
+
+  models.sort(
+    (a, b) =>
+      (b.quality?.index ?? -1) - (a.quality?.index ?? -1) ||
+      (b.valueScore ?? -1) - (a.valueScore ?? -1) ||
+      a.name.localeCompare(b.name)
+  );
+
+  const toMovement = (source, dateField) => (ev) => ({
+    urlSlug: byMatchKey.get(ev.matchKey)?.urlSlug ?? ev.matchKey,
+    name: byMatchKey.get(ev.matchKey)?.name ?? ev.matchKey,
+    labLabel: byMatchKey.get(ev.matchKey)?.labLabel ?? null,
+    source,
+    [dateField]: ev[dateField],
+    qualityIndex: byMatchKey.get(ev.matchKey)?.quality?.index ?? null,
+    promptUsdPerM: byMatchKey.get(ev.matchKey)?.promptUsdPerM ?? null,
+  });
+
+  const altas = [
+    ...detectAltas(presenceOR).map(toMovement("openrouter", "firstSeen")),
+    ...detectAltas(presenceORU).map(toMovement("openrouter-usage", "firstSeen")),
+  ]
+    .sort((a, b) => (a.firstSeen < b.firstSeen ? 1 : -1))
+    .slice(0, 50);
+
+  const bajas = detectBajas(presenceOR)
+    .map(toMovement("openrouter", "lastSeen"))
+    .sort((a, b) => (a.lastSeen < b.lastSeen ? 1 : -1))
+    .slice(0, 50);
+
+  const priceDrops = [];
+  for (const model of models) {
+    for (const field of ["promptUsdPerMSeries", "completionUsdPerMSeries"]) {
+      for (const event of detectPriceDrops(lastPerDate(model.series[field.replace(/Series$/, "")] ?? []))) {
+        priceDrops.push({
+          urlSlug: model.urlSlug,
+          name: model.name,
+          field: field === "promptUsdPerMSeries" ? "entrada" : "salida",
+          ...event,
+        });
+      }
+    }
+  }
+  priceDrops.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.pctChange - b.pctChange));
+  const movements = {
+    altas,
+    bajas: bajas.filter((b) => !altas.some((a) => a.urlSlug === b.urlSlug)),
+    priceDrops: priceDrops.slice(0, 50),
+  };
+
+  const labsSummary = {};
+  for (const model of models) {
+    labsSummary[model.labId] ??= { id: model.labId, label: model.labLabel, modelCount: 0 };
+    labsSummary[model.labId].modelCount++;
+  }
 
   const dataset = {
     generatedAt: new Date().toISOString(),
-    schemaVersion: 1,
+    schemaVersion: 3,
     sources: sourcesSummary,
-    totals: { models: models.length },
+    totals: { models: models.length, withQuality: models.filter((m) => m.quality !== null).length },
+    labs: Object.values(labsSummary).sort((a, b) => b.modelCount - a.modelCount),
+    movements,
     models,
   };
   await writeJson(OUTPUT, dataset);
-  log("build-dataset", `dataset written with ${models.length} models -> ${path.relative(ROOT, OUTPUT)}`);
+  log(
+    "build-dataset",
+    `dataset written with ${models.length} models (${skippedCatalog} registros de catálogo filtrados) -> ${path.relative(ROOT, OUTPUT)}`
+  );
   return dataset;
+}
+
+function assignRanks(models, rankField, metricFn) {
+  const eligible = models
+    .filter((m) => metricFn(m) !== null && Number.isFinite(metricFn(m)))
+    .sort((a, b) => metricFn(b) - metricFn(a));
+  eligible.forEach((model, i) => {
+    model[rankField] = i + 1;
+  });
 }
 
 function minIso(a, b) {
@@ -219,13 +388,8 @@ function minIso(a, b) {
   return a < b ? a : b;
 }
 
-function round6(n) {
-  return Math.round(n * 1e6) / 1e6;
-}
-
 function buildLinks(entry) {
   const links = {};
-  if (entry.huggingface.id) links.huggingface = `https://huggingface.co/${entry.huggingface.id}`;
   if (entry.openrouter.id) links.openrouter = `https://openrouter.ai/${entry.openrouter.id}`;
   return links;
 }

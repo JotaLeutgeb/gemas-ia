@@ -1,31 +1,23 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import * as Plot from "@observablehq/plot";
 import { Resvg } from "@resvg/resvg-js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATASET = path.join(ROOT, "public", "data", "dataset.json");
 const OUT_DIR = path.join(ROOT, "public", "charts");
-const DAY_MS = 86400000;
 const TOP_N = 10;
 
 const T = {
-  paper: "#f7f4ec",
-  ink: "#1c1a16",
-  inkSoft: "#5d5748",
-  inkFaint: "#8a8271",
-  rule: "#d9d2bf",
-  green: "#0e7255",
-  gold: "#96700f",
-  rust: "#ab4032",
+  paper: "#16140f",
+  ink: "#eae4d5",
+  inkSoft: "#b3ab97",
+  inkFaint: "#837b66",
+  rule: "#332e22",
+  green: "#4fbf94",
+  gold: "#d4a72c",
+  rust: "#e0725f",
 };
-
-function svgToString(svg) {
-  if (typeof svg === "string") return svg;
-  if (svg?.outerHTML) return svg.outerHTML;
-  throw new Error("Plot no devolvió SVG utilizable en Node");
-}
 
 async function savePng(svgString, outFile, width) {
   const resvg = new Resvg(svgString, {
@@ -36,62 +28,103 @@ async function savePng(svgString, outFile, width) {
   await fs.writeFile(outFile, resvg.render().asPng());
 }
 
-function isGemEligible(m) {
-  return !m.famous && m.gemScore !== null && (m.downloads ?? 0) <= 5_000_000;
-}
-
 function pickModels(dataset) {
-  const candidates = dataset.models.filter((m) => (m.series.downloads ?? []).length >= 2);
-  const gems = candidates.filter(isGemEligible).slice(0, TOP_N);
-  if (gems.length > 0) return gems;
-  return candidates.filter((m) => !m.famous).slice(0, TOP_N);
-}
-
-function seriesChart(model) {
-  const points = (model.series.downloads ?? []).map((p) => ({ date: new Date(p.date), value: p.value }));
-  const f90 = model.metrics.forecastDownloads90d;
-  const f180 = model.metrics.forecastDownloads180d;
-  const marks = [
-    Plot.areaY(points, { x: "date", y: "value", fill: T.green, fillOpacity: 0.14 }),
-    Plot.line(points, { x: "date", y: "value", stroke: T.green, strokeWidth: 2.5 }),
-  ];
-
-  if (f180 && points.length >= 4) {
-    const lastPoint = points[points.length - 1];
-    const projection = [lastPoint];
-    if (f90) projection.push({ date: new Date(lastPoint.date.getTime() + 90 * DAY_MS), value: f90.center });
-    projection.push({ date: new Date(lastPoint.date.getTime() + 180 * DAY_MS), value: f180.center });
-    marks.push(
-      Plot.line(projection, { x: "date", y: "value", stroke: T.gold, strokeWidth: 2, strokeDasharray: "5,5" })
-    );
-  }
-  return Plot.plot({
-    width: 1000,
-    height: 480,
-    margin: 48,
-    background: T.paper,
-    color: T.ink,
-    style: { fontFamily: "DejaVu Sans, Segoe UI, sans-serif", fontSize: "13px" },
-    y: { label: "descargas acumuladas", grid: true },
-    marks,
-  });
+  return dataset.models
+    .filter((m) => m.valueScore !== null && m.valueRank !== null)
+    .sort((a, b) => a.valueRank - b.valueRank)
+    .slice(0, TOP_N);
 }
 
 function esc(text) {
   return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+function truncate(text, max) {
+  return text.length > max ? `${text.slice(0, max - 1)}…` : text;
+}
+
+function fmtPrice(p) {
+  if (p == null) return "precio n/d";
+  if (p === 0) return "gratis";
+  return `$${p >= 1 ? p.toFixed(2) : p.toFixed(3)}/1M`;
+}
+
+function fmtTokens(value) {
+  if (!Number.isFinite(value)) return "n/d";
+  if (value >= 1e9) return `${(value / 1e9).toFixed(1)}B`;
+  if (value >= 1e6) return `${(value / 1e6).toFixed(1)}M`;
+  if (value >= 1e3) return `${Math.round(value / 1e3)}k`;
+  return String(Math.round(value));
+}
+
+function usageChart(model) {
+  const series = (model.series.usageTokens ?? []).map((p) => ({ date: p.date, value: Number(p.value) }));
+  if (series.length < 2) throw new Error("serie de uso insuficiente");
+
+  const W = 1000;
+  const H = 480;
+  const M = { top: 110, right: 72, bottom: 72, left: 108 };
+  const innerW = W - M.left - M.right;
+  const innerH = H - M.top - M.bottom;
+
+  const values = series.map((p) => p.value);
+  const maxValue = Math.max(...values);
+  const minValue = Math.min(0, ...values);
+  const span = maxValue - minValue || 1;
+
+  const x = (i) => M.left + (series.length === 1 ? innerW / 2 : (i / (series.length - 1)) * innerW);
+  const y = (v) => M.top + (1 - (v - minValue) / span) * innerH;
+
+  const linePoints = series.map((p, i) => `${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join(" ");
+  const baseY = y(minValue).toFixed(1);
+  const areaPath = `M ${M.left},${baseY} L ${linePoints.split(" ").join(" L ")} L ${(M.left + innerW).toFixed(1)},${baseY} Z`;
+
+  const gridLines = [];
+  for (let i = 0; i <= 4; i++) {
+    const value = minValue + (span * i) / 4;
+    const gy = y(value).toFixed(1);
+    gridLines.push(
+      `<line x1="${M.left}" y1="${gy}" x2="${W - M.right}" y2="${gy}" stroke="${T.rule}" stroke-width="1"/>`,
+      `<text x="${M.left - 14}" y="${Number(gy) + 5}" text-anchor="end" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="15" fill="${T.inkFaint}">${fmtTokens(value)}</text>`
+    );
+  }
+
+  const midIndex = Math.floor((series.length - 1) / 2);
+  const dateLabels = [
+    { label: series[0].date, anchor: "start", xPos: M.left },
+    { label: series[midIndex].date, anchor: "middle", xPos: M.left + innerW / 2 },
+    { label: series[series.length - 1].date, anchor: "end", xPos: W - M.right },
+  ]
+    .map(
+      ({ label, anchor, xPos }) =>
+        `<text x="${xPos}" y="${H - M.bottom + 36}" text-anchor="${anchor}" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="15" fill="${T.inkFaint}">${label}</text>`
+    )
+    .join("\n  ");
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <rect width="${W}" height="${H}" fill="${T.paper}"/>
+  <rect x="16" y="16" width="${W - 32}" height="${H - 32}" fill="none" stroke="${T.rule}" stroke-width="1"/>
+  <text x="${M.left}" y="56" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="16" letter-spacing="2" fill="${T.inkSoft}">◆ TOKENS POR DÍA · OPENROUTER</text>
+  <text x="${M.left}" y="88" font-family="Georgia, 'DejaVu Serif', serif" font-size="26" font-style="italic" fill="${T.ink}">${esc(truncate(model.name, 52))}</text>
+  ${gridLines.join("\n  ")}
+  <path d="${areaPath}" fill="${T.gold}" fill-opacity="0.14"/>
+  <polyline points="${linePoints}" fill="none" stroke="${T.gold}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="${x(series.length - 1).toFixed(1)}" cy="${y(values[values.length - 1]).toFixed(1)}" r="4" fill="${T.gold}"/>
+  ${dateLabels}
+</svg>`;
+}
+
 function weekCard(dataset, picks) {
   const dateLabel = dataset.generatedAt.slice(0, 10);
   const rows = picks.slice(0, 3).map((m, i) => {
-    const y = 300 + i * 96;
-    const price = m.promptUsdPerM == null ? "precio n/d" : m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}/1M`;
-    const score = m.gemScore !== null ? m.gemScore.toFixed(2) : "n/d";
+    const yPos = 300 + i * 96;
+    const quality = m.quality?.index != null ? `código ${m.quality.index.toFixed(1)}` : "código n/d";
+    const value = m.valueScore != null ? `${Math.round(m.valueScore).toLocaleString("es")} pts × $` : "n/d";
     return `
-    <text x="90" y="${y}" font-family="Georgia, 'DejaVu Serif', serif" font-size="44" fill="${T.gold}">${i + 1}.</text>
-    <text x="150" y="${y}" font-family="Georgia, 'DejaVu Serif', serif" font-size="34" font-weight="bold" fill="${T.ink}">${esc(truncate(m.name, 30))}</text>
-    <text x="1110" y="${y}" text-anchor="end" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="24" fill="${T.green}">score ${score}</text>
-    <text x="150" y="${y + 38}" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="19" fill="${T.inkSoft}">${esc(price)} · ${Math.round((m.contextLength ?? 0) / 1000)}k contexto</text>`;
+    <text x="90" y="${yPos}" font-family="Georgia, 'DejaVu Serif', serif" font-size="44" fill="${T.gold}">${i + 1}.</text>
+    <text x="150" y="${yPos}" font-family="Georgia, 'DejaVu Serif', serif" font-size="34" font-weight="bold" fill="${T.ink}">${esc(truncate(m.name, 30))}</text>
+    <text x="1110" y="${yPos}" text-anchor="end" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="24" fill="${T.green}">${esc(value)}</text>
+    <text x="150" y="${yPos + 38}" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="19" fill="${T.inkSoft}">${esc(truncate(m.labLabel ?? "", 24))} · ${esc(fmtPrice(m.blendedUsdPerM))} · ${quality}</text>`;
   }).join("\n");
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
@@ -101,16 +134,12 @@ function weekCard(dataset, picks) {
   <text x="80" y="105" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="17" letter-spacing="3" fill="${T.inkSoft}">◆ GEMAS IA · OBSERVATORIO DE LLMS</text>
   <text x="1120" y="105" text-anchor="end" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="17" fill="${T.inkFaint}">${dateLabel}</text>
   <line x1="80" y1="128" x2="1120" y2="128" stroke="${T.ink}" stroke-width="2"/>
-  <text x="80" y="205" font-family="Georgia, 'DejaVu Serif', serif" font-size="52" font-style="italic" fill="${T.ink}">Las joyas ocultas de la semana</text>
-  <text x="80" y="250" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="18" fill="${T.inkSoft}">mejor tendencia · fuera del mainstream · datos propios</text>
+  <text x="80" y="205" font-family="Georgia, 'DejaVu Serif', serif" font-size="50" font-style="italic" fill="${T.ink}">La frontera calidad-precio de la semana</text>
+  <text x="80" y="250" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="18" fill="${T.inkSoft}">modelos líderes · máxima calidad por dólar · datos propios</text>
   ${rows}
   <line x1="80" y1="560" x2="1120" y2="560" stroke="${T.rule}" stroke-width="1"/>
   <text x="80" y="588" font-family="'DejaVu Sans Mono', Consolas, monospace" font-size="16" fill="${T.inkSoft}">metodología abierta → jotaleutgeb.github.io/gemas-ia</text>
 </svg>`;
-}
-
-function truncate(text, max) {
-  return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 
 export async function generateAssets() {
@@ -127,9 +156,8 @@ export async function generateAssets() {
   let generated = 0;
 
   for (const model of picks) {
-    if ((model.series.downloads ?? []).length < 2) continue;
     try {
-      const svg = svgToString(seriesChart(model));
+      const svg = usageChart(model);
       await fs.writeFile(path.join(OUT_DIR, `${model.urlSlug}.svg`), svg, "utf8");
       await savePng(svg, path.join(OUT_DIR, `${model.urlSlug}.png`), 1000);
       generated++;

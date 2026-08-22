@@ -1,0 +1,61 @@
+---
+import fs from "node:fs/promises";
+import path from "node:path";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../config/site.js";
+import { renderEditionHtml } from "../../lib/ediciones.js";
+
+export async function getStaticPaths() {
+  const { readEditions } = await import("../../lib/ediciones.js");
+  const editions = await readEditions({ includeDrafts: false });
+  return editions.map((edition) => ({ params: { slug: edition.slug }, props: { edition } }));
+}
+
+const { edition } = Astro.props;
+const html = renderEditionHtml(edition.body, import.meta.env.BASE_URL.replace(/\/$/, "") + "/");
+
+let dataset = null;
+try {
+  dataset = JSON.parse(await fs.readFile(path.resolve("public/data/dataset.json"), "utf8"));
+} catch {}
+const gemModels = edition.gems
+  .map((slug) => dataset?.models?.find((m) => m.urlSlug === slug))
+  .filter(Boolean);
+const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://jotaleutgeb.github.io/gemas-ia/ediciones/${edition.slug}/`)}`;
+---
+
+<BaseLayout title={`${edition.title} — Gemas IA`} description={`Edición semanal del observatorio: ${edition.title}`}>
+  <p class="kicker"><span class="gem">◆</span> Edición semanal · {edition.date}</p>
+  <section class="hero">
+    <h1>{edition.title}</h1>
+  </section>
+
+  <div class="prose edition-body" set:html={html} />
+
+  {gemModels.length > 0 && (
+    <section class="card">
+      <h2>Los protagonistas</h2>
+      <div class="model-grid">
+        {gemModels.map((m) => (
+          <a href={withBase(`/modelos/${m.urlSlug}/`)} class="model-card">
+            <div class="name">{m.name}</div>
+            <div class="meta">
+              calidad {m.quality?.index?.toFixed(1) ?? "—"} · {m.promptUsdPerM != null ? (m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}/1M`) : "precio n/d"}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="card share-block">
+    <p>
+      Esta edición acompaña al post en LinkedIn. El análisis completo, los gráficos y las fichas de cada modelo viven acá.
+    </p>
+    <p class="small">
+      <a href={shareUrl} rel="noopener">Compartir esta edición en LinkedIn ↗</a> ·
+      <a href={withBase("/joyas/")}>ver el ranking actual</a> ·
+      <a href={withBase("/metodologia/")}>metodología</a>
+    </p>
+  </section>
+</BaseLayout>

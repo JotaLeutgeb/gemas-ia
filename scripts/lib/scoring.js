@@ -82,10 +82,3 @@ export function normalizeScores(values) {
   if (max === min) return () => 0.5;
   return (v) => (v === null || !Number.isFinite(v) ? null : (v - min) / (max - min));
 }
-
-export function scarcityFactor(totalDownloads) {
-  if (totalDownloads == null) return 1;
-  if (totalDownloads > 5_000_000) return 0;
-  if (totalDownloads > 500_000) return 0.5;
-  return 1;
-}

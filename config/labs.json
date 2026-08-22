@@ -1,0 +1,73 @@
+{
+  "_docs": "Whitelist del universo SOTA (pivote 2026-08-22): solo modelos de labs líderes. Un modelo entra si su id de OpenRouter empieza con alguno de los prefixes de un lab. Los fragments de exclusion remueven generaciones muertas. Agregar un lab nuevo = agregar una entrada aca.",
+  "labs": [
+    {
+      "id": "anthropic",
+      "label": "Anthropic",
+      "prefixes": ["anthropic/"]
+    },
+    {
+      "id": "google",
+      "label": "Google DeepMind",
+      "prefixes": ["google/"]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "prefixes": ["openai/"]
+    },
+    {
+      "id": "deepseek",
+      "label": "DeepSeek",
+      "prefixes": ["deepseek/"]
+    },
+    {
+      "id": "alibaba",
+      "label": "Alibaba (Qwen)",
+      "prefixes": ["qwen/", "alibaba/"]
+    },
+    {
+      "id": "moonshot",
+      "label": "Moonshot AI (Kimi)",
+      "prefixes": ["moonshotai/", "moonshot/"]
+    },
+    {
+      "id": "zhipu",
+      "label": "Z.ai (Zhipu)",
+      "prefixes": ["z-ai/", "zhipu/", "thudm/"]
+    },
+    {
+      "id": "minimax",
+      "label": "MiniMax",
+      "prefixes": ["minimax/"]
+    },
+    {
+      "id": "xai",
+      "label": "xAI",
+      "prefixes": ["x-ai/", "xai/"]
+    }
+  ],
+  "_excludeDocs": "Fragments matcheados por substring contra el slug normalizado del id completo (slugify sin separadores). Solo generaciones muertas: el objetivo es que los lanzamientos nuevos entren solos.",
+  "excludeSlugFragments": [
+    "gpt35",
+    "gpt4",
+    "openaio1",
+    "openaio3mini",
+    "claude2",
+    "claude3",
+    "gemini10",
+    "gemini15",
+    "gemini20",
+    "gemma2",
+    "gemma3",
+    "qwen25",
+    "qwq",
+    "qwenplus",
+    "qwenturbo",
+    "deepseekchat",
+    "deepseekr1",
+    "minimax01",
+    "minimaxm1",
+    "glm45"
+  ]
+}

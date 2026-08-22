@@ -1,9 +1,8 @@
 import { run as collectOpenRouter } from "./collect-openrouter.mjs";
-import { run as collectHuggingFace } from "./collect-huggingface.mjs";
 
 const force = process.argv.includes("--force");
 const results = [];
-for (const collector of [collectOpenRouter, collectHuggingFace]) {
+for (const collector of [collectOpenRouter]) {
   results.push(await collector({ force }));
 }
 const succeeded = results.filter((r) => r.ok);

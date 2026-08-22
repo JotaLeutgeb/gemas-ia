@@ -11,39 +11,42 @@ try {
   dataset = null;
 }
 const models = dataset?.models ?? [];
-const withDownloads = models.filter((m) => (m.downloads ?? 0) > 0);
-const shown = [...(withDownloads.length ? withDownloads : models)].slice(0, 200);
+const labOrder = new Map((dataset?.labs ?? []).map((l, i) => [l.id, i]));
 
-const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
-const byProvider = new Map();
-for (const m of shown) {
-  const key = m.provider ?? "otros";
-  if (!byProvider.has(key)) byProvider.set(key, []);
-  byProvider.get(key).push(m);
+const byLab = new Map();
+for (const m of models) {
+  const key = m.labId ?? "otros";
+  if (!byLab.has(key)) byLab.set(key, { id: key, label: m.labLabel ?? key, models: [] });
+  byLab.get(key).models.push(m);
 }
-const providers = [...byProvider.entries()].sort((a, b) => b[1].length - a[1].length);
+const groups = [...byLab.values()].sort(
+  (a, b) => (labOrder.get(a.id) ?? 99) - (labOrder.get(b.id) ?? 99)
+);
+
+const fmtPrice = (p) => (p == null ? null : p === 0 ? "gratis" : p >= 1 ? `$${p.toFixed(2)}/1M` : `$${p.toFixed(3)}/1M`);
 ---
 
-<BaseLayout title="Catálogo de modelos — Gemas IA" description="Todos los LLMs en el radar de Gemas IA, con su evolución histórica y proyecciones.">
+<BaseLayout title="Modelos por laboratorio — Gemas IA" description="La línea completa de cada lab líder en el radar de Gemas IA: calidad, precios y contexto.">
   <section class="hero">
-    <h1>Catálogo de modelos</h1>
+    <h1>Modelos por <span class="gem">laboratorio</span></h1>
     <p class="lede">
-      {models.length} modelos en el radar. Cada ficha incluye la serie histórica de descargas,
-      precios y una proyección con banda de confianza cuando hay datos suficientes.
+      {models.length} modelos de los labs líderes comparados. Cada ficha incluye benchmarks,
+      historial de precios y uso real cuando hay datos suficientes.
     </p>
     {dataset?.generatedAt && <p class="small muted">Última actualización: {dataset.generatedAt.slice(0, 10)}</p>}
   </section>
 
-  {providers.map(([provider, list]) => (
+  {groups.map(({ label, models: list }) => (
     <section class="card">
-      <h2>{provider}</h2>
+      <h2>{label} <span class="muted small">({list.length})</span></h2>
       <div class="model-grid">
         {list.map((m) => (
           <a href={withBase(`/modelos/${m.urlSlug}/`)} class="model-card">
             <div class="name">{m.name}</div>
             <div class="meta">
-              {m.downloads != null && <>📥 {fmtNum(m.downloads)} · </>}
-              {m.promptUsdPerM != null && <>💵 {m.promptUsdPerM === 0 ? "gratis" : `$${m.promptUsdPerM.toFixed(2)}/1M`}</>}
+              {m.quality != null && <>◆ {m.quality.index.toFixed(1)} · </>}
+              {fmtPrice(m.promptUsdPerM) != null && <>💵 {fmtPrice(m.promptUsdPerM)} · </>}
+              {m.contextLength ? `${Math.round(m.contextLength / 1000)}k` : "contexto n/d"}
             </div>
           </a>
         ))}

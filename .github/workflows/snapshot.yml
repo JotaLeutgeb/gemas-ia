@@ -26,6 +26,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run collect
+      - name: Collect OpenRouter usage
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: npm run collect:usage
       - run: npm run build:dataset
       - run: npm run charts
       - run: npm test

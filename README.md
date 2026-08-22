@@ -1,11 +1,11 @@
 # gemas-ia
 
-> El radar de las joyas ocultas de la IA.
+> Calidad y precio entre los modelos líderes de la IA.
 
-Observatorio estático de modelos LLM que persigue tres cosas:
+Comparador estático de LLMs frontera que persigue tres cosas:
 
-1. **Encontrar joyas ocultas**: modelos poco conocidos con la mejor relación crecimiento/escasez del mercado.
-2. **Proyectar su evolución**: forecasting con bandas de confianza sobre series temporales propias (snapshots diarios versionados en este mismo repo).
+1. **Comparar solo a los líderes**: Anthropic, OpenAI, Google DeepMind, DeepSeek, Alibaba (Qwen), Moonshot (Kimi), Z.ai (Zhipu), MiniMax y xAI — nada de catálogos infinitos.
+2. **Medir eficiencia para programar**: índice de código (SWE-bench Verified, Terminal-Bench, Cursor Bench, SciCode y FrontierCode) contra precio mezclado por millón de tokens; ranking de mejor valor, frontera eficiente de Pareto y leaderboard absoluto de código.
 3. **Contar la historia**: cada semana, un análisis listo para LinkedIn con cifras citables e imágenes generadas automáticamente.
 
 [![deploy](https://github.com/JotaLeutgeb/gemas-ia/actions/workflows/deploy.yml/badge.svg)](https://github.com/JotaLeutgeb/gemas-ia/actions/workflows/deploy.yml)
@@ -13,11 +13,11 @@ Observatorio estático de modelos LLM que persigue tres cosas:
 
 ## Cómo funciona
 
-Un cron diario consulta las APIs públicas de [OpenRouter](https://openrouter.ai) y [HuggingFace](https://huggingface.co), guarda un snapshot inmutable y regenera el dataset que alimenta el sitio. La historia se acumula sola: hoy es un punto, en tres meses es una tendencia, en un año es un mapa del mercado.
+Un cron diario consulta las APIs públicas de [OpenRouter](https://openrouter.ai) (catálogo, precios y tokens reales procesados), guarda un snapshot inmutable y regenera el dataset que alimenta el sitio. Los benchmarks vienen del hub de [Epoch AI](https://epoch.ai/benchmarks), refrescado semanalmente. La historia se acumula sola: hoy es un punto, en tres meses es una tendencia, en un año es el mapa de la guerra de precios entre los grandes.
 
-- **Dashboard**: panorama del mercado (precio vs momentum), estado de recolección en vivo.
-- **Ranking de joyas**: modelos fuera del radar mainstream ordenados por score.
-- **Fichas por modelo**: evolución histórica y proyección a 90/180 días con banda de confianza.
+- **Dashboard**: scatter calidad vs precio con la frontera eficiente marcada, leaderboard de calidad, movimientos.
+- **Mejor valor**: qué líder da más puntos de calidad por dólar (`calidad ÷ precio mezclado`).
+- **Modelos por lab**: la línea completa de cada laboratorio con fichas individuales (benchmarks, historial de precios, uso real).
 - **Metodología**: cómo se calcula todo, sin cajas negras, con aviso legal.
 - **Blog**: análisis con tesis, no crónicas de lanzamiento.
 
@@ -30,7 +30,7 @@ Astro 7 + Observable Plot + GitHub Actions + resvg (export PNG para LinkedIn). S
 ```bash
 npm install
 npm run dev        # sitio local
-npm test           # 21 tests (scoring + dataset)
+npm test           # 42 tests (scoring + labs + quality + dataset)
 npm run pipeline   # collect + dataset + imágenes
 ```
 
