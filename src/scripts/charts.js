@@ -111,6 +111,24 @@ export function renderDownloadsSeries(el, model) {
   return true;
 }
 
+export function renderUsageSeries(el, model) {
+  const series = (model.series.usageTokens ?? []).map((p) => ({ date: new Date(p.date), value: p.value }));
+  if (series.length < 2) return false;
+  clear(el);
+  const marks = [
+    Plot.areaY(series, { x: "date", y: "value", fill: THEME.gold, fillOpacity: 0.14 }),
+    Plot.line(series, { x: "date", y: "value", stroke: THEME.gold, strokeWidth: 2 }),
+  ];
+  el.append(
+    Plot.plot({
+      ...plotBase(el),
+      y: { label: "tokens por día (OpenRouter)", grid: true },
+      marks,
+    })
+  );
+  return true;
+}
+
 export async function mountDashboard() {
   const el = document.getElementById("scatter-momentum");
   if (!el) return;
@@ -121,13 +139,23 @@ export async function mountDashboard() {
 }
 
 export async function mountModelPage() {
-  const el = document.getElementById("chart-downloads");
-  if (!el || !el.dataset.model) return;
-  let model;
-  try {
-    model = JSON.parse(el.dataset.model);
-  } catch {
-    return renderEmpty(el);
+  const downloadsEl = document.getElementById("chart-downloads");
+  if (downloadsEl?.dataset.model) {
+    let model;
+    try {
+      model = JSON.parse(downloadsEl.dataset.model);
+    } catch {
+      model = null;
+    }
+    if (!model || !renderDownloadsSeries(downloadsEl, model)) {
+      renderEmpty(downloadsEl, "Aún no hay serie histórica para este modelo.");
+    }
   }
-  if (!renderDownloadsSeries(el, model)) renderEmpty(el, "Aún no hay serie histórica para este modelo.");
+  const usageEl = document.getElementById("chart-usage");
+  if (usageEl?.dataset.model) {
+    try {
+      const model = JSON.parse(usageEl.dataset.model);
+      if (!renderUsageSeries(usageEl, model)) renderEmpty(usageEl);
+    } catch {}
+  }
 }

@@ -87,6 +87,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </ul>
     </section>
 
+    <section class="card" id="benchmarks">
+      <p class="kicker">§ 08 · Desempeño</p>
+      <h2>Benchmarks</h2>
+      <p>
+        Los scores de desempeño vienen del <a href="https://epoch.ai/benchmarks" rel="noopener">Benchmarking Hub de Epoch AI</a>,
+        que unifica evaluaciones propias (GPQA Diamond, MATH L5, FrontierMath, SWE-bench Verified...)
+        con resultados externos reportados (MMLU, BBH, HLE y decenas más). Refrescamos semanalmente.
+      </p>
+      <ul>
+        <li>El matching entre "Model version" de Epoch y nuestros slugs es heurístico (normalización + substring bidireccional). Es conservador: si no hay match claro, el score no se muestra.</li>
+        <li>Los benchmarks se saturan: MMLU ya no discrimina modelos frontera. Por eso priorizamos GPQA, SWE-bench y MATH L5 en las fichas.</li>
+        <li>Un score alto no reemplaza probar el modelo en TU tarea. Los benchmarks miden benchmarks.</li>
+      </ul>
+    </section>
+
     <section class="card" id="aviso-legal">
       <p class="kicker">§ 07 · Atribución y aviso legal</p>
       <h2>Atribución y aviso legal</h2>

@@ -17,6 +17,26 @@ export async function getStaticPaths() {
 const { model } = Astro.props;
 const fmtPct = (v) => (Number.isFinite(v) ? `${(Math.exp(v) - 1) >= 0 ? "+" : ""}${((Math.exp(v) - 1) * 100).toFixed(1)}%` : "n/d");
 const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
+
+const KEY_BENCHMARKS = ["epoch_capabilities_index", "gpqa_diamond", "swe_bench_verified", "math_level_5", "hle", "mmlu_external", "terminalbench"];
+const BENCH_LABELS = {
+  epoch_capabilities_index: "Epoch Capabilities Index",
+  gpqa_diamond: "GPQA Diamond (ciencia nivel PhD)",
+  swe_bench_verified: "SWE-bench Verified (issues reales)",
+  math_level_5: "MATH Level 5 (competición)",
+  hle: "Humanity's Last Exam",
+  mmlu_external: "MMLU (conocimiento general)",
+  terminalbench: "Terminal-Bench (agente terminal)",
+};
+const benchmarks = (model.benchmarks ?? [])
+  .slice()
+  .sort((a, b) => {
+    const ia = KEY_BENCHMARKS.indexOf(a.benchmark);
+    const ib = KEY_BENCHMARKS.indexOf(b.benchmark);
+    return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+  });
+const hasBenchmarks = benchmarks.length > 0;
+const hasUsage = (model.series.usageTokens ?? []).length >= 2;
 ---
 
 <BaseLayout title={`${model.name} — Gemas IA`} description={`Evolución histórica, precios y proyección de ${model.name}.`}>
@@ -44,11 +64,55 @@ const fmtNum = (n) => (n == null ? "n/d" : n.toLocaleString("es"));
   <section class="card">
     <h2>Evolución y proyección</h2>
     <p class="small muted">
-      Línea verde: descargas diarias observadas. Línea amarilla punteada: extrapolación log-lineal
+      Línea verde: descargas acumuladas observadas. Línea amarilla punteada: extrapolación log-lineal
       a 180 días con su banda de confianza. Cuantos más puntos tengamos, más honesta es la banda.
     </p>
     <div id="chart-downloads" class="chart-container" role="img" aria-label="Serie histórica de descargas acumuladas con proyección a 180 días" data-model={JSON.stringify(model)}></div>
+    {hasUsage && (
+      <>
+        <h2 style="margin-top:2rem">Uso real (tokens por día en OpenRouter)</h2>
+        <p class="small muted">
+          Descargas mide curiosidad; tokens miden uso genuino. Esta serie viene del Data API
+          público de OpenRouter (top diario por volumen).
+        </p>
+        <div id="chart-usage" class="chart-container" role="img" aria-label="Serie histórica de tokens procesados por día" data-model={JSON.stringify(model)}></div>
+      </>
+    )}
   </section>
+
+  {hasBenchmarks && (
+    <section class="card">
+      <h2>Desempeño</h2>
+      <p class="section-note">
+        Scores compilados por Epoch AI (evaluaciones propias y fuentes externas agregadas),
+        matcheados heurísticamente al modelo. Verificá siempre la fuente antes de citar un número.
+      </p>
+      <table class="data">
+        <thead>
+          <tr><th>Benchmark</th><th class="num">Score</th><th style="width:34%"></th><th>Fuente</th></tr>
+        </thead>
+        <tbody>
+          {benchmarks.slice(0, 14).map((b) => {
+            const isIndex = b.benchmark === "epoch_capabilities_index";
+            const display = isIndex ? b.score.toFixed(1) : (Math.min(b.score, 1) * 100).toFixed(1);
+            const pct = Math.max(0, Math.min(isIndex ? b.score / 2 : b.score, 1)) * 100;
+            return (
+              <tr>
+                <td>{BENCH_LABELS[b.benchmark] ?? b.benchmark}</td>
+                <td class="num">{display}</td>
+                <td><span class="scorebar" aria-hidden="true"><span style={`width:${pct}%`}></span></span></td>
+                <td>{b.source === "epoch" ? "Epoch AI" : "externo"}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {benchmarks.length > 14 && (
+        <p class="small muted">+{benchmarks.length - 14} benchmarks más en el dataset crudo.</p>
+      )}
+      <p class="small muted">ECI es un índice compuesto (no un porcentaje); el resto se muestra en escala 0–100.</p>
+    </section>
+  )}
 
   <section class="card">
     <h2>Proyecciones</h2>

@@ -29,21 +29,28 @@ export async function readJson(filePath) {
 }
 
 export async function fetchJson(url, { retries = 3, timeoutMs = 30000, headers = {} } = {}) {
+  const buffer = await fetchBuffer(url, { retries, timeoutMs, headers });
+  return JSON.parse(new TextDecoder().decode(buffer));
+}
+
+export async function fetchJsonBuffer(url, opts = {}) {
+  return fetchBuffer(url, opts);
+}
+
+async function fetchBuffer(url, { retries = 3, timeoutMs = 30000, headers = {} } = {}) {
   let lastError;
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const response = await fetch(url, {
         headers: { "User-Agent": "gemas-ia/0.1 (+https://github.com/JotaLeutgeb/gemas-ia)", ...headers },
         signal: AbortSignal.timeout(timeoutMs),
+        redirect: "follow",
       });
       if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
-      return await response.json();
+      return new Uint8Array(await response.arrayBuffer());
     } catch (error) {
       lastError = error;
-      if (attempt < retries) {
-        const waitMs = attempt * 2000;
-        await new Promise((resolve) => setTimeout(resolve, waitMs));
-      }
+      if (attempt < retries) await new Promise((resolve) => setTimeout(resolve, attempt * 2000));
     }
   }
   throw lastError;

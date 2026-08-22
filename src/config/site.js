@@ -8,6 +8,7 @@ export const SITE = {
   sources: [
     { label: "OpenRouter", url: "https://openrouter.ai" },
     { label: "HuggingFace", url: "https://huggingface.co" },
+    { label: "Epoch AI", url: "https://epoch.ai/benchmarks" },
   ],
 };
 
