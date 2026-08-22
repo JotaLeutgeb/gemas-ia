@@ -1,3 +1,5 @@
+const SCALE_THRESHOLD = 1.5;
+
 export function normalizeBenchModel(version) {
   const base = String(version)
     .toLowerCase()
@@ -5,13 +7,29 @@ export function normalizeBenchModel(version) {
   return base.replace(/(max|xhigh|high|medium|low|minimal)$/, "").replace(/\d{6,8}$/, "");
 }
 
+export function tableScale(records) {
+  const rawMax = Math.max(0, ...(records ?? []).map((r) => Math.abs(Number(r?.score) || 0)));
+  return rawMax > 0 && rawMax <= SCALE_THRESHOLD ? 100 : 1;
+}
+
 export function buildBenchmarkIndex(tables) {
   const index = [];
   for (const table of Object.values(tables ?? {})) {
+    const scale = tableScale(table.records);
     for (const record of table.records ?? []) {
       const normalized = normalizeBenchModel(record.modelVersion);
       if (normalized.length < 5) continue;
-      index.push({ normalized, benchmark: table.benchmark, source: table.source, ...record });
+      index.push({
+        normalized,
+        benchmark: table.benchmark,
+        source: table.source,
+        modelVersion: record.modelVersion,
+        releaseDate: record.releaseDate,
+        organization: record.organization,
+        score: record.score * scale,
+        rawScore: record.score,
+        scaled: scale !== 1,
+      });
     }
   }
   return index;
@@ -29,6 +47,7 @@ export function matchBenchmarks({ aliases, index }) {
           matches.set(key, {
             benchmark: entry.benchmark,
             score: entry.score,
+            rawScore: entry.rawScore,
             releaseDate: entry.releaseDate,
             organization: entry.organization,
             source: entry.source,
