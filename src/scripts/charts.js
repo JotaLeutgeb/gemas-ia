@@ -76,6 +76,7 @@ export function renderQualityScatter(el, models) {
     (m) => m.quality !== null && Number.isFinite(m.blendedUsdPerM) && m.blendedUsdPerM > 0
   );
   if (visible.length < 3) return false;
+  clear(el);
 
   const frontierKeys = paretoFrontKeys(visible);
   const points = visible.map((m) => ({
