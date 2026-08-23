@@ -294,6 +294,8 @@ REGLA: nunca publicar una edición con placeholders sin reemplazar. Los archivos
 ### Publicar por primera vez en GitHub Pages
 > **HECHO 2026-08-22:** usuario real `JotaLeutgeb`, remote configurado, placeholders reemplazados.
 > Lección: la rutina original listaba 4 lugares y había 9 (faltaban BaseLayout canonical fallback, metodologia.astro, util.js User-Agent, AGENTS.md identidad). Cuando agregues URLs hardcodeadas, sumalas acá.
+>
+> **⚠️ Si el deploy falla con "YAML Exception reading .../*.astro" y un build "Build with Jekyll":** Pages quedó en modo *Deploy from a branch* (corre Jekyll sobre el repo crudo, que no tiene sentido para Astro). Fix: Settings → Pages → Build and deployment → Source → **GitHub Actions**, luego re-disparar el workflow deploy (tiene workflow_dispatch). No agregar `.nojekyll` en la raíz como parche: silenciaría Jekyll pero serviría archivos crudos rotos en vez de fallar ruidosamente.
 
 Pasos:
 1. ~~Crear repo público llamado exactamente `gemas-ia` bajo la cuenta del dueño.~~ ✓
