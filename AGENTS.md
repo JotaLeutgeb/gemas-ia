@@ -78,7 +78,7 @@ El proyecto dio una vuelta de 180°: antes EXCLUÍA a los famosos (`config/famou
 ```
 
 Principios inviolables:
-- Los snapshots son **append-only**: nunca se edita ni borra un archivo de `data/snapshots/` pasado. Si una corrida falla, ese día simplemente no existe. **Única excepción:** `data/snapshots/benchmarks/` conserva solo los últimos 8 archivos (es dato de referencia, no historia de mercado).
+- Los snapshots son **append-only**: nunca se edita ni borra un archivo de `data/snapshots/` pasado. Si una corrida falla, ese día simplemente no existe. **Únicas excepciones:** `data/snapshots/benchmarks/` conserva solo los últimos 8 archivos (dato de referencia, no historia) y el archivo `huggingface/` completo fue retirado del disco (fuente muerta desde el pivote; recuperable desde el historial de git si alguna vez hiciera falta).
 - `public/data/dataset.json` es un artefacto derivado. Nunca editarlo a mano.
 - Todo dato mostrado en el sitio debe provenir de `dataset.json`, que a su vez proviene de snapshots commiteados. Trazabilidad total.
 - El universo SOTA es una decisión de build, NO de colecta: los snapshots guardan el catálogo crudo completo; el filtro por labs vive en `config/labs.json` y se aplica retroactivamente en `build-dataset.mjs`. Cambiar la whitelist no requiere tocar datos.
@@ -100,7 +100,6 @@ gemas-ia/
 │   └── snapshots/
 │       ├── openrouter/        ← YYYY-MM-DD.json (append-only; catálogo crudo COMPLETO)
 │       ├── openrouter-usage/  ← tokens reales procesados por día
-│       ├── huggingface/       ← HISTÓRICO congelado (fuente retirada en el pivote; no se borra)
 │       └── benchmarks/        ← Epoch AI semanal (retención máx 8)
 ├── content/
 │   ├── linkedin/              ← borradores semanales privados (hooks, cifras para copiar)
@@ -161,7 +160,8 @@ Notas duras ganadas a fuerza de golpes:
 - Ninguna devuelve series históricas. La historia ES este repositorio; lo histórico se rellenó con backfills y sigue creciendo un punto por día.
 - El dataset de uso de OpenRouter arranca en 2025-01-01, permite ventanas ≤366 días por request y **exige citación exacta**: "Source: OpenRouter (openrouter.ai/rankings), as of {as_of}" (CC BY 4.0). Rate limits: 30 req/min, 500 req/día.
 - Los benchmarks de Epoch AI son snapshots de referencia con retención de 8 archivos; el matching a nuestros slugs es heurístico (`scripts/lib/benchmark-match.js`, substring bidireccional con mínimo de largo) — los no matcheados se descartan sin inventar nada. El campo `organization` permite auditar a qué lab pertenece cada score.
-- **HuggingFace fue retirada en el pivote 2026-08-22** (descargas medían curiosidad open-weights; nunca cubrió líderes cerrados). Sus snapshots históricos quedan congelados en disco; el colector y el subcomando de backfill fueron eliminados.
+- **HuggingFace fue retirada en el pivote 2026-08-22** (descargas medían curiosidad open-weights; nunca cubrió líderes cerrados). Sus snapshots históricos (267 archivos) fueron borrados del disco por decisión del dueño — siguen recuperables desde el historial de git. El colector y el subcomando de backfill fueron eliminados.
+- **Por qué SÍ se mantienen los snapshots diarios de OpenRouter/usage aunque el leaderboard muestre ~77 modelos con score:** los snapshots no son los modelos, son la historia. Sin ellos no hay series de precios por modelo (histórico + price drops), ni momentum/forecast de uso real, ni detección de altas/bajas. El score viene de Epoch (semanal) y es independiente de cuántos snapshots tengamos.
 
 ### Matching entre fuentes
 
@@ -366,6 +366,7 @@ Inversión de tesis documentada en §2. Hallazgos y lecciones del refactor:
 12. **Edición nocturna:** flip completo a tema oscuro único (`#16140f`/`#eae4d5`), sin toggle (CSP `script-src 'self'` complicaría un switch inline y el dueño prefirió oscuro directo). Paleta completa sincronizada en 4 lugares: `global.css`, `THEME`+`LAB_COLORS` (charts.js), `T` (generate-chart-assets.mjs), favicon + theme-color meta.
 13. **Exclusión qwen-plus / qwen-turbo + bug de escala latente:** los benchmarks de Epoch mezclan escalas — algunas tablas guardan fracciones (gpqa 0.48 = 48%) y otras porcentajes. Los modelos SIN ECI que caen al compuesto propio y matchean tablas en fracción reciben calidad ~0.5 en vez de ~50, aplastando el scatter. Afectó a `qwenplus` (0.55) y `qwenturbo` (0.47), excluidos por decisión del dueño (`excludeSlugFragments`). La normalización por tabla del refinamiento posterior (item 14) corrige la causa raíz.
 14. **Refinamiento: foco código (2026-08-22 PM):** a pedido del dueño, el KPI principal pasó de capacidad general a CAPACIDAD DE CÓDIGO. Cambios: (a) normalización de escala por tabla en `buildBenchmarkIndex` (fracción→porcentaje vía máximo ≤1.5, conserva rawScore) — corrige el bug raíz del item 13; (b) nuevo índice primario `computeCodeQuality` = media ponderada solo de benchmarks de código (SWE-bench 40/Terminal 25/Cursor 15/SciCode 15/FrontierCode 5), sin ECI como backbone → escala 0–100 consistente; (c) el índice general anterior queda anidado como `quality.general` solo display; (d) valueScore/ranks/frontera/scatter ahora miden eficiencia para programar. Cobertura: ~77 modelos con score. UI: labels "índice de código", fichas con KPI "índice general (ref.)", tabla de benchmarks ordenada code-first. Tests 42→47 (nuevos: code quality + normalización). Verificado: leaderboard liderado por GPT-5.3-Codex; mejor valor Qwen3.7 Flash (69.5 pts de código a $0.055/1M).
+15. **Refinamientos de UX y datos (2026-08-22 tarde):** (a) el scatter del dashboard reemplazó la leyenda fija de Plot por botones seleccionables por lab (`#lab-filter`, todos activos por defecto, `aria-pressed`); la frontera punteada se RECALCULA client-side sobre la selección visible (`paretoFrontKeys` en charts.js — es el mismo algoritmo pareto de quality.js duplicado a propósito porque el cliente no puede importar módulos de `scripts/lib`); sin leyenda nativa de Plot. (b) label del eje X acortado a "precio mezclado US$/1M (escala log)" + marginBottom 56 — el label largo se superponía a los números del eje; el detalle 75/25 vive en el texto de la tarjeta. (c) snapshots HuggingFace borrados del disco (267 archivos, fuente muerta desde el pivote; recuperables vía git history) — los snapshots OpenRouter/usage se mantienen: son la materia prima de series de precio, momentum y movimientos, NO redundan con el score que viene de Epoch.
 
 ---
 
