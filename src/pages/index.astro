@@ -74,8 +74,10 @@ const fmtPrice = (p) => {
       Cada punto es un modelo de un lab líder: precio mezclado por millón de tokens (75% entrada /
       25% salida, escala log) contra su <strong>índice de código</strong> — SWE-bench Verified,
       Terminal-Bench, Cursor Bench, SciCode y FrontierCode, normalizados a 0–100. La línea punteada
-      marca la <strong>frontera eficiente</strong>: nadie programa mejor por ese precio o menos.
+      marca la <strong>frontera eficiente</strong> de la selección: nadie programa mejor por ese
+      precio o menos. Tocá los labs para enfocar la comparación.
     </p>
+    <div id="lab-filter" class="lab-filter" role="group" aria-label="Filtrar laboratorios en el gráfico"></div>
     <div id="scatter-quality" class="chart-container" role="img" aria-label="Gráfico de dispersión: precio mezclado contra índice de código, coloreado por laboratorio"></div>
   </section>
 

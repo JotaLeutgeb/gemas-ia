@@ -55,19 +55,38 @@ export function renderEmpty(el, message = "Todavía no hay datos suficientes. Vo
   el.append(div);
 }
 
+function paretoFrontKeys(models) {
+  const eligible = models.filter(
+    (m) => Number.isFinite(m.blendedUsdPerM) && m.blendedUsdPerM > 0 && m.quality !== null
+  );
+  eligible.sort((a, b) => a.blendedUsdPerM - b.blendedUsdPerM || b.quality.index - a.quality.index);
+  const front = new Set();
+  let bestQuality = -Infinity;
+  for (const model of eligible) {
+    if (model.quality.index > bestQuality) {
+      front.add(model.matchKey);
+      bestQuality = model.quality.index;
+    }
+  }
+  return front;
+}
+
 export function renderQualityScatter(el, models) {
-  const points = models
-    .filter((m) => m.quality !== null && Number.isFinite(m.blendedUsdPerM) && m.blendedUsdPerM > 0)
-    .map((m) => ({
-      name: m.name,
-      labId: m.labId,
-      labLabel: m.labLabel,
-      x: Math.log10(m.blendedUsdPerM),
-      y: m.quality.index,
-      frontier: m.onEfficiencyFrontier === true,
-      priceLabel: `$${m.blendedUsdPerM >= 1 ? m.blendedUsdPerM.toFixed(2) : m.blendedUsdPerM.toFixed(3)}/1M`,
-    }));
-  if (points.length < 3) return false;
+  const visible = models.filter(
+    (m) => m.quality !== null && Number.isFinite(m.blendedUsdPerM) && m.blendedUsdPerM > 0
+  );
+  if (visible.length < 3) return false;
+
+  const frontierKeys = paretoFrontKeys(visible);
+  const points = visible.map((m) => ({
+    name: m.name,
+    labId: m.labId,
+    labLabel: m.labLabel,
+    x: Math.log10(m.blendedUsdPerM),
+    y: m.quality.index,
+    frontier: frontierKeys.has(m.matchKey),
+    priceLabel: `$${m.blendedUsdPerM >= 1 ? m.blendedUsdPerM.toFixed(2) : m.blendedUsdPerM.toFixed(3)}/1M`,
+  }));
 
   const regular = points.filter((p) => !p.frontier);
   const frontierDots = points.filter((p) => p.frontier);
@@ -101,10 +120,11 @@ export function renderQualityScatter(el, models) {
   el.append(
     Plot.plot({
       ...plotBase(el),
-      x: { label: "precio mezclado US$/1M — 75% entrada / 25% salida (escala log)", tickFormat: fmtPriceTick, grid: true },
+      marginBottom: 56,
+      x: { label: "precio mezclado US$/1M (escala log)", tickFormat: fmtPriceTick, grid: true },
       y: { label: "índice de código (0–100)", grid: true },
       marks,
-      color: { domain: Object.keys(LAB_COLORS), range: Object.values(LAB_COLORS), legend: true },
+      color: { domain: Object.keys(LAB_COLORS), range: Object.values(LAB_COLORS) },
     })
   );
   return true;
@@ -156,13 +176,63 @@ export function renderUsageSeries(el, model) {
   return true;
 }
 
+function buildLabFilter(container, labs, models, selected, onChange) {
+  container.replaceChildren();
+  const counts = {};
+  for (const model of models) {
+    if (model.quality === null || !Number.isFinite(model.blendedUsdPerM) || model.blendedUsdPerM <= 0) continue;
+    counts[model.labId] = (counts[model.labId] ?? 0) + 1;
+  }
+  for (const lab of labs) {
+    const button = document.createElement("button");
+    button.type = "button";
+    const isActive = selected.has(lab.id);
+    button.className = `lab-chip${isActive ? " active" : ""}`;
+    button.setAttribute("aria-pressed", String(isActive));
+
+    const swatch = document.createElement("span");
+    swatch.className = "swatch";
+    swatch.style.background = LAB_COLORS[lab.id] ?? THEME.inkSoft;
+    swatch.setAttribute("aria-hidden", "true");
+
+    const label = document.createElement("span");
+    label.textContent = lab.label;
+
+    const count = document.createElement("span");
+    count.className = "count";
+    count.textContent = String(counts[lab.id] ?? 0);
+
+    button.append(swatch, label, count);
+    button.addEventListener("click", () => {
+      const nowActive = !selected.has(lab.id);
+      if (nowActive) selected.add(lab.id);
+      else selected.delete(lab.id);
+      button.classList.toggle("active", nowActive);
+      button.setAttribute("aria-pressed", String(nowActive));
+      onChange();
+    });
+    container.append(button);
+  }
+}
+
 export async function mountDashboard() {
   const el = document.getElementById("scatter-quality");
   if (!el) return;
   const dataset = await loadDataset();
-  if (!dataset || !renderQualityScatter(el, dataset.models)) {
-    renderEmpty(el);
-  }
+  if (!dataset) return renderEmpty(el);
+
+  const selected = new Set((dataset.labs ?? []).map((lab) => lab.id));
+  const filterEl = document.getElementById("lab-filter");
+
+  const render = () => {
+    const visible = dataset.models.filter((model) => selected.has(model.labId));
+    if (!renderQualityScatter(el, visible)) {
+      renderEmpty(el, visible.length === 0 ? "Seleccioná al menos un laboratorio." : undefined);
+    }
+  };
+
+  if (filterEl) buildLabFilter(filterEl, dataset.labs ?? [], dataset.models, selected, render);
+  render();
 }
 
 function parseModelPayload(el) {
