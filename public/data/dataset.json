@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T11:55:00.846Z",
+  "generatedAt": "2026-09-14T10:58:49.227Z",
   "schemaVersion": 3,
   "sources": {
     "openrouter": {
@@ -17,10 +17,10 @@
       "fetchedAt": "2026-09-13T11:55:00.472Z"
     },
     "benchmarks": {
-      "lastSnapshot": "2026-09-07",
+      "lastSnapshot": "2026-09-14",
       "ok": true,
       "errors": [],
-      "fetchedAt": "2026-09-07T10:44:16.658Z"
+      "fetchedAt": "2026-09-14T10:58:48.545Z"
     }
   },
   "totals": {
@@ -24502,8 +24502,8 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
-          "score": 87.8048780487805,
-          "rawScore": 0.8780487804878049,
+          "score": 90.2,
+          "rawScore": 0.902,
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "epoch",
@@ -25323,8 +25323,8 @@
         },
         {
           "benchmark": "ebr_bench",
-          "score": 47.61904761904761,
-          "rawScore": 0.47619047619047616,
+          "score": 57.14285714285714,
+          "rawScore": 0.5714285714285714,
           "releaseDate": "2026-09-01",
           "organization": "Anthropic",
           "source": "epoch",
@@ -25386,8 +25386,8 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
-          "score": 87.8048780487805,
-          "rawScore": 0.8780487804878049,
+          "score": 90.2,
+          "rawScore": 0.902,
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "epoch",
@@ -25472,6 +25472,15 @@
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 73.3,
+          "rawScore": 0.733,
+          "releaseDate": "2026-09-01",
+          "organization": "Anthropic",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -31161,8 +31170,8 @@
         },
         {
           "benchmark": "ebr_bench",
-          "score": 39.04761904761905,
-          "rawScore": 0.3904761904761905,
+          "score": 44.76190476190475,
+          "rawScore": 0.4476190476190475,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "epoch",
@@ -31924,8 +31933,8 @@
         },
         {
           "benchmark": "ebr_bench",
-          "score": 39.04761904761905,
-          "rawScore": 0.3904761904761905,
+          "score": 44.76190476190475,
+          "rawScore": 0.4476190476190475,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "epoch",
@@ -32400,6 +32409,15 @@
       },
       "benchmarks": [
         {
+          "benchmark": "chess_puzzles",
+          "score": 61,
+          "rawScore": 0.61,
+          "releaseDate": "2026-09-02",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "critpt",
           "score": 18.2857142857143,
           "rawScore": 0.182857142857143,
@@ -32445,6 +32463,51 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "frontiermath_tier_4_v2",
+          "score": 21.951219512195124,
+          "rawScore": 0.21951219512195122,
+          "releaseDate": "2026-09-02",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 68.42105263157895,
+          "rawScore": 0.6842105263157895,
+          "releaseDate": "2026-09-02",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 95.39141414141415,
+          "rawScore": 0.9539141414141414,
+          "releaseDate": "2026-09-02",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mystery_game_puzzles",
+          "score": 47,
+          "rawScore": 0.47,
+          "releaseDate": "2026-09-02",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 98.88888888888889,
+          "rawScore": 0.9888888888888889,
+          "releaseDate": "2026-09-02",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "scicode",
           "score": 54.398148148148195,
           "rawScore": 0.543981481481482,
@@ -32469,6 +32532,15 @@
           "releaseDate": "2026-09-02",
           "organization": "Google DeepMind",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 69.69999999999999,
+          "rawScore": 0.697,
+          "releaseDate": "2026-09-02",
+          "organization": "Google DeepMind",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -33094,8 +33166,8 @@
         },
         {
           "benchmark": "ebr_bench",
-          "score": 50,
-          "rawScore": 0.5,
+          "score": 45.714285714285715,
+          "rawScore": 0.45714285714285713,
           "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "epoch",
@@ -33680,8 +33752,8 @@
         },
         {
           "benchmark": "ebr_bench",
-          "score": 50,
-          "rawScore": 0.5,
+          "score": 45.714285714285715,
+          "rawScore": 0.45714285714285713,
           "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "epoch",
@@ -44624,8 +44696,8 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
-          "score": 95.1219512195122,
-          "rawScore": 0.9512195121951219,
+          "score": 97.6,
+          "rawScore": 0.976,
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "epoch",
@@ -44633,8 +44705,8 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
-          "score": 95.1219512195122,
-          "rawScore": 0.9512195121951219,
+          "score": 97.6,
+          "rawScore": 0.976,
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "epoch",
@@ -44642,8 +44714,8 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
-          "score": 95.1219512195122,
-          "rawScore": 0.9512195121951219,
+          "score": 97.6,
+          "rawScore": 0.976,
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "epoch",
@@ -45068,8 +45140,8 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
-          "score": 95.1219512195122,
-          "rawScore": 0.9512195121951219,
+          "score": 97.6,
+          "rawScore": 0.976,
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "epoch",
@@ -45077,8 +45149,8 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
-          "score": 95.1219512195122,
-          "rawScore": 0.9512195121951219,
+          "score": 97.6,
+          "rawScore": 0.976,
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "epoch",
@@ -45086,8 +45158,8 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
-          "score": 95.1219512195122,
-          "rawScore": 0.9512195121951219,
+          "score": 97.6,
+          "rawScore": 0.976,
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "epoch",
@@ -115365,6 +115437,15 @@
       "benchmarks": [
         {
           "benchmark": "chess_puzzles",
+          "score": 40,
+          "rawScore": 0.4,
+          "releaseDate": "2026-09-01",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "chess_puzzles",
           "score": 28.999999999999996,
           "rawScore": 0.29,
           "releaseDate": "2026-08-02",
@@ -115383,9 +115464,27 @@
         },
         {
           "benchmark": "frontiermath_tier_4_v2",
+          "score": 34.146341463414636,
+          "rawScore": 0.34146341463414637,
+          "releaseDate": "2026-09-01",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tier_4_v2",
           "score": 46.34146341463415,
           "rawScore": 0.4634146341463415,
           "releaseDate": "2026-08-02",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 65.6140350877193,
+          "rawScore": 0.656140350877193,
+          "releaseDate": "2026-09-01",
           "organization": "Alibaba",
           "source": "epoch",
           "matchedVia": "substring"
@@ -115419,6 +115518,15 @@
         },
         {
           "benchmark": "gpqa_diamond",
+          "score": 92.2979797979798,
+          "rawScore": 0.922979797979798,
+          "releaseDate": "2026-09-01",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
           "score": 92.67676767676768,
           "rawScore": 0.9267676767676768,
           "releaseDate": "2026-08-02",
@@ -115446,9 +115554,27 @@
         },
         {
           "benchmark": "otis_mock_aime_2024_2025",
+          "score": 100,
+          "rawScore": 1,
+          "releaseDate": "2026-09-01",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
           "score": 99.44444444444444,
           "rawScore": 0.9944444444444445,
           "releaseDate": "2026-08-02",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 47.3,
+          "rawScore": 0.473,
+          "releaseDate": "2026-09-01",
           "organization": "Alibaba",
           "source": "epoch",
           "matchedVia": "substring"
