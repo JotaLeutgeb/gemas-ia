@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T13:27:41.745Z",
+  "generatedAt": "2026-11-02T13:51:01.344Z",
   "schemaVersion": 3,
   "sources": {
     "openrouter": {
@@ -17,10 +17,10 @@
       "fetchedAt": "2026-11-01T13:27:41.022Z"
     },
     "benchmarks": {
-      "lastSnapshot": "2026-10-26",
+      "lastSnapshot": "2026-11-02",
       "ok": true,
       "errors": [],
-      "fetchedAt": "2026-10-26T11:32:47.771Z"
+      "fetchedAt": "2026-11-02T13:51:00.475Z"
     }
   },
   "totals": {
@@ -1667,6 +1667,15 @@
         }
       },
       "benchmarks": [
+        {
+          "benchmark": "critpt",
+          "score": 16.8571428571429,
+          "rawScore": 0.168571428571429,
+          "releaseDate": "2026-02-05",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
         {
           "benchmark": "metr_time_horizons",
           "score": 74.5439,
@@ -5280,8 +5289,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.4,
-          "rawScore": 65.4,
+          "score": 65.5,
+          "rawScore": 65.5,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -8411,8 +8420,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.4,
-          "rawScore": 65.4,
+          "score": 65.5,
+          "rawScore": 65.5,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -9283,8 +9292,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.3,
-          "rawScore": 65.3,
+          "score": 65.2,
+          "rawScore": 65.2,
           "releaseDate": "2025-11-18",
           "organization": "Google DeepMind",
           "source": "external",
@@ -35024,8 +35033,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.3,
-          "rawScore": 66.3,
+          "score": 66.4,
+          "rawScore": 66.4,
           "releaseDate": "2026-05-28",
           "organization": "Anthropic",
           "source": "external",
@@ -35649,8 +35658,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.3,
-          "rawScore": 66.3,
+          "score": 66.4,
+          "rawScore": 66.4,
           "releaseDate": "2026-05-28",
           "organization": "Anthropic",
           "source": "external",
@@ -42151,18 +42160,18 @@
         },
         {
           "benchmark": "frontierswe",
-          "score": 196.71,
-          "rawScore": 196.71,
-          "releaseDate": "2026-07-24",
+          "score": 98.87,
+          "rawScore": 98.87,
+          "releaseDate": "2026-09-22",
           "organization": "Anthropic",
           "source": "external",
           "matchedVia": "substring"
         },
         {
           "benchmark": "frontierswe",
-          "score": 98.87,
-          "rawScore": 98.87,
-          "releaseDate": "2026-09-22",
+          "score": 196.71,
+          "rawScore": 196.71,
+          "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "external",
           "matchedVia": "substring"
@@ -42331,8 +42340,8 @@
         },
         {
           "benchmark": "mirrorcode",
-          "score": 77.4,
-          "rawScore": 0.774,
+          "score": 78.89,
+          "rawScore": 0.7889,
           "releaseDate": "2026-09-22",
           "organization": "Anthropic",
           "source": "epoch",
@@ -48306,6 +48315,87 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "arc_agi",
+          "score": 96.5,
+          "rawScore": 0.965,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 96.5,
+          "rawScore": 0.965,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 92,
+          "rawScore": 0.92,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 70,
+          "rawScore": 0.7000000000000001,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 67,
+          "rawScore": 0.67,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 83.88888888888889,
+          "rawScore": 0.8388888888888889,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 67.36111111111111,
+          "rawScore": 0.6736111111111112,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 32.77777777777777,
+          "rawScore": 0.3277777777777777,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 24.027777777777775,
+          "rawScore": 0.24027777777777776,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "btf3",
           "score": 14.2,
           "rawScore": 0.142,
@@ -50615,8 +50705,8 @@
         },
         {
           "benchmark": "scicode",
-          "score": 57.63888888888889,
-          "rawScore": 0.576388888888889,
+          "score": 58.6805555555556,
+          "rawScore": 0.586805555555556,
           "releaseDate": "2026-09-01",
           "organization": "Anthropic",
           "source": "external",
@@ -50624,8 +50714,8 @@
         },
         {
           "benchmark": "scicode",
-          "score": 55.671296296296305,
-          "rawScore": 0.556712962962963,
+          "score": 56.712962962963,
+          "rawScore": 0.56712962962963,
           "releaseDate": "2026-09-01",
           "organization": "Anthropic",
           "source": "external",
@@ -50633,8 +50723,8 @@
         },
         {
           "benchmark": "scicode",
-          "score": 55.324074074074105,
-          "rawScore": 0.553240740740741,
+          "score": 56.3657407407407,
+          "rawScore": 0.563657407407407,
           "releaseDate": "2026-09-01",
           "organization": "Anthropic",
           "source": "external",
@@ -51246,6 +51336,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "frontiermath_erdos",
+          "score": 1.4705882352941175,
+          "rawScore": 0.014705882352941176,
+          "releaseDate": "2026-09-30",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "frontiermath_tier_4_v2",
           "score": 78.04878048780488,
           "rawScore": 0.7804878048780488,
@@ -51382,8 +51481,8 @@
         },
         {
           "benchmark": "weirdml_v3",
-          "score": 20.216368409090908,
-          "rawScore": 0.2021636840909091,
+          "score": 20.096489621212122,
+          "rawScore": 0.2009648962121212,
           "releaseDate": "2026-09-30",
           "organization": "Google DeepMind",
           "source": "external",
@@ -61837,6 +61936,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 26.666666666666668,
+          "rawScore": 0.26666666666666666,
+          "releaseDate": "2026-09-22",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 7.000000000000001,
           "rawScore": 0.07,
@@ -62659,6 +62767,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 26.666666666666668,
+          "rawScore": 0.26666666666666666,
+          "releaseDate": "2026-09-22",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 7.000000000000001,
           "rawScore": 0.07,
@@ -63042,6 +63159,15 @@
           "releaseDate": "2026-09-22",
           "organization": "OpenAI",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 26.666666666666668,
+          "rawScore": 0.26666666666666666,
+          "releaseDate": "2026-09-22",
+          "organization": "OpenAI",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -63962,6 +64088,551 @@
       "valueScore": 254.63611
     },
     {
+      "matchKey": "deepseekdeepseekv41flash1017",
+      "urlSlug": "deepseek-deepseek-v4-1-flash-1017",
+      "name": "DeepSeek: DeepSeek V4.1 Flash 1017",
+      "labId": "deepseek",
+      "labLabel": "DeepSeek",
+      "provider": "deepseek",
+      "createdAt": "2026-10-17T08:27:04.000Z",
+      "contextLength": 1048576,
+      "promptUsdPerM": 0.15,
+      "completionUsdPerM": 0.6,
+      "blendedUsdPerM": 0.2625,
+      "links": {
+        "openrouter": "https://openrouter.ai/deepseek/deepseek-v4.1-flash-1017"
+      },
+      "series": {
+        "usageTokens": [],
+        "promptUsdPerM": [
+          {
+            "date": "2026-10-17",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-18",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-19",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-20",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-21",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-22",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-23",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-24",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-25",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-26",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-27",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-28",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-29",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-30",
+            "value": 0.15
+          },
+          {
+            "date": "2026-10-31",
+            "value": 0.15
+          },
+          {
+            "date": "2026-11-01",
+            "value": 0.15
+          }
+        ],
+        "completionUsdPerM": [
+          {
+            "date": "2026-10-17",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-18",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-19",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-20",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-21",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-22",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-23",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-24",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-25",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-26",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-27",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-28",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-29",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-30",
+            "value": 0.6
+          },
+          {
+            "date": "2026-10-31",
+            "value": 0.6
+          },
+          {
+            "date": "2026-11-01",
+            "value": 0.6
+          }
+        ]
+      },
+      "metrics": {
+        "momentumUsage": null,
+        "forecastUsage90d": null,
+        "forecastUsage180d": null
+      },
+      "quality": {
+        "index": 50.668333,
+        "source": "code-composite",
+        "general": null
+      },
+      "benchmarks": [
+        {
+          "benchmark": "apex_agents",
+          "score": 69.8,
+          "rawScore": 0.698,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 94.5,
+          "rawScore": 0.9450000000000001,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 94.5,
+          "rawScore": 0.9450000000000001,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 93.5,
+          "rawScore": 0.935,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 91.5,
+          "rawScore": 0.915,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 90.5,
+          "rawScore": 0.905,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 88.5,
+          "rawScore": 0.885,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 78.05555555555556,
+          "rawScore": 0.7805555555555556,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 73.61111111111111,
+          "rawScore": 0.7361111111111112,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 72.91666666666666,
+          "rawScore": 0.7291666666666666,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 68.61111111111113,
+          "rawScore": 0.6861111111111113,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 67.5,
+          "rawScore": 0.675,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 60.55555555555555,
+          "rawScore": 0.6055555555555555,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "chess_puzzles",
+          "score": 46,
+          "rawScore": 0.46,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "chess_puzzles",
+          "score": 48,
+          "rawScore": 0.48,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 24,
+          "rawScore": 0.24,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 14.285714285714299,
+          "rawScore": 0.142857142857143,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 47.7,
+          "rawScore": 0.47700000000000004,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 46.3,
+          "rawScore": 0.46299999999999997,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 45.6,
+          "rawScore": 0.456,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 44.9,
+          "rawScore": 0.449,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiercode",
+          "score": 43.87,
+          "rawScore": 0.4387,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tier_4_v2",
+          "score": 46.34146341463415,
+          "rawScore": 0.4634146341463415,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tier_4_v2",
+          "score": 26.82926829268293,
+          "rawScore": 0.2682926829268293,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 71.2280701754386,
+          "rawScore": 0.712280701754386,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 67.36842105263158,
+          "rawScore": 0.6736842105263158,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "furniture_assembly",
+          "score": 34.166666666666664,
+          "rawScore": 0.3416666666666667,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gdp_pdf",
+          "score": 19.8,
+          "rawScore": 0.198,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 93.18181818181817,
+          "rawScore": 0.9318181818181818,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 89.83585858585859,
+          "rawScore": 0.8983585858585859,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mystery_game_puzzles",
+          "score": 49,
+          "rawScore": 0.49,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mystery_game_puzzles",
+          "score": 43,
+          "rawScore": 0.43,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 99.44444444444444,
+          "rawScore": 0.9944444444444445,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 98.33333333333333,
+          "rawScore": 0.9833333333333333,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 51.851851851851805,
+          "rawScore": 0.518518518518518,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 55.9027777777778,
+          "rawScore": 0.559027777777778,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 42.5,
+          "rawScore": 0.425,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 42.9,
+          "rawScore": 0.429,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "surface_evolver_bench",
+          "score": 46.25,
+          "rawScore": 0.4625,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "webdev_arena",
+          "score": 1613.95,
+          "rawScore": 1613.95,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "weirdml_v3",
+          "score": 5.946331818181818,
+          "rawScore": 0.05946331818181818,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "weirdml_v3",
+          "score": 9.19092568181818,
+          "rawScore": 0.09190925681818181,
+          "releaseDate": "2026-10-17",
+          "organization": "DeepSeek",
+          "source": "external",
+          "matchedVia": "substring"
+        }
+      ],
+      "onEfficiencyFrontier": false,
+      "performanceRank": 60,
+      "valueRank": 10,
+      "valueScore": 193.022221
+    },
+    {
       "matchKey": "deepseekdeepseekv41flash",
       "urlSlug": "deepseek-deepseek-v4-1-flash",
       "name": "DeepSeek: DeepSeek V4.1 Flash",
@@ -64826,428 +65497,9 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 60,
+      "performanceRank": 61,
       "valueRank": 4,
       "valueScore": 314.055994
-    },
-    {
-      "matchKey": "deepseekdeepseekv41flash1017",
-      "urlSlug": "deepseek-deepseek-v4-1-flash-1017",
-      "name": "DeepSeek: DeepSeek V4.1 Flash 1017",
-      "labId": "deepseek",
-      "labLabel": "DeepSeek",
-      "provider": "deepseek",
-      "createdAt": "2026-10-17T08:27:04.000Z",
-      "contextLength": 1048576,
-      "promptUsdPerM": 0.15,
-      "completionUsdPerM": 0.6,
-      "blendedUsdPerM": 0.2625,
-      "links": {
-        "openrouter": "https://openrouter.ai/deepseek/deepseek-v4.1-flash-1017"
-      },
-      "series": {
-        "usageTokens": [],
-        "promptUsdPerM": [
-          {
-            "date": "2026-10-17",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-18",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-19",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-20",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-21",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-22",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-23",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-24",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-25",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-26",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-27",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-28",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-29",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-30",
-            "value": 0.15
-          },
-          {
-            "date": "2026-10-31",
-            "value": 0.15
-          },
-          {
-            "date": "2026-11-01",
-            "value": 0.15
-          }
-        ],
-        "completionUsdPerM": [
-          {
-            "date": "2026-10-17",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-18",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-19",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-20",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-21",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-22",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-23",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-24",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-25",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-26",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-27",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-28",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-29",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-30",
-            "value": 0.6
-          },
-          {
-            "date": "2026-10-31",
-            "value": 0.6
-          },
-          {
-            "date": "2026-11-01",
-            "value": 0.6
-          }
-        ]
-      },
-      "metrics": {
-        "momentumUsage": null,
-        "forecastUsage90d": null,
-        "forecastUsage180d": null
-      },
-      "quality": {
-        "index": 49.856389,
-        "source": "code-composite",
-        "general": null
-      },
-      "benchmarks": [
-        {
-          "benchmark": "arc_agi",
-          "score": 94.5,
-          "rawScore": 0.9450000000000001,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi",
-          "score": 90.5,
-          "rawScore": 0.905,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi",
-          "score": 88.5,
-          "rawScore": 0.885,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi_2",
-          "score": 72.91666666666666,
-          "rawScore": 0.7291666666666666,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi_2",
-          "score": 67.5,
-          "rawScore": 0.675,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi_2",
-          "score": 60.55555555555555,
-          "rawScore": 0.6055555555555555,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "chess_puzzles",
-          "score": 46,
-          "rawScore": 0.46,
-          "releaseDate": "2026-10-17",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "chess_puzzles",
-          "score": 48,
-          "rawScore": 0.48,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "critpt",
-          "score": 14.285714285714299,
-          "rawScore": 0.142857142857143,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontiercode",
-          "score": 43.87,
-          "rawScore": 0.4387,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontiermath_tier_4_v2",
-          "score": 46.34146341463415,
-          "rawScore": 0.4634146341463415,
-          "releaseDate": "2026-10-17",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontiermath_tier_4_v2",
-          "score": 26.82926829268293,
-          "rawScore": 0.2682926829268293,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontiermath_tiers_1_3_v2",
-          "score": 71.2280701754386,
-          "rawScore": 0.712280701754386,
-          "releaseDate": "2026-10-17",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontiermath_tiers_1_3_v2",
-          "score": 67.36842105263158,
-          "rawScore": 0.6736842105263158,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "furniture_assembly",
-          "score": 34.166666666666664,
-          "rawScore": 0.3416666666666667,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "gdp_pdf",
-          "score": 19.8,
-          "rawScore": 0.198,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "gpqa_diamond",
-          "score": 93.18181818181817,
-          "rawScore": 0.9318181818181818,
-          "releaseDate": "2026-10-17",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "gpqa_diamond",
-          "score": 89.83585858585859,
-          "rawScore": 0.8983585858585859,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "mystery_game_puzzles",
-          "score": 49,
-          "rawScore": 0.49,
-          "releaseDate": "2026-10-17",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "mystery_game_puzzles",
-          "score": 43,
-          "rawScore": 0.43,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "otis_mock_aime_2024_2025",
-          "score": 99.44444444444444,
-          "rawScore": 0.9944444444444445,
-          "releaseDate": "2026-10-17",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "otis_mock_aime_2024_2025",
-          "score": 98.33333333333333,
-          "rawScore": 0.9833333333333333,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "scicode",
-          "score": 51.851851851851805,
-          "rawScore": 0.518518518518518,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "simpleqa_verified",
-          "score": 42.5,
-          "rawScore": 0.425,
-          "releaseDate": "2026-10-17",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "simpleqa_verified",
-          "score": 42.9,
-          "rawScore": 0.429,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "surface_evolver_bench",
-          "score": 46.25,
-          "rawScore": 0.4625,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "webdev_arena",
-          "score": 1613.95,
-          "rawScore": 1613.95,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "weirdml_v3",
-          "score": 5.946331818181818,
-          "rawScore": 0.05946331818181818,
-          "releaseDate": "2026-09-09",
-          "organization": "DeepSeek",
-          "source": "external",
-          "matchedVia": "substring"
-        }
-      ],
-      "onEfficiencyFrontier": false,
-      "performanceRank": 61,
-      "valueRank": 10,
-      "valueScore": 189.929101
     },
     {
       "matchKey": "openaigpt56sol",
@@ -73333,6 +73585,15 @@
           "releaseDate": "2026-08-12",
           "organization": "xAI",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 41.11111111111111,
+          "rawScore": 0.4111111111111111,
+          "releaseDate": "2026-08-12",
+          "organization": "xAI",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -106011,6 +106272,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "critpt",
+          "score": 0,
+          "rawScore": 0,
+          "releaseDate": "2025-08-05",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "dtbench",
           "score": 68,
           "rawScore": 0.68,
@@ -128383,8 +128653,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.7,
-          "rawScore": 62.7,
+          "score": 62.8,
+          "rawScore": 62.8,
           "releaseDate": "2026-03-03",
           "organization": "Google",
           "source": "external",
@@ -129727,8 +129997,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.7,
-          "rawScore": 62.7,
+          "score": 62.8,
+          "rawScore": 62.8,
           "releaseDate": "2026-03-03",
           "organization": "Google",
           "source": "external",
@@ -132038,6 +132308,15 @@
           "releaseDate": "2026-08-13",
           "organization": "Google DeepMind",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 41.11111111111111,
+          "rawScore": 0.4111111111111111,
+          "releaseDate": "2026-08-13",
+          "organization": "Google DeepMind",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -148904,8 +149183,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.6,
-          "rawScore": 64.6,
+          "score": 64.7,
+          "rawScore": 64.7,
           "releaseDate": "2026-07-16",
           "organization": "Moonshot",
           "source": "external",
@@ -149380,8 +149659,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.6,
-          "rawScore": 64.6,
+          "score": 64.7,
+          "rawScore": 64.7,
           "releaseDate": "2026-07-16",
           "organization": "Moonshot",
           "source": "external",
@@ -157046,7 +157325,188 @@
         }
       },
       "quality": null,
-      "benchmarks": [],
+      "benchmarks": [
+        {
+          "benchmark": "apex_agents",
+          "score": 68.3,
+          "rawScore": 0.6829999999999999,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 28.000000000000004,
+          "rawScore": 0.28,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 26.5714285714286,
+          "rawScore": 0.265714285714286,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 25.7142857142857,
+          "rawScore": 0.257142857142857,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 21.4285714285714,
+          "rawScore": 0.214285714285714,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 15.1428571428571,
+          "rawScore": 0.151428571428571,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "ebr_bench",
+          "score": 78.0952380952381,
+          "rawScore": 0.780952380952381,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tier_4_v2",
+          "score": 92.6829268292683,
+          "rawScore": 0.926829268292683,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 90.87719298245615,
+          "rawScore": 0.9087719298245615,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "furniture_assembly",
+          "score": 79.16666666666666,
+          "rawScore": 0.7916666666666666,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 94.31818181818183,
+          "rawScore": 0.9431818181818182,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mystery_game_puzzles",
+          "score": 74,
+          "rawScore": 0.74,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 100,
+          "rawScore": 1,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 55.0925925925926,
+          "rawScore": 0.550925925925926,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 53.3564814814815,
+          "rawScore": 0.533564814814815,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 52.4305555555556,
+          "rawScore": 0.524305555555556,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 51.6203703703704,
+          "rawScore": 0.516203703703704,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 51.6203703703704,
+          "rawScore": 0.516203703703704,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 57.3,
+          "rawScore": 0.573,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "weirdml_v3",
+          "score": 28.086310681818183,
+          "rawScore": 0.28086310681818183,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        }
+      ],
       "onEfficiencyFrontier": false,
       "performanceRank": null,
       "valueRank": null,
@@ -157128,7 +157588,188 @@
         "forecastUsage180d": null
       },
       "quality": null,
-      "benchmarks": [],
+      "benchmarks": [
+        {
+          "benchmark": "apex_agents",
+          "score": 68.3,
+          "rawScore": 0.6829999999999999,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 28.000000000000004,
+          "rawScore": 0.28,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 26.5714285714286,
+          "rawScore": 0.265714285714286,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 25.7142857142857,
+          "rawScore": 0.257142857142857,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 21.4285714285714,
+          "rawScore": 0.214285714285714,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 15.1428571428571,
+          "rawScore": 0.151428571428571,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "ebr_bench",
+          "score": 78.0952380952381,
+          "rawScore": 0.780952380952381,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tier_4_v2",
+          "score": 92.6829268292683,
+          "rawScore": 0.926829268292683,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 90.87719298245615,
+          "rawScore": 0.9087719298245615,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "furniture_assembly",
+          "score": 79.16666666666666,
+          "rawScore": 0.7916666666666666,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 94.31818181818183,
+          "rawScore": 0.9431818181818182,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mystery_game_puzzles",
+          "score": 74,
+          "rawScore": 0.74,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 100,
+          "rawScore": 1,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 55.0925925925926,
+          "rawScore": 0.550925925925926,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 53.3564814814815,
+          "rawScore": 0.533564814814815,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 52.4305555555556,
+          "rawScore": 0.524305555555556,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 51.6203703703704,
+          "rawScore": 0.516203703703704,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 51.6203703703704,
+          "rawScore": 0.516203703703704,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 57.3,
+          "rawScore": 0.573,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "weirdml_v3",
+          "score": 28.086310681818183,
+          "rawScore": 0.28086310681818183,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        }
+      ],
       "onEfficiencyFrontier": false,
       "performanceRank": null,
       "valueRank": null,
@@ -160231,8 +160872,8 @@
         },
         {
           "benchmark": "gso",
-          "score": 3.5999999999999996,
-          "rawScore": 0.036,
+          "score": 3.6000000000000005,
+          "rawScore": 0.036000000000000004,
           "releaseDate": "2025-04-16",
           "organization": "OpenAI",
           "source": "external",
@@ -161291,8 +161932,8 @@
         },
         {
           "benchmark": "gso",
-          "score": 3.5999999999999996,
-          "rawScore": 0.036,
+          "score": 3.6000000000000005,
+          "rawScore": 0.036000000000000004,
           "releaseDate": "2025-04-16",
           "organization": "OpenAI",
           "source": "external",
@@ -188632,18 +189273,18 @@
         },
         {
           "benchmark": "frontierswe",
-          "score": 55.14,
-          "rawScore": 55.14,
-          "releaseDate": "2026-08-02",
+          "score": 51.27,
+          "rawScore": 51.27,
+          "releaseDate": "2026-09-01",
           "organization": "Alibaba",
           "source": "external",
           "matchedVia": "substring"
         },
         {
           "benchmark": "frontierswe",
-          "score": 51.27,
-          "rawScore": 51.27,
-          "releaseDate": "2026-09-01",
+          "score": 55.14,
+          "rawScore": 55.14,
+          "releaseDate": "2026-08-02",
           "organization": "Alibaba",
           "source": "external",
           "matchedVia": "substring"
@@ -198097,8 +198738,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.1,
-          "rawScore": 66.1,
+          "score": 66,
+          "rawScore": 66,
           "releaseDate": "2026-07-08",
           "organization": "xAI",
           "source": "external",
@@ -198156,6 +198797,15 @@
           "releaseDate": "2026-07-08",
           "organization": "xAI",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 32.22222222222222,
+          "rawScore": 0.32222222222222224,
+          "releaseDate": "2026-07-08",
+          "organization": "xAI",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
