@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-11-07T13:04:43.315Z",
+  "generatedAt": "2026-11-08T13:27:44.021Z",
   "schemaVersion": 3,
   "sources": {
     "openrouter": {
-      "lastSnapshot": "2026-11-07",
-      "modelsInSnapshot": 460,
+      "lastSnapshot": "2026-11-08",
+      "modelsInSnapshot": 461,
       "ok": true,
       "errors": [],
-      "fetchedAt": "2026-11-07T13:04:41.859Z"
+      "fetchedAt": "2026-11-08T13:27:42.389Z"
     },
     "openrouterUsage": {
-      "lastSnapshot": "2026-11-06",
+      "lastSnapshot": "2026-11-07",
       "modelsInSnapshot": 50,
       "ok": true,
       "errors": [],
-      "fetchedAt": "2026-11-07T13:04:42.461Z"
+      "fetchedAt": "2026-11-08T13:27:43.204Z"
     },
     "benchmarks": {
       "lastSnapshot": "2026-11-02",
@@ -116,6 +116,66 @@
       }
     ],
     "priceDrops": [
+      {
+        "urlSlug": "deepseek-deepseek-v4-1-flash-1017",
+        "name": "DeepSeek: DeepSeek V4.1 Flash 1017",
+        "field": "price",
+        "date": "2026-11-08",
+        "oldPrice": 0.15,
+        "newPrice": 0.006,
+        "pctChange": -0.96,
+        "wentFree": false
+      },
+      {
+        "urlSlug": "z-ai-glm-5-3-flash",
+        "name": "Z.ai: GLM 5.3 Flash",
+        "field": "price",
+        "date": "2026-11-08",
+        "oldPrice": 0.5,
+        "newPrice": 0.083,
+        "pctChange": -0.834,
+        "wentFree": false
+      },
+      {
+        "urlSlug": "z-ai-glm-5-3-flash",
+        "name": "Z.ai: GLM 5.3 Flash",
+        "field": "price",
+        "date": "2026-11-08",
+        "oldPrice": 0.15,
+        "newPrice": 0.0335,
+        "pctChange": -0.7766666666666666,
+        "wentFree": false
+      },
+      {
+        "urlSlug": "deepseek-deepseek-v4-pro",
+        "name": "DeepSeek: DeepSeek V4 Pro 0423",
+        "field": "price",
+        "date": "2026-11-08",
+        "oldPrice": 0.717924,
+        "newPrice": 0.241338,
+        "pctChange": -0.6638390693165294,
+        "wentFree": false
+      },
+      {
+        "urlSlug": "deepseek-deepseek-v4-pro",
+        "name": "DeepSeek: DeepSeek V4 Pro 0423",
+        "field": "price",
+        "date": "2026-11-08",
+        "oldPrice": 1.435848,
+        "newPrice": 0.482676,
+        "pctChange": -0.6638390693165294,
+        "wentFree": false
+      },
+      {
+        "urlSlug": "qwen-qwen3-6-27b",
+        "name": "Qwen: Qwen3.6 27B",
+        "field": "price",
+        "date": "2026-11-08",
+        "oldPrice": 0.45,
+        "newPrice": 0.32,
+        "pctChange": -0.2888888888888889,
+        "wentFree": false
+      },
       {
         "urlSlug": "openai-gpt-oss-120b",
         "name": "OpenAI: gpt-oss-120b",
@@ -554,66 +614,6 @@
         "oldPrice": 1.4,
         "newPrice": 0.966,
         "pctChange": -0.31,
-        "wentFree": false
-      },
-      {
-        "urlSlug": "moonshotai-kimi-k3",
-        "name": "MoonshotAI: Kimi K3",
-        "field": "price",
-        "date": "2026-10-26",
-        "oldPrice": 0.239,
-        "newPrice": 0.152,
-        "pctChange": -0.36401673640167365,
-        "wentFree": false
-      },
-      {
-        "urlSlug": "qwen-qwen3-5-122b-a10b",
-        "name": "Qwen: Qwen3.5-122B-A10B",
-        "field": "price",
-        "date": "2026-10-26",
-        "oldPrice": 0.4,
-        "newPrice": 0.26,
-        "pctChange": -0.35000000000000003,
-        "wentFree": false
-      },
-      {
-        "urlSlug": "qwen-qwen3-5-122b-a10b",
-        "name": "Qwen: Qwen3.5-122B-A10B",
-        "field": "price",
-        "date": "2026-10-26",
-        "oldPrice": 3.2,
-        "newPrice": 2.08,
-        "pctChange": -0.35000000000000003,
-        "wentFree": false
-      },
-      {
-        "urlSlug": "deepseek-deepseek-v4-pro",
-        "name": "DeepSeek: DeepSeek V4 Pro 0423",
-        "field": "price",
-        "date": "2026-10-25",
-        "oldPrice": 0.327642,
-        "newPrice": 0.2088,
-        "pctChange": -0.3627190653212957,
-        "wentFree": false
-      },
-      {
-        "urlSlug": "deepseek-deepseek-v4-pro",
-        "name": "DeepSeek: DeepSeek V4 Pro 0423",
-        "field": "price",
-        "date": "2026-10-25",
-        "oldPrice": 0.655284,
-        "newPrice": 0.4176,
-        "pctChange": -0.3627190653212957,
-        "wentFree": false
-      },
-      {
-        "urlSlug": "deepseek-deepseek-v4-1-flash",
-        "name": "DeepSeek: DeepSeek V4.1 Flash",
-        "field": "price",
-        "date": "2026-10-24",
-        "oldPrice": 0.3,
-        "newPrice": 0.02,
-        "pctChange": -0.9333333333333332,
         "wentFree": false
       }
     ]
@@ -1349,6 +1349,10 @@
           {
             "date": "2026-11-07",
             "value": 1.75
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.75
           }
         ],
         "completionUsdPerM": [
@@ -1662,6 +1666,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 14
+          },
+          {
+            "date": "2026-11-08",
             "value": 14
           }
         ]
@@ -2095,6 +2103,10 @@
           {
             "date": "2026-11-07",
             "value": 5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 5
           }
         ],
         "completionUsdPerM": [
@@ -2408,6 +2420,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 25
+          },
+          {
+            "date": "2026-11-08",
             "value": 25
           }
         ]
@@ -3845,6 +3861,10 @@
           {
             "date": "2026-11-07",
             "value": 5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 5
           }
         ],
         "completionUsdPerM": [
@@ -4158,6 +4178,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 25
+          },
+          {
+            "date": "2026-11-08",
             "value": 25
           }
         ]
@@ -4960,6 +4984,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -5273,6 +5301,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 12
+          },
+          {
+            "date": "2026-11-08",
             "value": 12
           }
         ]
@@ -6451,6 +6483,10 @@
           {
             "date": "2026-11-07",
             "value": 1.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.5
           }
         ],
         "completionUsdPerM": [
@@ -6764,6 +6800,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 9
+          },
+          {
+            "date": "2026-11-08",
             "value": 9
           }
         ]
@@ -8187,6 +8227,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -8500,6 +8544,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 12
+          },
+          {
+            "date": "2026-11-08",
             "value": 12
           }
         ]
@@ -10039,6 +10087,10 @@
           {
             "date": "2026-11-07",
             "value": 5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 5
           }
         ],
         "completionUsdPerM": [
@@ -10352,6 +10404,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 25
+          },
+          {
+            "date": "2026-11-08",
             "value": 25
           }
         ]
@@ -11654,6 +11710,10 @@
           {
             "date": "2026-11-07",
             "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2.5
           }
         ],
         "completionUsdPerM": [
@@ -11967,6 +12027,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 15
+          },
+          {
+            "date": "2026-11-08",
             "value": 15
           }
         ]
@@ -12787,6 +12851,10 @@
           {
             "date": "2026-11-07",
             "value": 30
+          },
+          {
+            "date": "2026-11-08",
+            "value": 30
           }
         ],
         "completionUsdPerM": [
@@ -13100,6 +13168,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 180
+          },
+          {
+            "date": "2026-11-08",
             "value": 180
           }
         ]
@@ -14256,6 +14328,10 @@
           {
             "date": "2026-11-06",
             "value": 121918872406
+          },
+          {
+            "date": "2026-11-07",
+            "value": 94861827284
           }
         ],
         "promptUsdPerM": [
@@ -14569,6 +14645,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.006
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.006
           }
         ],
@@ -14884,20 +14964,24 @@
           {
             "date": "2026-11-07",
             "value": 6.8
+          },
+          {
+            "date": "2026-11-08",
+            "value": 6.8
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.055046038741855874,
+        "momentumUsage": -0.025948029451594357,
         "forecastUsage90d": {
-          "center": 75209561687.05307,
-          "low": 48421564878.67596,
-          "high": 116817335072.32558
+          "center": 72653869366.78416,
+          "low": 46758781666.54873,
+          "high": 112889697845.61436
         },
         "forecastUsage180d": {
-          "center": 35903621155.86474,
-          "low": 23115538532.348373,
-          "high": 55766384603.14936
+          "center": 34244961110.7625,
+          "low": 22039468423.544903,
+          "high": 53209875072.34135
         }
       },
       "quality": {
@@ -16456,6 +16540,10 @@
           {
             "date": "2026-11-06",
             "value": 82409230819
+          },
+          {
+            "date": "2026-11-07",
+            "value": 79999570548
           }
         ],
         "promptUsdPerM": [
@@ -16769,6 +16857,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.5
           }
         ],
@@ -17084,20 +17176,24 @@
           {
             "date": "2026-11-07",
             "value": 3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 3
           }
         ]
       },
       "metrics": {
-        "momentumUsage": -0.21336690043568513,
+        "momentumUsage": -0.2399585974384164,
         "forecastUsage90d": {
-          "center": 168245418792.1875,
-          "low": 112516437310.92526,
-          "high": 251576761769.81134
+          "center": 166769086818.61588,
+          "low": 111445328218.82358,
+          "high": 249556699799.0813
         },
         "forecastUsage180d": {
-          "center": 194106022490.3283,
-          "low": 129811071635.67073,
-          "high": 290246028264.53015
+          "center": 191816923468.80054,
+          "low": 128183828320.38861,
+          "high": 287038798974.48315
         }
       },
       "quality": {
@@ -17967,6 +18063,10 @@
           {
             "date": "2026-11-07",
             "value": 1.75
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.75
           }
         ],
         "completionUsdPerM": [
@@ -18280,6 +18380,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 14
+          },
+          {
+            "date": "2026-11-08",
             "value": 14
           }
         ]
@@ -19645,6 +19749,10 @@
           {
             "date": "2026-11-07",
             "value": 1.75
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.75
           }
         ],
         "completionUsdPerM": [
@@ -19958,6 +20066,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 14
+          },
+          {
+            "date": "2026-11-08",
             "value": 14
           }
         ]
@@ -20832,6 +20944,10 @@
           {
             "date": "2026-11-07",
             "value": 1.75
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.75
           }
         ],
         "completionUsdPerM": [
@@ -21145,6 +21261,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 14
+          },
+          {
+            "date": "2026-11-08",
             "value": 14
           }
         ]
@@ -22011,6 +22131,10 @@
           {
             "date": "2026-11-07",
             "value": 21
+          },
+          {
+            "date": "2026-11-08",
+            "value": 21
           }
         ],
         "completionUsdPerM": [
@@ -22324,6 +22448,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 168
+          },
+          {
+            "date": "2026-11-08",
             "value": 168
           }
         ]
@@ -23728,6 +23856,10 @@
           {
             "date": "2026-11-07",
             "value": 0.65
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.65
           }
         ],
         "completionUsdPerM": [
@@ -24042,6 +24174,10 @@
           {
             "date": "2026-11-07",
             "value": 3.41
+          },
+          {
+            "date": "2026-11-08",
+            "value": 3.41
           }
         ]
       },
@@ -24286,7 +24422,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 18,
-      "valueRank": 34,
+      "valueRank": 33,
       "valueScore": 52.48574
     },
     {
@@ -25139,6 +25275,10 @@
           {
             "date": "2026-11-07",
             "value": 0.75
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.75
           }
         ],
         "completionUsdPerM": [
@@ -25452,6 +25592,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 4.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 4.5
           }
         ]
@@ -26222,9 +26366,9 @@
       "provider": "deepseek",
       "createdAt": "2026-04-24T03:17:59.000Z",
       "contextLength": 1048576,
-      "promptUsdPerM": 0.717924,
-      "completionUsdPerM": 1.435848,
-      "blendedUsdPerM": 0.897405,
+      "promptUsdPerM": 0.241338,
+      "completionUsdPerM": 0.482676,
+      "blendedUsdPerM": 0.301673,
       "links": {
         "openrouter": "https://openrouter.ai/deepseek/deepseek-v4-pro"
       },
@@ -27013,6 +27157,10 @@
           {
             "date": "2026-11-06",
             "value": 229888205202
+          },
+          {
+            "date": "2026-11-07",
+            "value": 159683967106
           }
         ],
         "promptUsdPerM": [
@@ -27327,6 +27475,10 @@
           {
             "date": "2026-11-07",
             "value": 0.717924
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.241338
           }
         ],
         "completionUsdPerM": [
@@ -27641,20 +27793,24 @@
           {
             "date": "2026-11-07",
             "value": 1.435848
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.482676
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.02316792789904215,
+        "momentumUsage": -0.041430069963812655,
         "forecastUsage90d": {
-          "center": 535079723048.399,
-          "low": 305568732943.1426,
-          "high": 936975152071.0247
+          "center": 521860669220.4161,
+          "low": 297475753465.8795,
+          "high": 915498338624.8243
         },
         "forecastUsage180d": {
-          "center": 766771847818.2391,
-          "low": 437881481771.4527,
-          "high": 1342689953975.8684
+          "center": 739045209034.6508,
+          "low": 421277255347.39404,
+          "high": 1296504413813.3513
         }
       },
       "quality": {
@@ -27867,8 +28023,8 @@
       ],
       "onEfficiencyFrontier": true,
       "performanceRank": 20,
-      "valueRank": 24,
-      "valueScore": 78.115942
+      "valueRank": 11,
+      "valueScore": 232.376239
     },
     {
       "matchKey": "qwenqwen37flash",
@@ -28138,6 +28294,10 @@
           {
             "date": "2026-11-06",
             "value": 50935962261
+          },
+          {
+            "date": "2026-11-07",
+            "value": 52439300844
           }
         ],
         "promptUsdPerM": [
@@ -28451,6 +28611,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.03
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.03
           }
         ],
@@ -28766,20 +28930,24 @@
           {
             "date": "2026-11-07",
             "value": 0.13
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.13
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.03169397789563611,
+        "momentumUsage": -0.08346139182353914,
         "forecastUsage90d": {
-          "center": 298392004327.92126,
-          "low": 234663688477.56744,
-          "high": 379427208463.6806
+          "center": 283563076876.373,
+          "low": 221737089929.2503,
+          "high": 362627734463.6011
         },
         "forecastUsage180d": {
-          "center": 1051908785127.1656,
-          "low": 827250033109.5493,
-          "high": 1337578782642.5857
+          "center": 963121415318.6028,
+          "low": 753129576085.0945,
+          "high": 1231664364407.461
         }
       },
       "quality": {
@@ -29560,6 +29728,10 @@
           {
             "date": "2026-11-07",
             "value": 1.475
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.475
           }
         ],
         "completionUsdPerM": [
@@ -29873,6 +30045,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 4.425
+          },
+          {
+            "date": "2026-11-08",
             "value": 4.425
           }
         ]
@@ -30476,6 +30652,10 @@
           {
             "date": "2026-11-07",
             "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.3
           }
         ],
         "completionUsdPerM": [
@@ -30789,6 +30969,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.5
           }
         ]
@@ -31385,7 +31569,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 23,
-      "valueRank": 23,
+      "valueRank": 24,
       "valueScore": 81.141078
     },
     {
@@ -32118,6 +32302,10 @@
           {
             "date": "2026-11-07",
             "value": 0.2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.2
           }
         ],
         "completionUsdPerM": [
@@ -32431,6 +32619,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.25
           }
         ]
@@ -33189,7 +33381,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 24,
-      "valueRank": 11,
+      "valueRank": 12,
       "valueScore": 148.706182
     },
     {
@@ -33201,9 +33393,9 @@
       "provider": "deepseek",
       "createdAt": "2026-08-12T15:42:44.000Z",
       "contextLength": 1048576,
-      "promptUsdPerM": 0.1165,
-      "completionUsdPerM": 4.66,
-      "blendedUsdPerM": 1.252375,
+      "promptUsdPerM": 0.111,
+      "completionUsdPerM": 4.44,
+      "blendedUsdPerM": 1.19325,
       "links": {
         "openrouter": "https://openrouter.ai/deepseek/deepseek-v4-pro-0813"
       },
@@ -33521,6 +33713,10 @@
           {
             "date": "2026-11-07",
             "value": 0.1165
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.111
           }
         ],
         "completionUsdPerM": [
@@ -33835,6 +34031,10 @@
           {
             "date": "2026-11-07",
             "value": 4.66
+          },
+          {
+            "date": "2026-11-08",
+            "value": 4.44
           }
         ]
       },
@@ -34215,8 +34415,8 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 25,
-      "valueRank": 33,
-      "valueScore": 53.41804
+      "valueRank": 32,
+      "valueScore": 56.06488
     },
     {
       "matchKey": "zaiglm51",
@@ -34944,6 +35144,10 @@
           {
             "date": "2026-11-07",
             "value": 1.4
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.4
           }
         ],
         "completionUsdPerM": [
@@ -35257,6 +35461,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 4.4
+          },
+          {
+            "date": "2026-11-08",
             "value": 4.4
           }
         ]
@@ -35771,6 +35979,10 @@
           {
             "date": "2026-11-07",
             "value": 5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 5
           }
         ],
         "completionUsdPerM": [
@@ -36084,6 +36296,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 25
+          },
+          {
+            "date": "2026-11-08",
             "value": 25
           }
         ]
@@ -37557,6 +37773,10 @@
           {
             "date": "2026-11-07",
             "value": 0.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.25
           }
         ],
         "completionUsdPerM": [
@@ -37870,6 +38090,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2
           }
         ]
@@ -38278,7 +38502,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 31,
-      "valueRank": 21,
+      "valueRank": 22,
       "valueScore": 94.662807
     },
     {
@@ -38707,6 +38931,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -39020,6 +39248,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -39732,6 +39964,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -40045,6 +40281,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -40914,6 +41154,10 @@
           {
             "date": "2026-11-07",
             "value": 0.32
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.32
           }
         ],
         "completionUsdPerM": [
@@ -41228,6 +41472,10 @@
           {
             "date": "2026-11-07",
             "value": 1.28
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.28
           }
         ]
       },
@@ -41490,7 +41738,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 32,
-      "valueRank": 17,
+      "valueRank": 18,
       "valueScore": 114.073848
     },
     {
@@ -41822,6 +42070,10 @@
           {
             "date": "2026-11-07",
             "value": 3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 3
           }
         ],
         "completionUsdPerM": [
@@ -42135,6 +42387,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 15
+          },
+          {
+            "date": "2026-11-08",
             "value": 15
           }
         ]
@@ -42778,6 +43034,10 @@
           {
             "date": "2026-11-06",
             "value": 1052183725590
+          },
+          {
+            "date": "2026-11-07",
+            "value": 766503175602
           }
         ],
         "promptUsdPerM": [
@@ -42963,6 +43223,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 4
+          },
+          {
+            "date": "2026-11-08",
             "value": 4
           }
         ],
@@ -43150,20 +43414,24 @@
           {
             "date": "2026-11-07",
             "value": 20
+          },
+          {
+            "date": "2026-11-08",
+            "value": 20
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.3210503296622093,
+        "momentumUsage": 0.255116558836951,
         "forecastUsage90d": {
-          "center": 42506637200444.055,
-          "low": 30252063346159.72,
-          "high": 59725321390996.51
+          "center": 34634482692351.766,
+          "low": 24356223312873.453,
+          "high": 49250139315843.55
         },
         "forecastUsage180d": {
-          "center": 1185806135764365,
-          "low": 843940727803179.1,
-          "high": 1666155152005354.8
+          "center": 806355355147542.4,
+          "low": 567058306427135.4,
+          "high": 1146635101550475.8
         }
       },
       "quality": {
@@ -44596,6 +44864,10 @@
           {
             "date": "2026-11-07",
             "value": 3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 3
           }
         ],
         "completionUsdPerM": [
@@ -44909,6 +45181,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 15
+          },
+          {
+            "date": "2026-11-08",
             "value": 15
           }
         ]
@@ -45933,6 +46209,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -46246,6 +46526,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -47342,6 +47626,10 @@
           {
             "date": "2026-11-07",
             "value": 15
+          },
+          {
+            "date": "2026-11-08",
+            "value": 15
           }
         ],
         "completionUsdPerM": [
@@ -47656,6 +47944,10 @@
           {
             "date": "2026-11-07",
             "value": 75
+          },
+          {
+            "date": "2026-11-08",
+            "value": 75
           }
         ]
       },
@@ -47886,9 +48178,9 @@
       "provider": "moonshotai",
       "createdAt": "2026-01-27T04:11:16.000Z",
       "contextLength": 262144,
-      "promptUsdPerM": 0.5,
-      "completionUsdPerM": 2.5,
-      "blendedUsdPerM": 1,
+      "promptUsdPerM": 0.532,
+      "completionUsdPerM": 3.325,
+      "blendedUsdPerM": 1.23025,
       "links": {
         "openrouter": "https://openrouter.ai/moonshotai/kimi-k2.5"
       },
@@ -48206,6 +48498,10 @@
           {
             "date": "2026-11-07",
             "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.532
           }
         ],
         "completionUsdPerM": [
@@ -48520,6 +48816,10 @@
           {
             "date": "2026-11-07",
             "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 3.325
           }
         ]
       },
@@ -48693,8 +48993,8 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 39,
-      "valueRank": 32,
-      "valueScore": 59.560555
+      "valueRank": 34,
+      "valueScore": 48.413375
     },
     {
       "matchKey": "moonshotaikimik250127",
@@ -49792,6 +50092,10 @@
           {
             "date": "2026-11-06",
             "value": 418133165748
+          },
+          {
+            "date": "2026-11-07",
+            "value": 221519933983
           }
         ],
         "promptUsdPerM": [
@@ -49953,6 +50257,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2
           }
         ],
@@ -50116,20 +50424,24 @@
           {
             "date": "2026-11-07",
             "value": 10
+          },
+          {
+            "date": "2026-11-08",
+            "value": 10
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.22926897911609562,
+        "momentumUsage": 0.09071169461436997,
         "forecastUsage90d": {
-          "center": 3416938612205.712,
-          "low": 2358301460101.201,
-          "high": 4950796018708.003
+          "center": 2545842011160.2896,
+          "low": 1734990584985.7573,
+          "high": 3735646522739.991
         },
         "forecastUsage180d": {
-          "center": 25612674022265.484,
-          "low": 17677346127331.7,
-          "high": 37110155893624.19
+          "center": 14936669791567.674,
+          "low": 10179336088338.062,
+          "high": 21917353207143.742
         }
       },
       "quality": {
@@ -51455,6 +51767,10 @@
           {
             "date": "2026-11-07",
             "value": 10
+          },
+          {
+            "date": "2026-11-08",
+            "value": 10
           }
         ],
         "completionUsdPerM": [
@@ -51724,6 +52040,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 50
+          },
+          {
+            "date": "2026-11-08",
             "value": 50
           }
         ]
@@ -52921,6 +53241,10 @@
           {
             "date": "2026-11-06",
             "value": 182826430518
+          },
+          {
+            "date": "2026-11-07",
+            "value": 137591519485
           }
         ],
         "promptUsdPerM": [
@@ -53022,6 +53346,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2
           }
         ],
@@ -53125,20 +53453,24 @@
           {
             "date": "2026-11-07",
             "value": 10
+          },
+          {
+            "date": "2026-11-08",
+            "value": 10
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.16484714953523685,
+        "momentumUsage": 0.24017332400300878,
         "forecastUsage90d": {
-          "center": 614415055141.6326,
-          "low": 481173438986.522,
-          "high": 784552573765.963
+          "center": 478711822936.5852,
+          "low": 374852372325.30133,
+          "high": 611347363223.8251
         },
         "forecastUsage180d": {
-          "center": 2127124856739.4937,
-          "low": 1665838058338.4602,
-          "high": 2716146466645.1416
+          "center": 1326155363836.02,
+          "low": 1038437866765.8424,
+          "high": 1693590059950.7063
         }
       },
       "quality": {
@@ -53953,6 +54285,10 @@
           {
             "date": "2026-11-07",
             "value": 10
+          },
+          {
+            "date": "2026-11-08",
+            "value": 10
           }
         ],
         "completionUsdPerM": [
@@ -54210,6 +54546,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 50
+          },
+          {
+            "date": "2026-11-08",
             "value": 50
           }
         ]
@@ -55007,6 +55347,10 @@
           {
             "date": "2026-11-07",
             "value": 10
+          },
+          {
+            "date": "2026-11-08",
+            "value": 10
           }
         ],
         "completionUsdPerM": [
@@ -55264,6 +55608,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 50
+          },
+          {
+            "date": "2026-11-08",
             "value": 50
           }
         ]
@@ -56116,6 +56464,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -56301,6 +56653,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -56891,6 +57247,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -57076,6 +57436,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -57625,6 +57989,10 @@
           {
             "date": "2026-11-06",
             "value": 670862913180
+          },
+          {
+            "date": "2026-11-07",
+            "value": 555396714278
           }
         ],
         "promptUsdPerM": [
@@ -57782,6 +58150,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2
           }
         ],
@@ -57941,20 +58313,24 @@
           {
             "date": "2026-11-07",
             "value": 10
+          },
+          {
+            "date": "2026-11-08",
+            "value": 10
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.5942813091193724,
+        "momentumUsage": 0.6569691968121318,
         "forecastUsage90d": {
-          "center": 16981251207568.559,
-          "low": 12571761725461.459,
-          "high": 22937349503731.863
+          "center": 16194805205618.514,
+          "low": 12012851882779.037,
+          "high": 21832593809294.094
         },
         "forecastUsage180d": {
-          "center": 443853572249058.1,
-          "low": 328598952050307.75,
-          "high": 599533237610839
+          "center": 396580920097934.9,
+          "low": 294172593753699.94,
+          "high": 534639968254168.75
         }
       },
       "quality": {
@@ -58502,6 +58878,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -58659,6 +59039,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -59369,6 +59753,10 @@
           {
             "date": "2026-11-07",
             "value": 0.325
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.325
           }
         ],
         "completionUsdPerM": [
@@ -59682,6 +60070,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.95
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.95
           }
         ]
@@ -60791,6 +61183,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -60980,6 +61376,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 6
+          },
+          {
+            "date": "2026-11-08",
             "value": 6
           }
         ]
@@ -62004,6 +62404,10 @@
           {
             "date": "2026-11-07",
             "value": 5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 5
           }
         ],
         "completionUsdPerM": [
@@ -62317,6 +62721,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 25
+          },
+          {
+            "date": "2026-11-08",
             "value": 25
           }
         ]
@@ -63825,6 +64233,10 @@
           {
             "date": "2026-11-06",
             "value": 1149964707379
+          },
+          {
+            "date": "2026-11-07",
+            "value": 848744082160
           }
         ],
         "promptUsdPerM": [
@@ -64010,6 +64422,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.1
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.1
           }
         ],
@@ -64197,20 +64613,24 @@
           {
             "date": "2026-11-07",
             "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.5
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.23952058731147913,
+        "momentumUsage": 0.22357763977827766,
         "forecastUsage90d": {
-          "center": 9909434971096.68,
-          "low": 6513016777961.345,
-          "high": 15077022644663.094
+          "center": 8424899341466.897,
+          "low": 5519481550841.808,
+          "high": 12859709423799.77
         },
         "forecastUsage180d": {
-          "center": 66817120977493.97,
-          "low": 43915826810590.55,
-          "high": 101661017905381.19
+          "center": 49559559363449.47,
+          "low": 32468408521873.316,
+          "high": 75647376515070.42
         }
       },
       "quality": {
@@ -64573,7 +64993,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 57,
-      "valueRank": 7,
+      "valueRank": 9,
       "valueScore": 257.88611
     },
     {
@@ -64728,6 +65148,10 @@
           {
             "date": "2026-11-06",
             "value": 87861131308
+          },
+          {
+            "date": "2026-11-07",
+            "value": 65912323196
           }
         ],
         "promptUsdPerM": [
@@ -64913,6 +65337,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.1
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.1
           }
         ],
@@ -65100,20 +65528,24 @@
           {
             "date": "2026-11-07",
             "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.5
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.44093556583458293,
+        "momentumUsage": 0.3371286294269969,
         "forecastUsage90d": {
-          "center": 155829642554.4427,
-          "low": 112512495829.8366,
-          "high": 215823827562.8575
+          "center": 145052244204.87543,
+          "low": 105155995497.85278,
+          "high": 200085153958.72455
         },
         "forecastUsage180d": {
-          "center": 296270292338.01904,
-          "low": 213913793837.65057,
-          "high": 410333922592.5409
+          "center": 259979217123.3209,
+          "low": 188472598512.4492,
+          "high": 358615490365.78046
         }
       },
       "quality": {
@@ -65476,7 +65908,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 56,
-      "valueRank": 6,
+      "valueRank": 8,
       "valueScore": 257.88611
     },
     {
@@ -66010,6 +66442,10 @@
           {
             "date": "2026-11-06",
             "value": 406158079465
+          },
+          {
+            "date": "2026-11-07",
+            "value": 322207740187
           }
         ],
         "promptUsdPerM": [
@@ -66135,6 +66571,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.1
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.1
           }
         ],
@@ -66262,20 +66702,24 @@
           {
             "date": "2026-11-07",
             "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.5
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.23606002211828542,
+        "momentumUsage": 0.28215134216668114,
         "forecastUsage90d": {
-          "center": 1946056003035.585,
-          "low": 1498527629698.6401,
-          "high": 2527236663439.0615
+          "center": 1611272192993.245,
+          "low": 1239516394016.3062,
+          "high": 2094525003821.053
         },
         "forecastUsage180d": {
-          "center": 8784025244560.955,
-          "low": 6763990608909.649,
-          "high": 11407333918448.793
+          "center": 6150318982909.01,
+          "low": 4731305635941.903,
+          "high": 7994922861076.269
         }
       },
       "quality": {
@@ -66737,7 +67181,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 59,
-      "valueRank": 8,
+      "valueRank": 10,
       "valueScore": 254.63611
     },
     {
@@ -66749,9 +67193,9 @@
       "provider": "deepseek",
       "createdAt": "2026-10-17T08:27:04.000Z",
       "contextLength": 1048576,
-      "promptUsdPerM": 0.15,
-      "completionUsdPerM": 0.6,
-      "blendedUsdPerM": 0.2625,
+      "promptUsdPerM": 0.006,
+      "completionUsdPerM": 0.5,
+      "blendedUsdPerM": 0.1295,
       "links": {
         "openrouter": "https://openrouter.ai/deepseek/deepseek-v4.1-flash-1017"
       },
@@ -66845,6 +67289,10 @@
           {
             "date": "2026-11-07",
             "value": 0.15
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.006
           }
         ],
         "completionUsdPerM": [
@@ -66935,6 +67383,10 @@
           {
             "date": "2026-11-07",
             "value": 0.6
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.5
           }
         ]
       },
@@ -67330,8 +67782,8 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 60,
-      "valueRank": 9,
-      "valueScore": 193.022221
+      "valueRank": 4,
+      "valueScore": 391.261259
     },
     {
       "matchKey": "deepseekdeepseekv41flash",
@@ -67581,6 +68033,10 @@
           {
             "date": "2026-11-06",
             "value": 10373704950353
+          },
+          {
+            "date": "2026-11-07",
+            "value": 9107028654892
           }
         ],
         "promptUsdPerM": [
@@ -67818,6 +68274,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.051
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.051
           }
         ],
@@ -68057,20 +68517,24 @@
           {
             "date": "2026-11-07",
             "value": 0.567
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.567
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.4765940211405276,
+        "momentumUsage": 0.41521000174531536,
         "forecastUsage90d": {
-          "center": 332290362385078.75,
-          "low": 268473635637078.34,
-          "high": 411276454285694.1
+          "center": 317775555600811.5,
+          "low": 255884012980436.38,
+          "high": 394637017612839.2
         },
         "forecastUsage180d": {
-          "center": 8683034125293059,
-          "low": 7015447945122002,
-          "high": 10747008916718952
+          "center": 7847938480537232,
+          "low": 6319435074943590,
+          "high": 9746146239954340
         }
       },
       "quality": {
@@ -68271,7 +68735,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 61,
-      "valueRank": 4,
+      "valueRank": 6,
       "valueScore": 276.979939
     },
     {
@@ -69020,6 +69484,10 @@
           {
             "date": "2026-11-07",
             "value": 4
+          },
+          {
+            "date": "2026-11-08",
+            "value": 4
           }
         ],
         "completionUsdPerM": [
@@ -69333,6 +69801,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 20
+          },
+          {
+            "date": "2026-11-08",
             "value": 20
           }
         ]
@@ -70312,6 +70784,10 @@
           {
             "date": "2026-11-07",
             "value": 4
+          },
+          {
+            "date": "2026-11-08",
+            "value": 4
           }
         ],
         "completionUsdPerM": [
@@ -70625,6 +71101,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 20
+          },
+          {
+            "date": "2026-11-08",
             "value": 20
           }
         ]
@@ -73136,6 +73616,10 @@
           {
             "date": "2026-11-07",
             "value": 0.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.25
           }
         ],
         "completionUsdPerM": [
@@ -73449,6 +73933,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2
           }
         ]
@@ -74195,6 +74683,10 @@
           {
             "date": "2026-11-06",
             "value": 616349569338
+          },
+          {
+            "date": "2026-11-07",
+            "value": 417502177240
           }
         ],
         "promptUsdPerM": [
@@ -74508,6 +75000,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.0699
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.0699
           }
         ],
@@ -74823,20 +75319,24 @@
           {
             "date": "2026-11-07",
             "value": 1.4
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.4
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.1012610629374078,
+        "momentumUsage": 0.0058473577169022295,
         "forecastUsage90d": {
-          "center": 4331235191322.0176,
-          "low": 2964269362167.486,
-          "high": 6328574090456.199
+          "center": 4019607670670.966,
+          "low": 2735368336427.114,
+          "high": 5906789813623.841
         },
         "forecastUsage180d": {
-          "center": 22365406866340.863,
-          "low": 15306739860060.28,
-          "high": 32679161524274.91
+          "center": 19582650874827.785,
+          "low": 13326117256953.408,
+          "high": 28776590201868.293
         }
       },
       "quality": {
@@ -75019,7 +75519,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 65,
-      "valueRank": 16,
+      "valueRank": 17,
       "valueScore": 122.480084
     },
     {
@@ -75219,6 +75719,10 @@
           {
             "date": "2026-11-07",
             "value": 2.8
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2.8
           }
         ],
         "completionUsdPerM": [
@@ -75400,6 +75904,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 8.8
+          },
+          {
+            "date": "2026-11-08",
             "value": 8.8
           }
         ]
@@ -76074,6 +76582,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -76387,6 +76899,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 6
+          },
+          {
+            "date": "2026-11-08",
             "value": 6
           }
         ]
@@ -77440,6 +77956,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -77753,6 +78273,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 12
+          },
+          {
+            "date": "2026-11-08",
             "value": 12
           }
         ]
@@ -78615,6 +79139,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -78928,6 +79456,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 12
+          },
+          {
+            "date": "2026-11-08",
             "value": 12
           }
         ]
@@ -81071,6 +81603,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -81384,6 +81920,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -82411,6 +82951,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -82724,6 +83268,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -85428,6 +85976,10 @@
           {
             "date": "2026-11-07",
             "value": 0.21
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.21
           }
         ],
         "completionUsdPerM": [
@@ -85742,6 +86294,10 @@
           {
             "date": "2026-11-07",
             "value": 0.84
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.84
           }
         ]
       },
@@ -85857,7 +86413,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 76,
-      "valueRank": 14,
+      "valueRank": 15,
       "valueScore": 127.764667
     },
     {
@@ -86140,6 +86696,10 @@
           {
             "date": "2026-11-06",
             "value": 232936460038
+          },
+          {
+            "date": "2026-11-07",
+            "value": 175517698890
           }
         ],
         "promptUsdPerM": [
@@ -86405,6 +86965,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.825
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.825
           }
         ],
@@ -86672,20 +87236,24 @@
           {
             "date": "2026-11-07",
             "value": 4.125
+          },
+          {
+            "date": "2026-11-08",
+            "value": 4.125
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.10008182743543707,
+        "momentumUsage": 0.013056406816942825,
         "forecastUsage90d": {
-          "center": 154010000471.72003,
-          "low": 112027228318.7719,
-          "high": 211726029477.46683
+          "center": 146431399461.51877,
+          "low": 106611135780.83153,
+          "high": 201124906804.6617
         },
         "forecastUsage180d": {
-          "center": 103700620108.33879,
-          "low": 75432069411.67638,
-          "high": 142562953591.5845
+          "center": 95601124264.83736,
+          "low": 69603544576.36086,
+          "high": 131309044910.40688
         }
       },
       "quality": {
@@ -87024,9 +87592,9 @@
       "provider": "z-ai",
       "createdAt": "2026-08-26T13:59:01.000Z",
       "contextLength": 1048576,
-      "promptUsdPerM": 0.15,
-      "completionUsdPerM": 0.5,
-      "blendedUsdPerM": 0.2375,
+      "promptUsdPerM": 0.0335,
+      "completionUsdPerM": 0.083,
+      "blendedUsdPerM": 0.045875,
       "links": {
         "openrouter": "https://openrouter.ai/z-ai/glm-5.3-flash"
       },
@@ -87323,6 +87891,10 @@
           {
             "date": "2026-11-06",
             "value": 1707604876414
+          },
+          {
+            "date": "2026-11-07",
+            "value": 1279666599538
           }
         ],
         "promptUsdPerM": [
@@ -87617,6 +88189,10 @@
           {
             "date": "2026-11-07",
             "value": 0.15
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.0335
           }
         ],
         "completionUsdPerM": [
@@ -87911,20 +88487,24 @@
           {
             "date": "2026-11-07",
             "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.083
           }
         ]
       },
       "metrics": {
-        "momentumUsage": -0.04840401949536302,
+        "momentumUsage": -0.11345858704397033,
         "forecastUsage90d": {
-          "center": 2951571222937.153,
-          "low": 2195824402591.0532,
-          "high": 3967426846058.777
+          "center": 2761189136396.853,
+          "low": 2048314078957.2412,
+          "high": 3722166207458.4385
         },
         "forecastUsage180d": {
-          "center": 4268199516490.1846,
-          "low": 3175331355924.4043,
-          "high": 5737205056907.69
+          "center": 3814046078914.7617,
+          "low": 2829347753927.253,
+          "high": 5141449110274.02
         }
       },
       "quality": {
@@ -88285,10 +88865,10 @@
           "matchedVia": "substring"
         }
       ],
-      "onEfficiencyFrontier": false,
+      "onEfficiencyFrontier": true,
       "performanceRank": 78,
-      "valueRank": 10,
-      "valueScore": 192.068168
+      "valueRank": 2,
+      "valueScore": 994.358365
     },
     {
       "matchKey": "zaiglm53flashx",
@@ -88520,6 +89100,10 @@
           {
             "date": "2026-11-07",
             "value": 0.37
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.37
           }
         ],
         "completionUsdPerM": [
@@ -88721,6 +89305,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.25
           }
         ]
@@ -89134,6 +89722,10 @@
           {
             "date": "2026-11-07",
             "value": 0.37
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.37
           }
         ],
         "completionUsdPerM": [
@@ -89159,6 +89751,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.25
           }
         ]
@@ -90023,6 +90619,10 @@
           {
             "date": "2026-11-06",
             "value": 223623659291
+          },
+          {
+            "date": "2026-11-07",
+            "value": 171411482753
           }
         ],
         "promptUsdPerM": [
@@ -90336,6 +90936,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.2
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.2
           }
         ],
@@ -90651,20 +91255,24 @@
           {
             "date": "2026-11-07",
             "value": 1.2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.2
           }
         ]
       },
       "metrics": {
-        "momentumUsage": -0.8335213375866897,
+        "momentumUsage": -0.8983577527865589,
         "forecastUsage90d": {
-          "center": 2472640907571.9136,
-          "low": 788433320478.855,
-          "high": 7754559452262.554
+          "center": 2237748619094.142,
+          "low": 710658281106.8064,
+          "high": 7046310463671.567
         },
         "forecastUsage180d": {
-          "center": 7332969503279.211,
-          "low": 2338211535988.0493,
-          "high": 22997252775635.008
+          "center": 6254502691700.32,
+          "low": 1986288403503.0435,
+          "high": 19694422950612.88
         }
       },
       "quality": {
@@ -91189,7 +91797,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 82,
-      "valueRank": 19,
+      "valueRank": 20,
       "valueScore": 99.431069
     },
     {
@@ -91718,6 +92326,10 @@
           {
             "date": "2026-11-07",
             "value": 0.2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.2
           }
         ],
         "completionUsdPerM": [
@@ -92031,6 +92643,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.2
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.2
           }
         ]
@@ -92570,7 +93186,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 81,
-      "valueRank": 18,
+      "valueRank": 19,
       "valueScore": 99.431069
     },
     {
@@ -93415,6 +94031,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -93728,6 +94348,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -94629,6 +95253,10 @@
           {
             "date": "2026-11-07",
             "value": 0.6
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.6
           }
         ],
         "completionUsdPerM": [
@@ -94943,6 +95571,10 @@
           {
             "date": "2026-11-07",
             "value": 3.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 3.5
           }
         ]
       },
@@ -95207,6 +95839,10 @@
           {
             "date": "2026-11-06",
             "value": 685744211528
+          },
+          {
+            "date": "2026-11-07",
+            "value": 588818621079
           }
         ],
         "promptUsdPerM": [
@@ -95272,6 +95908,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.15
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.15
           }
         ],
@@ -95339,20 +95979,24 @@
           {
             "date": "2026-11-07",
             "value": 0.6
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.6
           }
         ]
       },
       "metrics": {
-        "momentumUsage": -0.49759081401528327,
+        "momentumUsage": -0.5307146658200221,
         "forecastUsage90d": {
-          "center": 97876825838.85083,
-          "low": 46175141684.79656,
-          "high": 207468189305.9132
+          "center": 80514918139.52638,
+          "low": 38805400450.074066,
+          "high": 167055408985.0208
         },
         "forecastUsage180d": {
-          "center": 14056466460.744282,
-          "low": 6631389247.145192,
-          "high": 29795302612.81054
+          "center": 9941748846.617092,
+          "low": 4791578431.446539,
+          "high": 20627517955.36691
         }
       },
       "quality": {
@@ -95526,7 +96170,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 86,
-      "valueRank": 12,
+      "valueRank": 13,
       "valueScore": 148.589947
     },
     {
@@ -96177,6 +96821,10 @@
           {
             "date": "2026-11-06",
             "value": 109383813238
+          },
+          {
+            "date": "2026-11-07",
+            "value": 90412693557
           }
         ],
         "promptUsdPerM": [
@@ -96490,6 +97138,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.3
           }
         ],
@@ -96805,20 +97457,24 @@
           {
             "date": "2026-11-07",
             "value": 1.2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.2
           }
         ]
       },
       "metrics": {
-        "momentumUsage": -0.19730689661697728,
+        "momentumUsage": -0.2916111728484698,
         "forecastUsage90d": {
-          "center": 60204527578.92142,
-          "low": 38452517375.85098,
-          "high": 94261322492.1765
+          "center": 58464252628.47673,
+          "low": 37357639370.78718,
+          "high": 91495846444.70871
         },
         "forecastUsage180d": {
-          "center": 26003673133.776764,
-          "low": 16608496623.47627,
-          "high": 40713559557.97353
+          "center": 25022580727.99817,
+          "low": 15988993358.099487,
+          "high": 39160035423.49395
         }
       },
       "quality": {
@@ -98553,6 +99209,10 @@
           {
             "date": "2026-11-07",
             "value": 0.26
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.26
           }
         ],
         "completionUsdPerM": [
@@ -98867,6 +99527,10 @@
           {
             "date": "2026-11-07",
             "value": 0.38
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.38
           }
         ]
       },
@@ -99120,7 +99784,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 87,
-      "valueRank": 13,
+      "valueRank": 14,
       "valueScore": 131.484686
     },
     {
@@ -99941,6 +100605,10 @@
           {
             "date": "2026-11-07",
             "value": 0.27
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.27
           }
         ],
         "completionUsdPerM": [
@@ -100255,6 +100923,10 @@
           {
             "date": "2026-11-07",
             "value": 0.41
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.41
           }
         ]
       },
@@ -100526,7 +101198,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 88,
-      "valueRank": 15,
+      "valueRank": 16,
       "valueScore": 125.018226
     },
     {
@@ -101285,6 +101957,10 @@
           {
             "date": "2026-11-07",
             "value": 0.0605
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.0605
           }
         ],
         "completionUsdPerM": [
@@ -101599,6 +102275,10 @@
           {
             "date": "2026-11-07",
             "value": 0.4
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.4
           }
         ]
       },
@@ -101744,7 +102424,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 90,
-      "valueRank": 5,
+      "valueRank": 7,
       "valueScore": 259.986442
     },
     {
@@ -102669,6 +103349,10 @@
           {
             "date": "2026-11-07",
             "value": 0.6
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.6
           }
         ],
         "completionUsdPerM": [
@@ -102982,6 +103666,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.2
           }
         ]
@@ -103442,6 +104130,10 @@
           {
             "date": "2026-11-07",
             "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.3
           }
         ],
         "completionUsdPerM": [
@@ -103755,6 +104447,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.9
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.9
           }
         ]
@@ -104634,6 +105330,10 @@
           {
             "date": "2026-11-07",
             "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.5
           }
         ],
         "completionUsdPerM": [
@@ -104947,6 +105647,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2
           }
         ]
@@ -105390,6 +106094,10 @@
           {
             "date": "2026-11-07",
             "value": 0.1
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.1
           }
         ],
         "completionUsdPerM": [
@@ -105704,6 +106412,10 @@
           {
             "date": "2026-11-07",
             "value": 0.9
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.9
           }
         ]
       },
@@ -105831,7 +106543,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 94,
-      "valueRank": 20,
+      "valueRank": 21,
       "valueScore": 97.02065
     },
     {
@@ -105843,9 +106555,9 @@
       "provider": "openai",
       "createdAt": "2025-08-05T17:17:11.000Z",
       "contextLength": 131072,
-      "promptUsdPerM": 0.017,
-      "completionUsdPerM": 0.064,
-      "blendedUsdPerM": 0.02875,
+      "promptUsdPerM": 0.023,
+      "completionUsdPerM": 0.084,
+      "blendedUsdPerM": 0.03825,
       "links": {
         "openrouter": "https://openrouter.ai/openai/gpt-oss-120b"
       },
@@ -107654,6 +108366,10 @@
           {
             "date": "2026-11-06",
             "value": 50742489551
+          },
+          {
+            "date": "2026-11-07",
+            "value": 49278720047
           }
         ],
         "promptUsdPerM": [
@@ -107968,6 +108684,10 @@
           {
             "date": "2026-11-07",
             "value": 0.017
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.023
           }
         ],
         "completionUsdPerM": [
@@ -108282,20 +109002,24 @@
           {
             "date": "2026-11-07",
             "value": 0.064
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.084
           }
         ]
       },
       "metrics": {
-        "momentumUsage": -0.34680205918345025,
+        "momentumUsage": -0.43035724203362935,
         "forecastUsage90d": {
-          "center": 264073948121.80164,
-          "low": 160997088251.75327,
-          "high": 433144790591.43207
+          "center": 262222440353.90118,
+          "low": 159515315231.89764,
+          "high": 431059601551.0708
         },
         "forecastUsage180d": {
-          "center": 467038537649.54926,
-          "low": 284737836495.14996,
-          "high": 766055534925.5272
+          "center": 462358685827.30884,
+          "low": 281262318436.24835,
+          "high": 760057570272.8234
         }
       },
       "quality": {
@@ -108499,8 +109223,8 @@
       ],
       "onEfficiencyFrontier": true,
       "performanceRank": 95,
-      "valueRank": 2,
-      "valueScore": 850.36233
+      "valueRank": 3,
+      "valueScore": 639.161229
     },
     {
       "matchKey": "qwenqwen359b",
@@ -108888,6 +109612,10 @@
           {
             "date": "2026-11-07",
             "value": 0.17
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.17
           }
         ],
         "completionUsdPerM": [
@@ -109202,6 +109930,10 @@
           {
             "date": "2026-11-07",
             "value": 0.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.25
           }
         ]
       },
@@ -109293,7 +110025,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 96,
-      "valueRank": 22,
+      "valueRank": 23,
       "valueScore": 88.558605
     },
     {
@@ -110758,6 +111490,10 @@
           {
             "date": "2026-11-07",
             "value": 0.03
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.03
           }
         ],
         "completionUsdPerM": [
@@ -111072,6 +111808,10 @@
           {
             "date": "2026-11-07",
             "value": 0.13
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.13
           }
         ]
       },
@@ -111226,7 +111966,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 97,
-      "valueRank": 3,
+      "valueRank": 5,
       "valueScore": 303.787873
     },
     {
@@ -111633,6 +112373,10 @@
           {
             "date": "2026-11-07",
             "value": 10
+          },
+          {
+            "date": "2026-11-08",
+            "value": 10
           }
         ],
         "completionUsdPerM": [
@@ -111946,6 +112690,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 50
+          },
+          {
+            "date": "2026-11-08",
             "value": 50
           }
         ]
@@ -112832,6 +113580,10 @@
           {
             "date": "2026-11-07",
             "value": 1
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1
           }
         ],
         "completionUsdPerM": [
@@ -113145,6 +113897,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 5
+          },
+          {
+            "date": "2026-11-08",
             "value": 5
           }
         ]
@@ -123196,6 +123952,10 @@
           {
             "date": "2026-11-07",
             "value": 0.27
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.27
           }
         ],
         "completionUsdPerM": [
@@ -123509,6 +124269,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1
+          },
+          {
+            "date": "2026-11-08",
             "value": 1
           }
         ]
@@ -124554,6 +125318,10 @@
           {
             "date": "2026-11-06",
             "value": 728424779255
+          },
+          {
+            "date": "2026-11-07",
+            "value": 641352554248
           }
         ],
         "promptUsdPerM": [
@@ -124867,6 +125635,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.091
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.091
           }
         ],
@@ -125182,20 +125954,24 @@
           {
             "date": "2026-11-07",
             "value": 0.182
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.182
           }
         ]
       },
       "metrics": {
-        "momentumUsage": -0.19467633156764266,
+        "momentumUsage": -0.28769685151327873,
         "forecastUsage90d": {
-          "center": 6735240638213.371,
-          "low": 3627308656301.7515,
-          "high": 12506094946133.287
+          "center": 6500418984361.092,
+          "low": 3479991240140.302,
+          "high": 12142400384472.947
         },
         "forecastUsage180d": {
-          "center": 18096956573459.164,
-          "low": 9746236364472.082,
-          "high": 33602698003046.67
+          "center": 17139733247500.541,
+          "low": 9175734933877.623,
+          "high": 32016013748484.492
         }
       },
       "quality": null,
@@ -125296,9 +126072,9 @@
       "provider": "deepseek",
       "createdAt": "2026-07-31T06:21:48.000Z",
       "contextLength": 1048576,
-      "promptUsdPerM": 0.0474,
+      "promptUsdPerM": 0.0434,
       "completionUsdPerM": 0.3,
-      "blendedUsdPerM": 0.11055,
+      "blendedUsdPerM": 0.10755,
       "links": {
         "openrouter": "https://openrouter.ai/deepseek/deepseek-v4-flash-0731"
       },
@@ -125616,6 +126392,10 @@
           {
             "date": "2026-11-07",
             "value": 0.0474
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.0434
           }
         ],
         "completionUsdPerM": [
@@ -125929,6 +126709,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.3
           }
         ]
@@ -126617,6 +127401,10 @@
           {
             "date": "2026-11-07",
             "value": 0.44
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.44
           }
         ],
         "completionUsdPerM": [
@@ -126930,6 +127718,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.32
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.32
           }
         ]
@@ -129515,6 +130307,10 @@
           {
             "date": "2026-11-07",
             "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.3
           }
         ],
         "completionUsdPerM": [
@@ -129828,6 +130624,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.5
           }
         ]
@@ -132102,6 +132902,10 @@
           {
             "date": "2026-11-07",
             "value": 0.1
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.1
           }
         ],
         "completionUsdPerM": [
@@ -132415,6 +133219,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.4
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.4
           }
         ]
@@ -133283,6 +134091,10 @@
           {
             "date": "2026-11-06",
             "value": 71139800031
+          },
+          {
+            "date": "2026-11-07",
+            "value": 54740616455
           }
         ],
         "promptUsdPerM": [
@@ -133596,6 +134408,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.25
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.25
           }
         ],
@@ -133911,20 +134727,24 @@
           {
             "date": "2026-11-07",
             "value": 1.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.5
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.2114296979385501,
+        "momentumUsage": 0.17367924435486767,
         "forecastUsage90d": {
-          "center": 130123674176.24243,
-          "low": 93205255458.41075,
-          "high": 181665406074.44855
+          "center": 128323679289.48024,
+          "low": 91826968275.88947,
+          "high": 179326040874.12766
         },
         "forecastUsage180d": {
-          "center": 191592521442.8086,
-          "low": 137234288979.66338,
-          "high": 267481943075.12134
+          "center": 187483476631.62283,
+          "low": 134161047721.11874,
+          "high": 261998952802.95413
         }
       },
       "quality": null,
@@ -134989,6 +135809,10 @@
           {
             "date": "2026-11-07",
             "value": 0.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.25
           }
         ],
         "completionUsdPerM": [
@@ -135302,6 +136126,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.5
           }
         ]
@@ -135989,6 +136817,10 @@
           {
             "date": "2026-11-07",
             "value": 0.75
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.75
           }
         ],
         "completionUsdPerM": [
@@ -136302,6 +137134,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 3.75
+          },
+          {
+            "date": "2026-11-08",
             "value": 3.75
           }
         ]
@@ -137241,6 +138077,10 @@
           {
             "date": "2026-11-07",
             "value": 0.75
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.75
           }
         ],
         "completionUsdPerM": [
@@ -137554,6 +138394,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 3.75
+          },
+          {
+            "date": "2026-11-08",
             "value": 3.75
           }
         ]
@@ -138667,6 +139511,10 @@
           {
             "date": "2026-11-06",
             "value": 55782127696
+          },
+          {
+            "date": "2026-11-07",
+            "value": 46865461170
           }
         ],
         "promptUsdPerM": [
@@ -138980,6 +139828,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.0675
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.0675
           }
         ],
@@ -139295,20 +140147,24 @@
           {
             "date": "2026-11-07",
             "value": 0.225
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.225
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.18812287321486584,
+        "momentumUsage": 0.06489359893733403,
         "forecastUsage90d": {
-          "center": 120043437097.29633,
-          "low": 93946474005.66821,
-          "high": 153389756695.53168
+          "center": 118829346338.1544,
+          "low": 92880212570.82544,
+          "high": 152028221731.14197
         },
         "forecastUsage180d": {
-          "center": 201374218606.502,
-          "low": 157596268910.5107,
-          "high": 257313045541.74454
+          "center": 198130888547.95923,
+          "low": 154864430481.78427,
+          "high": 253485250775.00778
         }
       },
       "quality": null,
@@ -140227,6 +141083,10 @@
           {
             "date": "2026-11-06",
             "value": 68395959390
+          },
+          {
+            "date": "2026-11-07",
+            "value": 54723508693
           }
         ],
         "promptUsdPerM": [
@@ -140540,6 +141400,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.2
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.2
           }
         ],
@@ -140855,20 +141719,24 @@
           {
             "date": "2026-11-07",
             "value": 0.4
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.4
           }
         ]
       },
       "metrics": {
-        "momentumUsage": -0.07810956699897717,
+        "momentumUsage": -0.131350131296376,
         "forecastUsage90d": {
-          "center": 139197508563.9429,
-          "low": 109524037495.63164,
-          "high": 176910446633.0669
+          "center": 138221892169.80258,
+          "low": 108641012898.66792,
+          "high": 175857081642.09122
         },
         "forecastUsage180d": {
-          "center": 237357216901.82736,
-          "low": 186758520263.83524,
-          "high": 301664675516.76544
+          "center": 234485347246.33453,
+          "low": 184303117507.9163,
+          "high": 298331242665.34674
         }
       },
       "quality": null,
@@ -150392,6 +151260,10 @@
           {
             "date": "2026-11-07",
             "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.3
           }
         ],
         "completionUsdPerM": [
@@ -150705,6 +151577,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.2
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.2
           }
         ]
@@ -151451,6 +152327,10 @@
           {
             "date": "2026-11-07",
             "value": 0.57
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.57
           }
         ],
         "completionUsdPerM": [
@@ -151764,6 +152644,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.3
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.3
           }
         ]
@@ -152662,6 +153546,10 @@
           {
             "date": "2026-11-07",
             "value": 0.6
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.6
           }
         ],
         "completionUsdPerM": [
@@ -152975,6 +153863,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.5
           }
         ]
@@ -153517,6 +154409,10 @@
           {
             "date": "2026-11-07",
             "value": 0.6
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.6
           }
         ],
         "completionUsdPerM": [
@@ -153830,6 +154726,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.5
           }
         ]
@@ -154386,6 +155286,10 @@
           {
             "date": "2026-11-06",
             "value": 186743007506
+          },
+          {
+            "date": "2026-11-07",
+            "value": 107352632470
           }
         ],
         "promptUsdPerM": [
@@ -154699,6 +155603,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.192
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.192
           }
         ],
@@ -155014,20 +155922,24 @@
           {
             "date": "2026-11-07",
             "value": 16
+          },
+          {
+            "date": "2026-11-08",
+            "value": 16
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.03720071910292158,
+        "momentumUsage": -0.38435315709761064,
         "forecastUsage90d": {
-          "center": 439401949004.4054,
-          "low": 344658741296.11914,
-          "high": 560189107819.5153
+          "center": 409180698676.595,
+          "low": 315905756924.38715,
+          "high": 529996179238.8004
         },
         "forecastUsage180d": {
-          "center": 667241377942.308,
-          "low": 523371764698.2451,
-          "high": 850659295109.3578
+          "center": 596251421093.8676,
+          "low": 460332701681.9375,
+          "high": 772301763175.8363
         }
       },
       "quality": null,
@@ -155438,6 +156350,10 @@
           {
             "date": "2026-11-06",
             "value": 526443854953
+          },
+          {
+            "date": "2026-11-07",
+            "value": 823620338426
           }
         ],
         "promptUsdPerM": [
@@ -155499,6 +156415,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2
           }
         ],
@@ -155562,20 +156482,24 @@
           {
             "date": "2026-11-07",
             "value": 10
+          },
+          {
+            "date": "2026-11-08",
+            "value": 10
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 1.296840829605252,
+        "momentumUsage": 1.5415566512048189,
         "forecastUsage90d": {
-          "center": 6340637727511187,
-          "low": 4412209958121165,
-          "high": 9111916063182546
+          "center": 8836127722208513,
+          "low": 6225058196660223,
+          "high": 12542397300810876
         },
         "forecastUsage180d": {
-          "center": 59961948179982270000,
-          "low": 41725251660436595000,
-          "high": 86169288056038980000
+          "center": 102722273968890680000,
+          "low": 72367914277929255000,
+          "high": 145808618012885570000
         }
       },
       "quality": null,
@@ -156239,6 +157163,10 @@
           {
             "date": "2026-11-07",
             "value": 5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 5
           }
         ],
         "completionUsdPerM": [
@@ -156552,6 +157480,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 30
+          },
+          {
+            "date": "2026-11-08",
             "value": 30
           }
         ]
@@ -157678,6 +158610,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -157991,6 +158927,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 10
+          },
+          {
+            "date": "2026-11-08",
             "value": 10
           }
         ]
@@ -159321,6 +160261,10 @@
           {
             "date": "2026-11-07",
             "value": 0.05
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.05
           }
         ],
         "completionUsdPerM": [
@@ -159634,6 +160578,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.4
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.4
           }
         ]
@@ -160357,6 +161305,10 @@
           {
             "date": "2026-11-07",
             "value": 15
+          },
+          {
+            "date": "2026-11-08",
+            "value": 15
           }
         ],
         "completionUsdPerM": [
@@ -160670,6 +161622,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 120
+          },
+          {
+            "date": "2026-11-08",
             "value": 120
           }
         ]
@@ -161561,6 +162517,10 @@
           {
             "date": "2026-11-07",
             "value": 5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 5
           }
         ],
         "completionUsdPerM": [
@@ -161874,6 +162834,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 30
+          },
+          {
+            "date": "2026-11-08",
             "value": 30
           }
         ]
@@ -162669,6 +163633,10 @@
           {
             "date": "2026-11-07",
             "value": 30
+          },
+          {
+            "date": "2026-11-08",
+            "value": 30
           }
         ],
         "completionUsdPerM": [
@@ -162982,6 +163950,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 180
+          },
+          {
+            "date": "2026-11-08",
             "value": 180
           }
         ]
@@ -163599,6 +164571,10 @@
           {
             "date": "2026-11-06",
             "value": 200056410129
+          },
+          {
+            "date": "2026-11-07",
+            "value": 120337861700
           }
         ],
         "promptUsdPerM": [
@@ -163648,6 +164624,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1
+          },
+          {
+            "date": "2026-11-08",
             "value": 1
           }
         ],
@@ -163699,20 +164679,24 @@
           {
             "date": "2026-11-07",
             "value": 5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 5
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 1.2285994428251914,
+        "momentumUsage": 1.0532417490096329,
         "forecastUsage90d": {
-          "center": 130410613411579.12,
-          "low": 99695188225333.67,
-          "high": 170589257045634.3
+          "center": 23641111371417.86,
+          "low": 17792795171467.78,
+          "high": 31411711397208.047
         },
         "forecastUsage180d": {
-          "center": 94648505528126910,
-          "low": 72356078443499800,
-          "high": 123809081302037500
+          "center": 3324681586684874,
+          "low": 2502224939972721.5,
+          "high": 4417471617464557
         }
       },
       "quality": null,
@@ -163968,6 +164952,10 @@
           {
             "date": "2026-11-07",
             "value": 1
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1
           }
         ],
         "completionUsdPerM": [
@@ -164017,6 +165005,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 5
+          },
+          {
+            "date": "2026-11-08",
             "value": 5
           }
         ]
@@ -164552,6 +165544,10 @@
           {
             "date": "2026-11-07",
             "value": 0.075
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.075
           }
         ],
         "completionUsdPerM": [
@@ -164865,6 +165861,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.3
           }
         ]
@@ -165227,6 +166227,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -165540,6 +166544,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 8
+          },
+          {
+            "date": "2026-11-08",
             "value": 8
           }
         ]
@@ -165893,6 +166901,10 @@
           {
             "date": "2026-11-07",
             "value": 20
+          },
+          {
+            "date": "2026-11-08",
+            "value": 20
           }
         ],
         "completionUsdPerM": [
@@ -166206,6 +167218,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 80
+          },
+          {
+            "date": "2026-11-08",
             "value": 80
           }
         ]
@@ -170242,6 +171258,10 @@
           {
             "date": "2026-11-07",
             "value": 0.12
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.12
           }
         ],
         "completionUsdPerM": [
@@ -170555,6 +171575,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.24
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.24
           }
         ]
@@ -171499,6 +172523,10 @@
           {
             "date": "2026-11-07",
             "value": 0.14
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.14
           }
         ],
         "completionUsdPerM": [
@@ -171812,6 +172840,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.8
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.8
           }
         ]
@@ -172311,6 +173343,10 @@
           {
             "date": "2026-11-07",
             "value": 0.45
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.45
           }
         ],
         "completionUsdPerM": [
@@ -172624,6 +173660,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 3.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 3.5
           }
         ]
@@ -173185,6 +174225,10 @@
           {
             "date": "2026-11-07",
             "value": 0.12
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.12
           }
         ],
         "completionUsdPerM": [
@@ -173498,6 +174542,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.5
           }
         ]
@@ -173907,6 +174955,10 @@
           {
             "date": "2026-11-07",
             "value": 0.1
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.1
           }
         ],
         "completionUsdPerM": [
@@ -174220,6 +175272,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.3
           }
         ]
@@ -175191,6 +176247,10 @@
           {
             "date": "2026-11-07",
             "value": 0.08
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.08
           }
         ],
         "completionUsdPerM": [
@@ -175504,6 +176564,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.28
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.28
           }
         ]
@@ -176470,6 +177534,10 @@
           {
             "date": "2026-11-07",
             "value": 0.15
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.15
           }
         ],
         "completionUsdPerM": [
@@ -176783,6 +177851,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.6
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.6
           }
         ]
@@ -177136,6 +178208,10 @@
           {
             "date": "2026-11-07",
             "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.3
           }
         ],
         "completionUsdPerM": [
@@ -177449,6 +178525,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1
+          },
+          {
+            "date": "2026-11-08",
             "value": 1
           }
         ]
@@ -177794,6 +178874,10 @@
           {
             "date": "2026-11-07",
             "value": 0.195
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.195
           }
         ],
         "completionUsdPerM": [
@@ -178107,6 +179191,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.975
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.975
           }
         ]
@@ -178621,6 +179709,10 @@
           {
             "date": "2026-11-07",
             "value": 0.12
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.12
           }
         ],
         "completionUsdPerM": [
@@ -178934,6 +180026,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.8
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.8
           }
         ]
@@ -180812,6 +181908,10 @@
           {
             "date": "2026-11-07",
             "value": 0.09
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.09
           }
         ],
         "completionUsdPerM": [
@@ -181125,6 +182225,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.1
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.1
           }
         ]
@@ -182405,6 +183509,10 @@
           {
             "date": "2026-11-07",
             "value": 0.21
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.21
           }
         ],
         "completionUsdPerM": [
@@ -182718,6 +183826,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.9
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.9
           }
         ]
@@ -183506,6 +184618,10 @@
           {
             "date": "2026-11-07",
             "value": 0.15
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.15
           }
         ],
         "completionUsdPerM": [
@@ -183819,6 +184935,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.6
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.6
           }
         ]
@@ -184164,6 +185284,10 @@
           {
             "date": "2026-11-07",
             "value": 0.29
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.29
           }
         ],
         "completionUsdPerM": [
@@ -184477,6 +185601,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1
+          },
+          {
+            "date": "2026-11-08",
             "value": 1
           }
         ]
@@ -185290,6 +186418,10 @@
           {
             "date": "2026-11-07",
             "value": 0.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.25
           }
         ],
         "completionUsdPerM": [
@@ -185603,6 +186735,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.75
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.75
           }
         ]
@@ -186655,6 +187791,10 @@
           {
             "date": "2026-11-07",
             "value": 0.5
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.5
           }
         ],
         "completionUsdPerM": [
@@ -186968,6 +188108,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 3.6
+          },
+          {
+            "date": "2026-11-08",
             "value": 3.6
           }
         ]
@@ -187376,6 +188520,10 @@
           {
             "date": "2026-11-07",
             "value": 0.26
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.26
           }
         ],
         "completionUsdPerM": [
@@ -187689,6 +188837,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.56
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.56
           }
         ]
@@ -188229,6 +189381,10 @@
           {
             "date": "2026-11-07",
             "value": 0.3
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.3
           }
         ],
         "completionUsdPerM": [
@@ -188542,6 +189698,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.8
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.8
           }
         ]
@@ -189013,6 +190173,10 @@
           {
             "date": "2026-11-07",
             "value": 0.26
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.26
           }
         ],
         "completionUsdPerM": [
@@ -189326,6 +190490,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.08
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.08
           }
         ]
@@ -189671,6 +190839,10 @@
           {
             "date": "2026-11-07",
             "value": 0.26
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.26
           }
         ],
         "completionUsdPerM": [
@@ -189984,6 +191156,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.6
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.6
           }
         ]
@@ -190452,6 +191628,10 @@
           {
             "date": "2026-11-07",
             "value": 0.14
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.14
           }
         ],
         "completionUsdPerM": [
@@ -190765,6 +191945,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1
+          },
+          {
+            "date": "2026-11-08",
             "value": 1
           }
         ]
@@ -191155,6 +192339,10 @@
           {
             "date": "2026-11-07",
             "value": 0.065
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.065
           }
         ],
         "completionUsdPerM": [
@@ -191469,6 +192657,10 @@
           {
             "date": "2026-11-07",
             "value": 0.26
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.26
           }
         ]
       },
@@ -191602,9 +192794,9 @@
       "provider": "qwen",
       "createdAt": "2026-04-27T01:57:44.000Z",
       "contextLength": 262144,
-      "promptUsdPerM": 0.45,
-      "completionUsdPerM": 2.7,
-      "blendedUsdPerM": 1.0125,
+      "promptUsdPerM": 0.32,
+      "completionUsdPerM": 3.2,
+      "blendedUsdPerM": 1.04,
       "links": {
         "openrouter": "https://openrouter.ai/qwen/qwen3.6-27b"
       },
@@ -191922,6 +193114,10 @@
           {
             "date": "2026-11-07",
             "value": 0.45
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.32
           }
         ],
         "completionUsdPerM": [
@@ -192236,6 +193432,10 @@
           {
             "date": "2026-11-07",
             "value": 2.7
+          },
+          {
+            "date": "2026-11-08",
+            "value": 3.2
           }
         ]
       },
@@ -192631,6 +193831,10 @@
           {
             "date": "2026-11-07",
             "value": 0.1875
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.1875
           }
         ],
         "completionUsdPerM": [
@@ -192944,6 +194148,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 1.125
+          },
+          {
+            "date": "2026-11-08",
             "value": 1.125
           }
         ]
@@ -193915,6 +195123,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -194229,6 +195441,10 @@
           {
             "date": "2026-11-07",
             "value": 6
+          },
+          {
+            "date": "2026-11-08",
+            "value": 6
           }
         ]
       },
@@ -194492,6 +195708,10 @@
           {
             "date": "2026-11-06",
             "value": 109288297870
+          },
+          {
+            "date": "2026-11-07",
+            "value": 141601454294
           }
         ],
         "promptUsdPerM": [
@@ -194805,6 +196025,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.15
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.15
           }
         ],
@@ -195120,20 +196344,24 @@
           {
             "date": "2026-11-07",
             "value": 1.875
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.875
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.41449757727551484,
+        "momentumUsage": 0.48294703749067697,
         "forecastUsage90d": {
-          "center": 363243437656.9408,
-          "low": 283173440517.8775,
-          "high": 465953991869.8758
+          "center": 388819043406.33777,
+          "low": 302520832931.0641,
+          "high": 499735000233.4195
         },
         "forecastUsage180d": {
-          "center": 1345125086873.3394,
-          "low": 1048618252359.3737,
-          "high": 1725472063131.6262
+          "center": 1490296209906.543,
+          "low": 1159525641504.5913,
+          "high": 1915423612693.7883
         }
       },
       "quality": null,
@@ -195562,6 +196790,10 @@
           {
             "date": "2026-11-06",
             "value": 166746965404
+          },
+          {
+            "date": "2026-11-07",
+            "value": 95876492252
           }
         ],
         "promptUsdPerM": [
@@ -195855,6 +197087,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.15
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.15
           }
         ],
@@ -196150,20 +197386,24 @@
           {
             "date": "2026-11-07",
             "value": 0.47
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.47
           }
         ]
       },
       "metrics": {
-        "momentumUsage": 0.649107093999808,
+        "momentumUsage": 0.5477675788662774,
         "forecastUsage90d": {
-          "center": 410244476302.1587,
-          "low": 318479190892.23413,
-          "high": 528450633979.9808
+          "center": 400605901113.3791,
+          "low": 311275645718.3891,
+          "high": 515572259553.0433
         },
         "forecastUsage180d": {
-          "center": 1458395828806.1924,
-          "low": 1132175447541.4526,
-          "high": 1878612010265.6858
+          "center": 1387930583107.0063,
+          "low": 1078438902842.4753,
+          "high": 1786240554236.6934
         }
       },
       "quality": null,
@@ -196915,6 +198155,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -197172,6 +198416,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 6
+          },
+          {
+            "date": "2026-11-08",
             "value": 6
           }
         ]
@@ -197557,6 +198805,10 @@
           {
             "date": "2026-11-07",
             "value": 4
+          },
+          {
+            "date": "2026-11-08",
+            "value": 4
           }
         ],
         "completionUsdPerM": [
@@ -197738,6 +198990,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 12
+          },
+          {
+            "date": "2026-11-08",
             "value": 12
           }
         ]
@@ -198055,6 +199311,10 @@
           {
             "date": "2026-11-07",
             "value": 0.15
+          },
+          {
+            "date": "2026-11-08",
+            "value": 0.15
           }
         ],
         "completionUsdPerM": [
@@ -198240,6 +199500,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 0.47
+          },
+          {
+            "date": "2026-11-08",
             "value": 0.47
           }
         ]
@@ -204035,6 +205299,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -204348,6 +205616,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.5
           }
         ]
@@ -204802,6 +206074,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -205115,6 +206391,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.5
           }
         ]
@@ -205658,6 +206938,10 @@
           {
             "date": "2026-11-07",
             "value": 1.25
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.25
           }
         ],
         "completionUsdPerM": [
@@ -205971,6 +207255,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2.5
+          },
+          {
+            "date": "2026-11-08",
             "value": 2.5
           }
         ]
@@ -206586,6 +207874,10 @@
           {
             "date": "2026-11-07",
             "value": 2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 2
           }
         ],
         "completionUsdPerM": [
@@ -206899,6 +208191,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 6
+          },
+          {
+            "date": "2026-11-08",
             "value": 6
           }
         ]
@@ -207460,6 +208756,10 @@
           {
             "date": "2026-11-07",
             "value": 1
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1
           }
         ],
         "completionUsdPerM": [
@@ -207773,6 +209073,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 2
+          },
+          {
+            "date": "2026-11-08",
             "value": 2
           }
         ]
@@ -213825,6 +215129,10 @@
           {
             "date": "2026-11-07",
             "value": 1
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1
           }
         ],
         "completionUsdPerM": [
@@ -214138,6 +215446,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 3.2
+          },
+          {
+            "date": "2026-11-08",
             "value": 3.2
           }
         ]
@@ -214708,6 +216020,10 @@
           {
             "date": "2026-11-07",
             "value": 1.2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.2
           }
         ],
         "completionUsdPerM": [
@@ -215021,6 +216337,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 4
+          },
+          {
+            "date": "2026-11-08",
             "value": 4
           }
         ]
@@ -215387,6 +216707,10 @@
           {
             "date": "2026-11-07",
             "value": 1.2
+          },
+          {
+            "date": "2026-11-08",
+            "value": 1.2
           }
         ],
         "completionUsdPerM": [
@@ -215700,6 +217024,10 @@
           },
           {
             "date": "2026-11-07",
+            "value": 4
+          },
+          {
+            "date": "2026-11-08",
             "value": 4
           }
         ]
