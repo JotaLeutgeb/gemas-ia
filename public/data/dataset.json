@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T13:57:23.202Z",
+  "generatedAt": "2026-11-16T14:00:15.600Z",
   "schemaVersion": 3,
   "sources": {
     "openrouter": {
@@ -17,15 +17,15 @@
       "fetchedAt": "2026-11-15T13:57:22.702Z"
     },
     "benchmarks": {
-      "lastSnapshot": "2026-11-09",
+      "lastSnapshot": "2026-11-16",
       "ok": true,
       "errors": [],
-      "fetchedAt": "2026-11-09T14:21:18.464Z"
+      "fetchedAt": "2026-11-16T14:00:14.792Z"
     }
   },
   "totals": {
     "models": 244,
-    "withQuality": 97
+    "withQuality": 99
   },
   "labs": [
     {
@@ -91,7 +91,7 @@
         "labLabel": "Google DeepMind",
         "source": "openrouter-usage",
         "firstSeen": "2026-11-11",
-        "qualityIndex": null,
+        "qualityIndex": 62.318056,
         "promptUsdPerM": 2
       },
       {
@@ -100,7 +100,7 @@
         "labLabel": "Google DeepMind",
         "source": "openrouter",
         "firstSeen": "2026-11-11",
-        "qualityIndex": null,
+        "qualityIndex": 62.318056,
         "promptUsdPerM": 2
       },
       {
@@ -109,7 +109,7 @@
         "labLabel": "Anthropic",
         "source": "openrouter-usage",
         "firstSeen": "2026-11-10",
-        "qualityIndex": null,
+        "qualityIndex": 63.854167,
         "promptUsdPerM": 8
       },
       {
@@ -118,7 +118,7 @@
         "labLabel": "Anthropic",
         "source": "openrouter",
         "firstSeen": "2026-11-10",
-        "qualityIndex": null,
+        "qualityIndex": 63.854167,
         "promptUsdPerM": 8
       }
     ],
@@ -2889,6 +2889,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 43.333333333333336,
+          "rawScore": 0.43333333333333335,
+          "releaseDate": "2026-04-16",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 31.11111111111111,
           "rawScore": 0.3111111111111111,
           "releaseDate": "2026-04-16",
@@ -2952,8 +2961,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 28.560000000000002,
-          "rawScore": 0.2856,
+          "score": 24.34,
+          "rawScore": 0.2434,
           "releaseDate": "2026-04-16",
           "organization": "Anthropic",
           "source": "external",
@@ -3052,7 +3061,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 3,
-      "valueRank": 72,
+      "valueRank": 73,
       "valueScore": 7.557366
     },
     {
@@ -3496,6 +3505,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 43.333333333333336,
+          "rawScore": 0.43333333333333335,
+          "releaseDate": "2026-04-16",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 31.11111111111111,
           "rawScore": 0.3111111111111111,
           "releaseDate": "2026-04-16",
@@ -3559,8 +3577,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 28.560000000000002,
-          "rawScore": 0.2856,
+          "score": 24.34,
+          "rawScore": 0.2434,
           "releaseDate": "2026-04-16",
           "organization": "Anthropic",
           "source": "external",
@@ -3659,7 +3677,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 2,
-      "valueRank": 85,
+      "valueRank": 87,
       "valueScore": 1.259561
     },
     {
@@ -4684,6 +4702,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 33.33333333333333,
+          "rawScore": 0.3333333333333333,
+          "releaseDate": "2026-02-05",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 15,
           "rawScore": 0.15,
@@ -4821,7 +4848,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 4,
-      "valueRank": 73,
+      "valueRank": 74,
       "valueScore": 7.532708
     },
     {
@@ -5728,8 +5755,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.5,
-          "rawScore": 65.5,
+          "score": 65.2,
+          "rawScore": 65.2,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -5737,8 +5764,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.3,
-          "rawScore": 64.3,
+          "score": 64.1,
+          "rawScore": 64.1,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -5811,6 +5838,15 @@
           "benchmark": "gdp_pdf",
           "score": 17,
           "rawScore": 0.17,
+          "releaseDate": "2026-02-19",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 4172,
+          "rawScore": 4172,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -5944,8 +5980,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 21.99,
-          "rawScore": 0.21989999999999998,
+          "score": 18.11,
+          "rawScore": 0.1811,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -9083,8 +9119,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.5,
-          "rawScore": 65.5,
+          "score": 65.2,
+          "rawScore": 65.2,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -9092,8 +9128,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.3,
-          "rawScore": 64.3,
+          "score": 64.1,
+          "rawScore": 64.1,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -9166,6 +9202,15 @@
           "benchmark": "gdp_pdf",
           "score": 17,
           "rawScore": 0.17,
+          "releaseDate": "2026-02-19",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 4172,
+          "rawScore": 4172,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -9299,8 +9344,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 21.99,
-          "rawScore": 0.21989999999999998,
+          "score": 18.11,
+          "rawScore": 0.1811,
           "releaseDate": "2026-02-19",
           "organization": "Google DeepMind",
           "source": "external",
@@ -9955,8 +10000,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.2,
-          "rawScore": 65.2,
+          "score": 65,
+          "rawScore": 65,
           "releaseDate": "2025-11-18",
           "organization": "Google DeepMind",
           "source": "external",
@@ -10963,15 +11008,6 @@
           "matchedVia": "substring"
         },
         {
-          "benchmark": "geobench",
-          "score": 3877,
-          "rawScore": 3877,
-          "releaseDate": "2025-11-24",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
           "benchmark": "gpqa_diamond",
           "score": 80.68181818181817,
           "rawScore": 0.8068181818181818,
@@ -11127,7 +11163,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 9,
-      "valueRank": 74,
+      "valueRank": 75,
       "valueScore": 7.144024
     },
     {
@@ -12840,6 +12876,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 23.333333333333332,
+          "rawScore": 0.23333333333333334,
+          "releaseDate": "2026-03-05",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 15.555555555555555,
           "rawScore": 0.15555555555555556,
           "releaseDate": "2026-03-05",
@@ -12912,8 +12957,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 19,
-          "rawScore": 0.19,
+          "score": 17.76,
+          "rawScore": 0.1776,
           "releaseDate": "2026-03-05",
           "organization": "OpenAI",
           "source": "external",
@@ -12985,7 +13030,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 11,
-      "valueRank": 64,
+      "valueRank": 65,
       "valueScore": 12.681498
     },
     {
@@ -14101,6 +14146,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 23.333333333333332,
+          "rawScore": 0.23333333333333334,
+          "releaseDate": "2026-03-05",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 15.555555555555555,
           "rawScore": 0.15555555555555556,
           "releaseDate": "2026-03-05",
@@ -14173,8 +14227,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 19,
-          "rawScore": 0.19,
+          "score": 17.76,
+          "rawScore": 0.1776,
           "releaseDate": "2026-03-05",
           "organization": "OpenAI",
           "source": "external",
@@ -14255,7 +14309,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 10,
-      "valueRank": 87,
+      "valueRank": 89,
       "valueScore": 1.056792
     },
     {
@@ -15699,6 +15753,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 36.666666666666664,
+          "rawScore": 0.36666666666666664,
+          "releaseDate": "2026-06-16",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 15,
           "rawScore": 0.15,
@@ -15745,8 +15808,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 31.7,
-          "rawScore": 0.317,
+          "score": 30.4,
+          "rawScore": 0.304,
           "releaseDate": "2026-06-16",
           "organization": "Z.ai (Zhipu AI)",
           "source": "external",
@@ -17978,8 +18041,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.7,
-          "rawScore": 64.7,
+          "score": 64.4,
+          "rawScore": 64.4,
           "releaseDate": "2025-12-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -19472,6 +19535,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 32.22222222222222,
+          "rawScore": 0.32222222222222224,
+          "releaseDate": "2025-12-11",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 22,
           "rawScore": 0.22,
@@ -19690,7 +19762,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 14,
-      "valueRank": 52,
+      "valueRank": 53,
       "valueScore": 14.747923
     },
     {
@@ -21214,6 +21286,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 32.22222222222222,
+          "rawScore": 0.32222222222222224,
+          "releaseDate": "2025-12-11",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 22,
           "rawScore": 0.22,
@@ -21414,7 +21495,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 17,
-      "valueRank": 54,
+      "valueRank": 55,
       "valueScore": 14.618704
     },
     {
@@ -22457,6 +22538,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 32.22222222222222,
+          "rawScore": 0.32222222222222224,
+          "releaseDate": "2025-12-11",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 22,
           "rawScore": 0.22,
@@ -22657,7 +22747,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 15,
-      "valueRank": 53,
+      "valueRank": 54,
       "valueScore": 14.618704
     },
     {
@@ -23772,6 +23862,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 32.22222222222222,
+          "rawScore": 0.32222222222222224,
+          "releaseDate": "2025-12-11",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 22,
           "rawScore": 0.22,
@@ -23981,7 +24080,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 16,
-      "valueRank": 86,
+      "valueRank": 88,
       "valueScore": 1.218225
     },
     {
@@ -27154,6 +27253,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 23.333333333333332,
+          "rawScore": 0.23333333333333334,
+          "releaseDate": "2026-03-05",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 15.555555555555555,
           "rawScore": 0.15555555555555556,
           "releaseDate": "2026-03-05",
@@ -27262,8 +27370,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 19,
-          "rawScore": 0.19,
+          "score": 17.76,
+          "rawScore": 0.1776,
           "releaseDate": "2026-03-05",
           "organization": "OpenAI",
           "source": "external",
@@ -34509,6 +34617,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 23.333333333333332,
+          "rawScore": 0.23333333333333334,
+          "releaseDate": "2026-03-05",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 15.555555555555555,
           "rawScore": 0.15555555555555556,
           "releaseDate": "2026-03-05",
@@ -34626,8 +34743,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 19,
-          "rawScore": 0.19,
+          "score": 17.76,
+          "rawScore": 0.1776,
           "releaseDate": "2026-03-05",
           "organization": "OpenAI",
           "source": "external",
@@ -35667,6 +35784,15 @@
           "releaseDate": "2026-04-24",
           "organization": "DeepSeek",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 33.33333333333333,
+          "rawScore": 0.3333333333333333,
+          "releaseDate": "2026-08-13",
+          "organization": "DeepSeek",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -38040,8 +38166,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.4,
-          "rawScore": 66.4,
+          "score": 66.1,
+          "rawScore": 66.1,
           "releaseDate": "2026-05-28",
           "organization": "Anthropic",
           "source": "external",
@@ -38120,6 +38246,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "geobench",
+          "score": 4128,
+          "rawScore": 4128,
+          "releaseDate": "2026-05-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "gpqa_diamond",
           "score": 88.38383838383838,
           "rawScore": 0.8838383838383839,
@@ -38183,6 +38318,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 65.55555555555556,
+          "rawScore": 0.6555555555555556,
+          "releaseDate": "2026-05-28",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 31,
           "rawScore": 0.31,
@@ -38238,8 +38382,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 33.84,
-          "rawScore": 0.33840000000000003,
+          "score": 31,
+          "rawScore": 0.31,
           "releaseDate": "2026-05-28",
           "organization": "Anthropic",
           "source": "external",
@@ -38247,8 +38391,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 32.9,
-          "rawScore": 0.329,
+          "score": 30.659999999999997,
+          "rawScore": 0.3066,
           "releaseDate": "2026-05-28",
           "organization": "Anthropic",
           "source": "external",
@@ -38338,7 +38482,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 28,
-      "valueRank": 75,
+      "valueRank": 76,
       "valueScore": 6.597327
     },
     {
@@ -38665,8 +38809,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.4,
-          "rawScore": 66.4,
+          "score": 66.1,
+          "rawScore": 66.1,
           "releaseDate": "2026-05-28",
           "organization": "Anthropic",
           "source": "external",
@@ -38745,6 +38889,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "geobench",
+          "score": 4128,
+          "rawScore": 4128,
+          "releaseDate": "2026-05-28",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "gpqa_diamond",
           "score": 88.38383838383838,
           "rawScore": 0.8838383838383839,
@@ -38808,6 +38961,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 65.55555555555556,
+          "rawScore": 0.6555555555555556,
+          "releaseDate": "2026-05-28",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 31,
           "rawScore": 0.31,
@@ -38863,8 +39025,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 33.84,
-          "rawScore": 0.33840000000000003,
+          "score": 31,
+          "rawScore": 0.31,
           "releaseDate": "2026-05-28",
           "organization": "Anthropic",
           "source": "external",
@@ -38872,8 +39034,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 32.9,
-          "rawScore": 0.329,
+          "score": 30.659999999999997,
+          "rawScore": 0.3066,
           "releaseDate": "2026-05-28",
           "organization": "Anthropic",
           "source": "external",
@@ -38963,7 +39125,7 @@
       ],
       "onEfficiencyFrontier": false,
       "performanceRank": 27,
-      "valueRank": 79,
+      "valueRank": 81,
       "valueScore": 3.298663
     },
     {
@@ -43488,6 +43650,1103 @@
       "valueScore": 114.073848
     },
     {
+      "matchKey": "anthropicclaudefable52",
+      "urlSlug": "anthropic-claude-fable-5-2",
+      "name": "Anthropic: Claude Fable 5.2",
+      "labId": "anthropic",
+      "labLabel": "Anthropic",
+      "provider": "anthropic",
+      "createdAt": "2026-11-09T19:49:41.000Z",
+      "contextLength": 1000000,
+      "promptUsdPerM": 8,
+      "completionUsdPerM": 40,
+      "blendedUsdPerM": 16,
+      "links": {
+        "openrouter": "https://openrouter.ai/anthropic/claude-fable-5.2"
+      },
+      "series": {
+        "usageTokens": [
+          {
+            "date": "2026-11-10",
+            "value": 179398520921
+          },
+          {
+            "date": "2026-11-11",
+            "value": 124283771836
+          },
+          {
+            "date": "2026-11-12",
+            "value": 134664763181
+          },
+          {
+            "date": "2026-11-13",
+            "value": 201322934068
+          },
+          {
+            "date": "2026-11-14",
+            "value": 92033619268
+          }
+        ],
+        "promptUsdPerM": [
+          {
+            "date": "2026-11-10",
+            "value": 8
+          },
+          {
+            "date": "2026-11-11",
+            "value": 8
+          },
+          {
+            "date": "2026-11-12",
+            "value": 8
+          },
+          {
+            "date": "2026-11-13",
+            "value": 8
+          },
+          {
+            "date": "2026-11-14",
+            "value": 8
+          },
+          {
+            "date": "2026-11-15",
+            "value": 8
+          }
+        ],
+        "completionUsdPerM": [
+          {
+            "date": "2026-11-10",
+            "value": 40
+          },
+          {
+            "date": "2026-11-11",
+            "value": 40
+          },
+          {
+            "date": "2026-11-12",
+            "value": 40
+          },
+          {
+            "date": "2026-11-13",
+            "value": 40
+          },
+          {
+            "date": "2026-11-14",
+            "value": 40
+          },
+          {
+            "date": "2026-11-15",
+            "value": 40
+          }
+        ]
+      },
+      "metrics": {
+        "momentumUsage": -0.5967980993612674,
+        "forecastUsage90d": {
+          "center": 55286517.54777823,
+          "low": 40042378.825230405,
+          "high": 76334101.8250107
+        },
+        "forecastUsage180d": {
+          "center": 25717.351809938336,
+          "low": 18626.312331308323,
+          "high": 35507.95092190332
+        }
+      },
+      "quality": {
+        "index": 63.854167,
+        "source": "code-composite",
+        "general": null
+      },
+      "benchmarks": [
+        {
+          "benchmark": "apex_agents",
+          "score": 63.6,
+          "rawScore": 0.636,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 98.5,
+          "rawScore": 0.985,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 98.5,
+          "rawScore": 0.985,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 98.5,
+          "rawScore": 0.985,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 97.5,
+          "rawScore": 0.975,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 97.5,
+          "rawScore": 0.975,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 97.5,
+          "rawScore": 0.975,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 95.5,
+          "rawScore": 0.9550000000000001,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 94.5,
+          "rawScore": 0.9450000000000001,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 92.5,
+          "rawScore": 0.925,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 90.5,
+          "rawScore": 0.905,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 93.75,
+          "rawScore": 0.9375,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 92.5,
+          "rawScore": 0.925,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 90.41666666666669,
+          "rawScore": 0.9041666666666668,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 89.58333333333334,
+          "rawScore": 0.8958333333333335,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 89.16666666666667,
+          "rawScore": 0.8916666666666667,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 88.33333333333333,
+          "rawScore": 0.8833333333333333,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 87.5,
+          "rawScore": 0.875,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 86.66666666666667,
+          "rawScore": 0.8666666666666667,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 82.5,
+          "rawScore": 0.8250000000000001,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 76.80555555555554,
+          "rawScore": 0.7680555555555555,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "btf3",
+          "score": 13,
+          "rawScore": 0.13,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "chess_puzzles",
+          "score": 79,
+          "rawScore": 0.79,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "chess_puzzles",
+          "score": 47,
+          "rawScore": 0.47,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "chess_puzzles",
+          "score": 45,
+          "rawScore": 0.45,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "chess_puzzles",
+          "score": 31,
+          "rawScore": 0.31,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 35.7142857142857,
+          "rawScore": 0.35714285714285704,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 35.428571428571395,
+          "rawScore": 0.354285714285714,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 32.857142857142904,
+          "rawScore": 0.32857142857142907,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 30.8571428571429,
+          "rawScore": 0.308571428571429,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 29.4285714285714,
+          "rawScore": 0.294285714285714,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 28.571428570000002,
+          "rawScore": 0.2857142857,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 60,
+          "rawScore": 0.6,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 56.89999999999999,
+          "rawScore": 0.569,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 56.3,
+          "rawScore": 0.563,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 54.79999999999999,
+          "rawScore": 0.5479999999999999,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 53.2,
+          "rawScore": 0.532,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 98.4,
+          "rawScore": 0.9840000000000001,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 97.33000000000001,
+          "rawScore": 0.9733,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 96.53,
+          "rawScore": 0.9653,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 95.73,
+          "rawScore": 0.9573,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 91.47,
+          "rawScore": 0.9147,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 98.93,
+          "rawScore": 0.9893000000000001,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 98.13,
+          "rawScore": 0.9813,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 98.13,
+          "rawScore": 0.9813,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "dtbench",
+          "score": 98.13,
+          "rawScore": 0.9813,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "ebr_bench",
+          "score": 90.47619047619048,
+          "rawScore": 0.9047619047619048,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "ebr_bench",
+          "score": 39.523799999999994,
+          "rawScore": 0.395238,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "enigma_eval",
+          "score": 39.28,
+          "rawScore": 0.39280000000000004,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "forecastbench",
+          "score": 65.9,
+          "rawScore": 65.9,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "forecastbench",
+          "score": 65.7,
+          "rawScore": 65.7,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_erdos",
+          "score": 0,
+          "rawScore": 0,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tier_4_v2",
+          "score": 100,
+          "rawScore": 1,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tier_4_v2",
+          "score": 90.2,
+          "rawScore": 0.902,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 95.08771929824562,
+          "rawScore": 0.9508771929824561,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 87.01754385964912,
+          "rawScore": 0.8701754385964913,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontierswe",
+          "score": 168.78,
+          "rawScore": 168.78,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontierswe",
+          "score": 301.28,
+          "rawScore": 301.28,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "furniture_assembly",
+          "score": 90,
+          "rawScore": 0.9,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "furniture_assembly",
+          "score": 35.833333333333336,
+          "rawScore": 0.35833333333333334,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gdp_pdf",
+          "score": 29.799999999999997,
+          "rawScore": 0.298,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 4404,
+          "rawScore": 4404,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 93.87626262626263,
+          "rawScore": 0.9387626262626263,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 85.85858585858585,
+          "rawScore": 0.8585858585858586,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 78.78787878787878,
+          "rawScore": 0.7878787878787878,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 83.33333333333334,
+          "rawScore": 0.8333333333333334,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 60.34,
+          "rawScore": 60.34,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 61.02,
+          "rawScore": 61.02,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 61.15,
+          "rawScore": 61.15,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 60.32,
+          "rawScore": 60.32,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 59.59,
+          "rawScore": 59.59,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 70.61,
+          "rawScore": 70.61,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 69.9,
+          "rawScore": 69.9,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 70.03,
+          "rawScore": 70.03,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 69.63,
+          "rawScore": 69.63,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 70,
+          "rawScore": 0.7,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 63.88888888888889,
+          "rawScore": 0.638888888888889,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mystery_game_puzzles",
+          "score": 90,
+          "rawScore": 0.9,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mystery_game_puzzles",
+          "score": 52,
+          "rawScore": 0.52,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 99.72222222222223,
+          "rawScore": 0.9972222222222222,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 97.77777777777777,
+          "rawScore": 0.9777777777777777,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 100,
+          "rawScore": 1,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 99.72222222222223,
+          "rawScore": 0.9972222222222222,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 37.27,
+          "rawScore": 0.37270000000000003,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "proofbench",
+          "score": 100,
+          "rawScore": 1,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "proofbench",
+          "score": 95,
+          "rawScore": 0.9500000000000001,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "rli",
+          "score": 16.1,
+          "rawScore": 0.161,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 60.9953703703704,
+          "rawScore": 0.609953703703704,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 67.7083333333333,
+          "rawScore": 0.677083333333333,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 65.625,
+          "rawScore": 0.65625,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 59.7222222222222,
+          "rawScore": 0.597222222222222,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 59.4907407407407,
+          "rawScore": 0.594907407407407,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 57.7546296296296,
+          "rawScore": 0.577546296296296,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simplebench",
+          "score": 81.9,
+          "rawScore": 0.8190000000000001,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 94,
+          "rawScore": 0.94,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 70.7,
+          "rawScore": 0.707,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "spireclimb",
+          "score": 15.333333333333332,
+          "rawScore": 0.15333333333333332,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "spireclimb_sts1_a20_heart",
+          "score": 13.333333333333334,
+          "rawScore": 0.13333333333333333,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "spireclimb_sts2_a10",
+          "score": 17.333333333333336,
+          "rawScore": 0.17333333333333334,
+          "releaseDate": "2026-11-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "surface_evolver_bench",
+          "score": 95,
+          "rawScore": 0.9500000000000001,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "vending_bench_2",
+          "score": 5680.258,
+          "rawScore": 5680.258,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "vending_bench_2",
+          "score": 5018.519999999999,
+          "rawScore": 5018.519999999999,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "vending_bench_2",
+          "score": 4966.639999999998,
+          "rawScore": 4966.639999999998,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "vending_bench_2",
+          "score": 4529.944000000001,
+          "rawScore": 4529.944000000001,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "vending_bench_2",
+          "score": 4339.812500000001,
+          "rawScore": 4339.812500000001,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "webdev_arena",
+          "score": 1627.98,
+          "rawScore": 1627.98,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "weirdml",
+          "score": 91.94,
+          "rawScore": 0.9194,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "weirdml",
+          "score": 87.85,
+          "rawScore": 0.8785,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "weirdml_v3",
+          "score": 15.586933333333333,
+          "rawScore": 0.15586933333333333,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        }
+      ],
+      "onEfficiencyFrontier": false,
+      "performanceRank": 33,
+      "valueRank": 80,
+      "valueScore": 3.990885
+    },
+    {
       "matchKey": "anthropicclaudesonnet46",
       "urlSlug": "anthropic-claude-sonnet-4-6",
       "name": "Anthropic: Claude Sonnet 4.6",
@@ -44636,9 +45895,311 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 33,
-      "valueRank": 69,
+      "performanceRank": 34,
+      "valueRank": 70,
       "valueScore": 10.509695
+    },
+    {
+      "matchKey": "googlegemini4carbon",
+      "urlSlug": "google-gemini-4-carbon",
+      "name": "Google: Gemini 4 Carbon",
+      "labId": "google",
+      "labLabel": "Google DeepMind",
+      "provider": "google",
+      "createdAt": "2026-11-10T16:07:51.000Z",
+      "contextLength": 1048576,
+      "promptUsdPerM": 2,
+      "completionUsdPerM": 10,
+      "blendedUsdPerM": 4,
+      "links": {
+        "openrouter": "https://openrouter.ai/google/gemini-4-carbon"
+      },
+      "series": {
+        "usageTokens": [
+          {
+            "date": "2026-11-11",
+            "value": 94655267329
+          },
+          {
+            "date": "2026-11-12",
+            "value": 95752110345
+          },
+          {
+            "date": "2026-11-13",
+            "value": 120720133229
+          },
+          {
+            "date": "2026-11-14",
+            "value": 146045987979
+          }
+        ],
+        "promptUsdPerM": [
+          {
+            "date": "2026-11-11",
+            "value": 2
+          },
+          {
+            "date": "2026-11-12",
+            "value": 2
+          },
+          {
+            "date": "2026-11-13",
+            "value": 2
+          },
+          {
+            "date": "2026-11-14",
+            "value": 2
+          },
+          {
+            "date": "2026-11-15",
+            "value": 2
+          }
+        ],
+        "completionUsdPerM": [
+          {
+            "date": "2026-11-11",
+            "value": 10
+          },
+          {
+            "date": "2026-11-12",
+            "value": 10
+          },
+          {
+            "date": "2026-11-13",
+            "value": 10
+          },
+          {
+            "date": "2026-11-14",
+            "value": 10
+          },
+          {
+            "date": "2026-11-15",
+            "value": 10
+          }
+        ]
+      },
+      "metrics": {
+        "momentumUsage": 1.0729266413581513,
+        "forecastUsage90d": {
+          "center": 138590503166766540,
+          "low": 128503205228975920,
+          "high": 149469638004690850
+        },
+        "forecastUsage180d": {
+          "center": 1.3574581232449471e+23,
+          "low": 1.2586556496673101e+23,
+          "high": 1.4640164344002726e+23
+        }
+      },
+      "quality": {
+        "index": 62.318056,
+        "source": "code-composite",
+        "general": null
+      },
+      "benchmarks": [
+        {
+          "benchmark": "arc_agi",
+          "score": 98.5,
+          "rawScore": 0.985,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 97.5,
+          "rawScore": 0.975,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi",
+          "score": 85.5,
+          "rawScore": 0.855,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 94.16666666666667,
+          "rawScore": 0.9416666666666668,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 92.08333333333333,
+          "rawScore": 0.9208333333333333,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "arc_agi_2",
+          "score": 49.583333333333336,
+          "rawScore": 0.49583333333333335,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "chess_puzzles",
+          "score": 78,
+          "rawScore": 0.78,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "critpt",
+          "score": 36,
+          "rawScore": 0.36,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 60.4,
+          "rawScore": 0.604,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 60.099999999999994,
+          "rawScore": 0.601,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "cursorbench",
+          "score": 58.60000000000001,
+          "rawScore": 0.5860000000000001,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "ebr_bench",
+          "score": 87.61904761904763,
+          "rawScore": 0.8761904761904763,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_erdos",
+          "score": 2.94,
+          "rawScore": 0.0294,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tier_4_v2",
+          "score": 95.1219512195122,
+          "rawScore": 0.9512195121951219,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontiermath_tiers_1_3_v2",
+          "score": 90.52631578947368,
+          "rawScore": 0.9052631578947369,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "frontierswe",
+          "score": 61.93,
+          "rawScore": 61.93,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "furniture_assembly",
+          "score": 77.5,
+          "rawScore": 0.775,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "gpqa_diamond",
+          "score": 96.52777777777779,
+          "rawScore": 0.9652777777777778,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mystery_game_puzzles",
+          "score": 73,
+          "rawScore": 0.73,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "otis_mock_aime_2024_2025",
+          "score": 100,
+          "rawScore": 1,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "scicode",
+          "score": 64.2361111111111,
+          "rawScore": 0.642361111111111,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simpleqa_verified",
+          "score": 77.7,
+          "rawScore": 0.777,
+          "releaseDate": "2026-11-10",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        }
+      ],
+      "onEfficiencyFrontier": false,
+      "performanceRank": 35,
+      "valueRank": 52,
+      "valueScore": 15.579514
     },
     {
       "matchKey": "anthropicclaudeopus55",
@@ -45814,8 +47375,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.5,
-          "rawScore": 66.5,
+          "score": 66.6,
+          "rawScore": 66.6,
           "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "external",
@@ -46075,6 +47636,24 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 95.55555555555556,
+          "rawScore": 0.9555555555555556,
+          "releaseDate": "2026-09-22",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 87.77777777777777,
+          "rawScore": 0.8777777777777778,
+          "releaseDate": "2026-07-24",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 78.89,
           "rawScore": 0.7889,
           "releaseDate": "2026-09-22",
@@ -46188,6 +47767,15 @@
           "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 43.8,
+          "rawScore": 0.438,
+          "releaseDate": "2026-09-22",
+          "organization": "Anthropic",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -46417,8 +48005,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 34,
-      "valueRank": 71,
+      "performanceRank": 36,
+      "valueRank": 72,
       "valueScore": 7.655972
     },
     {
@@ -47417,8 +49005,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 35,
-      "valueRank": 70,
+      "performanceRank": 37,
+      "valueRank": 71,
       "valueScore": 10.054461
     },
     {
@@ -48862,7 +50450,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 36,
+      "performanceRank": 38,
       "valueRank": 46,
       "valueScore": 17.494862
     },
@@ -49291,7 +50879,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 37,
+      "performanceRank": 39,
       "valueRank": null,
       "valueScore": null
     },
@@ -50219,8 +51807,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 38,
-      "valueRank": 84,
+      "performanceRank": 40,
+      "valueRank": 86,
       "valueScore": 1.991736
     },
     {
@@ -51102,7 +52690,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 39,
+      "performanceRank": 41,
       "valueRank": 31,
       "valueScore": 59.560555
     },
@@ -52026,7 +53614,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 40,
+      "performanceRank": 42,
       "valueRank": null,
       "valueScore": null
     },
@@ -53134,6 +54722,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "geobench",
+          "score": 3878,
+          "rawScore": 3878,
+          "releaseDate": "2026-06-30",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "gpqa_diamond",
           "score": 95.58080808080808,
           "rawScore": 0.9558080808080808,
@@ -53257,6 +54854,24 @@
           "releaseDate": "2026-09-28",
           "organization": "Anthropic",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 63.33333333333333,
+          "rawScore": 0.6333333333333333,
+          "releaseDate": "2026-06-30",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 97.77777777777777,
+          "rawScore": 0.9777777777777777,
+          "releaseDate": "2026-09-28",
+          "organization": "Anthropic",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -53531,8 +55146,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 41,
-      "valueRank": 55,
+      "performanceRank": 43,
+      "valueRank": 56,
       "valueScore": 14.342004
     },
     {
@@ -54772,8 +56387,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66,
-          "rawScore": 66,
+          "score": 65.9,
+          "rawScore": 65.9,
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "external",
@@ -54784,6 +56399,15 @@
           "score": 65.7,
           "rawScore": 65.7,
           "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "forecastbench",
+          "score": 65.7,
+          "rawScore": 65.7,
+          "releaseDate": "2026-09-01",
           "organization": "Anthropic",
           "source": "external",
           "matchedVia": "substring"
@@ -54915,6 +56539,24 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "geobench",
+          "score": 4404,
+          "rawScore": 4404,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 4303,
+          "rawScore": 4303,
+          "releaseDate": "2026-09-01",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "gpqa_diamond",
           "score": 85.85858585858585,
           "rawScore": 0.8585858585858586,
@@ -55033,8 +56675,26 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 70,
+          "rawScore": 0.7,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 73.3,
           "rawScore": 0.733,
+          "releaseDate": "2026-09-01",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 93.33333333333333,
+          "rawScore": 0.9333333333333333,
           "releaseDate": "2026-09-01",
           "organization": "Anthropic",
           "source": "epoch",
@@ -55105,8 +56765,17 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 41.79,
-          "rawScore": 0.4179,
+          "score": 44.65,
+          "rawScore": 0.4465,
+          "releaseDate": "2026-09-01",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 37.27,
+          "rawScore": 0.37270000000000003,
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "external",
@@ -55375,8 +57044,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 42,
-      "valueRank": 80,
+      "performanceRank": 44,
+      "valueRank": 82,
       "valueScore": 2.825329
     },
     {
@@ -55817,7 +57486,7 @@
           "benchmark": "arc_agi",
           "score": 98.5,
           "rawScore": 0.985,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55826,7 +57495,7 @@
           "benchmark": "arc_agi",
           "score": 98.5,
           "rawScore": 0.985,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55835,7 +57504,7 @@
           "benchmark": "arc_agi",
           "score": 76.5,
           "rawScore": 0.765,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55844,7 +57513,7 @@
           "benchmark": "arc_agi_2",
           "score": 91.25,
           "rawScore": 0.9125,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55853,7 +57522,7 @@
           "benchmark": "arc_agi_2",
           "score": 87.08333333333333,
           "rawScore": 0.8708333333333333,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55862,7 +57531,7 @@
           "benchmark": "arc_agi_2",
           "score": 42.08333333333334,
           "rawScore": 0.4208333333333334,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55871,7 +57540,7 @@
           "benchmark": "chess_puzzles",
           "score": 59,
           "rawScore": 0.59,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -55880,7 +57549,7 @@
           "benchmark": "critpt",
           "score": 27.142857142857103,
           "rawScore": 0.271428571428571,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55889,7 +57558,7 @@
           "benchmark": "cursorbench",
           "score": 52.900000000000006,
           "rawScore": 0.529,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55898,7 +57567,7 @@
           "benchmark": "cursorbench",
           "score": 52.800000000000004,
           "rawScore": 0.528,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55907,7 +57576,7 @@
           "benchmark": "cursorbench",
           "score": 50.6,
           "rawScore": 0.506,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55916,7 +57585,7 @@
           "benchmark": "cursorbench",
           "score": 48.8,
           "rawScore": 0.488,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55925,7 +57594,7 @@
           "benchmark": "dtbench",
           "score": 97.6,
           "rawScore": 0.976,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55934,7 +57603,7 @@
           "benchmark": "dtbench",
           "score": 97.33000000000001,
           "rawScore": 0.9733,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55943,7 +57612,7 @@
           "benchmark": "dtbench",
           "score": 97.33000000000001,
           "rawScore": 0.9733,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55952,7 +57621,7 @@
           "benchmark": "ebr_bench",
           "score": 64.76190476190476,
           "rawScore": 0.6476190476190476,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -55961,7 +57630,7 @@
           "benchmark": "frontiercode",
           "score": 47.55,
           "rawScore": 0.4755,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -55970,7 +57639,7 @@
           "benchmark": "frontiermath_erdos",
           "score": 1.4705882352941175,
           "rawScore": 0.014705882352941176,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -55979,7 +57648,7 @@
           "benchmark": "frontiermath_tier_4_v2",
           "score": 78.04878048780488,
           "rawScore": 0.7804878048780488,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -55988,7 +57657,7 @@
           "benchmark": "frontiermath_tiers_1_3_v2",
           "score": 85.96491228070175,
           "rawScore": 0.8596491228070176,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -55997,7 +57666,7 @@
           "benchmark": "frontierswe",
           "score": 129.36,
           "rawScore": 129.36,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -56006,7 +57675,7 @@
           "benchmark": "furniture_assembly",
           "score": 72.5,
           "rawScore": 0.725,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -56015,7 +57684,7 @@
           "benchmark": "gdp_pdf",
           "score": 28.4,
           "rawScore": 0.284,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -56024,7 +57693,7 @@
           "benchmark": "gpqa_diamond",
           "score": 96.40151515151516,
           "rawScore": 0.9640151515151515,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -56033,7 +57702,7 @@
           "benchmark": "lmca",
           "score": 62.92,
           "rawScore": 62.92,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -56042,7 +57711,7 @@
           "benchmark": "lmca",
           "score": 63.69,
           "rawScore": 63.69,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -56051,7 +57720,7 @@
           "benchmark": "lmca",
           "score": 62.85,
           "rawScore": 62.85,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -56060,7 +57729,7 @@
           "benchmark": "mirrorcode",
           "score": 58.88888888888889,
           "rawScore": 0.5888888888888889,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -56069,7 +57738,7 @@
           "benchmark": "mystery_game_puzzles",
           "score": 64,
           "rawScore": 0.64,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -56078,16 +57747,25 @@
           "benchmark": "otis_mock_aime_2024_2025",
           "score": 100,
           "rawScore": 1,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 40.44,
+          "rawScore": 0.4044,
+          "releaseDate": "2026-10-13",
+          "organization": "Google DeepMind",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
           "benchmark": "scicode",
           "score": 61.8055555555556,
           "rawScore": 0.618055555555556,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -56096,7 +57774,7 @@
           "benchmark": "simpleqa_verified",
           "score": 76,
           "rawScore": 0.76,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "epoch",
           "matchedVia": "substring"
@@ -56105,24 +57783,24 @@
           "benchmark": "webdev_arena",
           "score": 1679.5,
           "rawScore": 1679.5,
-          "releaseDate": "2026-09-30",
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
         },
         {
           "benchmark": "weirdml_v3",
-          "score": 20.096489621212122,
-          "rawScore": 0.2009648962121212,
-          "releaseDate": "2026-09-30",
+          "score": 20.261679772727273,
+          "rawScore": 0.20261679772727273,
+          "releaseDate": "2026-10-13",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 43,
-      "valueRank": 56,
+      "performanceRank": 45,
+      "valueRank": 57,
       "valueScore": 13.988095
     },
     {
@@ -57171,6 +58849,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "forecastbench",
+          "score": 66.6,
+          "rawScore": 66.6,
+          "releaseDate": "2026-09-03",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "frontiercode",
           "score": 53.26,
           "rawScore": 0.5326,
@@ -57316,6 +59003,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 60,
+          "rawScore": 0.6,
+          "releaseDate": "2026-09-03",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 46.7,
           "rawScore": 0.467,
           "releaseDate": "2026-09-03",
@@ -57339,6 +59035,15 @@
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 41.88000000000001,
+          "rawScore": 0.41880000000000006,
+          "releaseDate": "2026-09-03",
+          "organization": "OpenAI",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -57460,8 +59165,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 44,
-      "valueRank": 81,
+      "performanceRank": 46,
+      "valueRank": 83,
       "valueScore": 2.783806
     },
     {
@@ -58290,6 +59995,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "forecastbench",
+          "score": 66.6,
+          "rawScore": 66.6,
+          "releaseDate": "2026-09-03",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "frontiercode",
           "score": 53.26,
           "rawScore": 0.5326,
@@ -58435,6 +60149,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 60,
+          "rawScore": 0.6,
+          "releaseDate": "2026-09-03",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 46.7,
           "rawScore": 0.467,
           "releaseDate": "2026-09-03",
@@ -58458,6 +60181,15 @@
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 41.88000000000001,
+          "rawScore": 0.41880000000000006,
+          "releaseDate": "2026-09-03",
+          "organization": "OpenAI",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -58500,6 +60232,15 @@
           "benchmark": "scicode",
           "score": 54.050925925925895,
           "rawScore": 0.540509259259259,
+          "releaseDate": "2026-09-03",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simplebench",
+          "score": 86.5,
+          "rawScore": 0.865,
           "releaseDate": "2026-09-03",
           "organization": "OpenAI",
           "source": "external",
@@ -58588,8 +60329,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 45,
-      "valueRank": 82,
+      "performanceRank": 47,
+      "valueRank": 84,
       "valueScore": 2.783806
     },
     {
@@ -59426,6 +61167,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 48.888888888888886,
+          "rawScore": 0.4888888888888889,
+          "releaseDate": "2026-09-22",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 56.00000000000001,
           "rawScore": 0.56,
@@ -59544,8 +61294,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 47,
-      "valueRank": 58,
+      "performanceRank": 49,
+      "valueRank": 59,
       "valueScore": 13.886667
     },
     {
@@ -60257,6 +62007,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 48.888888888888886,
+          "rawScore": 0.4888888888888889,
+          "releaseDate": "2026-09-22",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 56.00000000000001,
           "rawScore": 0.56,
@@ -60375,8 +62134,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 46,
-      "valueRank": 57,
+      "performanceRank": 48,
+      "valueRank": 58,
       "valueScore": 13.886667
     },
     {
@@ -61225,6 +62984,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 61.111111111111114,
+          "rawScore": 0.6111111111111112,
+          "releaseDate": "2026-09-29",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 80,
           "rawScore": 0.8,
@@ -61240,6 +63008,15 @@
           "releaseDate": "2026-09-29",
           "organization": "OpenAI",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 38.79,
+          "rawScore": 0.3879,
+          "releaseDate": "2026-09-29",
+          "organization": "OpenAI",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -61343,8 +63120,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 49,
-      "valueRank": 63,
+      "performanceRank": 51,
+      "valueRank": 64,
       "valueScore": 13.599445
     },
     {
@@ -62000,6 +63777,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 61.111111111111114,
+          "rawScore": 0.6111111111111112,
+          "releaseDate": "2026-09-29",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 80,
           "rawScore": 0.8,
@@ -62015,6 +63801,15 @@
           "releaseDate": "2026-09-29",
           "organization": "OpenAI",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 38.79,
+          "rawScore": 0.3879,
+          "releaseDate": "2026-09-29",
+          "organization": "OpenAI",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -62118,8 +63913,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 48,
-      "valueRank": 62,
+      "performanceRank": 50,
+      "valueRank": 63,
       "valueScore": 13.599445
     },
     {
@@ -62983,7 +64778,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 50,
+      "performanceRank": 52,
       "valueRank": 26,
       "valueScore": 72.731268
     },
@@ -63449,7 +65244,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 52,
+      "performanceRank": 54,
       "valueRank": null,
       "valueScore": null
     },
@@ -63647,7 +65442,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 51,
+      "performanceRank": 53,
       "valueRank": null,
       "valueScore": null
     },
@@ -64463,6 +66258,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 54.44444444444444,
+          "rawScore": 0.5444444444444444,
+          "releaseDate": "2026-09-21",
+          "organization": "xAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 28.999999999999996,
           "rawScore": 0.29,
@@ -64536,7 +66340,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 53,
+      "performanceRank": 55,
       "valueRank": 47,
       "valueScore": 17.284568
     },
@@ -65865,8 +67669,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.5,
-          "rawScore": 66.5,
+          "score": 66.6,
+          "rawScore": 66.6,
           "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "external",
@@ -66005,6 +67809,15 @@
           "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 87.77777777777777,
+          "rawScore": 0.8777777777777778,
+          "releaseDate": "2026-07-24",
+          "organization": "Anthropic",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -66216,8 +68029,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 55,
-      "valueRank": 78,
+      "performanceRank": 57,
+      "valueRank": 79,
       "valueScore": 5.175389
     },
     {
@@ -66568,8 +68381,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.5,
-          "rawScore": 66.5,
+          "score": 66.6,
+          "rawScore": 66.6,
           "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "external",
@@ -66708,6 +68521,15 @@
           "releaseDate": "2026-07-24",
           "organization": "Anthropic",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 87.77777777777777,
+          "rawScore": 0.8777777777777778,
+          "releaseDate": "2026-07-24",
+          "organization": "Anthropic",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -66919,8 +68741,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 54,
-      "valueRank": 83,
+      "performanceRank": 56,
+      "valueRank": 85,
       "valueScore": 2.587694
     },
     {
@@ -67966,7 +69788,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 57,
+      "performanceRank": 59,
       "valueRank": 9,
       "valueScore": 257.88611
     },
@@ -68961,7 +70783,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 56,
+      "performanceRank": 58,
       "valueRank": 8,
       "valueScore": 257.88611
     },
@@ -69356,7 +71178,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 58,
+      "performanceRank": 60,
       "valueRank": null,
       "valueScore": null
     },
@@ -70218,6 +72040,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 78.88888888888889,
+          "rawScore": 0.7888888888888889,
+          "releaseDate": "2026-10-07",
+          "organization": "Anthropic",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 30,
           "rawScore": 0.3,
@@ -70318,7 +72149,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 59,
+      "performanceRank": 61,
       "valueRank": 10,
       "valueScore": 254.63611
     },
@@ -70866,6 +72697,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 64.44444444444444,
+          "rawScore": 0.6444444444444445,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 49,
           "rawScore": 0.49,
@@ -70975,7 +72815,7 @@
         }
       ],
       "onEfficiencyFrontier": true,
-      "performanceRank": 60,
+      "performanceRank": 62,
       "valueRank": 2,
       "valueScore": 1206.388881
     },
@@ -71948,6 +73788,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 64.44444444444444,
+          "rawScore": 0.6444444444444445,
+          "releaseDate": "2026-09-09",
+          "organization": "DeepSeek",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 43,
           "rawScore": 0.43,
@@ -72012,7 +73861,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 61,
+      "performanceRank": 63,
       "valueRank": 5,
       "valueScore": 561.920417
     },
@@ -73072,8 +74921,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.5,
-          "rawScore": 66.5,
+          "score": 66,
+          "rawScore": 66,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -73081,8 +74930,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.6,
-          "rawScore": 65.6,
+          "score": 65.8,
+          "rawScore": 65.8,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -73090,8 +74939,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.5,
-          "rawScore": 65.5,
+          "score": 65.7,
+          "rawScore": 65.7,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -73155,6 +75004,15 @@
           "benchmark": "gdp_pdf",
           "score": 30.7,
           "rawScore": 0.307,
+          "releaseDate": "2026-07-09",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 3843,
+          "rawScore": 3843,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -73288,8 +75146,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 36.23,
-          "rawScore": 0.36229999999999996,
+          "score": 31.010000000000005,
+          "rawScore": 0.31010000000000004,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -73432,8 +75290,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 62,
-      "valueRank": 76,
+      "performanceRank": 64,
+      "valueRank": 77,
       "valueScore": 6.215914
     },
     {
@@ -74881,8 +76739,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66.5,
-          "rawScore": 66.5,
+          "score": 66,
+          "rawScore": 66,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -74890,8 +76748,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.5,
-          "rawScore": 65.5,
+          "score": 65.7,
+          "rawScore": 65.7,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -74946,6 +76804,15 @@
           "benchmark": "gdp_pdf",
           "score": 30.7,
           "rawScore": 0.307,
+          "releaseDate": "2026-07-09",
+          "organization": "OpenAI",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 3843,
+          "rawScore": 3843,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -75070,8 +76937,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 36.23,
-          "rawScore": 0.36229999999999996,
+          "score": 31.010000000000005,
+          "rawScore": 0.31010000000000004,
           "releaseDate": "2026-07-09",
           "organization": "OpenAI",
           "source": "external",
@@ -75196,8 +77063,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 63,
-      "valueRank": 77,
+      "performanceRank": 65,
+      "valueRank": 78,
       "valueScore": 5.650831
     },
     {
@@ -77789,7 +79656,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 64,
+      "performanceRank": 66,
       "valueRank": 27,
       "valueScore": 72.169933
     },
@@ -78993,6 +80860,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "posttrainbench",
+          "score": 34.52,
+          "rawScore": 0.34520000000000006,
+          "releaseDate": "2026-08-14",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "proofbench",
           "score": 49,
           "rawScore": 0.49,
@@ -79048,7 +80924,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 65,
+      "performanceRank": 67,
       "valueRank": 35,
       "valueScore": 51.182812
     },
@@ -79627,6 +81503,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "posttrainbench",
+          "score": 34.52,
+          "rawScore": 0.34520000000000006,
+          "releaseDate": "2026-08-14",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "proofbench",
           "score": 49,
           "rawScore": 0.49,
@@ -79682,8 +81567,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 66,
-      "valueRank": 65,
+      "performanceRank": 68,
+      "valueRank": 66,
       "valueScore": 11.462569
     },
     {
@@ -80750,8 +82635,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.5,
-          "rawScore": 65.5,
+          "score": 65.4,
+          "rawScore": 65.4,
           "releaseDate": "2026-08-12",
           "organization": "xAI",
           "source": "external",
@@ -80948,7 +82833,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 67,
+      "performanceRank": 69,
       "valueRank": 49,
       "valueScore": 16.21713
     },
@@ -82359,6 +84244,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 41.11111111111111,
+          "rawScore": 0.4111111111111111,
+          "releaseDate": "2026-07-09",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 10,
           "rawScore": 0.1,
@@ -82504,8 +84398,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 69,
-      "valueRank": 68,
+      "performanceRank": 71,
+      "valueRank": 69,
       "valueScore": 10.697428
     },
     {
@@ -83590,6 +85484,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 41.11111111111111,
+          "rawScore": 0.4111111111111111,
+          "releaseDate": "2026-07-09",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 10,
           "rawScore": 0.1,
@@ -83735,8 +85638,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 68,
-      "valueRank": 67,
+      "performanceRank": 70,
+      "valueRank": 68,
       "valueScore": 10.697428
     },
     {
@@ -85798,8 +87701,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.2,
-          "rawScore": 64.2,
+          "score": 64,
+          "rawScore": 64,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -85942,8 +87845,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 70,
-      "valueRank": 59,
+      "performanceRank": 72,
+      "valueRank": 60,
       "valueScore": 13.864484
     },
     {
@@ -86230,8 +88133,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.2,
-          "rawScore": 64.2,
+          "score": 64,
+          "rawScore": 64,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -86428,8 +88331,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 72,
-      "valueRank": 61,
+      "performanceRank": 74,
+      "valueRank": 62,
       "valueScore": 13.864484
     },
     {
@@ -87194,8 +89097,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.2,
-          "rawScore": 64.2,
+          "score": 64,
+          "rawScore": 64,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -87338,8 +89241,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 71,
-      "valueRank": 60,
+      "performanceRank": 73,
+      "valueRank": 61,
       "valueScore": 13.864484
     },
     {
@@ -87660,8 +89563,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.2,
-          "rawScore": 64.2,
+          "score": 64,
+          "rawScore": 64,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -87705,8 +89608,8 @@
         },
         {
           "benchmark": "geobench",
-          "score": 4019,
-          "rawScore": 4019,
+          "score": 4093,
+          "rawScore": 4093,
           "releaseDate": "2025-03-25",
           "organization": "Google DeepMind",
           "source": "external",
@@ -87858,7 +89761,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 73,
+      "performanceRank": 75,
       "valueRank": null,
       "valueScore": null
     },
@@ -88287,8 +90190,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.4,
-          "rawScore": 64.4,
+          "score": 64.2,
+          "rawScore": 64.2,
           "releaseDate": "2025-03-31",
           "organization": "Google DeepMind",
           "source": "external",
@@ -88296,8 +90199,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.2,
-          "rawScore": 64.2,
+          "score": 64,
+          "rawScore": 64,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -88458,7 +90361,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 74,
+      "performanceRank": 76,
       "valueRank": null,
       "valueScore": null
     },
@@ -88648,8 +90551,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.2,
-          "rawScore": 64.2,
+          "score": 64,
+          "rawScore": 64,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -88707,6 +90610,15 @@
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 4019,
+          "rawScore": 4019,
+          "releaseDate": "2025-06-05",
+          "organization": "Google DeepMind",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -88864,7 +90776,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 75,
+      "performanceRank": 77,
       "valueRank": null,
       "valueScore": null
     },
@@ -90279,6 +92191,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "simplebench",
+          "score": 25,
+          "rawScore": 0.25,
+          "releaseDate": "2025-10-27",
+          "organization": "MiniMax",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "terminalbench",
           "score": 45.0561797753,
           "rawScore": 0.45056179775300004,
@@ -90334,7 +92255,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 76,
+      "performanceRank": 78,
       "valueRank": 14,
       "valueScore": 127.764667
     },
@@ -91494,6 +93415,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 38.88888888888889,
+          "rawScore": 0.3888888888888889,
+          "releaseDate": "2026-09-02",
+          "organization": "Google DeepMind",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 47,
           "rawScore": 0.47,
@@ -91585,7 +93515,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 77,
+      "performanceRank": 79,
       "valueRank": 42,
       "valueScore": 28.161712
     },
@@ -92883,6 +94813,24 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "posttrainbench",
+          "score": 36.79,
+          "rawScore": 0.3679,
+          "releaseDate": "2026-08-20",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 34.52,
+          "rawScore": 0.34520000000000006,
+          "releaseDate": "2026-08-14",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "proofbench",
           "score": 49,
           "rawScore": 0.49,
@@ -92956,7 +94904,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 78,
+      "performanceRank": 80,
       "valueRank": 3,
       "valueScore": 921.074003
     },
@@ -93750,6 +95698,24 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "posttrainbench",
+          "score": 36.79,
+          "rawScore": 0.3679,
+          "releaseDate": "2026-08-20",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 34.52,
+          "rawScore": 0.34520000000000006,
+          "releaseDate": "2026-08-14",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "proofbench",
           "score": 49,
           "rawScore": 0.49,
@@ -93823,7 +95789,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 79,
+      "performanceRank": 81,
       "valueRank": 23,
       "valueScore": 77.315576
     },
@@ -94252,6 +96218,24 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "posttrainbench",
+          "score": 36.79,
+          "rawScore": 0.3679,
+          "releaseDate": "2026-08-20",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "posttrainbench",
+          "score": 34.52,
+          "rawScore": 0.34520000000000006,
+          "releaseDate": "2026-08-14",
+          "organization": "Z.ai (Zhipu AI)",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "proofbench",
           "score": 49,
           "rawScore": 0.49,
@@ -94325,7 +96309,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 80,
+      "performanceRank": 82,
       "valueRank": 24,
       "valueScore": 77.315576
     },
@@ -95928,6 +97912,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 21.11111111111111,
+          "rawScore": 0.2111111111111111,
+          "releaseDate": "2026-07-09",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 12,
           "rawScore": 0.12,
@@ -96082,7 +98075,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 82,
+      "performanceRank": 84,
       "valueRank": 18,
       "valueScore": 99.431069
     },
@@ -97373,6 +99366,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 21.11111111111111,
+          "rawScore": 0.2111111111111111,
+          "releaseDate": "2026-07-09",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 12,
           "rawScore": 0.12,
@@ -97527,7 +99529,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 81,
+      "performanceRank": 83,
       "valueRank": 17,
       "valueScore": 99.431069
     },
@@ -98970,6 +100972,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "geobench",
+          "score": 3878,
+          "rawScore": 3878,
+          "releaseDate": "2026-06-30",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "gpqa_diamond",
           "score": 80.3030303030303,
           "rawScore": 0.803030303030303,
@@ -99030,6 +101041,15 @@
           "releaseDate": "2026-06-30",
           "organization": "Anthropic",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 63.33333333333333,
+          "rawScore": 0.6333333333333333,
+          "releaseDate": "2026-06-30",
+          "organization": "Anthropic",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -99169,8 +101189,8 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 83,
-      "valueRank": 66,
+      "performanceRank": 85,
+      "valueRank": 67,
       "valueScore": 10.960995
     },
     {
@@ -100213,7 +102233,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 84,
+      "performanceRank": 86,
       "valueRank": 39,
       "valueScore": 32.728826
     },
@@ -100597,8 +102617,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.3,
-          "rawScore": 64.3,
+          "score": 64,
+          "rawScore": 64,
           "releaseDate": "2026-06-01",
           "organization": "MiniMax",
           "source": "external",
@@ -100723,7 +102743,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 86,
+      "performanceRank": 88,
       "valueRank": 12,
       "valueScore": 148.589947
     },
@@ -102159,8 +104179,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.3,
-          "rawScore": 64.3,
+          "score": 64,
+          "rawScore": 64,
           "releaseDate": "2026-06-01",
           "organization": "MiniMax",
           "source": "external",
@@ -102285,7 +104305,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 85,
+      "performanceRank": 87,
       "valueRank": 25,
       "valueScore": 74.294973
     },
@@ -104333,8 +106353,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.6,
-          "rawScore": 62.6,
+          "score": 62.4,
+          "rawScore": 62.4,
           "releaseDate": "2024-12-26",
           "organization": "DeepSeek",
           "source": "external",
@@ -104477,7 +106497,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 87,
+      "performanceRank": 89,
       "valueRank": 13,
       "valueScore": 131.484686
     },
@@ -105785,8 +107805,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.6,
-          "rawScore": 62.6,
+          "score": 62.4,
+          "rawScore": 62.4,
           "releaseDate": "2024-12-26",
           "organization": "DeepSeek",
           "source": "external",
@@ -105947,7 +107967,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 88,
+      "performanceRank": 90,
       "valueRank": 15,
       "valueScore": 125.018226
     },
@@ -106079,8 +108099,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.6,
-          "rawScore": 62.6,
+          "score": 62.4,
+          "rawScore": 62.4,
           "releaseDate": "2024-12-26",
           "organization": "DeepSeek",
           "source": "external",
@@ -106241,7 +108261,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 89,
+      "performanceRank": 91,
       "valueRank": null,
       "valueScore": null
     },
@@ -107229,7 +109249,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 90,
+      "performanceRank": 92,
       "valueRank": 7,
       "valueScore": 259.986442
     },
@@ -108659,7 +110679,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 91,
+      "performanceRank": 93,
       "valueRank": 34,
       "valueScore": 51.248175
     },
@@ -109422,7 +111442,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 92,
+      "performanceRank": 94,
       "valueRank": 29,
       "valueScore": 66.093598
     },
@@ -110686,7 +112706,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 93,
+      "performanceRank": 95,
       "valueRank": 38,
       "valueScore": 33.990993
     },
@@ -111572,7 +113592,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 94,
+      "performanceRank": 96,
       "valueRank": 19,
       "valueScore": 97.02065
     },
@@ -114258,7 +116278,7 @@
         {
           "benchmark": "simplebench",
           "score": 22.1,
-          "rawScore": 0.221,
+          "rawScore": 0.22100000000000003,
           "releaseDate": "2025-08-05",
           "organization": "OpenAI",
           "source": "external",
@@ -114320,7 +116340,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 95,
+      "performanceRank": 97,
       "valueRank": 21,
       "valueScore": 93.134922
     },
@@ -115178,7 +117198,7 @@
         }
       ],
       "onEfficiencyFrontier": true,
-      "performanceRank": 96,
+      "performanceRank": 98,
       "valueRank": 4,
       "valueScore": 747.828222
     },
@@ -117175,7 +119195,7 @@
         }
       ],
       "onEfficiencyFrontier": false,
-      "performanceRank": 97,
+      "performanceRank": 99,
       "valueRank": 6,
       "valueScore": 303.787873
     },
@@ -118180,8 +120200,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66,
-          "rawScore": 66,
+          "score": 65.9,
+          "rawScore": 65.9,
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "external",
@@ -118245,6 +120265,15 @@
           "benchmark": "gdp_pdf",
           "score": 29.799999999999997,
           "rawScore": 0.298,
+          "releaseDate": "2026-06-09",
+          "organization": "Anthropic",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 4404,
+          "rawScore": 4404,
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "external",
@@ -118324,654 +120353,11 @@
         },
         {
           "benchmark": "mirrorcode",
-          "score": 63.88888888888889,
-          "rawScore": 0.638888888888889,
+          "score": 70,
+          "rawScore": 0.7,
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "mystery_game_puzzles",
-          "score": 52,
-          "rawScore": 0.52,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "otis_mock_aime_2024_2025",
-          "score": 97.77777777777777,
-          "rawScore": 0.9777777777777777,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "otis_mock_aime_2024_2025",
-          "score": 100,
-          "rawScore": 1,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "otis_mock_aime_2024_2025",
-          "score": 99.72222222222223,
-          "rawScore": 0.9972222222222222,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "posttrainbench",
-          "score": 41.79,
-          "rawScore": 0.4179,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "proofbench",
-          "score": 95,
-          "rawScore": 0.9500000000000001,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "rli",
-          "score": 16.1,
-          "rawScore": 0.161,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "scicode",
-          "score": 60.9953703703704,
-          "rawScore": 0.609953703703704,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "simplebench",
-          "score": 81.9,
-          "rawScore": 0.8190000000000001,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "simpleqa_verified",
-          "score": 70.7,
-          "rawScore": 0.707,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "surface_evolver_bench",
-          "score": 95,
-          "rawScore": 0.9500000000000001,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "vending_bench_2",
-          "score": 5680.258,
-          "rawScore": 5680.258,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "vending_bench_2",
-          "score": 5018.519999999999,
-          "rawScore": 5018.519999999999,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "vending_bench_2",
-          "score": 4966.639999999998,
-          "rawScore": 4966.639999999998,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "vending_bench_2",
-          "score": 4529.944000000001,
-          "rawScore": 4529.944000000001,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "vending_bench_2",
-          "score": 4339.812500000001,
-          "rawScore": 4339.812500000001,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "webdev_arena",
-          "score": 1627.98,
-          "rawScore": 1627.98,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "weirdml",
-          "score": 91.94,
-          "rawScore": 0.9194,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "weirdml",
-          "score": 87.85,
-          "rawScore": 0.8785,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "weirdml_v3",
-          "score": 15.586933333333333,
-          "rawScore": 0.15586933333333333,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        }
-      ],
-      "onEfficiencyFrontier": false,
-      "performanceRank": null,
-      "valueRank": null,
-      "valueScore": null
-    },
-    {
-      "matchKey": "anthropicclaudefable52",
-      "urlSlug": "anthropic-claude-fable-5-2",
-      "name": "Anthropic: Claude Fable 5.2",
-      "labId": "anthropic",
-      "labLabel": "Anthropic",
-      "provider": "anthropic",
-      "createdAt": "2026-11-09T19:49:41.000Z",
-      "contextLength": 1000000,
-      "promptUsdPerM": 8,
-      "completionUsdPerM": 40,
-      "blendedUsdPerM": 16,
-      "links": {
-        "openrouter": "https://openrouter.ai/anthropic/claude-fable-5.2"
-      },
-      "series": {
-        "usageTokens": [
-          {
-            "date": "2026-11-10",
-            "value": 179398520921
-          },
-          {
-            "date": "2026-11-11",
-            "value": 124283771836
-          },
-          {
-            "date": "2026-11-12",
-            "value": 134664763181
-          },
-          {
-            "date": "2026-11-13",
-            "value": 201322934068
-          },
-          {
-            "date": "2026-11-14",
-            "value": 92033619268
-          }
-        ],
-        "promptUsdPerM": [
-          {
-            "date": "2026-11-10",
-            "value": 8
-          },
-          {
-            "date": "2026-11-11",
-            "value": 8
-          },
-          {
-            "date": "2026-11-12",
-            "value": 8
-          },
-          {
-            "date": "2026-11-13",
-            "value": 8
-          },
-          {
-            "date": "2026-11-14",
-            "value": 8
-          },
-          {
-            "date": "2026-11-15",
-            "value": 8
-          }
-        ],
-        "completionUsdPerM": [
-          {
-            "date": "2026-11-10",
-            "value": 40
-          },
-          {
-            "date": "2026-11-11",
-            "value": 40
-          },
-          {
-            "date": "2026-11-12",
-            "value": 40
-          },
-          {
-            "date": "2026-11-13",
-            "value": 40
-          },
-          {
-            "date": "2026-11-14",
-            "value": 40
-          },
-          {
-            "date": "2026-11-15",
-            "value": 40
-          }
-        ]
-      },
-      "metrics": {
-        "momentumUsage": -0.5967980993612674,
-        "forecastUsage90d": {
-          "center": 55286517.54777823,
-          "low": 40042378.825230405,
-          "high": 76334101.8250107
-        },
-        "forecastUsage180d": {
-          "center": 25717.351809938336,
-          "low": 18626.312331308323,
-          "high": 35507.95092190332
-        }
-      },
-      "quality": null,
-      "benchmarks": [
-        {
-          "benchmark": "apex_agents",
-          "score": 63.6,
-          "rawScore": 0.636,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi",
-          "score": 98.5,
-          "rawScore": 0.985,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi",
-          "score": 98.5,
-          "rawScore": 0.985,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi",
-          "score": 95.5,
-          "rawScore": 0.9550000000000001,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi",
-          "score": 92.5,
-          "rawScore": 0.925,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi",
-          "score": 90.5,
-          "rawScore": 0.905,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi_2",
-          "score": 89.16666666666667,
-          "rawScore": 0.8916666666666667,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi_2",
-          "score": 88.33333333333333,
-          "rawScore": 0.8833333333333333,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi_2",
-          "score": 87.5,
-          "rawScore": 0.875,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi_2",
-          "score": 82.5,
-          "rawScore": 0.8250000000000001,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "arc_agi_2",
-          "score": 76.80555555555554,
-          "rawScore": 0.7680555555555555,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "btf3",
-          "score": 13,
-          "rawScore": 0.13,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "chess_puzzles",
-          "score": 47,
-          "rawScore": 0.47,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "chess_puzzles",
-          "score": 45,
-          "rawScore": 0.45,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "chess_puzzles",
-          "score": 31,
-          "rawScore": 0.31,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "critpt",
-          "score": 28.571428570000002,
-          "rawScore": 0.2857142857,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "dtbench",
-          "score": 98.4,
-          "rawScore": 0.9840000000000001,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "dtbench",
-          "score": 97.33000000000001,
-          "rawScore": 0.9733,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "dtbench",
-          "score": 96.53,
-          "rawScore": 0.9653,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "dtbench",
-          "score": 95.73,
-          "rawScore": 0.9573,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "dtbench",
-          "score": 91.47,
-          "rawScore": 0.9147,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "ebr_bench",
-          "score": 39.523799999999994,
-          "rawScore": 0.395238,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "enigma_eval",
-          "score": 39.28,
-          "rawScore": 0.39280000000000004,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "forecastbench",
-          "score": 66,
-          "rawScore": 66,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "forecastbench",
-          "score": 65.7,
-          "rawScore": 65.7,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontiermath_erdos",
-          "score": 0,
-          "rawScore": 0,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontiermath_tier_4_v2",
-          "score": 90.2,
-          "rawScore": 0.902,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontiermath_tiers_1_3_v2",
-          "score": 87.01754385964912,
-          "rawScore": 0.8701754385964913,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "frontierswe",
-          "score": 301.28,
-          "rawScore": 301.28,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "furniture_assembly",
-          "score": 35.833333333333336,
-          "rawScore": 0.35833333333333334,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "gdp_pdf",
-          "score": 29.799999999999997,
-          "rawScore": 0.298,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "gpqa_diamond",
-          "score": 85.85858585858585,
-          "rawScore": 0.8585858585858586,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "gpqa_diamond",
-          "score": 78.78787878787878,
-          "rawScore": 0.7878787878787878,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "gpqa_diamond",
-          "score": 83.33333333333334,
-          "rawScore": 0.8333333333333334,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "epoch",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "lmca",
-          "score": 60.34,
-          "rawScore": 60.34,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "lmca",
-          "score": 61.02,
-          "rawScore": 61.02,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "lmca",
-          "score": 61.15,
-          "rawScore": 61.15,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "lmca",
-          "score": 60.32,
-          "rawScore": 60.32,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "lmca",
-          "score": 59.59,
-          "rawScore": 59.59,
-          "releaseDate": "2026-06-09",
-          "organization": "Anthropic",
-          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -119021,8 +120407,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 41.79,
-          "rawScore": 0.4179,
+          "score": 37.27,
+          "rawScore": 0.37270000000000003,
           "releaseDate": "2026-06-09",
           "organization": "Anthropic",
           "source": "external",
@@ -130378,8 +131764,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.6,
-          "rawScore": 62.6,
+          "score": 62.4,
+          "rawScore": 62.4,
           "releaseDate": "2024-12-26",
           "organization": "DeepSeek",
           "source": "external",
@@ -130387,8 +131773,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 60.7,
-          "rawScore": 60.7,
+          "score": 60.5,
+          "rawScore": 60.5,
           "releaseDate": "2025-08-21",
           "organization": "DeepSeek",
           "source": "external",
@@ -134141,8 +135527,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.6,
-          "rawScore": 62.6,
+          "score": 62.4,
+          "rawScore": 62.4,
           "releaseDate": "2024-12-26",
           "organization": "DeepSeek",
           "source": "external",
@@ -136958,8 +138344,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.9,
-          "rawScore": 62.9,
+          "score": 62.7,
+          "rawScore": 62.7,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -136994,8 +138380,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 41.199999999999996,
-          "rawScore": 0.412,
+          "score": 41.2,
+          "rawScore": 0.41200000000000003,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -139613,8 +140999,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.9,
-          "rawScore": 62.9,
+          "score": 62.7,
+          "rawScore": 62.7,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -139649,8 +141035,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 41.199999999999996,
-          "rawScore": 0.412,
+          "score": 41.2,
+          "rawScore": 0.41200000000000003,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -141218,8 +142604,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.8,
-          "rawScore": 62.8,
+          "score": 62.6,
+          "rawScore": 62.6,
           "releaseDate": "2026-03-03",
           "organization": "Google",
           "source": "external",
@@ -141250,6 +142636,15 @@
           "releaseDate": "2026-03-03",
           "organization": "Google",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 4229,
+          "rawScore": 4229,
+          "releaseDate": "2026-03-03",
+          "organization": "Google",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -142674,8 +144069,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.8,
-          "rawScore": 62.8,
+          "score": 62.6,
+          "rawScore": 62.6,
           "releaseDate": "2026-03-03",
           "organization": "Google",
           "source": "external",
@@ -142706,6 +144101,15 @@
           "releaseDate": "2026-03-03",
           "organization": "Google",
           "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "geobench",
+          "score": 4229,
+          "rawScore": 4229,
+          "releaseDate": "2026-03-03",
+          "organization": "Google",
+          "source": "external",
           "matchedVia": "substring"
         },
         {
@@ -143810,8 +145214,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65.9,
-          "rawScore": 65.9,
+          "score": 65.7,
+          "rawScore": 65.7,
           "releaseDate": "2026-07-21",
           "organization": "Google DeepMind",
           "source": "external",
@@ -143887,6 +145291,15 @@
           "releaseDate": "2026-07-21",
           "organization": "Google DeepMind",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 23.333333333333332,
+          "rawScore": 0.23333333333333334,
+          "releaseDate": "2026-07-21",
+          "organization": "Google DeepMind",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -145291,124 +146704,6 @@
           "score": 1587.26,
           "rawScore": 1587.26,
           "releaseDate": "2026-08-13",
-          "organization": "Google DeepMind",
-          "source": "external",
-          "matchedVia": "substring"
-        }
-      ],
-      "onEfficiencyFrontier": false,
-      "performanceRank": null,
-      "valueRank": null,
-      "valueScore": null
-    },
-    {
-      "matchKey": "googlegemini4carbon",
-      "urlSlug": "google-gemini-4-carbon",
-      "name": "Google: Gemini 4 Carbon",
-      "labId": "google",
-      "labLabel": "Google DeepMind",
-      "provider": "google",
-      "createdAt": "2026-11-10T16:07:51.000Z",
-      "contextLength": 1048576,
-      "promptUsdPerM": 2,
-      "completionUsdPerM": 10,
-      "blendedUsdPerM": 4,
-      "links": {
-        "openrouter": "https://openrouter.ai/google/gemini-4-carbon"
-      },
-      "series": {
-        "usageTokens": [
-          {
-            "date": "2026-11-11",
-            "value": 94655267329
-          },
-          {
-            "date": "2026-11-12",
-            "value": 95752110345
-          },
-          {
-            "date": "2026-11-13",
-            "value": 120720133229
-          },
-          {
-            "date": "2026-11-14",
-            "value": 146045987979
-          }
-        ],
-        "promptUsdPerM": [
-          {
-            "date": "2026-11-11",
-            "value": 2
-          },
-          {
-            "date": "2026-11-12",
-            "value": 2
-          },
-          {
-            "date": "2026-11-13",
-            "value": 2
-          },
-          {
-            "date": "2026-11-14",
-            "value": 2
-          },
-          {
-            "date": "2026-11-15",
-            "value": 2
-          }
-        ],
-        "completionUsdPerM": [
-          {
-            "date": "2026-11-11",
-            "value": 10
-          },
-          {
-            "date": "2026-11-12",
-            "value": 10
-          },
-          {
-            "date": "2026-11-13",
-            "value": 10
-          },
-          {
-            "date": "2026-11-14",
-            "value": 10
-          },
-          {
-            "date": "2026-11-15",
-            "value": 10
-          }
-        ]
-      },
-      "metrics": {
-        "momentumUsage": 1.0729266413581513,
-        "forecastUsage90d": {
-          "center": 138590503166766540,
-          "low": 128503205228975920,
-          "high": 149469638004690850
-        },
-        "forecastUsage180d": {
-          "center": 1.3574581232449471e+23,
-          "low": 1.2586556496673101e+23,
-          "high": 1.4640164344002726e+23
-        }
-      },
-      "quality": null,
-      "benchmarks": [
-        {
-          "benchmark": "critpt",
-          "score": 36,
-          "rawScore": 0.36,
-          "releaseDate": "2026-10-28",
-          "organization": "Google DeepMind",
-          "source": "external",
-          "matchedVia": "substring"
-        },
-        {
-          "benchmark": "scicode",
-          "score": 64.2361111111111,
-          "rawScore": 0.642361111111111,
-          "releaseDate": "2026-10-28",
           "organization": "Google DeepMind",
           "source": "external",
           "matchedVia": "substring"
@@ -148679,8 +149974,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 61.3,
-          "rawScore": 61.3,
+          "score": 61.1,
+          "rawScore": 61.1,
           "releaseDate": "2026-04-02",
           "organization": "Google DeepMind",
           "source": "external",
@@ -148843,8 +150138,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.9,
-          "rawScore": 62.9,
+          "score": 62.7,
+          "rawScore": 62.7,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -148879,8 +150174,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 41.199999999999996,
-          "rawScore": 0.412,
+          "score": 41.2,
+          "rawScore": 0.41200000000000003,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -149498,8 +150793,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.9,
-          "rawScore": 62.9,
+          "score": 62.7,
+          "rawScore": 62.7,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -149534,8 +150829,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 41.199999999999996,
-          "rawScore": 0.412,
+          "score": 41.2,
+          "rawScore": 0.41200000000000003,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -150385,8 +151680,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.9,
-          "rawScore": 62.9,
+          "score": 62.7,
+          "rawScore": 62.7,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -150421,8 +151716,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 41.199999999999996,
-          "rawScore": 0.412,
+          "score": 41.2,
+          "rawScore": 0.41200000000000003,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -150885,8 +152180,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.9,
-          "rawScore": 62.9,
+          "score": 62.7,
+          "rawScore": 62.7,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -150894,8 +152189,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.7,
-          "rawScore": 62.7,
+          "score": 62.4,
+          "rawScore": 62.4,
           "releaseDate": "2025-04-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -150957,8 +152252,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 41.199999999999996,
-          "rawScore": 0.412,
+          "score": 41.2,
+          "rawScore": 0.41200000000000003,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -151325,8 +152620,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.9,
-          "rawScore": 62.9,
+          "score": 62.7,
+          "rawScore": 62.7,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -151388,8 +152683,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 41.199999999999996,
-          "rawScore": 0.412,
+          "score": 41.2,
+          "rawScore": 0.41200000000000003,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -151944,8 +153239,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.9,
-          "rawScore": 62.9,
+          "score": 62.7,
+          "rawScore": 62.7,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -151980,8 +153275,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 41.199999999999996,
-          "rawScore": 0.412,
+          "score": 41.2,
+          "rawScore": 0.41200000000000003,
           "releaseDate": "2025-06-17",
           "organization": "Google DeepMind",
           "source": "external",
@@ -155693,6 +156988,15 @@
       "quality": null,
       "benchmarks": [
         {
+          "benchmark": "simplebench",
+          "score": 25,
+          "rawScore": 0.25,
+          "releaseDate": "2025-10-27",
+          "organization": "MiniMax",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "terminalbench",
           "score": 30.037453183500002,
           "rawScore": 0.300374531835,
@@ -156354,6 +157658,15 @@
       },
       "quality": null,
       "benchmarks": [
+        {
+          "benchmark": "simplebench",
+          "score": 25,
+          "rawScore": 0.25,
+          "releaseDate": "2025-10-27",
+          "organization": "MiniMax",
+          "source": "external",
+          "matchedVia": "substring"
+        },
         {
           "benchmark": "terminalbench",
           "score": 30.037453183500002,
@@ -157317,6 +158630,24 @@
       },
       "quality": null,
       "benchmarks": [
+        {
+          "benchmark": "simplebench",
+          "score": 34.7,
+          "rawScore": 0.34700000000000003,
+          "releaseDate": "2025-12-23",
+          "organization": "MiniMax",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simplebench",
+          "score": 25,
+          "rawScore": 0.25,
+          "releaseDate": "2025-10-27",
+          "organization": "MiniMax",
+          "source": "external",
+          "matchedVia": "substring"
+        },
         {
           "benchmark": "terminalbench",
           "score": 36.6292134831,
@@ -158615,6 +159946,15 @@
           "score": 4,
           "rawScore": 0.04,
           "releaseDate": "2026-02-12",
+          "organization": "MiniMax",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simplebench",
+          "score": 25,
+          "rawScore": 0.25,
+          "releaseDate": "2025-10-27",
           "organization": "MiniMax",
           "source": "external",
           "matchedVia": "substring"
@@ -161937,6 +163277,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "simplebench",
+          "score": 39.6,
+          "rawScore": 0.396,
+          "releaseDate": "2025-11-06",
+          "organization": "Moonshot",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "terminalbench",
           "score": 35.7303370787,
           "rawScore": 0.35730337078700003,
@@ -163280,8 +164629,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.7,
-          "rawScore": 64.7,
+          "score": 64.2,
+          "rawScore": 64.2,
           "releaseDate": "2026-07-16",
           "organization": "Moonshot",
           "source": "external",
@@ -163375,6 +164724,15 @@
           "releaseDate": "2026-07-16",
           "organization": "Moonshot",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 54.44444444444444,
+          "rawScore": 0.5444444444444444,
+          "releaseDate": "2026-07-16",
+          "organization": "Moonshot",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -163923,9 +165281,18 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "dtbench",
+          "score": 93.33,
+          "rawScore": 0.9333,
+          "releaseDate": "2026-10-23",
+          "organization": "Moonshot",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "forecastbench",
-          "score": 64.7,
-          "rawScore": 64.7,
+          "score": 64.2,
+          "rawScore": 64.2,
           "releaseDate": "2026-07-16",
           "organization": "Moonshot",
           "source": "external",
@@ -164019,6 +165386,24 @@
           "releaseDate": "2026-07-16",
           "organization": "Moonshot",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "lmca",
+          "score": 57.61,
+          "rawScore": 57.61,
+          "releaseDate": "2026-10-23",
+          "organization": "Moonshot",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 54.44444444444444,
+          "rawScore": 0.5444444444444444,
+          "releaseDate": "2026-07-16",
+          "organization": "Moonshot",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -164134,6 +165519,15 @@
           "score": 7.544402727272727,
           "rawScore": 0.07544402727272727,
           "releaseDate": "2026-07-16",
+          "organization": "Moonshot",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "weirdml_v3",
+          "score": 9.890022727272727,
+          "rawScore": 0.09890022727272728,
+          "releaseDate": "2026-10-23",
           "organization": "Moonshot",
           "source": "external",
           "matchedVia": "substring"
@@ -170638,8 +172032,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 67,
-          "rawScore": 67,
+          "score": 66.7,
+          "rawScore": 66.7,
           "releaseDate": "2026-04-23",
           "organization": "OpenAI",
           "source": "external",
@@ -170719,6 +172113,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 23.333333333333332,
+          "rawScore": 0.23333333333333334,
+          "releaseDate": "2026-04-23",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 10,
           "rawScore": 0.1,
           "releaseDate": "2026-04-23",
@@ -170773,8 +172176,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 27.229999999999997,
-          "rawScore": 0.2723,
+          "score": 23.87,
+          "rawScore": 0.23870000000000002,
           "releaseDate": "2026-04-23",
           "organization": "OpenAI",
           "source": "external",
@@ -171865,8 +173268,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 67,
-          "rawScore": 67,
+          "score": 66.7,
+          "rawScore": 66.7,
           "releaseDate": "2026-04-23",
           "organization": "OpenAI",
           "source": "external",
@@ -171973,6 +173376,15 @@
         },
         {
           "benchmark": "mirrorcode",
+          "score": 23.333333333333332,
+          "rawScore": 0.23333333333333334,
+          "releaseDate": "2026-04-23",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
           "score": 10,
           "rawScore": 0.1,
           "releaseDate": "2026-04-23",
@@ -172027,8 +173439,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 27.229999999999997,
-          "rawScore": 0.2723,
+          "score": 23.87,
+          "rawScore": 0.23870000000000002,
           "releaseDate": "2026-04-23",
           "organization": "OpenAI",
           "source": "external",
@@ -172531,6 +173943,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 76.66666666666667,
+          "rawScore": 0.7666666666666667,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 74,
           "rawScore": 0.74,
@@ -172927,6 +174348,15 @@
           "benchmark": "gpqa_diamond",
           "score": 94.31818181818183,
           "rawScore": 0.9431818181818182,
+          "releaseDate": "2026-10-26",
+          "organization": "OpenAI",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 76.66666666666667,
+          "rawScore": 0.7666666666666667,
           "releaseDate": "2026-10-26",
           "organization": "OpenAI",
           "source": "epoch",
@@ -180155,8 +181585,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.1,
-          "rawScore": 64.1,
+          "score": 63.9,
+          "rawScore": 63.9,
           "releaseDate": "2025-04-29",
           "organization": "Alibaba",
           "source": "external",
@@ -180986,8 +182416,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.1,
-          "rawScore": 64.1,
+          "score": 63.9,
+          "rawScore": 63.9,
           "releaseDate": "2025-04-29",
           "organization": "Alibaba",
           "source": "external",
@@ -181888,8 +183318,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.1,
-          "rawScore": 64.1,
+          "score": 63.9,
+          "rawScore": 63.9,
           "releaseDate": "2025-04-29",
           "organization": "Alibaba",
           "source": "external",
@@ -181897,8 +183327,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 62.2,
-          "rawScore": 62.2,
+          "score": 62,
+          "rawScore": 62,
           "releaseDate": "2025-07-25",
           "organization": "Alibaba",
           "source": "external",
@@ -203590,8 +205020,8 @@
         },
         {
           "benchmark": "simplebench",
-          "score": 35.199999999999996,
-          "rawScore": 0.352,
+          "score": 35.2,
+          "rawScore": 0.35200000000000004,
           "releaseDate": "2026-04-27",
           "organization": "Alibaba",
           "source": "external",
@@ -205950,6 +207380,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "geobench",
+          "score": 2377,
+          "rawScore": 2377,
+          "releaseDate": "2026-08-14",
+          "organization": "Alibaba",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "lmca",
           "score": 41.36,
           "rawScore": 41.36,
@@ -205989,6 +207428,15 @@
           "benchmark": "scicode",
           "score": 39.0046296296296,
           "rawScore": 0.390046296296296,
+          "releaseDate": "2026-08-14",
+          "organization": "Alibaba",
+          "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "simplebench",
+          "score": 60.20000000000001,
+          "rawScore": 0.6020000000000001,
           "releaseDate": "2026-08-14",
           "organization": "Alibaba",
           "source": "external",
@@ -207418,6 +208866,15 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 52.22222222222223,
+          "rawScore": 0.5222222222222223,
+          "releaseDate": "2026-08-02",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 38,
           "rawScore": 0.38,
@@ -208182,6 +209639,24 @@
           "matchedVia": "substring"
         },
         {
+          "benchmark": "mirrorcode",
+          "score": 47.77777777777778,
+          "rawScore": 0.4777777777777778,
+          "releaseDate": "2026-09-01",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 52.22222222222223,
+          "rawScore": 0.5222222222222223,
+          "releaseDate": "2026-08-02",
+          "organization": "Alibaba",
+          "source": "epoch",
+          "matchedVia": "substring"
+        },
+        {
           "benchmark": "mystery_game_puzzles",
           "score": 38,
           "rawScore": 0.38,
@@ -208755,6 +210230,15 @@
           "releaseDate": "2026-08-02",
           "organization": "Alibaba",
           "source": "external",
+          "matchedVia": "substring"
+        },
+        {
+          "benchmark": "mirrorcode",
+          "score": 52.22222222222223,
+          "rawScore": 0.5222222222222223,
+          "releaseDate": "2026-08-02",
+          "organization": "Alibaba",
+          "source": "epoch",
           "matchedVia": "substring"
         },
         {
@@ -209873,8 +211357,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.1,
-          "rawScore": 64.1,
+          "score": 63.9,
+          "rawScore": 63.9,
           "releaseDate": "2025-04-29",
           "organization": "Alibaba",
           "source": "external",
@@ -211321,8 +212805,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.1,
-          "rawScore": 64.1,
+          "score": 63.9,
+          "rawScore": 63.9,
           "releaseDate": "2025-04-29",
           "organization": "Alibaba",
           "source": "external",
@@ -215483,8 +216967,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 63.3,
-          "rawScore": 63.3,
+          "score": 63.1,
+          "rawScore": 63.1,
           "releaseDate": "2026-02-17",
           "organization": "xAI",
           "source": "external",
@@ -216314,8 +217798,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 63.3,
-          "rawScore": 63.3,
+          "score": 63.1,
+          "rawScore": 63.1,
           "releaseDate": "2026-02-17",
           "organization": "xAI",
           "source": "external",
@@ -218261,8 +219745,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 66,
-          "rawScore": 66,
+          "score": 65.8,
+          "rawScore": 65.8,
           "releaseDate": "2026-07-08",
           "organization": "xAI",
           "source": "external",
@@ -218342,8 +219826,8 @@
         },
         {
           "benchmark": "posttrainbench",
-          "score": 23.45,
-          "rawScore": 0.2345,
+          "score": 22.62,
+          "rawScore": 0.2262,
           "releaseDate": "2026-07-08",
           "organization": "xAI",
           "source": "external",
@@ -221521,8 +223005,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 65,
-          "rawScore": 65,
+          "score": 64.7,
+          "rawScore": 64.7,
           "releaseDate": "2025-07-09",
           "organization": "xAI",
           "source": "external",
@@ -223353,8 +224837,8 @@
         },
         {
           "benchmark": "forecastbench",
-          "score": 64.9,
-          "rawScore": 64.9,
+          "score": 64.6,
+          "rawScore": 64.6,
           "releaseDate": "2025-09-19",
           "organization": "xAI",
           "source": "external",
